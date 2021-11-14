@@ -5,11 +5,13 @@
  */
 package Forms;
 
+import Utils.ClickMouse;
 import Utils.MapRoom;
 import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
+import java.awt.event.MouseAdapter;
 import javax.swing.JPanel;
 
 /**
@@ -162,6 +164,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnQuanLyPhongMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnQuanLyPhongMousePressed(evt);
             }
         });
         btnQuanLyPhong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
@@ -519,53 +524,64 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnResizeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResizeMousePressed
         // TODO add your handling code here:
-//        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        GraphicsDevice device = env.getDefaultScreenDevice();
-//        if (switchSize) {
-//            this.setExtendedState(this.MAXIMIZED_BOTH);
-//            this.setUndecorated(true);
-//            this.setVisible(true);
-//            switchSize = !switchSize;
-//        }
-//        if (!switchSize) {
-//            device.setFullScreenWindow(null);
-//            this.setVisible(true);
-//            switchSize = !switchSize;
-//        }
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice device = env.getDefaultScreenDevice();
+        if (switchSize) {
+            this.setExtendedState(this.MAXIMIZED_BOTH);
+            this.setUndecorated(true);
+            this.setVisible(true);
+            switchSize = !switchSize;
+        }
+        if (!switchSize) {
+            device.setFullScreenWindow(null);
+            this.setVisible(true);
+            switchSize = !switchSize;
+        }
     }//GEN-LAST:event_btnResizeMousePressed
 
     private void btnDichVuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDichVuMousePressed
         // TODO add your handling code here:
-        pnlScreen.removeAll();
         JPanel dichvu = new DichVuPanel();
-        dichvu.setVisible(true);
-        pnlScreen.add(dichvu);
-        pnlScreen.revalidate();
-        pnlScreen.repaint();
-        changeColor(btnDichVu);
+        SwitchPanel(dichvu);
     }//GEN-LAST:event_btnDichVuMousePressed
 
     private void btnThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMousePressed
         // TODO add your handling code here:
-        pnlScreen.removeAll();
         JPanel lichSuGD = new LichSuGDPanel();
-        lichSuGD.setVisible(true);
-        pnlScreen.add(lichSuGD);
-        pnlScreen.revalidate();
-        pnlScreen.repaint();
-        changeColor(btnThongKe);
+        SwitchPanel(lichSuGD);
     }//GEN-LAST:event_btnThongKeMousePressed
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
         // TODO add your handling code here:
-        
+        fillToHome();
     }//GEN-LAST:event_btnHomeMousePressed
+
+    private void btnQuanLyPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyPhongMousePressed
+        // TODO add your handling code here:
+        JPanel quanLyPhong = new QuanLyPhongPanel();
+        SwitchPanel(quanLyPhong);
+    }//GEN-LAST:event_btnQuanLyPhongMousePressed
 
     public void init() {
         gbc = new GridBagConstraints();
-        MapRoom.updateStatusScreen(pnlScreen, gbc, null);
-        changeColor(btnHome);
         switchSize = true;
+        ScpScreenDisplay.getVerticalScrollBar().setUnitIncrement(16);
+        MapRoom.setGridBagLayout(gbc, pnlScreen);
+        fillToHome();
+    }
+
+    public void fillToHome() {
+        JPanel home = new HomePanel();
+        SwitchPanel(home);
+    }
+    
+    // thay đổi giao diện hiển thị trong panel pnlScreen
+    public void SwitchPanel(JPanel panel) {
+        pnlScreen.removeAll();
+        panel.setVisible(true);
+        pnlScreen.add(panel);
+        pnlScreen.revalidate();
+        pnlScreen.repaint();
     }
 
     public void changeColor(JPanel panel) {

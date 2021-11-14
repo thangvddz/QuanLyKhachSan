@@ -5,8 +5,10 @@
  */
 package Utils;
 
+import Forms.QuanLyPhongPanel;
 import Models.PhongDAO;
 import Models.TrangThaiDAO;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -14,14 +16,13 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
 /**
@@ -35,6 +36,9 @@ public class MapRoom {
     public static TrangThaiDAO trangThaiDao = new TrangThaiDAO();
     public static int sizeWith = 200;
     public static int sizeHeight = 200;
+    public static int posTang = 0;
+    public static int posPhong = 0;
+    public static Color colorRoom;
 
     public static void DisplayMapRoom(JPanel box, GridBagConstraints gbc, int floors, int rooms, MouseAdapter ac) {
 
@@ -47,11 +51,16 @@ public class MapRoom {
         initTang(tang, floors, rooms);
 
         JLabel TenTang = new JLabel("Tầng " + (floors + 1));
-        TenTang.setPreferredSize(new Dimension(sizeWith / 2, sizeHeight));
-        TenTang.setOpaque(true);
-        TenTang.setFont(new Font("Arial", Font.BOLD, 24));
+        TenTang.setPreferredSize(new Dimension(sizeWith / 2 - 10, sizeHeight - 50));
+        TenTang.setHorizontalAlignment(JLabel.CENTER);
+        TenTang.setVerticalAlignment(JLabel.CENTER);
+        TenTang.setFont(new Font("Arial", Font.BOLD, 20));
+        TenTang.setForeground(Color.WHITE);
         JPanel bx = new JPanel();
-        bx.add(TenTang);
+        bx.setLayout(new BorderLayout());
+        bx.add(TenTang, BorderLayout.CENTER);
+        bx.setBorder(outline);
+        bx.setBackground(new Color(60, 60, 61));
         tang.add(bx);
 
         if (rooms != 0) {
@@ -59,8 +68,17 @@ public class MapRoom {
                 int numRoom = dao.RoomCodePerFloor(floors + 1).get(i).getMaPhong();
                 int numStatus = dao.RoomCodePerFloor(floors + 1).get(i).getMaTT();
                 String info = "<html><center>" + numRoom + "</center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "</html>";
+
                 tang.add(addRoomToFloor(floors, ac, info, numStatus, numRoom));
             }
+        }
+        if (QuanLyPhongPanel.quanlyphong) {
+            JLabel room = new JLabel("Thêm phòng");
+            room.setFont(new Font("Arial", Font.BOLD, 20));
+            room.putClientProperty("Tang", new Integer(floors + 1));
+            room.setPreferredSize(new Dimension(sizeWith, sizeHeight - 50));
+            room.addMouseListener(ac);
+            tang.add(room);
         }
         box.add(tang, gbc);
         box.revalidate();
@@ -76,43 +94,43 @@ public class MapRoom {
     }
 
     public static void initTang(JPanel tang, int floors, int rooms) {
-        tang.setToolTipText("" + (floors + 1));
-        tang.setPreferredSize(new Dimension(sizeWith * rooms + sizeWith * 2, sizeHeight + 30));
-//            tang.setLayout(new BoxLayout(tang, BoxLayout.X_AXIS));
-        tang.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        tang.setPreferredSize(new Dimension(sizeWith * rooms + sizeWith * 2, sizeHeight-50));
+        tang.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
         tang.setAlignmentX(Component.LEFT_ALIGNMENT);
-        tang.setBorder(outline);
+        tang.setBackground(Color.WHITE);
     }
 
     public static JPanel addRoomToFloor(int floors, MouseAdapter ac, String nameLabel, int numStatus, int numRoom) {
 
         JPanel box = new JPanel();
+        box.setLayout(new BorderLayout());
+        box.putClientProperty("Tang", new Integer(floors + 1));
+        box.putClientProperty("Phong", new Integer(numRoom));
+        box.addMouseListener(ac);
         JLabel room = new JLabel(nameLabel);
-        room.putClientProperty("Tang", new Integer(floors + 1));
-        room.putClientProperty("Phong", new Integer(numRoom));
+        room.setHorizontalAlignment(JLabel.CENTER);
+        room.setVerticalAlignment(JLabel.CENTER);
         room.setPreferredSize(new Dimension(sizeWith, sizeHeight - 50));
-        room.addMouseListener(ac);
         room.setBorder(outline);
         room.setFont(new Font("Arial", Font.BOLD, 10));
+        room.setForeground(Color.WHITE);
         switch (numStatus) {
             case 1:
-                room.setOpaque(true);
-                room.setBackground(Color.GREEN);
+                box.setBackground(new Color(24, 24, 214));
                 break;
             case 2:
-                room.setOpaque(true);
-                room.setBackground(Color.RED);
+                box.setBackground(new Color(176, 13, 11));
                 break;
             case 3:
-                room.setOpaque(true);
-                room.setBackground(Color.PINK);
+                box.setBackground(new Color(164, 166, 164));
                 break;
             default:
-                room.setOpaque(true);
-                room.setBackground(Color.DARK_GRAY);
+                box.setBackground(new Color(252, 121, 28));
+
                 break;
         }
-        box.add(room);
+
+        box.add(room, BorderLayout.CENTER);
         return box;
     }
 
