@@ -29,6 +29,7 @@ public class PhongDAO extends DAO<Phong, Integer> {
     private static final String SQL_ROOMCODE_PER_FLOOR = "select * from PHONG where SoTang = ?";
     private static final String SQL_SELECT_THONGTINPHONG_BY_ID = "select MaPhong, PHONG.SoTang, PHONG.MaLP, TenLP, giaPhong, SoGiuong, PHONG.MaTT "
             + "from LOAIPHONG join PHONG on LOAIPHONG.MaLP = PHONG.MaLP join TANG on PHONG.SoTang = TANG.SoTang where MaPhong=? and PHONG.SoTang=?";
+    private static final String SQL_SELECT_BY_STATUS = "SELECT * FROM PHONG WHERE MaTT=?";
 
     JdbcHelper jdbc;
 
@@ -77,6 +78,10 @@ public class PhongDAO extends DAO<Phong, Integer> {
         return selectBySql(SQL_SELECT_ALL);
     }
 
+    public List<Phong> selectByMaTT(Integer id) {
+        return selectBySql(SQL_SELECT_BY_STATUS, id);
+    }
+    
     @Override
     protected List<Phong> selectBySql(String sql, Object... args) {
         List<Phong> ls = new ArrayList<>();

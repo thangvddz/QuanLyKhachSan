@@ -12,27 +12,32 @@ import java.util.Date;
  * @author you have to better
  */
 public class HoaDonChiTiet {
+
+    int MaCTHD;
     int MaHD;
-    int MaDV;
     String MaPhong;
     int SoTang;
     Date NgayDK;
-    Date ThoiGianBDSD;
-    int SoLanSuDung;
     boolean TrangThai;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int MaHD, int MaDV, String MaPhong, int SoTang, Date NgayDK, Date ThoiGianBDSD, int SoLanSuDung, boolean TrangThai) {
+    public HoaDonChiTiet(int MaCTHD, int MaHD, String MaPhong, int SoTang, Date NgayDK, boolean TrangThai) {
+        this.MaCTHD = MaCTHD;
         this.MaHD = MaHD;
-        this.MaDV = MaDV;
         this.MaPhong = MaPhong;
         this.SoTang = SoTang;
         this.NgayDK = NgayDK;
-        this.ThoiGianBDSD = ThoiGianBDSD;
-        this.SoLanSuDung = SoLanSuDung;
         this.TrangThai = TrangThai;
+    }
+
+    public int getMaCTHD() {
+        return MaCTHD;
+    }
+
+    public void setMaCTHD(int MaCTHD) {
+        this.MaCTHD = MaCTHD;
     }
 
     public int getMaHD() {
@@ -41,14 +46,6 @@ public class HoaDonChiTiet {
 
     public void setMaHD(int MaHD) {
         this.MaHD = MaHD;
-    }
-
-    public int getMaDV() {
-        return MaDV;
-    }
-
-    public void setMaDV(int MaDV) {
-        this.MaDV = MaDV;
     }
 
     public String getMaPhong() {
@@ -75,22 +72,6 @@ public class HoaDonChiTiet {
         this.NgayDK = NgayDK;
     }
 
-    public Date getThoiGianBDSD() {
-        return ThoiGianBDSD;
-    }
-
-    public void setThoiGianBDSD(Date ThoiGianBDSD) {
-        this.ThoiGianBDSD = ThoiGianBDSD;
-    }
-
-    public int getSoLanSuDung() {
-        return SoLanSuDung;
-    }
-
-    public void setSoLanSuDung(int SoLanSuDung) {
-        this.SoLanSuDung = SoLanSuDung;
-    }
-
     public boolean isTrangThai() {
         return TrangThai;
     }
@@ -98,6 +79,5 @@ public class HoaDonChiTiet {
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
-    
-    
+
 }

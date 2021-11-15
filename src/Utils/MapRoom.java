@@ -42,7 +42,7 @@ public class MapRoom {
 
     public static void DisplayMapRoom(JPanel box, GridBagConstraints gbc, int floors, int rooms, MouseAdapter ac) {
 
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        
         gbc.gridx = 0;
         gbc.gridy = floors;
         gbc.ipady = 5;
@@ -91,6 +91,7 @@ public class MapRoom {
         gbc.fill = GridBagConstraints.NONE;
         gbc.weightx = 1;
         gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
     }
 
     public static void initTang(JPanel tang, int floors, int rooms) {

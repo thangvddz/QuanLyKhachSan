@@ -1,0 +1,80 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Models;
+
+import Entities.YeuCau;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ *
+ * @author you have to better
+ */
+public class YeuCauDAO extends DAO<YeuCau, Object> {
+
+    private static final String SQL_INSERT = "INSERT INTO YEUCAU(MaDV, MaHDCT, ThoiGianBD, TrangThai) VALUES (?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE YEUCAU SET MaDV=?, ThoiGianBD=?, TrangThai=? WHERE MaHDCT=?";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM YEUCAU";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM YEUCAU WHERE MaDV=?, MaHDCT=?";
+    private static final String SQL_DELETE = "DELETE FROM YEUCAU WHERE MaDV=?, MaHDCT=?";
+
+    JdbcHelper jdbc;
+
+    public YeuCauDAO() {
+        jdbc = new JdbcHelper();
+    }
+
+    @Override
+    public void insert(YeuCau entity) {
+        jdbc.update(SQL_INSERT, entity.getMaDV(), entity.getMaHDCT(), entity.getThoiGianBDSD(), entity.isTrangThai());
+    }
+
+    @Override
+    public void update(YeuCau entity) {
+        jdbc.update(SQL_UPDATE, entity.getMaDV(), entity.getThoiGianBDSD(), entity.isTrangThai(), entity.getMaHDCT());
+    }
+
+    @Override
+    public void delete(Object id) {
+        jdbc.update(SQL_DELETE, id);
+    }
+
+    @Override
+    public YeuCau selectById(Object id) {
+        return selectBySql(SQL_SELECT_BY_ID, id).get(0);
+    }
+
+    @Override
+    public List<YeuCau> selectAll() {
+        return selectBySql(SQL_SELECT_ALL);
+    }
+
+    @Override
+    protected List<YeuCau> selectBySql(String sql, Object... args) {
+        List<YeuCau> ls = new ArrayList<>();
+        try {
+            ResultSet rs = jdbc.query(sql, args);
+
+            while (rs.next()) {
+                int maDV = rs.getInt(1);
+                int maHDCT = rs.getInt(2);
+                Date ThoiGianBDSD = rs.getDate(3);
+                boolean TrangThai = rs.getBoolean(4);
+                ls.add(new YeuCau(maDV, maHDCT, ThoiGianBDSD, TrangThai));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        if (ls.isEmpty()) {
+            return null;
+        }
+        return ls;
+    }
+
+}

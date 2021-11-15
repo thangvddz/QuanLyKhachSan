@@ -5,6 +5,8 @@
  */
 package Forms;
 
+import java.awt.GridBagConstraints;
+
 /**
  *
  * @author hungp
@@ -14,6 +16,8 @@ public class DichVuPanel extends javax.swing.JPanel {
     /**
      * Creates new form DichVuPanel
      */
+    GridBagConstraints gbc;
+    
     public DichVuPanel() {
         initComponents();
     }
@@ -186,7 +190,7 @@ public class DichVuPanel extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

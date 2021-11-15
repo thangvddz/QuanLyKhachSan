@@ -5,9 +5,11 @@
  */
 package Forms;
 
+import Models.PhongDAO;
 import Utils.ClickMouse;
 import Utils.MapRoom;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
@@ -25,6 +27,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
      */
     public static boolean switchSize;
     GridBagConstraints gbc;
+    PhongDAO phongDAO;
 
     public ManHinhChinhGUI() {
         initComponents();
@@ -70,15 +73,11 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
-        btnClose = new javax.swing.JLabel();
-        btnResize = new javax.swing.JLabel();
-        btnMinimux = new javax.swing.JLabel();
         ScpScreenDisplay = new javax.swing.JScrollPane();
         pnlScreen = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(212, 34, 51));
 
@@ -290,72 +289,18 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
         pnlHeader.setBackground(new java.awt.Color(212, 34, 51));
 
-        btnClose.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        btnClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_close_window_35px.png"))); // NOI18N
-        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCloseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCloseMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnCloseMousePressed(evt);
-            }
-        });
-
-        btnResize.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        btnResize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnResize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_enlarge_35px.png"))); // NOI18N
-        btnResize.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnResize.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnResizeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnResizeMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnResizeMousePressed(evt);
-            }
-        });
-
-        btnMinimux.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        btnMinimux.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnMinimux.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_minus_35px.png"))); // NOI18N
-        btnMinimux.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnMinimuxMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnMinimuxMouseExited(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMinimux, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnResize, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMinimux, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnResize, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 50, Short.MAX_VALUE)
         );
+
+        pnlScreen.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout pnlScreenLayout = new javax.swing.GroupLayout(pnlScreen);
         pnlScreen.setLayout(pnlScreenLayout);
@@ -380,7 +325,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScpScreenDisplay))
         );
@@ -484,61 +429,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         resetColor(btnPhanHoi);
     }//GEN-LAST:event_btnPhanHoiMouseExited
 
-    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
-        // TODO add your handling code here:
-        btnClose.setOpaque(true);
-        btnClose.setBackground(new Color(3, 36, 252));
-    }//GEN-LAST:event_btnCloseMouseEntered
-
-    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
-        // TODO add your handling code here:
-        btnClose.setBackground(new Color(212, 34, 51));
-    }//GEN-LAST:event_btnCloseMouseExited
-
-    private void btnResizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResizeMouseEntered
-        // TODO add your handling code here:
-        btnResize.setOpaque(true);
-        btnResize.setBackground(new Color(3, 36, 252));
-    }//GEN-LAST:event_btnResizeMouseEntered
-
-    private void btnResizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResizeMouseExited
-        // TODO add your handling code here:
-        btnResize.setBackground(new Color(212, 34, 51));
-    }//GEN-LAST:event_btnResizeMouseExited
-
-    private void btnMinimuxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimuxMouseEntered
-        // TODO add your handling code here:
-        btnMinimux.setOpaque(true);
-        btnMinimux.setBackground(new Color(3, 36, 252));
-    }//GEN-LAST:event_btnMinimuxMouseEntered
-
-    private void btnMinimuxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimuxMouseExited
-        // TODO add your handling code here:
-        btnMinimux.setBackground(new Color(212, 34, 51));
-    }//GEN-LAST:event_btnMinimuxMouseExited
-
-    private void btnCloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMousePressed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnCloseMousePressed
-
-    private void btnResizeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResizeMousePressed
-        // TODO add your handling code here:
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice device = env.getDefaultScreenDevice();
-        if (switchSize) {
-            this.setExtendedState(this.MAXIMIZED_BOTH);
-            this.setUndecorated(true);
-            this.setVisible(true);
-            switchSize = !switchSize;
-        }
-        if (!switchSize) {
-            device.setFullScreenWindow(null);
-            this.setVisible(true);
-            switchSize = !switchSize;
-        }
-    }//GEN-LAST:event_btnResizeMousePressed
-
     private void btnDichVuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDichVuMousePressed
         // TODO add your handling code here:
         JPanel dichvu = new DichVuPanel();
@@ -549,6 +439,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         JPanel lichSuGD = new LichSuGDPanel();
         SwitchPanel(lichSuGD);
+        System.out.println("lay out" + pnlScreen.getLayout().toString());
     }//GEN-LAST:event_btnThongKeMousePressed
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
@@ -563,6 +454,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuanLyPhongMousePressed
 
     public void init() {
+        phongDAO = new PhongDAO();
         gbc = new GridBagConstraints();
         switchSize = true;
         ScpScreenDisplay.getVerticalScrollBar().setUnitIncrement(16);
@@ -571,14 +463,22 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     }
 
     public void fillToHome() {
+        resetStatus();
         JPanel home = new HomePanel();
         SwitchPanel(home);
     }
     
+    public void resetStatus(){
+        phongDAO.updateMaTT3();
+    }
+
     // thay đổi giao diện hiển thị trong panel pnlScreen
     public void SwitchPanel(JPanel panel) {
+
         pnlScreen.removeAll();
         panel.setVisible(true);
+        MapRoom.setGridBagLayout(gbc, pnlScreen);
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlScreen.add(panel);
         pnlScreen.revalidate();
         pnlScreen.repaint();
@@ -629,15 +529,12 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScpScreenDisplay;
-    private javax.swing.JLabel btnClose;
     private javax.swing.JPanel btnDichVu;
     private javax.swing.JPanel btnHoaDon;
     private javax.swing.JPanel btnHome;
-    private javax.swing.JLabel btnMinimux;
     private javax.swing.JPanel btnNhanVien;
     private javax.swing.JPanel btnPhanHoi;
     private javax.swing.JPanel btnQuanLyPhong;
-    private javax.swing.JLabel btnResize;
     private javax.swing.JPanel btnThongKe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
