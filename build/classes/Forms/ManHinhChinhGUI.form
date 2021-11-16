@@ -37,7 +37,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="22" red="d4" type="rgb"/>
+          <Color blue="34" green="16" red="f7" type="rgb"/>
         </Property>
       </Properties>
 
@@ -53,8 +53,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="1" attributes="0">
-              <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
               <Component id="pnlSlider" alignment="1" max="32767" attributes="0"/>
+              <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -62,7 +62,7 @@
         <Container class="javax.swing.JPanel" name="pnlSlider">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="22" red="d4" type="rgb"/>
+              <Color blue="34" green="16" red="f7" type="rgb"/>
             </Property>
           </Properties>
 
@@ -117,7 +117,7 @@
             <Container class="javax.swing.JPanel" name="btnHome">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
@@ -164,12 +164,13 @@
             <Container class="javax.swing.JPanel" name="btnHoaDon">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHoaDonMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHoaDonMouseExited"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHoaDonMousePressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -210,7 +211,7 @@
             <Container class="javax.swing.JPanel" name="btnQuanLyPhong">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
@@ -257,12 +258,13 @@
             <Container class="javax.swing.JPanel" name="btnNhanVien">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNhanVienMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNhanVienMouseExited"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNhanVienMousePressed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -303,7 +305,7 @@
             <Container class="javax.swing.JPanel" name="btnDichVu">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
@@ -350,7 +352,7 @@
             <Container class="javax.swing.JPanel" name="btnThongKe">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
@@ -397,7 +399,7 @@
             <Container class="javax.swing.JPanel" name="btnPhanHoi">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
+                  <Color blue="34" green="16" red="f7" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
@@ -452,41 +454,16 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlHeader" max="32767" attributes="0"/>
                   <Component id="ScpScreenDisplay" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="pnlHeader" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ScpScreenDisplay" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="ScpScreenDisplay" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="pnlHeader">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="22" red="d4" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-            </Container>
             <Container class="javax.swing.JScrollPane" name="ScpScreenDisplay">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
@@ -501,12 +478,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1148" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1167" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="651" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="801" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>

@@ -21,7 +21,7 @@ public class KhachHangDAO extends DAO<KhachHang, Integer> {
     private static final String SQL_INSERT = "INSERT INTO KHACHHANG(SoCMT, HoTen, SoHoChieu, SoDienThoai, NgaySinh, QueQuan, GioiTinh) VALUES (?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE KHACHHANG SET SoCMT=?, HoTen=?, SoHoChieu=?, SoDienThoai=?, NgaySinh=?, QueQuan=?, GioiTinh=? WHERE MaKH=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM KHACHHANG";
-    private static final String SQL_SELECT_NEW_CUSTOMER = "select top 1 * from KHACHHANG order by MaKH desc";
+    private static final String SQL_SELECT_ID_CUSTOMER = "select * from KHACHHANG where SoCMT=?";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM KHACHHANG WHERE MaKH=?";
     private static final String SQL_DELETE = "DELETE FROM KHACHHANG WHERE MaKH=?";
 
@@ -51,8 +51,8 @@ public class KhachHangDAO extends DAO<KhachHang, Integer> {
         return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
     
-    public KhachHang selectMaKHNew() {
-        return selectBySql(SQL_SELECT_NEW_CUSTOMER).get(0);
+    public KhachHang selectMaKHNew(String soCMT) {
+        return selectBySql(SQL_SELECT_ID_CUSTOMER, soCMT).get(0);
     }
 
     @Override

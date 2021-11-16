@@ -11,7 +11,7 @@ package Entities;
  */
 public class Phong {
 
-    int maPhong;
+    String maPhong;
     int soTang;
     int maLoaiPhong;
     int maTT;
@@ -20,7 +20,7 @@ public class Phong {
     public Phong() {
     }
 
-    public Phong(int maPhong, int soTang, int maLoaiPhong, int maTT, String ViTriPhong) {
+    public Phong(String maPhong, int soTang, int maLoaiPhong, int maTT, String ViTriPhong) {
         this.maPhong = maPhong;
         this.soTang = soTang;
         this.maLoaiPhong = maLoaiPhong;
@@ -28,19 +28,11 @@ public class Phong {
         this.ViTriPhong = ViTriPhong;
     }
 
-    public int getMaTT() {
-        return maTT;
-    }
-
-    public void setMaTT(int maTT) {
-        this.maTT = maTT;
-    }
-
-    public int getMaPhong() {
+    public String getMaPhong() {
         return maPhong;
     }
 
-    public void setMaPhong(int maPhong) {
+    public void setMaPhong(String maPhong) {
         this.maPhong = maPhong;
     }
 
@@ -58,6 +50,14 @@ public class Phong {
 
     public void setMaLoaiPhong(int maLoaiPhong) {
         this.maLoaiPhong = maLoaiPhong;
+    }
+
+    public int getMaTT() {
+        return maTT;
+    }
+
+    public void setMaTT(int maTT) {
+        this.maTT = maTT;
     }
 
     public String getViTriPhong() {

@@ -69,7 +69,7 @@ public class PhongDAO extends DAO<Phong, Integer> {
         return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
     
-    public Phong selectByIdd(int soTang, int soPhong) {
+    public Phong selectByIdd(int soTang, String soPhong) {
         return selectBySql(SQL_SELECT_BY_ID, soPhong, soTang).get(0);
     }
 
@@ -89,7 +89,7 @@ public class PhongDAO extends DAO<Phong, Integer> {
             ResultSet rs = jdbc.query(sql, args);
 
             while (rs.next()) {
-                int maPhong = rs.getInt(1);
+                String maPhong = rs.getString(1);
                 int loaiPhong = rs.getInt(2);
                 int soTang = rs.getInt(3);
                 int MaTT = rs.getInt(4);

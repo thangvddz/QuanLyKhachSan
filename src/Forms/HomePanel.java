@@ -55,6 +55,7 @@ public class HomePanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Giao diện đặt trả phòng"));
 
         pnlScreen.setBackground(new java.awt.Color(255, 255, 255));
         pnlScreen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hiện trạng phòng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -67,7 +68,7 @@ public class HomePanel extends javax.swing.JPanel {
         );
         pnlScreenLayout.setVerticalGroup(
             pnlScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 546, Short.MAX_VALUE)
         );
 
         pnlGhiChu.setBackground(new java.awt.Color(255, 255, 255));

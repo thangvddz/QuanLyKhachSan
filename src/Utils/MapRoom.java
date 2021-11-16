@@ -5,7 +5,11 @@
  */
 package Utils;
 
+import Entities.HoaDonChiTiet;
 import Forms.QuanLyPhongPanel;
+import Models.HoaDonChiTietDAO;
+import Models.HoaDonDAO;
+import Models.KhachHangDAO;
 import Models.PhongDAO;
 import Models.TrangThaiDAO;
 import java.awt.BorderLayout;
@@ -33,16 +37,18 @@ public class MapRoom {
 
     public static Border outline = BorderFactory.createLineBorder(Color.BLACK);
     public static PhongDAO dao = new PhongDAO();
+    public static HoaDonChiTietDAO daohdct = new HoaDonChiTietDAO();
+    public static KhachHangDAO daokh = new KhachHangDAO();
+    public static HoaDonDAO daohd = new HoaDonDAO();
     public static TrangThaiDAO trangThaiDao = new TrangThaiDAO();
     public static int sizeWith = 200;
     public static int sizeHeight = 200;
     public static int posTang = 0;
-    public static int posPhong = 0;
+    public static String posPhong = null;
     public static Color colorRoom;
 
     public static void DisplayMapRoom(JPanel box, GridBagConstraints gbc, int floors, int rooms, MouseAdapter ac) {
 
-        
         gbc.gridx = 0;
         gbc.gridy = floors;
         gbc.ipady = 5;
@@ -65,21 +71,33 @@ public class MapRoom {
 
         if (rooms != 0) {
             for (int i = 0; i < rooms; i++) {
-                int numRoom = dao.RoomCodePerFloor(floors + 1).get(i).getMaPhong();
                 int numStatus = dao.RoomCodePerFloor(floors + 1).get(i).getMaTT();
-                String info = "<html><center>" + numRoom + "</center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "</html>";
+                String numRoom = dao.RoomCodePerFloor(floors + 1).get(i).getMaPhong();
+                String tenKH = "";
+                HoaDonChiTiet mahd = null;
+                try {
+                    mahd = daohdct.getMaHDFromHDCT(floors + 1, numRoom, false);
+                } catch (Exception e) {
+                }
+                if (mahd != null) {
+                    int maKH = daohd.selectByIdd(mahd.getMaHD(), false).getMaKH();
+                    tenKH = daokh.selectById(maKH).getHoTen();
+                    numStatus=2;
+                }
+
+                String info = "<html><center>" + numRoom + "</center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><br><center>" + tenKH + "</center>" + "</html>";
 
                 tang.add(addRoomToFloor(floors, ac, info, numStatus, numRoom));
             }
         }
-        if (QuanLyPhongPanel.quanlyphong) {
-            JLabel room = new JLabel("Thêm phòng");
-            room.setFont(new Font("Arial", Font.BOLD, 20));
-            room.putClientProperty("Tang", new Integer(floors + 1));
-            room.setPreferredSize(new Dimension(sizeWith, sizeHeight - 50));
-            room.addMouseListener(ac);
-            tang.add(room);
-        }
+//        if (QuanLyPhongPanel.quanlyphong) {
+//            JLabel room = new JLabel("Thêm phòng");
+//            room.setFont(new Font("Arial", Font.BOLD, 20));
+//            room.putClientProperty("Tang", new Integer(floors + 1));
+//            room.setPreferredSize(new Dimension(sizeWith, sizeHeight - 50));
+//            room.addMouseListener(ac);
+//            tang.add(room);
+//        }
         box.add(tang, gbc);
         box.revalidate();
         box.repaint();
@@ -95,18 +113,18 @@ public class MapRoom {
     }
 
     public static void initTang(JPanel tang, int floors, int rooms) {
-        tang.setPreferredSize(new Dimension(sizeWith * rooms + sizeWith * 2, sizeHeight-50));
+        tang.setPreferredSize(new Dimension(sizeWith * rooms + sizeWith * 2, sizeHeight - 50));
         tang.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
         tang.setAlignmentX(Component.LEFT_ALIGNMENT);
         tang.setBackground(Color.WHITE);
     }
 
-    public static JPanel addRoomToFloor(int floors, MouseAdapter ac, String nameLabel, int numStatus, int numRoom) {
+    public static JPanel addRoomToFloor(int floors, MouseAdapter ac, String nameLabel, int numStatus, String numRoom) {
 
         JPanel box = new JPanel();
         box.setLayout(new BorderLayout());
         box.putClientProperty("Tang", new Integer(floors + 1));
-        box.putClientProperty("Phong", new Integer(numRoom));
+        box.putClientProperty("Phong", new String(numRoom));
         box.addMouseListener(ac);
         JLabel room = new JLabel(nameLabel);
         room.setHorizontalAlignment(JLabel.CENTER);
