@@ -334,8 +334,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Hình thức thuê");
 
+        chkThueTheoNgay.setBackground(new java.awt.Color(255, 255, 255));
         chkThueTheoNgay.setText("Thuê theo ngày");
 
+        chkThueTheoGio.setBackground(new java.awt.Color(255, 255, 255));
         chkThueTheoGio.setText("Thuê theo giờ");
 
         tblThongTinPhongDaThue.setModel(new javax.swing.table.DefaultTableModel(
