@@ -20,12 +20,14 @@ public class KhachHang {
     String soDT;
     Date ngaySinh;
     String QueQuan;
+    String QuocTich;
+    String Email;
     boolean gioiTinh;
 
     public KhachHang() {
     }
 
-    public KhachHang(int maKH, String soCMT, String HoTen, String soHoChieu, String soDT, Date ngaySinh, String QueQuan, boolean gioiTinh) {
+    public KhachHang(int maKH, String soCMT, String HoTen, String soHoChieu, String soDT, Date ngaySinh, String QueQuan, String QuocTich, String Email, boolean gioiTinh) {
         this.maKH = maKH;
         this.soCMT = soCMT;
         this.HoTen = HoTen;
@@ -33,7 +35,25 @@ public class KhachHang {
         this.soDT = soDT;
         this.ngaySinh = ngaySinh;
         this.QueQuan = QueQuan;
+        this.QuocTich = QuocTich;
+        this.Email = Email;
         this.gioiTinh = gioiTinh;
+    }
+
+    public String getQuocTich() {
+        return QuocTich;
+    }
+
+    public void setQuocTich(String QuocTich) {
+        this.QuocTich = QuocTich;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public int getMaKH() {

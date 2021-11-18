@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class KhachHangDAO extends DAO<KhachHang, Integer> {
 
-    private static final String SQL_INSERT = "INSERT INTO KHACHHANG(SoCMT, HoTen, SoHoChieu, SoDienThoai, NgaySinh, QueQuan, GioiTinh) VALUES (?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE KHACHHANG SET SoCMT=?, HoTen=?, SoHoChieu=?, SoDienThoai=?, NgaySinh=?, QueQuan=?, GioiTinh=? WHERE MaKH=?";
+    private static final String SQL_INSERT = "INSERT INTO KHACHHANG(SoCMT, HoTen, SoHoChieu, SoDienThoai, NgaySinh, QueQuan,QuocTich, Email, GioiTinh) VALUES (?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE KHACHHANG SET SoCMT=?, HoTen=?, SoHoChieu=?, SoDienThoai=?, NgaySinh=?, QueQuan=?,QuocTich=?, Email=?, GioiTinh=? WHERE MaKH=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM KHACHHANG";
     private static final String SQL_SELECT_ID_CUSTOMER = "select * from KHACHHANG where SoCMT=?";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM KHACHHANG WHERE MaKH=?";
@@ -33,12 +33,12 @@ public class KhachHangDAO extends DAO<KhachHang, Integer> {
 
     @Override
     public void insert(KhachHang entity) {
-        jdbc.update(SQL_INSERT, entity.getSoCMT(), entity.getHoTen(), entity.getSoHoChieu(), entity.getSoDT(), entity.getNgaySinh(), entity.getQueQuan(), entity.isGioiTinh());
+        jdbc.update(SQL_INSERT, entity.getSoCMT(), entity.getHoTen(), entity.getSoHoChieu(), entity.getSoDT(), entity.getNgaySinh(), entity.getQueQuan(),entity.getQuocTich(), entity.getEmail(), entity.isGioiTinh());
     }
 
     @Override
     public void update(KhachHang entity) {
-        jdbc.update(SQL_UPDATE, entity.getSoCMT(), entity.getHoTen(), entity.getSoHoChieu(), entity.getSoDT(), entity.getNgaySinh(), entity.getQueQuan(), entity.isGioiTinh(), entity.getMaKH());
+        jdbc.update(SQL_UPDATE, entity.getSoCMT(), entity.getHoTen(), entity.getSoHoChieu(), entity.getSoDT(), entity.getNgaySinh(), entity.getQueQuan(),entity.getQuocTich(), entity.getEmail(), entity.isGioiTinh(), entity.getMaKH());
     }
 
     @Override
@@ -74,8 +74,10 @@ public class KhachHangDAO extends DAO<KhachHang, Integer> {
                 String soDT = rs.getString(5);
                 Date ngaySinh = rs.getDate(6);
                 String QueQuan = rs.getString(7);
-                boolean gioiTinh = rs.getBoolean(8);
-                ls.add(new KhachHang(maKH, soCMT, HoTen, soHoChieu, soDT, ngaySinh, QueQuan, gioiTinh));
+                String QuocTich = rs.getString(8);
+                String Email = rs.getString(9);
+                boolean gioiTinh = rs.getBoolean(10);
+                ls.add(new KhachHang(maKH, soCMT, HoTen, soHoChieu, soDT, ngaySinh, QueQuan, QuocTich, Email, gioiTinh));
             }
         } catch (SQLException ex) {
             System.out.println("Error selectbySQL in NhanVienDao");

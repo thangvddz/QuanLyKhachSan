@@ -15,17 +15,17 @@ public class Phong {
     int soTang;
     int maLoaiPhong;
     int maTT;
-    String ViTriPhong;
+    String GhiChu;
 
     public Phong() {
     }
 
-    public Phong(String maPhong, int soTang, int maLoaiPhong, int maTT, String ViTriPhong) {
+    public Phong(String maPhong, int soTang, int maLoaiPhong, int maTT, String GhiChu) {
         this.maPhong = maPhong;
         this.soTang = soTang;
         this.maLoaiPhong = maLoaiPhong;
         this.maTT = maTT;
-        this.ViTriPhong = ViTriPhong;
+        this.GhiChu = GhiChu;
     }
 
     public String getMaPhong() {
@@ -60,12 +60,12 @@ public class Phong {
         this.maTT = maTT;
     }
 
-    public String getViTriPhong() {
-        return ViTriPhong;
+    public String getGhiChu() {
+        return GhiChu;
     }
 
-    public void setViTriPhong(String ViTriPhong) {
-        this.ViTriPhong = ViTriPhong;
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
     }
 
 }

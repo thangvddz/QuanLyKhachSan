@@ -54,12 +54,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     public static int soTang;
     public static String CMT;
     public static KhachHang khachMucTieu;
-
+    
     public DatTraPhongPanel() {
         initComponents();
         init();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +93,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         jdcNgaySinh = new com.toedter.calendar.JDateChooser();
         jLabel18 = new javax.swing.JLabel();
         txtPhiPhuThu = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtGiamGia = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtSoPhongDaThue = new javax.swing.JTextField();
@@ -211,6 +213,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setText("Phí phụ thu");
 
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel19.setText("Giảm giá");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -270,7 +275,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPhiPhuThu, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtPhiPhuThu, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +320,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQueQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -664,7 +676,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private void txtSoDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoDTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSoDTActionPerformed
-
+    
     public void init() {
         khachHangDAO = new KhachHangDAO();
         hoaDonDAO = new HoaDonDAO();
@@ -681,22 +693,22 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         fillTableChonPhong();
         fillGioiTinh();
         fillComboboxDichVu();
-
+        
         fillKhachHangField();
         fillTablePhongDaThue();
         fillTableCTPhongDV();
     }
-
+    
     public void DatPhong() {
         insertKhachHang();
         insertHoaDon();
         insertHDCT();
     }
-
+    
     public void TraPhong() {
-
+        
     }
-
+    
     public void insertKhachHang() {
         CMT = txtSoCMT.getText().trim();
         if (!CMT.equals("")) {
@@ -705,19 +717,19 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 clearForm();
                 fillForm(khachMucTieu);
             } catch (Exception e) {
-                khachHangDAO.insert(new KhachHang(-1, CMT, txtTenKhachHang.getText(), txtSoHoChieu.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
+                khachHangDAO.insert(new KhachHang(-1, CMT, txtTenKhachHang.getText(), txtSoHoChieu.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
             }
         }
     }
-
+    
     public void insertHoaDon() {
         try {
-            hoaDonDAO.insert(new HoaDon(-1, 1, khachHangDAO.selectMaKHNew(CMT).getMaKH(), jdcCheckIn.getDate(), jdcCheckOut.getDate(), Double.parseDouble(txtTraTruoc.getText()), "Khách này ngầu lắm", false));
+            hoaDonDAO.insert(new HoaDon(-1, "NV01", khachHangDAO.selectMaKHNew(CMT).getMaKH(), jdcCheckIn.getDate(), jdcCheckOut.getDate(), Double.parseDouble(txtTraTruoc.getText()), Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public void insertHDCT() {
         try {
             int MaHD = hoaDonDAO.selectHoaDonByKHMoi(false).getMaHD();
@@ -729,9 +741,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void insertYeuCauDV() {
         int maDV = cboDichVu.getSelectedIndex();
         try {
@@ -741,16 +753,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void fillGioiTinh() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboGioiTinh.getModel();
         model.removeAllElements();
         model.addElement("Nam");
         model.addElement("Nữ");
     }
-
+    
     public void fillForm(KhachHang kh) {
         txtSoCMT.setText(kh.getSoCMT());
         txtTenKhachHang.setText(kh.getHoTen());
@@ -758,13 +770,15 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtSoDT.setText(kh.getSoDT());
         jdcNgaySinh.setDate(kh.getNgaySinh());
         txtQueQuan.setText(kh.getQueQuan());
+        txtQuocTich.setText(kh.getQuocTich());
+        txtEmail.setText(kh.getEmail());
         if (kh.isGioiTinh()) {
             cboGioiTinh.setSelectedIndex(0);
         } else {
             cboGioiTinh.setSelectedIndex(1);
         }
     }
-
+    
     public void fillKhachHangField() {
         int makh = MapRoom.maKH;
         if (makh != 0) {
@@ -773,14 +787,14 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             fillHoaDonField(makh);
         }
     }
-
+    
     public void fillHoaDonField(int maKH) {
         HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
         jdcCheckIn.setDate(hd.getThoiDiemDatPhong());
         jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
         txtTraTruoc.setText(String.valueOf(hd.getTienTraTruoc()));
     }
-
+    
     public void clearForm() {
         txtSoCMT.setText("");
         txtTenKhachHang.setText("");
@@ -788,9 +802,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtSoDT.setText("");
         jdcNgaySinh.setDate(null);
         txtQueQuan.setText("");
+        txtQuocTich.setText("");
+        txtEmail.setText("");
         cboGioiTinh.setSelectedIndex(0);
     }
-
+    
     public void fillTableChonPhong() {
         Phong lsPhong = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong);
         LoaiPhong lp = loaiPhongDAO.selectById(lsPhong.getMaLoaiPhong());
@@ -802,7 +818,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             });
         }
     }
-
+    
     public void fillComboboxDichVu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboDichVu.getModel();
         List<DichVu> lsDichVu = dichVuDAO.selectAll();
@@ -812,12 +828,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             model.addElement(dichVu.getTenDV() + ", Phi: " + dichVu.getPhiDV());
         }
     }
-
+    
     public void clearTableChonPhong() {
         DefaultTableModel model = (DefaultTableModel) tblPhongDuocChon.getModel();
         model.setRowCount(0);
     }
-
+    
     public void fillTablePhongDaThue() {
         DefaultTableModel model = (DefaultTableModel) tblThongTinPhongDaThue.getModel();
         model.setRowCount(0);
@@ -833,7 +849,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     public void fillTableCTPhongDV() {
         DefaultTableModel model = (DefaultTableModel) tblChiTietPhongVaDV.getModel();
         model.setRowCount(0);
@@ -852,7 +868,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
         }
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -875,6 +891,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -902,6 +919,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblPhongDuocChon;
     private javax.swing.JTable tblThongTinPhongDaThue;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtGiamGia;
     private javax.swing.JTextField txtGioCheckIn;
     private javax.swing.JTextField txtGioCheckOut;
     private javax.swing.JTextField txtPhiPhuThu;

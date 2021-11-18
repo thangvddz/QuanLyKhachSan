@@ -74,9 +74,12 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnKhachHang = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        btnDangXuat = new javax.swing.JPanel();
+        btnCaiDat = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        btnDangXuat = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         ScpScreenDisplay = new javax.swing.JScrollPane();
         pnlScreen = new javax.swing.JPanel();
@@ -135,7 +138,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel2.setText("HOME");
         btnHome.add(jLabel2);
 
-        pnlSlider.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 330, 70));
+        pnlSlider.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 360, 70));
 
         btnHoaDon.setBackground(new java.awt.Color(247, 22, 52));
         btnHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,7 +165,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel4.setText("HÓA ĐƠN");
         btnHoaDon.add(jLabel4);
 
-        pnlSlider.add(btnHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 330, 70));
+        pnlSlider.add(btnHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 360, 70));
 
         btnQuanLyPhong.setBackground(new java.awt.Color(247, 22, 52));
         btnQuanLyPhong.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,7 +192,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel6.setText("QUẢN LÝ PHÒNG");
         btnQuanLyPhong.add(jLabel6);
 
-        pnlSlider.add(btnQuanLyPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 330, 70));
+        pnlSlider.add(btnQuanLyPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 360, 70));
 
         btnNhanVien.setBackground(new java.awt.Color(247, 22, 52));
         btnNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,7 +219,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel8.setText("NHÂN VIÊN");
         btnNhanVien.add(jLabel8);
 
-        pnlSlider.add(btnNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 70));
+        pnlSlider.add(btnNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 360, 70));
 
         btnDichVu.setBackground(new java.awt.Color(247, 22, 52));
         btnDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -243,7 +246,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel10.setText("DỊCH VỤ");
         btnDichVu.add(jLabel10);
 
-        pnlSlider.add(btnDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 330, 70));
+        pnlSlider.add(btnDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 360, 70));
 
         btnThongKe.setBackground(new java.awt.Color(247, 22, 52));
         btnThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,7 +273,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel12.setText("THỐNG KÊ");
         btnThongKe.add(jLabel12);
 
-        pnlSlider.add(btnThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 330, 70));
+        pnlSlider.add(btnThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 360, 70));
 
         btnPhanHoi.setBackground(new java.awt.Color(247, 22, 52));
         btnPhanHoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -294,9 +297,17 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel14.setText("PHẢN HỒI");
         btnPhanHoi.add(jLabel14);
 
-        pnlSlider.add(btnPhanHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 330, 70));
+        pnlSlider.add(btnPhanHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 360, 70));
 
         btnKhachHang.setBackground(new java.awt.Color(247, 22, 52));
+        btnKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnKhachHangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnKhachHangMouseExited(evt);
+            }
+        });
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_customer_35px.png"))); // NOI18N
@@ -304,7 +315,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel16.setBackground(new java.awt.Color(204, 204, 204));
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("KHÁCH HÀNG");
 
         javax.swing.GroupLayout btnKhachHangLayout = new javax.swing.GroupLayout(btnKhachHang);
@@ -314,34 +325,83 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             .addGroup(btnKhachHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         btnKhachHangLayout.setVerticalGroup(
             btnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnKhachHangLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(btnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addGroup(btnKhachHangLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel16)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(btnKhachHangLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlSlider.add(btnKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 330, 70));
+        pnlSlider.add(btnKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 360, 70));
 
-        btnDangXuat.setBackground(new java.awt.Color(247, 22, 52));
+        btnCaiDat.setBackground(new java.awt.Color(247, 22, 52));
+        btnCaiDat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCaiDatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCaiDatMouseExited(evt);
+            }
+        });
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_logout_rounded_left_35px.png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_settings_35px.png"))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("ĐĂNG XUẤT");
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel18.setText("CÀI ĐẶT");
+
+        javax.swing.GroupLayout btnCaiDatLayout = new javax.swing.GroupLayout(btnCaiDat);
+        btnCaiDat.setLayout(btnCaiDatLayout);
+        btnCaiDatLayout.setHorizontalGroup(
+            btnCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCaiDatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
+        );
+        btnCaiDatLayout.setVerticalGroup(
+            btnCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCaiDatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCaiDatLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(21, 21, 21))
+        );
+
+        pnlSlider.add(btnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 360, 70));
+
+        btnDangXuat.setBackground(new java.awt.Color(247, 22, 52));
+        btnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDangXuatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDangXuatMouseExited(evt);
+            }
+        });
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_logout_rounded_left_35px.png"))); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("ĐĂNG XUẤT");
 
         javax.swing.GroupLayout btnDangXuatLayout = new javax.swing.GroupLayout(btnDangXuat);
         btnDangXuat.setLayout(btnDangXuatLayout);
@@ -349,24 +409,26 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             btnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnDangXuatLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         btnDangXuatLayout.setVerticalGroup(
             btnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnDangXuatLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(btnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(btnDangXuatLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(btnDangXuatLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel20)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(btnDangXuatLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel18)
-                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        pnlSlider.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 320, 80));
+        pnlSlider.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 740, 360, 70));
 
         jPanel4.setBackground(new java.awt.Color(212, 34, 51));
 
@@ -380,7 +442,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         );
         pnlScreenLayout.setVerticalGroup(
             pnlScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 801, Short.MAX_VALUE)
+            .addGap(0, 842, Short.MAX_VALUE)
         );
 
         ScpScreenDisplay.setViewportView(pnlScreen);
@@ -401,7 +463,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnlSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -530,6 +592,36 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         nv.setVisible(true);
     }//GEN-LAST:event_btnNhanVienMousePressed
 
+    private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered
+        // TODO add your handling code here:
+        changeColor(btnKhachHang);
+    }//GEN-LAST:event_btnKhachHangMouseEntered
+
+    private void btnKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseExited
+        // TODO add your handling code here:
+        resetColor(btnKhachHang);
+    }//GEN-LAST:event_btnKhachHangMouseExited
+
+    private void btnCaiDatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCaiDatMouseEntered
+        // TODO add your handling code here:
+        changeColor(btnCaiDat);
+    }//GEN-LAST:event_btnCaiDatMouseEntered
+
+    private void btnCaiDatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCaiDatMouseExited
+        // TODO add your handling code here:
+        resetColor(btnCaiDat);
+    }//GEN-LAST:event_btnCaiDatMouseExited
+
+    private void btnDangXuatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMouseEntered
+        // TODO add your handling code here:
+        changeColor(btnDangXuat);
+    }//GEN-LAST:event_btnDangXuatMouseEntered
+
+    private void btnDangXuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMouseExited
+        // TODO add your handling code here:
+        resetColor(btnDangXuat);
+    }//GEN-LAST:event_btnDangXuatMouseExited
+
     public void init() {
         phongDAO = new PhongDAO();
         gbc = new GridBagConstraints();
@@ -606,6 +698,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScpScreenDisplay;
+    private javax.swing.JPanel btnCaiDat;
     private javax.swing.JPanel btnDangXuat;
     private javax.swing.JPanel btnDichVu;
     private javax.swing.JPanel btnHoaDon;
@@ -625,7 +718,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

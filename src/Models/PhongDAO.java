@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class PhongDAO extends DAO<Phong, Integer> {
 
-    private static final String SQL_INSERT = "INSERT INTO PHONG(MaPhong, MaLP, SoTang, MaTT, ViTriPhong) VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE PHONG SET MaLP=?, MaTT=?, ViTriPhong=? WHERE MaPhong=? AND SoTang=?";
+    private static final String SQL_INSERT = "INSERT INTO PHONG(MaPhong, MaLP, SoTang, MaTT, GhiChu) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE PHONG SET MaLP=?, MaTT=?, GhiChu=? WHERE MaPhong=? AND SoTang=?";
     private static final String SQL_UPDATE_TT = "UPDATE PHONG SET MaTT=? WHERE MaPhong=? AND SoTang=?";
     private static final String SQL_UPDATE_STATUS_3 = "UPDATE PHONG SET MaTT=1 WHERE MaTT=3";
     private static final String SQL_SELECT_ALL = "SELECT * FROM PHONG";
@@ -39,12 +39,12 @@ public class PhongDAO extends DAO<Phong, Integer> {
 
     @Override
     public void insert(Phong entity) {
-        jdbc.update(SQL_INSERT, entity.getMaPhong(), entity.getMaLoaiPhong(), entity.getSoTang(), entity.getMaTT(), entity.getViTriPhong());
+        jdbc.update(SQL_INSERT, entity.getMaPhong(), entity.getMaLoaiPhong(), entity.getSoTang(), entity.getMaTT(), entity.getGhiChu());
     }
 
     @Override
     public void update(Phong entity) {
-        jdbc.update(SQL_UPDATE, entity.getMaLoaiPhong(), entity.getMaTT(), entity.getViTriPhong(), entity.getMaPhong(), entity.getSoTang());
+        jdbc.update(SQL_UPDATE, entity.getMaLoaiPhong(), entity.getMaTT(), entity.getGhiChu(), entity.getMaPhong(), entity.getSoTang());
     }
     
     public void updateMaTT(Phong entity) {
@@ -93,8 +93,8 @@ public class PhongDAO extends DAO<Phong, Integer> {
                 int loaiPhong = rs.getInt(2);
                 int soTang = rs.getInt(3);
                 int MaTT = rs.getInt(4);
-                String viTriPhong = rs.getString(5);
-                ls.add(new Phong(maPhong, soTang, loaiPhong, MaTT, viTriPhong));
+                String GhiChu = rs.getString(5);
+                ls.add(new Phong(maPhong, soTang, loaiPhong, MaTT, GhiChu));
             }
         } catch (SQLException ex) {
             System.out.println("Error selectbySQL in NhanVienDao");

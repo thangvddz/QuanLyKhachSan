@@ -13,30 +13,34 @@ import java.util.Date;
  */
 public class NhanVien {
 
-    int MaNV;
+    int id;
+    String MaNV;
     String HoTen;
     String SoCMT;
     boolean GioiTinh;
     String QueQuan;
     Date NgaySinh;
+    Date ThoiGianLap;
     Date NgayVaoLam;
     String SoDT;
     String Email;
     String username;
     String passwd;
-    boolean VaiTro;
-    boolean TrangThai;
+    String VaiTro;
+    int TrangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(int MaNV, String HoTen, String SoCMT, boolean GioiTinh, String QueQuan, Date NgaySinh, Date NgayVaoLam, String SoDT, String Email, String username, String passwd, boolean VaiTro, boolean TrangThai) {
+    public NhanVien(int id, String MaNV, String HoTen, String SoCMT, boolean GioiTinh, String QueQuan, Date NgaySinh, Date ThoiGianLap, Date NgayVaoLam, String SoDT, String Email, String username, String passwd, String VaiTro, int TrangThai) {
+        this.id = id;
         this.MaNV = MaNV;
         this.HoTen = HoTen;
         this.SoCMT = SoCMT;
         this.GioiTinh = GioiTinh;
         this.QueQuan = QueQuan;
         this.NgaySinh = NgaySinh;
+        this.ThoiGianLap = ThoiGianLap;
         this.NgayVaoLam = NgayVaoLam;
         this.SoDT = SoDT;
         this.Email = Email;
@@ -46,11 +50,27 @@ public class NhanVien {
         this.TrangThai = TrangThai;
     }
 
-    public int getMaNV() {
+    public Date getThoiGianLap() {
+        return ThoiGianLap;
+    }
+
+    public void setThoiGianLap(Date ThoiGianLap) {
+        this.ThoiGianLap = ThoiGianLap;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getMaNV() {
         return MaNV;
     }
 
-    public void setMaNV(int MaNV) {
+    public void setMaNV(String MaNV) {
         this.MaNV = MaNV;
     }
 
@@ -134,19 +154,19 @@ public class NhanVien {
         this.passwd = passwd;
     }
 
-    public boolean isVaiTro() {
+    public String getVaiTro() {
         return VaiTro;
     }
 
-    public void setVaiTro(boolean VaiTro) {
+    public void setVaiTro(String VaiTro) {
         this.VaiTro = VaiTro;
     }
 
-    public boolean isTrangThai() {
+    public int getTrangThai() {
         return TrangThai;
     }
 
-    public void setTrangThai(boolean TrangThai) {
+    public void setTrangThai(int TrangThai) {
         this.TrangThai = TrangThai;
     }
 

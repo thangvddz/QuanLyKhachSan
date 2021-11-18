@@ -12,26 +12,33 @@ import java.util.Date;
  * @author you have to better
  */
 public class HoaDon {
-    int MaHD; 
-    int MaNV;
+
+    int MaHD;
+    String MaNV;
     int MaKH;
     Date ThoiDiemDatPhong;
     Date ThoiDiemTraPhong;
     double TienTraTruoc;
+    double GiamGia;
+    double PhuThu;
+    double ThanhTien;
     String GhiChu;
     boolean TrangThai;
 
     public HoaDon() {
-        
+
     }
 
-    public HoaDon(int MaHD, int MaNV, int MaKH, Date ThoiDiemDatPhong, Date ThoiDiemTraPhong, double TienTraTruoc, String GhiChu, boolean TrangThai) {
+    public HoaDon(int MaHD, String MaNV, int MaKH, Date ThoiDiemDatPhong, Date ThoiDiemTraPhong, double TienTraTruoc, double GiamGia, double PhuThu, double ThanhTien, String GhiChu, boolean TrangThai) {
         this.MaHD = MaHD;
         this.MaNV = MaNV;
         this.MaKH = MaKH;
         this.ThoiDiemDatPhong = ThoiDiemDatPhong;
         this.ThoiDiemTraPhong = ThoiDiemTraPhong;
         this.TienTraTruoc = TienTraTruoc;
+        this.GiamGia = GiamGia;
+        this.PhuThu = PhuThu;
+        this.ThanhTien = ThanhTien;
         this.GhiChu = GhiChu;
         this.TrangThai = TrangThai;
     }
@@ -44,11 +51,11 @@ public class HoaDon {
         this.MaHD = MaHD;
     }
 
-    public int getMaNV() {
+    public String getMaNV() {
         return MaNV;
     }
 
-    public void setMaNV(int MaNV) {
+    public void setMaNV(String MaNV) {
         this.MaNV = MaNV;
     }
 
@@ -84,6 +91,30 @@ public class HoaDon {
         this.TienTraTruoc = TienTraTruoc;
     }
 
+    public double getGiamGia() {
+        return GiamGia;
+    }
+
+    public void setGiamGia(double GiamGia) {
+        this.GiamGia = GiamGia;
+    }
+
+    public double getPhuThu() {
+        return PhuThu;
+    }
+
+    public void setPhuThu(double PhuThu) {
+        this.PhuThu = PhuThu;
+    }
+
+    public double getThanhTien() {
+        return ThanhTien;
+    }
+
+    public void setThanhTien(double ThanhTien) {
+        this.ThanhTien = ThanhTien;
+    }
+
     public String getGhiChu() {
         return GhiChu;
     }
@@ -99,5 +130,5 @@ public class HoaDon {
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
-    
+
 }
