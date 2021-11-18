@@ -22,6 +22,7 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
     private static final String SQL_UPDATE = "UPDATE HOADON SET MaNV=?, MaKH=?, ThoiDiemDatPhong=?, ThoiDiemTraPhong=?, TienTraTruoc=?, GhiChu=?, TrangThai=? WHERE MaHD=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM HOADON";
     private static final String SQL_SELECT_ID_HOADON = "select * from HOADON where MaKH=? and TrangThai=?";
+    private static final String SQL_SELECT_ID_HOADON_MOI = "select TOP 1 * from HOADON where TrangThai=? order by MaHD desc";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM HOADON WHERE MaHD=? and TrangThai=?";
     private static final String SQL_DELETE = "DELETE FROM HOADON WHERE MaHD=?";
 
@@ -50,13 +51,17 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
     public HoaDon selectById(Integer id) {
         return null;
     }
-    
+
     public HoaDon selectByIdd(Integer id, boolean trangthai) {
         return selectBySql(SQL_SELECT_BY_ID, id, trangthai).get(0);
     }
-
+    
     public HoaDon selectHoaDonByKH(int makh, boolean trangthai) {
         return selectBySql(SQL_SELECT_ID_HOADON, makh, trangthai).get(0);
+    }
+
+    public HoaDon selectHoaDonByKHMoi(boolean trangthai) {
+        return selectBySql(SQL_SELECT_ID_HOADON_MOI, trangthai).get(0);
     }
 
     @Override
@@ -90,7 +95,5 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
         }
         return ls;
     }
-
-    
 
 }

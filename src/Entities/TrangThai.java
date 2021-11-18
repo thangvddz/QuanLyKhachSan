@@ -35,7 +35,6 @@ public class TrangThai {
 
     public void setTenTrangThai(String TenTrangThai) {
         this.TenTrangThai = TenTrangThai;
-    }
-    
+    } 
     
 }

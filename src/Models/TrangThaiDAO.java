@@ -11,10 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author you have to better
- */
 public class TrangThaiDAO extends DAO<TrangThai, Integer> {
 
     private static final String SQL_INSERT = "INSERT INTO TRANGTHAI(TenTT) VALUES(?)";

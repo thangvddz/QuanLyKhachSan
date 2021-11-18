@@ -5,6 +5,12 @@
  */
 package Forms;
 
+import Utils.ClickMouse;
+import Utils.MapRoom;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 /**
  *
  * @author you have to better
@@ -17,8 +23,14 @@ public class DatTraPhongJFrame extends javax.swing.JFrame {
     public DatTraPhongJFrame() {
         setTitle("Dat Tra Phong");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
         add(new DatTraPhongPanel());
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent we) {
+                HomePanel h = new HomePanel();
+                ManHinhChinhGUI.SwitchPanel(h);
+            }
+        });
         pack();
         setLocationRelativeTo(null);
     }

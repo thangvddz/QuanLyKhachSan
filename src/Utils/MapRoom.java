@@ -6,6 +6,7 @@
 package Utils;
 
 import Entities.HoaDonChiTiet;
+import Entities.Phong;
 import Forms.QuanLyPhongPanel;
 import Models.HoaDonChiTietDAO;
 import Models.HoaDonDAO;
@@ -41,6 +42,7 @@ public class MapRoom {
     public static KhachHangDAO daokh = new KhachHangDAO();
     public static HoaDonDAO daohd = new HoaDonDAO();
     public static TrangThaiDAO trangThaiDao = new TrangThaiDAO();
+    public static int maKH = 0;
     public static int sizeWith = 200;
     public static int sizeHeight = 200;
     public static int posTang = 0;
@@ -78,11 +80,15 @@ public class MapRoom {
                 try {
                     mahd = daohdct.getMaHDFromHDCT(floors + 1, numRoom, false);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 if (mahd != null) {
-                    int maKH = daohd.selectByIdd(mahd.getMaHD(), false).getMaKH();
+                    System.out.println("maHD: "+ mahd.getMaHD());
+                    maKH = daohd.selectByIdd(mahd.getMaHD(), false).getMaKH();
                     tenKH = daokh.selectById(maKH).getHoTen();
-                    numStatus=2;
+                    numStatus = 2;
+                } else {
+                    maKH = 0;
                 }
 
                 String info = "<html><center>" + numRoom + "</center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><br><center>" + tenKH + "</center>" + "</html>";
@@ -125,6 +131,7 @@ public class MapRoom {
         box.setLayout(new BorderLayout());
         box.putClientProperty("Tang", new Integer(floors + 1));
         box.putClientProperty("Phong", new String(numRoom));
+        box.putClientProperty("MaKH", new Integer(maKH));
         box.addMouseListener(ac);
         JLabel room = new JLabel(nameLabel);
         room.setHorizontalAlignment(JLabel.CENTER);
@@ -135,17 +142,20 @@ public class MapRoom {
         room.setForeground(Color.WHITE);
         switch (numStatus) {
             case 1:
+                dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
                 box.setBackground(new Color(24, 24, 214));
                 break;
             case 2:
+                dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
                 box.setBackground(new Color(176, 13, 11));
                 break;
             case 3:
+                dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
                 box.setBackground(new Color(164, 166, 164));
                 break;
             default:
+                dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
                 box.setBackground(new Color(252, 121, 28));
-
                 break;
         }
 

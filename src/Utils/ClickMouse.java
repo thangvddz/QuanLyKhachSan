@@ -28,7 +28,8 @@ public class ClickMouse {
             JPanel title = (JPanel) me.getSource();
             MapRoom.posTang = (int) title.getClientProperty("Tang");
             MapRoom.posPhong = (String) title.getClientProperty("Phong");
-            System.out.println("tang:" + MapRoom.posTang + ", phong:" + MapRoom.posPhong);
+            MapRoom.maKH = (int) title.getClientProperty("MaKH");
+            System.out.println("tang:" + MapRoom.posTang + ", phong:" + MapRoom.posPhong+", maKH: "+ MapRoom.maKH);
             DatTraPhongJFrame jf = new DatTraPhongJFrame();
             jf.setVisible(true);
         }

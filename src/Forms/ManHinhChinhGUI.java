@@ -26,7 +26,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
      * Creates new form ManHinhChinhGUI
      */
     public static boolean switchSize;
-    GridBagConstraints gbc;
+    public static GridBagConstraints gbc;
     PhongDAO phongDAO;
 
     public ManHinhChinhGUI() {
@@ -71,6 +71,12 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnPhanHoi = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        btnKhachHang = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        btnDangXuat = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         ScpScreenDisplay = new javax.swing.JScrollPane();
         pnlScreen = new javax.swing.JPanel();
@@ -290,6 +296,78 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
         pnlSlider.add(btnPhanHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 330, 70));
 
+        btnKhachHang.setBackground(new java.awt.Color(247, 22, 52));
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_customer_35px.png"))); // NOI18N
+
+        jLabel16.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("KHÁCH HÀNG");
+
+        javax.swing.GroupLayout btnKhachHangLayout = new javax.swing.GroupLayout(btnKhachHang);
+        btnKhachHang.setLayout(btnKhachHangLayout);
+        btnKhachHangLayout.setHorizontalGroup(
+            btnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnKhachHangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        btnKhachHangLayout.setVerticalGroup(
+            btnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnKhachHangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btnKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addGroup(btnKhachHangLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        pnlSlider.add(btnKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 330, 70));
+
+        btnDangXuat.setBackground(new java.awt.Color(247, 22, 52));
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_logout_rounded_left_35px.png"))); // NOI18N
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("ĐĂNG XUẤT");
+
+        javax.swing.GroupLayout btnDangXuatLayout = new javax.swing.GroupLayout(btnDangXuat);
+        btnDangXuat.setLayout(btnDangXuatLayout);
+        btnDangXuatLayout.setHorizontalGroup(
+            btnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnDangXuatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
+        );
+        btnDangXuatLayout.setVerticalGroup(
+            btnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnDangXuatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(btnDangXuatLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel18)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        pnlSlider.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 320, 80));
+
         jPanel4.setBackground(new java.awt.Color(212, 34, 51));
 
         pnlScreen.setBackground(new java.awt.Color(255, 255, 255));
@@ -427,7 +505,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         JPanel lichSuGD = new LichSuGDPanel();
         SwitchPanel(lichSuGD);
-        System.out.println("lay out" + pnlScreen.getLayout().toString());
     }//GEN-LAST:event_btnThongKeMousePressed
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
@@ -473,7 +550,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     }
 
     // thay đổi giao diện hiển thị trong panel pnlScreen
-    public void SwitchPanel(JPanel panel) {
+    public static void SwitchPanel(JPanel panel) {
 
         pnlScreen.removeAll();
         panel.setVisible(true);
@@ -529,9 +606,11 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScpScreenDisplay;
+    private javax.swing.JPanel btnDangXuat;
     private javax.swing.JPanel btnDichVu;
     private javax.swing.JPanel btnHoaDon;
     private javax.swing.JPanel btnHome;
+    private javax.swing.JPanel btnKhachHang;
     private javax.swing.JPanel btnNhanVien;
     private javax.swing.JPanel btnPhanHoi;
     private javax.swing.JPanel btnQuanLyPhong;
@@ -542,6 +621,10 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -553,7 +636,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblQuanLyKhacSan;
-    private javax.swing.JPanel pnlScreen;
+    public static javax.swing.JPanel pnlScreen;
     private javax.swing.JPanel pnlSeparator;
     private javax.swing.JPanel pnlSlider;
     // End of variables declaration//GEN-END:variables
