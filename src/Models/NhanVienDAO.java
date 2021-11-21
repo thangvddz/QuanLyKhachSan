@@ -16,76 +16,92 @@ import java.util.List;
  *
  * @author you have to better
  */
-public class NhanVienDAO extends DAO<NhanVien, Integer> {
-    
-    private static final String SQL_INSERT = "INSERT INTO NHANVIEN(MaNV, HoTen, Username, Pass_word, ThoiGianLap, SoCmt, GioiTinh, QueQuan, NgaySinh, ThoiGianVaolam, SDT, Emai, VaiTro, TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE NHANVIEN SET HoTen=?, Username=?, Pass_word=?, ThoiGianLap=?, SoCmt=?, GioiTinh=?, QueQuan=?, NgaySinh=?, ThoiGianVaolam=?, SDT=?, Emai=?, VaiTro=?, TrangThai=? WHERE MaNV=?";
-    private static final String SQL_SELECT_ALL = "SELECT * FROM NHANVIEN";
-    private static final String SQL_SELECT_BY_ID = "SELECT * FROM NHANVIEN WHERE MaNV=?";
-    private static final String SQL_DELETE = "DELETE FROM NHANVIEN WHERE MaNV=?";
-    
-    JdbcHelper jdbc;
-    
-    public NhanVienDAO() {
-        jdbc = new JdbcHelper();
-    }
-    
+public class NhanVienDAO extends DAO<NhanVien, String> {
+
+    final String insert = "insert into NHANVIEN(MaNV,HoTen,Username,Pass_word,SoCmt,NgaySinh,SDT,Emai,GioiTinh,VaiTro)"
+            + "values(?,?,?,?,?,?,?,?,?,?)";
+    final String update = "update NHANVIEN set HoTen=?,Username=?,Pass_word=?,SoCmt=?,GioiTinh=?,NgaySinh=?,SDT=?,Emai=?,VaiTro=? where MaNV=?";
+    final String delete = "delete from NHANVIEN where MaNV=? ";
+    final String SELECT_ALL = "SELECT*FROM NHANVIEN";
+    final String SELECT_BY_ID = "SELECT*FROM NHANVIEN WHERE MaNV = ?";
+
     @Override
     public void insert(NhanVien entity) {
-        jdbc.update(SQL_INSERT, entity.getMaNV(), entity.getHoTen(), entity.getUsername(), entity.getPasswd(), entity.getThoiGianLap(), entity.getSoCMT(), entity.isGioiTinh(), entity.getQueQuan(), entity.getNgaySinh(), entity.getNgayVaoLam(), entity.getSoDT(), entity.getEmail(), entity.getVaiTro(), entity.getTrangThai());
+        JdbcHelper.update(insert,
+                entity.getMaNV(),
+                entity.getHoTen(),
+                entity.getUsername(),
+                entity.getPasswd(),
+                entity.getSoCMT(),
+                entity.getNgaySinh(),
+                entity.getSoDT(),
+                entity.getEmail(),
+                entity.isGioiTinh(),
+                entity.isVaiTro());
     }
-    
+
     @Override
     public void update(NhanVien entity) {
-        jdbc.update(SQL_UPDATE, entity.getHoTen(), entity.getUsername(), entity.getPasswd(), entity.getThoiGianLap(), entity.getSoCMT(), entity.isGioiTinh(), entity.getQueQuan(), entity.getNgaySinh(), entity.getNgayVaoLam(), entity.getSoDT(), entity.getEmail(), entity.getVaiTro(), entity.getTrangThai(), entity.getMaNV());
+        JdbcHelper.update(update,
+                entity.getHoTen(),
+                entity.getUsername(),
+                entity.getPasswd(),
+                entity.getSoCMT(),
+                entity.isGioiTinh(),
+                entity.getNgaySinh(), 
+                entity.getSoDT(),
+                entity.getEmail(),               
+                entity.isVaiTro(),
+                entity.getMaNV());
     }
-    
+
     @Override
-    public void delete(Integer id) {
-        jdbc.update(SQL_DELETE, id);
+    public void delete(String id) {
+        String sql = "delete from NHANVIEN where MaNV = ? ";
+        JdbcHelper.update(sql, id);
+        JdbcHelper.update(delete, id);
     }
-    
+
     @Override
-    public NhanVien selectById(Integer id) {
-        return selectBySql(SQL_SELECT_BY_ID, id).get(0);
-    }
-    
-    @Override
-    public List<NhanVien> selectAll() {
-        return selectBySql(SQL_SELECT_ALL);
-    }
-    
-    @Override
-    protected List<NhanVien> selectBySql(String sql, Object... args) {
-        List<NhanVien> ls = new ArrayList<>();
-        try {
-            ResultSet rs = jdbc.query(sql, args);
-            
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String MaNV = rs.getString(2);
-                String HoTen = rs.getString(3);
-                String username = rs.getString(4);
-                String passwd = rs.getString(5);
-                Date ThoiGianLap = rs.getDate(6);
-                String SoCMT = rs.getString(7);
-                boolean GioiTinh = rs.getBoolean(8);
-                String QueQuan = rs.getString(9);
-                Date NgaySinh = rs.getDate(10);
-                Date NgayVaoLam = rs.getDate(11);
-                String SoDT = rs.getString(12);
-                String Email = rs.getString(13);
-                String VaiTro = rs.getString(14);
-                int TrangThai = rs.getInt(15);
-                ls.add(new NhanVien(id, MaNV, HoTen, SoCMT, GioiTinh, QueQuan, NgaySinh, ThoiGianLap, NgayVaoLam, SoDT, Email, username, passwd, VaiTro, TrangThai));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        if (ls.isEmpty()) {
+    public NhanVien selectById(String id) {
+        List<NhanVien> lst = selectBySql(SELECT_BY_ID, id);
+        if (lst.isEmpty()) {
             return null;
         }
-        return ls;
+        return lst.get(0);
     }
-    
+
+    @Override
+    public List<NhanVien> selectAll() {
+        return selectBySql(SELECT_ALL);
+    }
+
+    @Override
+    protected List<NhanVien> selectBySql(String sql, Object... args) {
+        List<NhanVien> lst = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql, args);
+            while (rs.next()) {
+                NhanVien entity = new NhanVien();
+                entity.setMaNV(rs.getString("MaNV"));
+                entity.setHoTen(rs.getString("HoTen"));
+                entity.setUsername(rs.getString("Username"));
+                entity.setPasswd(rs.getString("Pass_word"));
+                entity.setSoCMT(rs.getString("SoCmt"));
+                entity.setGioiTinh(rs.getBoolean("GioiTinh"));
+                entity.setNgaySinh(rs.getDate("NgaySinh"));
+                entity.setSoDT(rs.getString("SDT"));
+                entity.setEmail(rs.getString("Emai"));
+                entity.setVaiTro(rs.getBoolean("VaiTro"));
+                lst.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return lst;
+    }
+
 }
