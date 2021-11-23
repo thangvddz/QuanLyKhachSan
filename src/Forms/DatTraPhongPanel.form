@@ -176,16 +176,16 @@
                               <Component id="txtSoDT" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSoHoChieu" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtSoHoChieu" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="lblSoCMT" min="-2" pref="111" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txtSoCMT" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblTenKH" min="-2" pref="111" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtTenKhachHang" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <Component id="lblNgayChkIn" min="-2" pref="111" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jdcCheckIn" min="-2" pref="145" max="-2" attributes="0"/>
@@ -195,11 +195,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPhutCheckIn" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblTenKH" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtTenKhachHang" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -296,28 +292,28 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblSoHoChieu" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="txtSoHoChieu" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNgaySinh" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lblNgaySinh" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblSoDT" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="txtSoDT" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblPhiPhuThu" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                   <Component id="txtPhiPhuThu" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="lblGiamGia" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Component id="txtGiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblDiaChi" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Component id="txtQueQuan" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblGiamGia" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtGiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jdcNgaySinh" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblSoDT" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtSoDT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblDiaChi" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtQueQuan" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -325,9 +321,8 @@
                                   <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jdcNgaySinh" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -390,16 +385,6 @@
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSoCMTKeyPressed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSoHoChieu">
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblSoHoChieu">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; H&#x1ed9; chi&#x1ebf;u"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSoDT">
             </Component>
