@@ -28,6 +28,7 @@ import Utils.MapRoom;
 import Utils.mgsBox;
 import Utils.xDate;
 import Utils.xTime;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -189,6 +190,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
         lblSoCMT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSoCMT.setText("Số cmt");
+
+        txtSoCMT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSoCMTKeyPressed(evt);
+            }
+        });
 
         lblSoHoChieu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSoHoChieu.setText("Số Hộ chiếu");
@@ -653,6 +660,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         btnTraPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTraPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_checkout_25px.png"))); // NOI18N
         btnTraPhong.setText("Trả phòng");
+        btnTraPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraPhongActionPerformed(evt);
+            }
+        });
 
         btnDatPhong.setBackground(new java.awt.Color(255, 255, 255));
         btnDatPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -722,6 +734,29 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         frame.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void txtSoCMTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoCMTKeyPressed
+        // TODO add your handling code here:
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_ENTER:
+                CMT = txtSoCMT.getText().trim();
+                try {
+                    khachMucTieu = khachHangDAO.selectMaKHNew(CMT);
+                    clearForm();
+                    fillForm(khachMucTieu);
+                } catch (Exception e) {
+                    khachMucTieu = null;
+                }
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_txtSoCMTKeyPressed
+
+    private void btnTraPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraPhongActionPerformed
+        // TODO add your handling code here:
+        TraPhong();
+    }//GEN-LAST:event_btnTraPhongActionPerformed
+
     public void init() {
         khachHangDAO = new KhachHangDAO();
         hoaDonDAO = new HoaDonDAO();
@@ -735,7 +770,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         numSelected = 0;
         maPhong = MapRoom.posPhong;
         soTang = MapRoom.posTang;
-        CMT = null;
+        CMT = "";
         fillTableChonPhong();
         fillGioiTinh();
         fillComboboxDichVu();
@@ -749,9 +784,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void DatPhong() {
-        if (checkHinhThuc()) {
-            //phong khong co nguoi thue makh = 0
-            if (MapRoom.maKH == 0) {
+
+        //phong khong co nguoi thue makh = 0
+        if (MapRoom.maKH == 0) {
+            if (checkHinhThuc()) {
                 insertKhachHang();
                 insertHoaDon();
                 insertHDCT();
@@ -760,11 +796,17 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
                 frame.dispose();
             } else {
-
+                mgsBox.alert(this, "Vui lòng chọn hình thức thuê");
             }
         } else {
-            mgsBox.alert(this, "Vui lòng chọn hình thức thuê");
+            System.out.println("da co khach hang thue phong nay");
+            
+            updateLSGD();
+            if(){
+                
+            }
         }
+
     }
 
     public void TraPhong() {
@@ -776,8 +818,6 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         if (!CMT.equals("")) {
             try {
                 khachMucTieu = khachHangDAO.selectMaKHNew(CMT);
-                clearForm();
-                fillForm(khachMucTieu);
                 MapRoom.maKH = khachMucTieu.getMaKH();
             } catch (Exception e) {
                 khachHangDAO.insert(new KhachHang(-1, CMT, txtTenKhachHang.getText(), txtSoHoChieu.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
@@ -792,7 +832,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         int hoursChkOut = Integer.parseInt(txtGioCheckOut.getText());
         int minutesChkOut = Integer.parseInt(txtPhutCheckOut.getText());
         try {
-            hoaDonDAO.insert(new HoaDon(-1, "NV01", khachHangDAO.selectMaKHNew(CMT).getMaKH(), xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn), xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), Double.parseDouble(txtTraTruoc.getText()), Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
+            hoaDonDAO.insert(new HoaDon(-1, "NV01", MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn), xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), Double.parseDouble(txtTraTruoc.getText()), Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -800,7 +840,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     public void insertHDCT() {
         try {
-            int MaHD = hoaDonDAO.selectHoaDonByKHMoi(false).getMaHD();
+            int MaHD = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD();
             hoaDonChiTietDAO.insert(new HoaDonChiTiet(-1, MaHD, maPhong, soTang, xDate.toDate(xDate.timeNow(), "dd-MM-yyyy"), false));
             int maDV = cboDichVu.getSelectedIndex();
             if (maDV != 0) {
@@ -813,17 +853,18 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     public void insertLSGD() {
         try {
-            int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD(), false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
+            int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             // trang thai true thue theo ngay false thue theo gio
             lsgddao.insert(new LichSuGD(-1, maHDCT,
                     xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
                     xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? true : false));
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void updateLSGD() {
-        int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD(), false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
+        int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
         lsgddao.update(new LichSuGD(-1, maHDCT,
                 xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
                 xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? true : false));
