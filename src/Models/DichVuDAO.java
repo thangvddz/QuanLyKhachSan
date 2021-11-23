@@ -75,4 +75,9 @@ public class DichVuDAO extends DAO<DichVu, Integer> {
         }
         return ls;
     }
+    
+    public List<DichVu> selectByKey(String key) {
+        String sql = "select * from DICHVU where TenDV like ?";
+        return this.selectBySql(sql, "%" + key + "%");
+    }
 }
