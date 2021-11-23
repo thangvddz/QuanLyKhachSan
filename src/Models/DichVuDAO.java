@@ -18,7 +18,7 @@ import java.util.List;
 public class DichVuDAO extends DAO<DichVu, Integer> {
 
     private static final String SQL_INSERT = "INSERT INTO DICHVU(TenDV, PhiDV, TrangThai) VALUES (?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE DICHVU SET TenDV, PhiDV, TrangThai WHERE MaDV=?";
+    private static final String SQL_UPDATE = "UPDATE DICHVU SET TenDV = ?, PhiDV = ?, TrangThai = ? WHERE MaDV=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM DICHVU";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM DICHVU WHERE MaDV=?";
     private static final String SQL_DELETE = "DELETE FROM DICHVU WHERE MaDV=?";
@@ -74,5 +74,10 @@ public class DichVuDAO extends DAO<DichVu, Integer> {
             return null;
         }
         return ls;
+    }
+    
+    public List<DichVu> selectByKey(String key) {
+        String sql = "select * from DICHVU where TenDV like ?";
+        return this.selectBySql(sql, "%" + key + "%");
     }
 }
