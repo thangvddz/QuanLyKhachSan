@@ -760,7 +760,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
                 frame.dispose();
             } else {
-                
+
             }
         } else {
             mgsBox.alert(this, "Vui lòng chọn hình thức thuê");
@@ -812,11 +812,14 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void insertLSGD() {
-        int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD(), false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
-        // trang thai true thue theo ngay false thue theo gio
-        lsgddao.insert(new LichSuGD(-1, maHDCT,
-                xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
-                xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? true : false));
+        try {
+            int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD(), false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
+            // trang thai true thue theo ngay false thue theo gio
+            lsgddao.insert(new LichSuGD(-1, maHDCT,
+                    xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
+                    xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? true : false));
+        } catch (Exception e) {
+        }
     }
 
     public void updateLSGD() {
