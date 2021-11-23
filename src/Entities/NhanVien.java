@@ -26,13 +26,13 @@ public class NhanVien {
     String Email;
     String username;
     String passwd;
-    String VaiTro;
+    boolean VaiTro;
     int TrangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(int id, String MaNV, String HoTen, String SoCMT, boolean GioiTinh, String QueQuan, Date NgaySinh, Date ThoiGianLap, Date NgayVaoLam, String SoDT, String Email, String username, String passwd, String VaiTro, int TrangThai) {
+    public NhanVien(int id, String MaNV, String HoTen, String SoCMT, boolean GioiTinh, String QueQuan, Date NgaySinh, Date ThoiGianLap, Date NgayVaoLam, String SoDT, String Email, String username, String passwd, boolean VaiTro, int TrangThai) {
         this.id = id;
         this.MaNV = MaNV;
         this.HoTen = HoTen;
@@ -50,13 +50,7 @@ public class NhanVien {
         this.TrangThai = TrangThai;
     }
 
-    public Date getThoiGianLap() {
-        return ThoiGianLap;
-    }
 
-    public void setThoiGianLap(Date ThoiGianLap) {
-        this.ThoiGianLap = ThoiGianLap;
-    }
 
     public int getId() {
         return id;
@@ -114,6 +108,14 @@ public class NhanVien {
         this.NgaySinh = NgaySinh;
     }
 
+    public Date getThoiGianLap() {
+        return ThoiGianLap;
+    }
+
+    public void setThoiGianLap(Date ThoiGianLap) {
+        this.ThoiGianLap = ThoiGianLap;
+    }
+
     public Date getNgayVaoLam() {
         return NgayVaoLam;
     }
@@ -154,11 +156,11 @@ public class NhanVien {
         this.passwd = passwd;
     }
 
-    public String getVaiTro() {
+    public boolean isVaiTro() {
         return VaiTro;
     }
 
-    public void setVaiTro(String VaiTro) {
+    public void setVaiTro(boolean VaiTro) {
         this.VaiTro = VaiTro;
     }
 
@@ -170,4 +172,10 @@ public class NhanVien {
         this.TrangThai = TrangThai;
     }
 
+    @Override
+    public String toString() {
+        return "NhanVien{" + "id=" + id + ", MaNV=" + MaNV + ", HoTen=" + HoTen + ", SoCMT=" + SoCMT + ", GioiTinh=" + GioiTinh + ", QueQuan=" + QueQuan + ", NgaySinh=" + NgaySinh + ", ThoiGianLap=" + ThoiGianLap + ", NgayVaoLam=" + NgayVaoLam + ", SoDT=" + SoDT + ", Email=" + Email + ", username=" + username + ", passwd=" + passwd + ", VaiTro=" + VaiTro + ", TrangThai=" + TrangThai + '}';
+    }
+
+    
 }

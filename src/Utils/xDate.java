@@ -38,7 +38,6 @@ public class xDate {
         DateFormat dateFormat = new SimpleDateFormat(parttern);
         return dateFormat.format(date);
     }
-
     public static Date addDays(Date date, long days) {
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         return date;

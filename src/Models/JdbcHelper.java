@@ -17,73 +17,62 @@ import java.sql.SQLException;
  */
 public class JdbcHelper {
 
-    Connection conn;
-    static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+  static String url = "jdbc:sqlserver://localhost:1433;databasename=DA1_N8_V21";
+    static String userName = "sa";
+    static String password = "a";
 
-    public JdbcHelper() {
+    static {
         try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databasename=DA1_N8_V21;"
-                    + "username=sa;password=a");
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println("ket noi that bai");
-            ex.printStackTrace();
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
     }
 
-    public PreparedStatement getStmt(String sql, Object... args) {
-        PreparedStatement psStmt = null;
-
-        try {
-            if (sql.trim().startsWith("{")) {
-                psStmt = conn.prepareCall(sql);
-            } else {
-                psStmt = conn.prepareStatement(sql);
-            }
-            for (int i = 0; i < args.length; i++) {
-                int n = i + 1;
-                psStmt.setObject(n, args[i]);
-            }
-        } catch (SQLException e) {
-            System.out.println("Loi getStmt");
-            e.printStackTrace();
+    public static PreparedStatement getStmt(String sql, Object... args) throws SQLException {
+        Connection con = DriverManager.getConnection(url, userName, password);
+        PreparedStatement stmt;
+        if (sql.trim().startsWith("{")) {
+            stmt = con.prepareCall(sql);
+        } else {
+            stmt = con.prepareStatement(sql);
         }
-
-        return psStmt;
+        for (int i = 0; i < args.length; i++) {
+            stmt.setObject(i + 1, args[i]);
+        }
+        return stmt;
     }
 
-    public ResultSet query(String sql, Object... args) throws SQLException {
-        PreparedStatement ps = this.getStmt(sql, args);
-        return ps.executeQuery();
+    public static ResultSet query(String sql, Object... args) throws SQLException {
+        PreparedStatement stmt = JdbcHelper.getStmt(sql, args);
+        return stmt.executeQuery();
     }
 
-    public Object value(String sql, Object... args) {
+    public static Object value(String sql, Object... args) {
         try {
-            ResultSet rs = this.query(sql, args);
+            ResultSet rs = JdbcHelper.query(sql, args);
             if (rs.next()) {
-                return rs.getObject(1);
+                return rs.getObject(0);
             }
             rs.getStatement().getConnection().close();
-
-        } catch (SQLException e) {
-            System.out.println("loi");
-            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
-        return null;
     }
 
-    public int update(String sql, Object... args) {
+    public static int update(String sql, Object... args) {
         try {
-            PreparedStatement ps = this.getStmt(sql, args);
-//            try {
-            return ps.executeUpdate();
-//            } finally {
-//                ps.getConnection().close();
-//            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            PreparedStatement stmt = JdbcHelper.getStmt(sql, args);
+            try {
+                return stmt.executeUpdate();
+            } finally {
+                stmt.getConnection().close();
+            }
+        } catch (Exception e) {
+//            throw new RuntimeException();
+            e.printStackTrace();
         }
         return -1;
     }
-
 }

@@ -307,6 +307,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnKhachHangMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnKhachHangMousePressed(evt);
+            }
         });
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -588,8 +591,8 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMousePressed
         // TODO add your handling code here:
-        NhanVienJFrame nv = new NhanVienJFrame();
-        nv.setVisible(true);
+        JPanel nhanvien  = new NhanVienJPanel();
+        SwitchPanel(nhanvien);
     }//GEN-LAST:event_btnNhanVienMousePressed
 
     private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered
@@ -621,6 +624,12 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetColor(btnDangXuat);
     }//GEN-LAST:event_btnDangXuatMouseExited
+
+    private void btnKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMousePressed
+        // TODO add your handling code here:
+        JPanel khachhang  = new KhachHangJPanel();
+        SwitchPanel(khachhang);
+    }//GEN-LAST:event_btnKhachHangMousePressed
 
     public void init() {
         phongDAO = new PhongDAO();
