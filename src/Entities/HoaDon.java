@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -16,8 +17,8 @@ public class HoaDon {
     int MaHD;
     String MaNV;
     int MaKH;
-    Date ThoiDiemDatPhong;
-    Date ThoiDiemTraPhong;
+    Timestamp ThoiDiemDatPhong;
+    Timestamp ThoiDiemTraPhong;
     double TienTraTruoc;
     double GiamGia;
     double PhuThu;
@@ -29,7 +30,7 @@ public class HoaDon {
 
     }
 
-    public HoaDon(int MaHD, String MaNV, int MaKH, Date ThoiDiemDatPhong, Date ThoiDiemTraPhong, double TienTraTruoc, double GiamGia, double PhuThu, double ThanhTien, String GhiChu, boolean TrangThai) {
+    public HoaDon(int MaHD, String MaNV, int MaKH, Timestamp ThoiDiemDatPhong, Timestamp ThoiDiemTraPhong, double TienTraTruoc, double GiamGia, double PhuThu, double ThanhTien, String GhiChu, boolean TrangThai) {
         this.MaHD = MaHD;
         this.MaNV = MaNV;
         this.MaKH = MaKH;
@@ -67,19 +68,19 @@ public class HoaDon {
         this.MaKH = MaKH;
     }
 
-    public Date getThoiDiemDatPhong() {
+    public Timestamp getThoiDiemDatPhong() {
         return ThoiDiemDatPhong;
     }
 
-    public void setThoiDiemDatPhong(Date ThoiDiemDatPhong) {
+    public void setThoiDiemDatPhong(Timestamp ThoiDiemDatPhong) {
         this.ThoiDiemDatPhong = ThoiDiemDatPhong;
     }
 
-    public Date getThoiDiemTraPhong() {
+    public Timestamp getThoiDiemTraPhong() {
         return ThoiDiemTraPhong;
     }
 
-    public void setThoiDiemTraPhong(Date ThoiDiemTraPhong) {
+    public void setThoiDiemTraPhong(Timestamp ThoiDiemTraPhong) {
         this.ThoiDiemTraPhong = ThoiDiemTraPhong;
     }
 

@@ -8,6 +8,7 @@ package Models;
 import Entities.YeuCau;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +65,7 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
             while (rs.next()) {
                 int maDV = rs.getInt(1);
                 int maHDCT = rs.getInt(2);
-                Date ThoiGianBDSD = rs.getDate(3);
+                Timestamp ThoiGianBDSD = rs.getTimestamp(3);
                 boolean TrangThai = rs.getBoolean(4);
                 ls.add(new YeuCau(maDV, maHDCT, ThoiGianBDSD, TrangThai));
             }

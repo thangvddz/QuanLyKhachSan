@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,19 +16,16 @@ public class LichSuGD {
 
     int MaLSGD;
     int MaHDCT;
-    Date ThoiGianBD;
-    Date ThoiGianKT;
+    Timestamp ThoiGianBD;
+    Timestamp ThoiGianKT;
     boolean TrangThai;
 
-    public LichSuGD(int MaLSGD, int MaHDCT, Date ThoiGianBD, Date ThoiGianKT, boolean TrangThai) {
+    public LichSuGD(int MaLSGD, int MaHDCT, Timestamp ThoiGianBD, Timestamp ThoiGianKT, boolean TrangThai) {
         this.MaLSGD = MaLSGD;
         this.MaHDCT = MaHDCT;
         this.ThoiGianBD = ThoiGianBD;
         this.ThoiGianKT = ThoiGianKT;
         this.TrangThai = TrangThai;
-    }
-
-    public LichSuGD() {
     }
 
     public int getMaLSGD() {
@@ -46,19 +44,19 @@ public class LichSuGD {
         this.MaHDCT = MaHDCT;
     }
 
-    public Date getThoiGianBD() {
+    public Timestamp getThoiGianBD() {
         return ThoiGianBD;
     }
 
-    public void setThoiGianBD(Date ThoiGianBD) {
+    public void setThoiGianBD(Timestamp ThoiGianBD) {
         this.ThoiGianBD = ThoiGianBD;
     }
 
-    public Date getThoiGianKT() {
+    public Timestamp getThoiGianKT() {
         return ThoiGianKT;
     }
 
-    public void setThoiGianKT(Date ThoiGianKT) {
+    public void setThoiGianKT(Timestamp ThoiGianKT) {
         this.ThoiGianKT = ThoiGianKT;
     }
 

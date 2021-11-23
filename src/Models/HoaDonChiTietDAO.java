@@ -28,10 +28,11 @@ public class HoaDonChiTietDAO extends DAO<HoaDonChiTiet, Object> {
             + "join HOADONCHITIET on HOADON.MaHD = HOADONCHITIET.MaHD\n"
             + "join YEUCAU on HOADONCHITIET.MaHDCT = YEUCAU.MaHDCT\n"
             + "join DICHVU on YEUCAU.MaDV = DICHVU.MaDV where HOADON.MaHD=? and HOADON.TrangThai=?";
-    private static final String SQL_SELECT_PHONG_DATHUE = "select MaPhong, SoTang, count(MaPhong) as soyeucau from HOADONCHITIET where MaHD=? and TrangThai=? group by MaPhong, SoTang";
+    private static final String SQL_SELECT_PHONG_DATHUE = "select MaPhong, SoTang, count(*) as soyeucau from HOADONCHITIET where MaHD=? and TrangThai=? group by MaPhong, SoTang";
     private static final String SQL_SELECT_MAHD = "select HOADONCHITIET.* from HOADON join HOADONCHITIET on HOADON.MaHD=HOADONCHITIET.MaHD where MaPhong=? and SoTang=? and HOADON.TrangThai=?";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM HOADONCHITIET WHERE MaHDCT=?";
     private static final String SQL_SELECT_NEW_ID = "SELECT TOP 1 * FROM HOADONCHITIET where MaHD=? and TrangThai=? order by MaHDCT desc";
+    private static final String SQL_SELECT_NEW_ID_RESERVE = "select top 1 * from HOADONCHITIET where MaHD=? and TrangThai=? and SoTang=? and MaPhong=?";
     private static final String SQL_DELETE = "DELETE FROM HOADONCHITIET WHERE MaHDCT=?";
     
     JdbcHelper jdbc;
@@ -62,6 +63,10 @@ public class HoaDonChiTietDAO extends DAO<HoaDonChiTiet, Object> {
     
     public HoaDonChiTiet selectByNewID(int maHD, boolean TrangThai) {
         return selectBySql(SQL_SELECT_NEW_ID, maHD, TrangThai).get(0);
+    }
+    
+    public HoaDonChiTiet selectByNewIDReserve(int maHD, boolean TrangThai, int soTang, String maPhong) {
+        return selectBySql(SQL_SELECT_NEW_ID_RESERVE, maHD, TrangThai, soTang, maPhong).get(0);
     }
     
     @Override

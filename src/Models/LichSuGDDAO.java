@@ -8,6 +8,7 @@ package Models;
 import Entities.LichSuGD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,8 +65,8 @@ public class LichSuGDDAO extends DAO<LichSuGD, Integer> {
             while (rs.next()) {
                 int MaLSGD = rs.getInt(1);
                 int MaHDCT = rs.getInt(2);
-                Date ThoiGianBD = rs.getDate(3);
-                Date ThoiGianKT = rs.getDate(4);
+                Timestamp ThoiGianBD = rs.getTimestamp(3);
+                Timestamp ThoiGianKT = rs.getTimestamp(4);
                 boolean TrangThai = rs.getBoolean(5);
                 ls.add(new LichSuGD(MaLSGD, MaHDCT, ThoiGianBD, ThoiGianKT, TrangThai));
             }

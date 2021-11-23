@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,18 +16,19 @@ public class YeuCau {
 
     int maDV;
     int maHDCT;
-    Date ThoiGianBDSD;
+    Timestamp ThoiGianBDSD;
     boolean TrangThai;
 
     public YeuCau() {
     }
 
-    public YeuCau(int maDV, int maHDCT, Date ThoiGianBDSD, boolean TrangThai) {
+    public YeuCau(int maDV, int maHDCT, Timestamp ThoiGianBDSD, boolean TrangThai) {
         this.maDV = maDV;
         this.maHDCT = maHDCT;
         this.ThoiGianBDSD = ThoiGianBDSD;
         this.TrangThai = TrangThai;
     }
+
 
     public int getMaDV() {
         return maDV;
@@ -44,11 +46,11 @@ public class YeuCau {
         this.maHDCT = maHDCT;
     }
 
-    public Date getThoiGianBDSD() {
+    public Timestamp getThoiGianBDSD() {
         return ThoiGianBDSD;
     }
 
-    public void setThoiGianBDSD(Date ThoiGianBDSD) {
+    public void setThoiGianBDSD(Timestamp ThoiGianBDSD) {
         this.ThoiGianBDSD = ThoiGianBDSD;
     }
 
