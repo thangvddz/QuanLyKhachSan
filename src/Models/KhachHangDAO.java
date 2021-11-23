@@ -89,4 +89,8 @@ public class KhachHangDAO extends DAO<KhachHang, Integer> {
         return ls;
     }
 
+    public KhachHang selectById(String maKh) {
+        return selectBySql(SQL_SELECT_BY_ID, maKh).get(0);
+    }
+
 }

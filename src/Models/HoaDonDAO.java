@@ -8,7 +8,9 @@ package Models;
 import Entities.HoaDon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -79,8 +81,8 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
                 int MaHD = rs.getInt(1);
                 String MaNV = rs.getString(2);
                 int MaKH = rs.getInt(3);
-                Date ThoiDiemDatPhong = rs.getDate(4);
-                Date ThoiDiemTraPhong = rs.getDate(5);
+                Timestamp ThoiDiemDatPhong = rs.getTimestamp(4);
+                Timestamp ThoiDiemTraPhong = rs.getTimestamp(5);
                 double TienTraTruoc = rs.getDouble(6);
                 double GiamGia = rs.getDouble(7);
                 double PhuThu = rs.getDouble(8);
@@ -90,7 +92,6 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
                 ls.add(new HoaDon(MaHD, MaNV, MaKH, ThoiDiemDatPhong, ThoiDiemTraPhong, TienTraTruoc, GiamGia, PhuThu, ThanhTien, GhiChu, TrangThai));
             }
         } catch (SQLException ex) {
-            System.out.println("Error selectbySQL in NhanVienDao");
             ex.printStackTrace();
         }
         if (ls.isEmpty()) {
