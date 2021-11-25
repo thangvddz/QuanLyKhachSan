@@ -19,7 +19,7 @@ public class TraPhongJframe extends javax.swing.JFrame {
      * Creates new form TraPhongJframe
      */
     public TraPhongJframe(int maKH) {
-        setTitle("Dat Tra Phong");
+        setTitle("Trả phòng");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         add(new TraPhongJpanel(maKH));
         addWindowListener(new WindowAdapter() {

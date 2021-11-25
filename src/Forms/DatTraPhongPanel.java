@@ -1000,6 +1000,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            chkThueTheoNgay.setSelected(true);
         }
         txtPhiPhuThu.setText(String.valueOf(hd.getPhuThu()));
         txtGiamGia.setText(String.valueOf(hd.getGiamGia()));

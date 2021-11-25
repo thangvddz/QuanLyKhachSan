@@ -5,14 +5,14 @@
         <group>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/TraPhongJpanel.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/PhongDAO.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Utils/xTime.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/HoaDonChiTietDAO.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Utils/ClickMouse.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Utils/MapRoom.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/DatTraPhongPanel.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/LichSuGDDAO.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/HoaDonDAO.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/DichVuPanel.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/TraPhongJframe.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/YeuCauDAO.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Entities/Phong.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/KhachHangJPanel.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/ManHinhChinhGUI.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/HomePanel.java</file>
         </group>
     </open-files>
 </project-private>

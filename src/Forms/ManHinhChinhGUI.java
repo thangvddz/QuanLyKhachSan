@@ -53,9 +53,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnHome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnHoaDon = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btnQuanLyPhong = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -140,33 +137,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
         pnlSlider.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 360, 70));
 
-        btnHoaDon.setBackground(new java.awt.Color(247, 22, 52));
-        btnHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnHoaDonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnHoaDonMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnHoaDonMousePressed(evt);
-            }
-        });
-        btnHoaDon.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_bill_50px.png"))); // NOI18N
-        btnHoaDon.add(jLabel3);
-
-        jLabel4.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("HÓA ĐƠN");
-        btnHoaDon.add(jLabel4);
-
-        pnlSlider.add(btnHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 360, 70));
-
         btnQuanLyPhong.setBackground(new java.awt.Color(247, 22, 52));
         btnQuanLyPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -192,7 +162,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel6.setText("QUẢN LÝ PHÒNG");
         btnQuanLyPhong.add(jLabel6);
 
-        pnlSlider.add(btnQuanLyPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 360, 70));
+        pnlSlider.add(btnQuanLyPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 360, 70));
 
         btnNhanVien.setBackground(new java.awt.Color(247, 22, 52));
         btnNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -219,7 +189,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel8.setText("NHÂN VIÊN");
         btnNhanVien.add(jLabel8);
 
-        pnlSlider.add(btnNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 360, 70));
+        pnlSlider.add(btnNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 360, 70));
 
         btnDichVu.setBackground(new java.awt.Color(247, 22, 52));
         btnDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -246,7 +216,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel10.setText("DỊCH VỤ");
         btnDichVu.add(jLabel10);
 
-        pnlSlider.add(btnDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 360, 70));
+        pnlSlider.add(btnDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 360, 70));
 
         btnThongKe.setBackground(new java.awt.Color(247, 22, 52));
         btnThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,7 +243,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel12.setText("THỐNG KÊ");
         btnThongKe.add(jLabel12);
 
-        pnlSlider.add(btnThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 360, 70));
+        pnlSlider.add(btnThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 360, 70));
 
         btnPhanHoi.setBackground(new java.awt.Color(247, 22, 52));
         btnPhanHoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,7 +267,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         jLabel14.setText("PHẢN HỒI");
         btnPhanHoi.add(jLabel14);
 
-        pnlSlider.add(btnPhanHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 360, 70));
+        pnlSlider.add(btnPhanHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 360, 70));
 
         btnKhachHang.setBackground(new java.awt.Color(247, 22, 52));
         btnKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -344,7 +314,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlSlider.add(btnKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 360, 70));
+        pnlSlider.add(btnKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 360, 70));
 
         btnCaiDat.setBackground(new java.awt.Color(247, 22, 52));
         btnCaiDat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -386,7 +356,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        pnlSlider.add(btnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 360, 70));
+        pnlSlider.add(btnCaiDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 360, 70));
 
         btnDangXuat.setBackground(new java.awt.Color(247, 22, 52));
         btnDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -431,7 +401,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlSlider.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 740, 360, 70));
+        pnlSlider.add(btnDangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 360, 70));
 
         jPanel4.setBackground(new java.awt.Color(212, 34, 51));
 
@@ -499,16 +469,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetColor(btnHome);
     }//GEN-LAST:event_btnHomeMouseExited
-
-    private void btnHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMouseEntered
-        // TODO add your handling code here:
-        changeColor(btnHoaDon);
-    }//GEN-LAST:event_btnHoaDonMouseEntered
-
-    private void btnHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMouseExited
-        // TODO add your handling code here:
-        resetColor(btnHoaDon);
-    }//GEN-LAST:event_btnHoaDonMouseExited
 
     private void btnQuanLyPhongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyPhongMouseEntered
         // TODO add your handling code here:
@@ -582,12 +542,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         JPanel quanLyPhong = new QuanLyPhongPanel();
         SwitchPanel(quanLyPhong);
     }//GEN-LAST:event_btnQuanLyPhongMousePressed
-
-    private void btnHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHoaDonMousePressed
-        // TODO add your handling code here:
-        JPanel hoaDon = new QuanLyHoaDonPanel();
-        SwitchPanel(hoaDon);
-    }//GEN-LAST:event_btnHoaDonMousePressed
 
     private void btnNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMousePressed
         // TODO add your handling code here:
@@ -710,7 +664,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     private javax.swing.JPanel btnCaiDat;
     private javax.swing.JPanel btnDangXuat;
     private javax.swing.JPanel btnDichVu;
-    private javax.swing.JPanel btnHoaDon;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnKhachHang;
     private javax.swing.JPanel btnNhanVien;
@@ -730,8 +683,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
