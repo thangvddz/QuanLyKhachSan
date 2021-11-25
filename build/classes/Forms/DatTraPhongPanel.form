@@ -229,7 +229,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtPhutCheckOut" min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="txtPhutCheckOut" min="-2" pref="32" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -275,7 +275,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtQuocTich" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="txtQuocTich" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblTenKH" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="txtTenKhachHang" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -378,7 +378,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; cmt"/>
+                <Property name="text" type="java.lang.String" value="S&#x1ed1; cmt/H&#x1ed9; chi&#x1ebf;u"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSoCMT">
@@ -487,6 +487,10 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value=":"/>
               </Properties>
             </Component>
@@ -503,6 +507,10 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value=":"/>
               </Properties>
             </Component>

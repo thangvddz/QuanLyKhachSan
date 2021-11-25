@@ -41,6 +41,25 @@ public class xTime {
         return timestamp;
     }
 
+    public static Timestamp getTimeHol(Timestamp time, int hours, int minutes) {
+        Date date = new Date(time.getTime());
+        Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int moth = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        System.out.println("year " + year + ", month: " + moth + ", day: " + day);
+        LocalDate currentDate = LocalDate.of(year, moth, day);
+        LocalTime currentTime = LocalTime.of(hours, minutes);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+        currentTime.format(formatterTime);
+        LocalDateTime fromDateAndTime = LocalDateTime.of(currentDate, currentTime);
+        fromDateAndTime.format(formatter);
+        Timestamp timestamp = Timestamp.valueOf(fromDateAndTime);
+        return timestamp;
+    }
+
     public static void getTimeFromDatabase(Timestamp t, JTextField hours, JTextField minutes) {
         LocalDateTime localDateTime = t.toLocalDateTime();
         int hour = localDateTime.getHour();

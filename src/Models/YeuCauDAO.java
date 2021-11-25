@@ -77,5 +77,41 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
         }
         return ls;
     }
+    
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        
+        List<Object[]> ls = new ArrayList<>();
+        try {
+            ResultSet rs = jdbc.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                ls.add(vals);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ls;
+    }
+    
+    public List<Object[]> getDichVuDaDung(int soTang, String maPhong) {
+        String sql = "{CALL DichVuDaDung(?,?)}";
+        String[] cols = {"TenDV", "TongPhiDV"};
+        return this.getListOfArray(sql, cols, soTang, maPhong);
+    }
+    
+    public List<Object[]> getTienNhanPSom(Timestamp cusCheckIn, Timestamp HolCheckIn, double giaPhong) {
+        String sql = "{CALL TienNhanPhongSom(?,?,?)}";
+        String[] cols = {"TienPhongSom"};
+        return this.getListOfArray(sql, cols, cusCheckIn, HolCheckIn, giaPhong);
+    }
+    
+    public List<Object[]> getTienTraPTre(Timestamp cusCheckOut, Timestamp HolCheckOut, double giaPhong) {
+        String sql = "{CALL TienTraPhongTre(?,?,?)}";
+        String[] cols = {"TienPhongTre"};
+        return this.getListOfArray(sql, cols, cusCheckOut, HolCheckOut, giaPhong);
+    }
 
 }

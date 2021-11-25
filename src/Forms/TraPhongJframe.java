@@ -5,25 +5,23 @@
  */
 package Forms;
 
-import Utils.ClickMouse;
-import Utils.MapRoom;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
  * @author you have to better
  */
-public class DatTraPhongJFrame extends javax.swing.JFrame {
+public class TraPhongJframe extends javax.swing.JFrame {
 
     /**
-     * Creates new form DatTraPhongJFrame
+     * Creates new form TraPhongJframe
      */
-    public DatTraPhongJFrame() {
+    public TraPhongJframe(int maKH) {
         setTitle("Dat Tra Phong");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        add(new DatTraPhongPanel());
+        add(new TraPhongJpanel(maKH));
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent we) {
