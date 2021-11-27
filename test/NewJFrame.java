@@ -1,4 +1,5 @@
 
+import java.sql.Timestamp;
 import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,28 +35,9 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCalendar1 = new com.toedter.calendar.JCalendar();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        time1 = new cambodia.raven.Time();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        date = new com.toedter.calendar.JDateChooser();
-        Date date = new Date();
-        SpinnerDateModel sm =
-        new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
-        jSpinner1 = new javax.swing.JSpinner(sm);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        time1.setTextRefernce(jTextField1);
-
-        jButton1.setText("...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("click");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -64,88 +46,31 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        JSpinner.DateEditor de = new JSpinner.DateEditor(jSpinner1, "HH:mm:ss");
-        jSpinner1.setEditor(de);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(312, 312, 312)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(173, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(187, 187, 187))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(140, 140, 140))
-                            .addComponent(jButton2))
-                        .addGap(262, 262, 262)
-                        .addComponent(time1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115))))
+                .addGap(0, 340, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(499, 499, 499))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(time1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(528, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addGap(148, 148, 148))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        time1.showPopup();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.out.println("date : "+ date.getDate().getMonth());
-        Calendar cal = Calendar.getInstance(TimeZone.getDefault());
-        cal.setTime(date.getDate());
-        int year = cal.get(Calendar.YEAR);
-        int moth = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        System.out.println("year " + year + ", month: "+moth +", day: "+ day);
-        LocalDate currentDate = LocalDate.of(year, moth, day);
-        LocalTime currentTime = LocalTime.of(xTime.hoursAndMinute(time1.getSelectedTimeDB())[0], xTime.hoursAndMinute(time1.getSelectedTimeDB())[1]);
-        LocalDateTime fromDateAndTime = LocalDateTime.of(currentDate, currentTime);
-        System.out.println("LocalDateTime:" + fromDateAndTime);
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        System.out.println("TimeStamp: " + xTime.getTimeHol(new Timestamp(date.getTime()), 14, 0));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -184,13 +109,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser date;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private cambodia.raven.Time time1;
     // End of variables declaration//GEN-END:variables
 }

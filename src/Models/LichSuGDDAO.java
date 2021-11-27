@@ -23,6 +23,7 @@ public class LichSuGDDAO extends DAO<LichSuGD, Integer> {
     private static final String SQL_UPDATE = "UPDATE LICHSUGD SET MaHDCT=?, ThoiGianBD=?, ThoiGianKT=?, TrangThai=? WHERE MaLSGD=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM LICHSUGD";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM LICHSUGD WHERE MaLSGD=?";
+    private static final String SQL_SELECT_BY_MAHDCT = "SELECT * FROM LICHSUGD WHERE MaHDCT=? order by MaLSGD desc";
     private static final String SQL_DELETE = "DELETE FROM LICHSUGD WHERE MaLSGD=?";
 
     JdbcHelper jdbc;
@@ -49,6 +50,10 @@ public class LichSuGDDAO extends DAO<LichSuGD, Integer> {
     @Override
     public LichSuGD selectById(Integer id) {
         return selectBySql(SQL_SELECT_BY_ID, id).get(0);
+    }
+    
+    public List<LichSuGD> selectByMaHDCT(Integer id) {
+        return selectBySql(SQL_SELECT_BY_MAHDCT, id);
     }
 
     @Override
@@ -80,4 +85,40 @@ public class LichSuGDDAO extends DAO<LichSuGD, Integer> {
         return ls;
     }
 
+    
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        
+        List<Object[]> ls = new ArrayList<>();
+        try {
+            ResultSet rs = jdbc.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                ls.add(vals);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ls;
+    }
+    
+    public List<Object[]> getHoursRented(Integer maHDCT) {
+        String sql = "{CALL ThoiGianDaThue(?)}";
+        String[] cols = {"soGio"};
+        return this.getListOfArray(sql, cols, maHDCT);
+    }
+    
+    public List<Object[]> getTimesRented(Timestamp dateBD, Timestamp dateKT) {
+        String sql = "{CALL LichSuThoiGianThue(?,?)}";
+        String[] cols = {"soNgay","soGio","soPhut"};
+        return this.getListOfArray(sql, cols, dateBD, dateKT);
+    }
+    
+    public List<Object[]> checkOverCheckOut(Timestamp checkOutInLS, Timestamp checkOutInHD, int maHD) {
+        String sql = "{CALL checkOverCheckOut(?,?,?)}";
+        String[] cols = {"result"};
+        return this.getListOfArray(sql, cols, checkOutInLS, checkOutInHD, maHD);
+    }
 }

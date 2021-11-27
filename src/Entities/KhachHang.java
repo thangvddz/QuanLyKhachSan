@@ -16,7 +16,6 @@ public class KhachHang {
     int maKH;
     String soCMT;
     String HoTen;
-    String soHoChieu;
     String soDT;
     Date ngaySinh;
     String QueQuan;
@@ -27,33 +26,16 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(int maKH, String soCMT, String HoTen, String soHoChieu, String soDT, Date ngaySinh, String QueQuan, String QuocTich, String Email, boolean gioiTinh) {
+    public KhachHang(int maKH, String soCMT, String HoTen, String soDT, Date ngaySinh, String QueQuan, String QuocTich, String Email, boolean gioiTinh) {
         this.maKH = maKH;
         this.soCMT = soCMT;
         this.HoTen = HoTen;
-        this.soHoChieu = soHoChieu;
         this.soDT = soDT;
         this.ngaySinh = ngaySinh;
         this.QueQuan = QueQuan;
         this.QuocTich = QuocTich;
         this.Email = Email;
         this.gioiTinh = gioiTinh;
-    }
-
-    public String getQuocTich() {
-        return QuocTich;
-    }
-
-    public void setQuocTich(String QuocTich) {
-        this.QuocTich = QuocTich;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
     }
 
     public int getMaKH() {
@@ -80,14 +62,6 @@ public class KhachHang {
         this.HoTen = HoTen;
     }
 
-    public String getSoHoChieu() {
-        return soHoChieu;
-    }
-
-    public void setSoHoChieu(String soHoChieu) {
-        this.soHoChieu = soHoChieu;
-    }
-
     public String getSoDT() {
         return soDT;
     }
@@ -110,6 +84,22 @@ public class KhachHang {
 
     public void setQueQuan(String QueQuan) {
         this.QueQuan = QueQuan;
+    }
+
+    public String getQuocTich() {
+        return QuocTich;
+    }
+
+    public void setQuocTich(String QuocTich) {
+        this.QuocTich = QuocTich;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public boolean isGioiTinh() {
