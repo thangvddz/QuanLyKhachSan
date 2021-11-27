@@ -24,6 +24,15 @@ public class NhanVienDAO extends DAO<NhanVien, String> {
     final String delete = "delete from NHANVIEN where MaNV=? ";
     final String SELECT_ALL = "SELECT*FROM NHANVIEN";
     final String SELECT_BY_ID = "SELECT*FROM NHANVIEN WHERE MaNV = ?";
+    final String SELECT_BY_USERNAME = "SELECT * FROM NHANVIEN WHERE Username = ?";
+
+    public NhanVien selectByUser(String user) {
+        List<NhanVien> lst = selectBySql(SELECT_BY_USERNAME, user);
+        if (lst.isEmpty()) {
+            return null;
+        }
+        return lst.get(0);
+    }
 
     @Override
     public void insert(NhanVien entity) {

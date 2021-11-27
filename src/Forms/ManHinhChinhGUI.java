@@ -592,6 +592,8 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         ScpScreenDisplay.getVerticalScrollBar().setUnitIncrement(16);
         MapRoom.setGridBagLayout(gbc, pnlScreen);
         fillToHome();
+        new DangNhapJDialog(this, true).setVisible(true);
+        new VaoCaJDialog(this, true).setVisible(true);
     }
 
     public void fillToHome() {
