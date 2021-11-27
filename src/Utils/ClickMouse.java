@@ -5,8 +5,13 @@
  */
 package Utils;
 
+import Entities.Phong;
 import Forms.DatTraPhongJFrame;
 import Forms.DatTraPhongPanel;
+import Forms.HomePanel;
+import Forms.ManHinhChinhGUI;
+import Forms.ThemPhongJframe;
+import Models.PhongDAO;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,6 +26,8 @@ import javax.swing.JPanel;
  */
 public class ClickMouse {
 
+    public static PhongDAO phongDAO = new PhongDAO();
+
     public static class MouseClikXemThongTin extends MouseAdapter {
 
         @Override
@@ -29,9 +36,76 @@ public class ClickMouse {
             MapRoom.posTang = (int) title.getClientProperty("Tang");
             MapRoom.posPhong = (String) title.getClientProperty("Phong");
             MapRoom.maKH = (int) title.getClientProperty("MaKH");
-            System.out.println("tang:" + MapRoom.posTang + ", phong:" + MapRoom.posPhong+", maKH: "+ MapRoom.maKH);
-            DatTraPhongJFrame jf = new DatTraPhongJFrame();
-            jf.setVisible(true);
+            System.out.println("tang:" + MapRoom.posTang + ", phong:" + MapRoom.posPhong + ", maKH: " + MapRoom.maKH);
+            MapRoom.posStatus = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong).getMaTT();
+            if (MapRoom.posStatus == 5) {
+                phongDAO.updateMaTT(new Phong(MapRoom.posPhong, MapRoom.posTang, -1, 1, null));
+                HomePanel h = new HomePanel();
+                ManHinhChinhGUI.SwitchPanel(h);
+            } else {
+                DatTraPhongJFrame jf = new DatTraPhongJFrame();
+                jf.setVisible(true);
+            }
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+            JPanel title = (JPanel) me.getSource();
+            MapRoom.colorRoom = title.getBackground();
+            changeColor(title);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+            JPanel title = (JPanel) me.getSource();
+            resetColor(title);
+        }
+    }
+    
+    public static class MouseClikQuanLyPhong extends MouseAdapter {
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+            JPanel title = (JPanel) me.getSource();
+            MapRoom.posTang = (int) title.getClientProperty("Tang");
+            MapRoom.posPhong = (String) title.getClientProperty("Phong");
+            MapRoom.maKH = (int) title.getClientProperty("MaKH");
+            System.out.println("tang:" + MapRoom.posTang + ", phong:" + MapRoom.posPhong + ", maKH: " + MapRoom.maKH);
+            MapRoom.posStatus = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong).getMaTT();
+//            if (MapRoom.posStatus == 5) {
+//                phongDAO.updateMaTT(new Phong(MapRoom.posPhong, MapRoom.posTang, -1, 1, null));
+//                HomePanel h = new HomePanel();
+//                ManHinhChinhGUI.SwitchPanel(h);
+//            } else {
+//                DatTraPhongJFrame jf = new DatTraPhongJFrame();
+//                jf.setVisible(true);
+//            }
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+            JPanel title = (JPanel) me.getSource();
+            MapRoom.colorRoom = title.getBackground();
+            changeColor(title);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+            JPanel title = (JPanel) me.getSource();
+            resetColor(title);
+        }
+    }
+    
+    public static class MouseClikThemPhong extends MouseAdapter {
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+            JPanel title = (JPanel) me.getSource();
+            MapRoom.posTang = (int) title.getClientProperty("Tang");
+            ThemPhongJframe themPhongJframe = new ThemPhongJframe();
+            themPhongJframe.setVisible(true);
         }
 
         @Override
@@ -49,7 +123,7 @@ public class ClickMouse {
     }
 
     public static void changeColor(JPanel panel) {
-        panel.setBackground(new Color(6, 145, 83));
+        panel.setBackground(new Color(104, 136, 150));
     }
 
     public static void resetColor(JPanel panel) {

@@ -12,6 +12,7 @@ import Models.HoaDonChiTietDAO;
 import Models.HoaDonDAO;
 import Models.KhachHangDAO;
 import Models.PhongDAO;
+import Models.TangDAO;
 import Models.TrangThaiDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,10 +23,16 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -41,11 +48,13 @@ public class MapRoom {
     public static HoaDonChiTietDAO daohdct = new HoaDonChiTietDAO();
     public static KhachHangDAO daokh = new KhachHangDAO();
     public static HoaDonDAO daohd = new HoaDonDAO();
+    public static TangDAO tangDAO = new TangDAO();
     public static TrangThaiDAO trangThaiDao = new TrangThaiDAO();
     public static int maKH = 0;
     public static int sizeWith = 200;
     public static int sizeHeight = 200;
     public static int posTang = 0;
+    public static int posStatus = 0;
     public static String posPhong = null;
     public static Color colorRoom;
 
@@ -83,7 +92,7 @@ public class MapRoom {
                     e.printStackTrace();
                 }
                 if (mahd != null) {
-                    System.out.println("maHD: "+ mahd.getMaHD());
+                    System.out.println("maHD: " + mahd.getMaHD());
                     maKH = daohd.selectByIdd(mahd.getMaHD(), false).getMaKH();
                     tenKH = daokh.selectById(maKH).getHoTen();
                     numStatus = 2;
@@ -91,19 +100,30 @@ public class MapRoom {
                     maKH = 0;
                 }
 
-                String info = "<html><center>" + numRoom + "</center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><br><center>" + tenKH + "</center>" + "</html>";
-
+                String info = "<html><center><h4>" + numRoom + "</h4></center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><center><h3>" + tenKH + "</h3></center>" + "</html>";
+                posStatus = numStatus;
                 tang.add(addRoomToFloor(floors, ac, info, numStatus, numRoom));
             }
         }
-//        if (QuanLyPhongPanel.quanlyphong) {
-//            JLabel room = new JLabel("Thêm phòng");
-//            room.setFont(new Font("Arial", Font.BOLD, 20));
-//            room.putClientProperty("Tang", new Integer(floors + 1));
-//            room.setPreferredSize(new Dimension(sizeWith, sizeHeight - 50));
-//            room.addMouseListener(ac);
-//            tang.add(room);
-//        }
+        if (QuanLyPhongPanel.quanlyphong) {
+            JPanel boxx = new JPanel();
+            boxx.setLayout(new BorderLayout());
+            boxx.putClientProperty("Tang", new Integer(floors + 1));
+            boxx.setBackground(new Color(255, 255, 255));
+            boxx.addMouseListener(new ClickMouse.MouseClikThemPhong());
+            JLabel roomm;
+            try {
+                roomm = new JLabel(new ImageIcon((ImageIO.read(new File("src/image/icons8_add_100px.png")))));
+                roomm.setHorizontalAlignment(JLabel.CENTER);
+                roomm.setVerticalAlignment(JLabel.CENTER);
+                roomm.setFont(new Font("Arial", Font.BOLD, 10));
+                roomm.setForeground(Color.WHITE);
+                boxx.add(roomm, BorderLayout.CENTER);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            tang.add(boxx);
+        }
         box.add(tang, gbc);
         box.revalidate();
         box.repaint();
@@ -143,15 +163,19 @@ public class MapRoom {
         switch (numStatus) {
             case 1:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
-                box.setBackground(new Color(24, 24, 214));
+                box.setBackground(new Color(8, 27, 135));
                 break;
             case 2:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
-                box.setBackground(new Color(176, 13, 11));
+                box.setBackground(new Color(112, 7, 6));
                 break;
             case 3:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
                 box.setBackground(new Color(164, 166, 164));
+                break;
+            case 4:
+                dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
+                box.setBackground(new Color(59, 11, 2));
                 break;
             default:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
@@ -173,6 +197,13 @@ public class MapRoom {
                 DisplayMapRoom(panel, gbc, i, ls.get(i), ac);
                 panel.revalidate();
                 panel.repaint();
+            }
+            if (QuanLyPhongPanel.quanlyphong) {
+                DisplayMapRoom(panel, gbc, ls.size() + 1, 0, new ClickMouse.MouseClikThemPhong());
+            }
+        } else {
+            if (QuanLyPhongPanel.quanlyphong) {
+                DisplayMapRoom(panel, gbc, 1, 0, new ClickMouse.MouseClikThemPhong());
             }
         }
     }

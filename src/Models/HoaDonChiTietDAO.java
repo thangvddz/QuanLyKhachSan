@@ -30,7 +30,7 @@ public class HoaDonChiTietDAO extends DAO<HoaDonChiTiet, Object> {
             + "join YEUCAU on HOADONCHITIET.MaHDCT = YEUCAU.MaHDCT\n"
             + "join DICHVU on YEUCAU.MaDV = DICHVU.MaDV where HOADON.MaHD=? and HOADON.TrangThai=?";
     private static final String SQL_SELECT_PHONG_DATHUE = "select MaPhong, SoTang, count(*) as soyeucau from HOADONCHITIET where MaHD=? and TrangThai=? group by MaPhong, SoTang";
-    private static final String SQL_SELECT_MAHD = "select HOADONCHITIET.* from HOADON join HOADONCHITIET on HOADON.MaHD=HOADONCHITIET.MaHD where MaPhong=? and SoTang=? and HOADON.TrangThai=?";
+    private static final String SQL_SELECT_MAHD = "select top 1 * from HOADONCHITIET where MaPhong=? and SoTang=? and TrangThai=?";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM HOADONCHITIET WHERE MaHDCT=?";
     private static final String SQL_SELECT_NEW_ID = "SELECT TOP 1 * FROM HOADONCHITIET where MaHD=? and TrangThai=? order by MaHDCT desc";
     private static final String SQL_SELECT_NEW_ID_RESERVE = "select top 1 * from HOADONCHITIET where TrangThai=? and SoTang=? and MaPhong=?";

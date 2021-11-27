@@ -383,7 +383,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         lblPhiDVNgayLe.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPhiDVNgayLe.setText("Phí dịch vụ ngày lễ :");
 
-        jLabel30.setText("10%");
+        jLabel30.setText("0");
 
         lblKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblKhuyenMai.setText("Khuyến mãi :");
@@ -414,8 +414,10 @@ public class TraPhongJpanel extends javax.swing.JPanel {
 
         txtTongTienDichVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Phí trả phòng muộn");
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Phí nhận phòng sớm");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -500,9 +502,9 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtTongTienPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtTienTheoNgay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSoGio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSoGio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtTienTheoGio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTongTienPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -917,7 +919,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             e.printStackTrace();
             hoaDonDAO.updateTT(true, hd.getMaHD());
         }
-        
+        MapRoom.maKH = 0;
         TraPhongJframe frame = (TraPhongJframe) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
     }
