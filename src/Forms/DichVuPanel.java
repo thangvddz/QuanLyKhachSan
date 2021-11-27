@@ -129,7 +129,11 @@ public class DichVuPanel extends javax.swing.JPanel {
         txtMaDV.setText(String.valueOf(model.getMaDV()));
         txtTenDV.setText(model.getTenDV());
         txtPhiDV.setText(String.valueOf(model.getPhiDV()));
-
+        if (model.isTrangThai()) {
+            rdoHoTro.setSelected(true);
+        } else {
+            rdoTamNgung.setSelected(true);
+        }
     }
     
     void delete() {

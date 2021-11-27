@@ -509,7 +509,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMousePressed
         // TODO add your handling code here:
-        JPanel nhanvien  = new NhanVienJPanel();
+        JPanel nhanvien = new NhanVienJPanel();
         SwitchPanel(nhanvien);
     }//GEN-LAST:event_btnNhanVienMousePressed
 
@@ -545,7 +545,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMousePressed
         // TODO add your handling code here:
-        JPanel khachhang  = new KhachHangJPanel();
+        JPanel khachhang = new KhachHangJPanel();
         SwitchPanel(khachhang);
     }//GEN-LAST:event_btnKhachHangMousePressed
 
@@ -556,6 +556,8 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         ScpScreenDisplay.getVerticalScrollBar().setUnitIncrement(16);
         MapRoom.setGridBagLayout(gbc, pnlScreen);
         fillToHome();
+        new DangNhapJDialog(this, true).setVisible(true);
+        new VaoCaJDialog(this, true).setVisible(true);
     }
 
     public void fillToHome() {
@@ -563,8 +565,8 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         JPanel home = new HomePanel();
         SwitchPanel(home);
     }
-    
-    public void resetStatus(){
+
+    public void resetStatus() {
         phongDAO.updateMaTT3();
     }
 
