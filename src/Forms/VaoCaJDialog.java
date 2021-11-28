@@ -7,7 +7,9 @@ package Forms;
 
 import Entities.LichSuCaLam;
 import Entities.NhanVien;
+import Models.LichSuCaLamDAO;
 import Utils.Auth;
+import Utils.mgsBox;
 import Utils.xDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     /**
      * Creates new form VaoCaJDialog
      */
-    Connection cn;
+    LichSuCaLamDAO  daoLSCL = new LichSuCaLamDAO();
     
     public VaoCaJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -79,6 +81,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Số tiền mệnh giá 500 đ :");
 
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Accept.png"))); // NOI18N
         btnLuu.setText("LƯU");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,7 +233,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        
+        luu();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnBangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangActionPerformed
@@ -339,8 +342,11 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     private void luu(){
         LichSuCaLam model = getModel();
         try {
-            
+            daoLSCL.insert1Phan(model);
+            mgsBox.alert(this, "Lưu thành công");
         } catch (Exception e) {
+            mgsBox.alert(this, "Lưu thất bại");
+            e.printStackTrace();
         }
     }
     

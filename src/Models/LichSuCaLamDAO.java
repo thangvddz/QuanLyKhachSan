@@ -13,7 +13,13 @@ import java.util.List;
  * @author ACER
  */
 public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object>{
-    private static final String SQL_INSERT
+    private static final String SQL_INSERT1phan = "insert into LSCaLam(MaNV,TienVaoDauCa,ThoiGianBD) values (?,?,?)";
+    
+    public void insert1Phan(LichSuCaLam etity){
+        JdbcHelper.update(SQL_INSERT1phan, etity.getMaNV(),
+                etity.getTienVaoDauCa(),
+                etity.getThoiGianDB());
+    }
 
     @Override
     public void insert(LichSuCaLam entity) {
