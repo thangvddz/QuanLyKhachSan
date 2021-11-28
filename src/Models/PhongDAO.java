@@ -6,7 +6,6 @@
 package Models;
 
 import Entities.Phong;
-import Entities.ThongTinPhong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,10 +24,10 @@ public class PhongDAO extends DAO<Phong, Integer> {
     private static final String SQL_SELECT_ALL = "SELECT * FROM PHONG";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM PHONG WHERE MaPhong=? AND SoTang=?";
     private static final String SQL_DELETE = "DELETE FROM PHONG WHERE MaPhong=? AND SoTang=?";
-    private static final String SQL_NUMBER_ROOM_PER_FLOOR = "select TANG.SoTang, COUNT(PHONG.SoTang) as so_tang from TANG join PHONG on TANG.SoTang = PHONG.SoTang group by TANG.SoTang";
+    private static final String SQL_NUMBER_ROOM_PER_FLOOR = "select TANG.SoTang, COUNT(PHONG.SoTang) as so_tang from TANG left outer join PHONG on TANG.SoTang = PHONG.SoTang group by TANG.SoTang";
     private static final String SQL_ROOMCODE_PER_FLOOR = "select * from PHONG where SoTang = ?";
-    private static final String SQL_SELECT_THONGTINPHONG_BY_ID = "select MaPhong, PHONG.SoTang, PHONG.MaLP, TenLP, giaPhong, SoGiuong, PHONG.MaTT "
-            + "from LOAIPHONG join PHONG on LOAIPHONG.MaLP = PHONG.MaLP join TANG on PHONG.SoTang = TANG.SoTang where MaPhong=? and PHONG.SoTang=?";
+    private static final String SQL_SELECT_THONGTINPHONG_BY_ID = "select PHONG.* "
+            + "from LOAIPHONG join PHONG on LOAIPHONG.MaLP = PHONG.MaLP where MaPhong=? and PHONG.SoTang=?";
     private static final String SQL_SELECT_BY_STATUS = "SELECT * FROM PHONG WHERE MaTT=?";
 
     JdbcHelper jdbc;
@@ -46,11 +45,11 @@ public class PhongDAO extends DAO<Phong, Integer> {
     public void update(Phong entity) {
         jdbc.update(SQL_UPDATE, entity.getMaLoaiPhong(), entity.getMaTT(), entity.getGhiChu(), entity.getMaPhong(), entity.getSoTang());
     }
-    
+
     public void updateMaTT(Phong entity) {
         jdbc.update(SQL_UPDATE_TT, entity.getMaTT(), entity.getMaPhong(), entity.getSoTang());
     }
-    
+
     public void updateMaTT3() {
         jdbc.update(SQL_UPDATE_STATUS_3);
     }
@@ -59,8 +58,8 @@ public class PhongDAO extends DAO<Phong, Integer> {
     public void delete(Integer id) {
 //        jdbc.update(SQL_DELETE, id);
     }
-    
-    public void deletePhong(Integer idTang, Integer idPhong){
+
+    public void deletePhong(Integer idTang, String idPhong) {
         jdbc.update(SQL_DELETE, idPhong, idTang);
     }
 
@@ -68,9 +67,13 @@ public class PhongDAO extends DAO<Phong, Integer> {
     public Phong selectById(Integer id) {
         return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
-    
+
     public Phong selectByIdd(int soTang, String soPhong) {
         return selectBySql(SQL_SELECT_BY_ID, soPhong, soTang).get(0);
+    }
+
+    public Phong selectThongTinPByID(int soTang, String soPhong) {
+        return selectBySql(SQL_SELECT_THONGTINPHONG_BY_ID, soPhong, soTang).get(0);
     }
 
     @Override
@@ -81,7 +84,7 @@ public class PhongDAO extends DAO<Phong, Integer> {
     public List<Phong> selectByMaTT(Integer id) {
         return selectBySql(SQL_SELECT_BY_STATUS, id);
     }
-    
+
     @Override
     protected List<Phong> selectBySql(String sql, Object... args) {
         List<Phong> ls = new ArrayList<>();
@@ -139,32 +142,4 @@ public class PhongDAO extends DAO<Phong, Integer> {
         return selectBySql(SQL_ROOMCODE_PER_FLOOR, tang);
     }
 
-    /**
-     *
-     * @param maP
-     * @param soT
-     * @return
-     */
-    public ThongTinPhong selectDetailById(Integer maP, Integer soT) {
-        ThongTinPhong thongTin = null;
-        try {
-            ResultSet rs = jdbc.query(SQL_SELECT_THONGTINPHONG_BY_ID, maP, soT);
-
-            while (rs.next()) {
-                int maPhong = rs.getInt(1);
-                int soTang = rs.getInt(2);
-                int loaiPhong = rs.getInt(3);
-                String tenLP = rs.getString(4);
-                double giaPhong = rs.getDouble(5);
-                int soGiuong = rs.getInt(6);
-                int MaTT = rs.getInt(7);
-
-                thongTin = new ThongTinPhong(maPhong, soTang, loaiPhong, giaPhong, soGiuong, MaTT, tenLP);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return thongTin;
-    }
 }

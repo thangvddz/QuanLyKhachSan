@@ -82,27 +82,33 @@ public class MapRoom {
 
         if (rooms != 0) {
             for (int i = 0; i < rooms; i++) {
-                int numStatus = dao.RoomCodePerFloor(floors + 1).get(i).getMaTT();
-                String numRoom = dao.RoomCodePerFloor(floors + 1).get(i).getMaPhong();
-                String tenKH = "";
-                HoaDonChiTiet mahd = null;
-                try {
-                    mahd = daohdct.getMaHDFromHDCT(floors + 1, numRoom, false);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (mahd != null) {
-                    System.out.println("maHD: " + mahd.getMaHD());
-                    maKH = daohd.selectByIdd(mahd.getMaHD(), false).getMaKH();
-                    tenKH = daokh.selectById(maKH).getHoTen();
-                    numStatus = 2;
-                } else {
-                    maKH = 0;
-                }
 
-                String info = "<html><center><h4>" + numRoom + "</h4></center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><center><h3>" + tenKH + "</h3></center>" + "</html>";
-                posStatus = numStatus;
-                tang.add(addRoomToFloor(floors, ac, info, numStatus, numRoom));
+                try {
+                    int numStatus = dao.RoomCodePerFloor(floors + 1).get(i).getMaTT();
+                    String numRoom = dao.RoomCodePerFloor(floors + 1).get(i).getMaPhong();
+
+                    String tenKH = "";
+                    HoaDonChiTiet mahd = null;
+                    try {
+                        mahd = daohdct.getMaHDFromHDCT(floors + 1, numRoom, false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (mahd != null) {
+                        System.out.println("maHD: " + mahd.getMaHD());
+                        maKH = daohd.selectByIdd(mahd.getMaHD(), false).getMaKH();
+                        tenKH = daokh.selectById(maKH).getHoTen();
+                        numStatus = 2;
+                    } else {
+                        maKH = 0;
+                    }
+
+                    String info = "<html><center><h4>" + numRoom + "</h4></center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><center><h3>" + tenKH + "</h3></center>" + "</html>";
+                    posStatus = numStatus;
+                    tang.add(addRoomToFloor(floors, ac, info, numStatus, numRoom));
+                } catch (Exception e) {
+                    System.out.println("Tang nay chang co phong nao gi");
+                }
             }
         }
         if (QuanLyPhongPanel.quanlyphong) {
@@ -199,7 +205,7 @@ public class MapRoom {
                 panel.repaint();
             }
             if (QuanLyPhongPanel.quanlyphong) {
-                DisplayMapRoom(panel, gbc, ls.size() + 1, 0, new ClickMouse.MouseClikThemPhong());
+                DisplayMapRoom(panel, gbc, ls.size(), 0, new ClickMouse.MouseClikThemPhong());
             }
         } else {
             if (QuanLyPhongPanel.quanlyphong) {
