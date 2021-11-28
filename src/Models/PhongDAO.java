@@ -24,7 +24,7 @@ public class PhongDAO extends DAO<Phong, Integer> {
     private static final String SQL_SELECT_ALL = "SELECT * FROM PHONG";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM PHONG WHERE MaPhong=? AND SoTang=?";
     private static final String SQL_DELETE = "DELETE FROM PHONG WHERE MaPhong=? AND SoTang=?";
-    private static final String SQL_NUMBER_ROOM_PER_FLOOR = "select TANG.SoTang, COUNT(PHONG.SoTang) as so_tang from TANG left outer join PHONG on TANG.SoTang = PHONG.SoTang group by TANG.SoTang";
+    private static final String SQL_NUMBER_ROOM_PER_FLOOR = "select TANG.SoTang, COUNT(PHONG.SoTang) as so_tang from TANG left outer join PHONG on TANG.SoTang = PHONG.SoTang " + "group by TANG.SoTang";
     private static final String SQL_ROOMCODE_PER_FLOOR = "select * from PHONG where SoTang = ?";
     private static final String SQL_SELECT_THONGTINPHONG_BY_ID = "select PHONG.* "
             + "from LOAIPHONG join PHONG on LOAIPHONG.MaLP = PHONG.MaLP where MaPhong=? and PHONG.SoTang=?";

@@ -197,20 +197,24 @@ public class MapRoom {
         panel.removeAll();
         setGridBagLayout(gbc, panel);
         PhongDAO dao = new PhongDAO();
-        List<Integer> ls = dao.RoomPerFloor();
-        if (!ls.isEmpty()) {
-            for (int i = 0; i < ls.size(); i++) {
-                DisplayMapRoom(panel, gbc, i, ls.get(i), ac);
-                panel.revalidate();
-                panel.repaint();
+        try {
+            List<Integer> ls = dao.RoomPerFloor();
+            if (!ls.isEmpty()) {
+                for (int i = 0; i < ls.size(); i++) {
+                    DisplayMapRoom(panel, gbc, i, ls.get(i), ac);
+                    panel.revalidate();
+                    panel.repaint();
+                }
+                if (QuanLyPhongPanel.quanlyphong) {
+                    DisplayMapRoom(panel, gbc, ls.size(), 0, new ClickMouse.MouseClikThemPhong());
+                }
+            } else {
+                if (QuanLyPhongPanel.quanlyphong) {
+                    DisplayMapRoom(panel, gbc, 1, 0, new ClickMouse.MouseClikThemPhong());
+                }
             }
-            if (QuanLyPhongPanel.quanlyphong) {
-                DisplayMapRoom(panel, gbc, ls.size(), 0, new ClickMouse.MouseClikThemPhong());
-            }
-        } else {
-            if (QuanLyPhongPanel.quanlyphong) {
-                DisplayMapRoom(panel, gbc, 1, 0, new ClickMouse.MouseClikThemPhong());
-            }
+        } catch (Exception e) {
+            
         }
     }
 }
