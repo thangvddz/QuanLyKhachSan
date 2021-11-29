@@ -18,10 +18,11 @@ public class checkText {
         return false;
     }
 
-    public static boolean issDouble(String str) {
+    public static boolean issNum(String str) {
         if (!str.trim().equals("")) {
             try {
                 double num = Double.parseDouble(str);
+                int num2 = Integer.parseInt(str);
                 return true;
             } catch (NumberFormatException e) {
                 e.printStackTrace();

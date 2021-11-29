@@ -68,4 +68,9 @@ public class LoaiPhong {
         this.GiaNgay = GiaNgay;
     }
 
+    @Override
+    public String toString() {
+        return TenLP;
+    }
+
 }
