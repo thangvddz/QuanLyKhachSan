@@ -9,7 +9,6 @@ import Entities.LoaiPhong;
 import Entities.Phong;
 import Entities.TrangThai;
 import static Forms.QuanLyPhongPanel.gbc;
-import static Forms.QuanLyPhongPanel.pnlMainScreen;
 import Models.LoaiPhongDAO;
 import Models.PhongDAO;
 import Models.TrangThaiDAO;
@@ -18,6 +17,7 @@ import Utils.MapRoom;
 import Utils.mgsBox;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import static Forms.QuanLyPhongPanel.pnlQuanLyPhong;
 
 /**
  *
@@ -284,7 +284,7 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
             pdao.update(new Phong(txtSoPhong.getText(), soTang, maLp, maTT, "Welcome"));
             mgsBox.alert(this, "Cập nhật thành công!");
             this.setVisible(false);
-            MapRoom.updateStatusScreen(pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
+            MapRoom.updateStatusScreen(pnlQuanLyPhong, gbc, new ClickMouse.MouseClikQuanLyPhong());
         }
     }
     
@@ -293,7 +293,7 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
             pdao.deletePhong(Integer.parseInt(txtSoTang.getText()), txtSoPhong.getText());
             mgsBox.alert(this, "Xóa thành công!");
             this.setVisible(false);
-            MapRoom.updateStatusScreen(pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
+            MapRoom.updateStatusScreen(pnlQuanLyPhong, gbc, new ClickMouse.MouseClikQuanLyPhong());
         }
     }
 

@@ -10,7 +10,6 @@ import Entities.Phong;
 import Entities.Tang;
 import Entities.TrangThai;
 import static Forms.QuanLyPhongPanel.gbc;
-import static Forms.QuanLyPhongPanel.pnlMainScreen;
 import Models.LoaiPhongDAO;
 import Models.PhongDAO;
 import Models.TangDAO;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import static Forms.QuanLyPhongPanel.pnlQuanLyPhong;
 
 /**
  *
@@ -406,12 +406,19 @@ public class ThemPhongJframe extends javax.swing.JFrame {
     public void insert() {
         int maLp = cboLoaiPhong.getSelectedIndex() + 1;
         int soTang = Integer.parseInt(txtTang.getText());
-        int soTangData = tdao.selectAll().size();
+
+        try {
+            int soTangData = tdao.selectAll().size();
+            if (soTang > soTangData) {
+                tdao.insert(new Tang(soTang, "Tàng này được", true));
+            }
+        } catch (Exception e) {
+            tdao.insert(new Tang(soTang, "Tàng này được", true));
+            e.printStackTrace();
+        }
         int maTT = cboTrangThaiPhong.getSelectedIndex() + 1;
         System.out.println("MaLP:" + maLp + ", so tang:" + soTang + ", matt:" + maTT);
-        if (soTang > soTangData) {
-            tdao.insert(new Tang(soTang, "Tàng này được", true));
-        }
+
         for (int i = 0; i < lsRoom.size(); i++) {
             try {
                 pdao.insert(new Phong(lsRoom.get(i), soTang, maLp, maTT, "welcome to my heart"));
@@ -419,7 +426,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
                 System.out.println("hhh");
             }
         }
-        MapRoom.updateStatusScreen(pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
+        MapRoom.updateStatusScreen(pnlQuanLyPhong, gbc, new ClickMouse.MouseClikQuanLyPhong());
         this.setVisible(false);
     }
 
@@ -477,8 +484,8 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiPhong.getModel();
         model.removeAllElements();
         List<LoaiPhong> ls = lpdao.selectAll();
-        for (LoaiPhong l : ls) {
-            model.addElement(l);
+        for (int i = 0; i < ls.size(); i++) {
+            model.addElement(ls.get(i));
         }
     }
 

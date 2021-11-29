@@ -7,6 +7,9 @@ package Utils;
 
 import Entities.HoaDonChiTiet;
 import Entities.Phong;
+import Forms.HomePanel;
+import Forms.ManHinhChinhGUI;
+import Forms.ManHinhTrongJpanel;
 import Forms.QuanLyPhongPanel;
 import Models.HoaDonChiTietDAO;
 import Models.HoaDonDAO;
@@ -214,7 +217,14 @@ public class MapRoom {
                 }
             }
         } catch (Exception e) {
-            
+
+            if (QuanLyPhongPanel.quanlyphong) {
+                DisplayMapRoom(panel, gbc, 0, 0, new ClickMouse.MouseClikThemPhong());
+            } else {
+                ManHinhTrongJpanel mht = new ManHinhTrongJpanel();
+                mht.setVisible(true);
+                HomePanel.pnlScreen.add(mht);
+            }
         }
     }
 }
