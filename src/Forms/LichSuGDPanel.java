@@ -5,7 +5,9 @@
  */
 package Forms;
 
+import Models.ThongKeDAO;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -13,17 +15,29 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hungp
  */
 public class LichSuGDPanel extends javax.swing.JPanel {
-
+    
+    ThongKeDAO dao = new ThongKeDAO();
+    
     public LichSuGDPanel() {
         initComponents();
+        fillTableLSGD();
     }
-
+    
+    void fillTableLSGD(){
+        DefaultTableModel model = (DefaultTableModel) tblBang.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = dao.getLichSuGD();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
     public void guiMail() {
         try {
             Calendar c1 = Calendar.getInstance();
@@ -82,6 +96,8 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         txtDoanhThu = new javax.swing.JTextField();
         txtTongHD = new javax.swing.JTextField();
         btnGuiEmail = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblBang = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder("Thống kê"));
@@ -101,6 +117,16 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             }
         });
 
+        tblBang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Ngày GD", "Mã HĐ", "Tên KH", "Mã phòng", "Tổng tiền", "Nhân viên"
+            }
+        ));
+        jScrollPane4.setViewportView(tblBang);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,16 +139,20 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(569, Short.MAX_VALUE))))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addGap(31, 31, 31)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 560, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +168,9 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                     .addComponent(txtTongHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnGuiEmail)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,6 +184,8 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable tblBang;
     private javax.swing.JTextField txtDoanhThu;
     private javax.swing.JTextField txtTongHD;
     // End of variables declaration//GEN-END:variables
