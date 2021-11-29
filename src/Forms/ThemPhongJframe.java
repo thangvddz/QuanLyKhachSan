@@ -80,7 +80,8 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTang.setText("Tầng");
@@ -139,7 +140,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0};
         jPanel2Layout.rowHeights = new int[] {0};
@@ -182,7 +183,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel2.add(btnZenRoom, gridBagConstraints);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWidths = new int[] {0, 10, 0};
         jPanel3Layout.rowHeights = new int[] {0};
@@ -350,6 +351,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         } else {
             if (mgsBox.confirm(this, "Bạn có chắc muốn xóa phòng đang chọn?")) {
                 delete();
+
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -361,6 +363,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         } else {
             if (mgsBox.confirm(this, "Bạn có chắc muốn Sửa phòng đang chọn?")) {
                 update();
+
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -404,7 +407,9 @@ public class ThemPhongJframe extends javax.swing.JFrame {
     }
 
     public void insert() {
-        int maLp = cboLoaiPhong.getSelectedIndex() + 1;
+        LoaiPhong Lp = (LoaiPhong) cboLoaiPhong.getSelectedItem();
+        System.out.println("jjjj" + Lp);
+        int maLp = Lp.getMaLP();
         int soTang = Integer.parseInt(txtTang.getText());
 
         try {
@@ -426,7 +431,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
                 System.out.println("hhh");
             }
         }
-        MapRoom.updateStatusScreen(pnlQuanLyPhong, gbc, new ClickMouse.MouseClikQuanLyPhong());
+        MapRoom.updateStatusScreen(QuanLyPhongPanel.pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
         this.setVisible(false);
     }
 
@@ -490,7 +495,6 @@ public class ThemPhongJframe extends javax.swing.JFrame {
     }
 
     public void setSoGiuong() {
-
         try {
             LoaiPhong maLP = (LoaiPhong) cboLoaiPhong.getSelectedItem();
             System.out.println("malp:" + maLP.getSoGiuong());

@@ -110,4 +110,11 @@ public class KhachHang {
         this.gioiTinh = gioiTinh;
     }
 
+    @Override
+    public String toString() {
+        return HoTen;
+    }
+    
+    
+
 }

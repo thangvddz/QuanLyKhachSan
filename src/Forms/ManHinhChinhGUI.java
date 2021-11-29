@@ -417,6 +417,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(247, 22, 52));
 
+        txtThongTinNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtThongTinNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -624,9 +627,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         pnlScreen.setLayout(new FlowLayout(FlowLayout.LEFT));
         fillToHome();
         fillCheckInCheckOut();
-//        fillNhanVien();
         new DangNhapJDialog(this, true).setVisible(true);
         new VaoCaJDialog(this, true).setVisible(true);
+        fillNhanVien();
     }
 
     public void fillToHome() {
@@ -682,10 +685,10 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         }
     }
 
-//    public void fillNhanVien() {
-//        System.out.println(Auth.user);
-//        txtThongTinNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
-//    }
+    public void fillNhanVien() {
+        System.out.println(Auth.user);
+        txtThongTinNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
+    }
 
     /**
      * @param args the command line arguments

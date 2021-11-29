@@ -261,7 +261,8 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
     
     public void updateLoaiP() {
         Phong p = pdao.selectThongTinPByID(MapRoom.posTang, MapRoom.posPhong);
-        cboLoaiPhong.setSelectedIndex(p.getMaLoaiPhong()-1);
+        LoaiPhong lp = lpdao.selectById(p.getMaLoaiPhong());
+        cboLoaiPhong.setSelectedItem(lp);
     }
     
     public void setSoGiuong() {

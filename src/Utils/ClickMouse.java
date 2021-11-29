@@ -44,15 +44,19 @@ public class ClickMouse {
             MapRoom.maKH = (int) title.getClientProperty("MaKH");
             System.out.println("tang:" + MapRoom.posTang + ", phong:" + MapRoom.posPhong + ", maKH: " + MapRoom.maKH);
             MapRoom.posStatus = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong).getMaTT();
+
             if (MapRoom.posStatus == 5) {
-                phongDAO.updateMaTT(new Phong(MapRoom.posPhong, MapRoom.posTang, -1, 1, null));
-                HomePanel h = new HomePanel();
-                ManHinhChinhGUI.SwitchPanel(h);
-            } else {
+                if (mgsBox.confirm(null, "Bạn có chắc muốn thay đổi trạng thái từ đang dọn sang phòng trống")) {
+                    phongDAO.updateMaTT(new Phong(MapRoom.posPhong, MapRoom.posTang, -1, 1, null));
+                    HomePanel h = new HomePanel();
+                    ManHinhChinhGUI.SwitchPanel(h);
+                }
+            } else if (MapRoom.posStatus == 1 || MapRoom.posStatus == 2) {
                 DatTraPhongJFrame jf = new DatTraPhongJFrame();
                 jf.setVisible(true);
+            } else {
+                mgsBox.alert(null, "Trạng thái phòng không sẵn sàng");
             }
-
         }
 
         @Override
