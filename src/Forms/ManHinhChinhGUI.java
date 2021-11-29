@@ -10,6 +10,7 @@ import Utils.ClickMouse;
 import Utils.MapRoom;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
@@ -554,7 +555,8 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         gbc = new GridBagConstraints();
         switchSize = true;
         ScpScreenDisplay.getVerticalScrollBar().setUnitIncrement(16);
-        MapRoom.setGridBagLayout(gbc, pnlScreen);
+//        MapRoom.setGridBagLayout(gbc, pnlScreen);
+        pnlScreen.setLayout(new FlowLayout(FlowLayout.LEFT));
         fillToHome();
         new DangNhapJDialog(this, true).setVisible(true);
         new VaoCaJDialog(this, true).setVisible(true);
@@ -575,8 +577,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
         pnlScreen.removeAll();
         panel.setVisible(true);
-        MapRoom.setGridBagLayout(gbc, pnlScreen);
-        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        MapRoom.setGridBagLayout(gbc, pnlScreen);
+        pnlScreen.setLayout(new FlowLayout(FlowLayout.LEFT));
+//        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         pnlScreen.add(panel);
         pnlScreen.revalidate();
         pnlScreen.repaint();

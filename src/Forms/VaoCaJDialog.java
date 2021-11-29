@@ -342,7 +342,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     private void luu(){
         LichSuCaLam model = getModel();
         try {
-            daoLSCL.insert1Phan(model);
+            daoLSCL.insert(model);
             mgsBox.alert(this, "Lưu thành công");
         } catch (Exception e) {
             mgsBox.alert(this, "Lưu thất bại");

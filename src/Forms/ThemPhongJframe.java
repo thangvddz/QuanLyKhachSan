@@ -7,11 +7,13 @@ package Forms;
 
 import Entities.LoaiPhong;
 import Entities.Phong;
+import Entities.Tang;
 import Entities.TrangThai;
 import static Forms.QuanLyPhongPanel.gbc;
 import static Forms.QuanLyPhongPanel.pnlMainScreen;
 import Models.LoaiPhongDAO;
 import Models.PhongDAO;
+import Models.TangDAO;
 import Models.TrangThaiDAO;
 import Utils.ClickMouse;
 import Utils.MapRoom;
@@ -31,6 +33,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
     PhongDAO pdao;
     LoaiPhongDAO lpdao;
     TrangThaiDAO ttdao;
+    TangDAO tdao;
     List<String> lsRoom;
     public static int index;
 
@@ -373,6 +376,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         pdao = new PhongDAO();
         lpdao = new LoaiPhongDAO();
         ttdao = new TrangThaiDAO();
+        tdao = new TangDAO();
         lsRoom = new ArrayList<>();
         fillTang();
         fillComboboxLoaiPhong();
@@ -402,10 +406,18 @@ public class ThemPhongJframe extends javax.swing.JFrame {
     public void insert() {
         int maLp = cboLoaiPhong.getSelectedIndex() + 1;
         int soTang = Integer.parseInt(txtTang.getText());
-        int maTT = cboTrangThaiPhong.getSelectedIndex()+ 1;
+        int soTangData = tdao.selectAll().size();
+        int maTT = cboTrangThaiPhong.getSelectedIndex() + 1;
         System.out.println("MaLP:" + maLp + ", so tang:" + soTang + ", matt:" + maTT);
+        if (soTang > soTangData) {
+            tdao.insert(new Tang(soTang, "Tàng này được", true));
+        }
         for (int i = 0; i < lsRoom.size(); i++) {
-            pdao.insert(new Phong(lsRoom.get(i), maLp, soTang, maTT, "hello"));
+            try {
+                pdao.insert(new Phong(lsRoom.get(i), soTang, maLp, maTT, "welcome to my heart"));
+            } catch (Exception e) {
+                System.out.println("hhh");
+            }
         }
         MapRoom.updateStatusScreen(pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
         this.setVisible(false);

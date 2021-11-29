@@ -12,18 +12,13 @@ import java.util.List;
  *
  * @author ACER
  */
-public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object>{
-    private static final String SQL_INSERT1phan = "insert into LSCaLam(MaNV,TienVaoDauCa,ThoiGianBD) values (?,?,?)";
-    
-    public void insert1Phan(LichSuCaLam etity){
-        JdbcHelper.update(SQL_INSERT1phan, etity.getMaNV(),
-                etity.getTienVaoDauCa(),
-                etity.getThoiGianDB());
-    }
+public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
+
+    private static final String SQL_INSERT = "insert into LSCaLam(MaNV,TienVaoDauCa,ThoiGianBD) values (?,?,?)";
 
     @Override
     public void insert(LichSuCaLam entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JdbcHelper.update(SQL_INSERT,entity.getMaNV(),entity.getTienVaoDauCa(),entity.getThoiGianDB());
     }
 
     @Override
@@ -50,5 +45,5 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object>{
     protected List<LichSuCaLam> selectBySql(String sql, Object... args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -65,7 +65,5 @@ public class xDate {
         }
         return true;
     }
-    public static Date now() {
-        return new Date();
-    }
+    
 }
