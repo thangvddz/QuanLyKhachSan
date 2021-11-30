@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
 
-    private static final String SQL_INSERT = "insert into LSCaLam(MaNV,TienVaoDauCa,ThoiGianBD) values (?,?,?)";
+    private static final String SQL_INSERT = "insert into LSCaLam(MaNV,TenCaLam,TienVaoDauCa,ThoiGianBD) values (?,?,?,?)";
 
     @Override
     public void insert(LichSuCaLam entity) {
-        JdbcHelper.update(SQL_INSERT,entity.getMaNV(),entity.getTienVaoDauCa(),entity.getThoiGianDB());
+        JdbcHelper.update(SQL_INSERT,entity.getMaNV(),entity.getTenCaLam(),entity.getTienVaoDauCa(),entity.getThoiGianDB());
     }
 
     @Override

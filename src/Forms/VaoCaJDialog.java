@@ -5,19 +5,26 @@
  */
 package Forms;
 
+import Entities.CaLam;
 import Entities.LichSuCaLam;
 import Entities.NhanVien;
+import Models.CaLamDAO;
 import Models.LichSuCaLamDAO;
 import Utils.Auth;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xTime;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Timer;
 
 /**
@@ -29,8 +36,9 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     /**
      * Creates new form VaoCaJDialog
      */
-    LichSuCaLamDAO  daoLSCL = new LichSuCaLamDAO();
-    
+    LichSuCaLamDAO daoLSCL = new LichSuCaLamDAO();
+    CaLamDAO cldao = new CaLamDAO();
+
     public VaoCaJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -71,8 +79,9 @@ public class VaoCaJDialog extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         txtTienDauCa = new javax.swing.JTextField();
         lblDongHo = new javax.swing.JLabel();
-        btnBang = new javax.swing.JButton();
         lblHoTen = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        cboTenCa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("KHAI BAO TIEN DAU CA");
@@ -81,6 +90,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Số tiền mệnh giá 500 đ :");
 
+        btnLuu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Accept.png"))); // NOI18N
         btnLuu.setText("LƯU");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -109,81 +119,87 @@ public class VaoCaJDialog extends javax.swing.JDialog {
 
         jLabel12.setText("Tổng tiền đầu ca:");
 
-        lblDongHo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblDongHo.setText("jLabel13");
-
-        btnBang.setText("=");
-        btnBang.addActionListener(new java.awt.event.ActionListener() {
+        txtTienDauCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBangActionPerformed(evt);
+                txtTienDauCaActionPerformed(evt);
             }
         });
+
+        lblDongHo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDongHo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblHoTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblHoTen.setText("a");
+
+        jLabel13.setText("Ca Làm: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(lblDongHo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(lblDongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt500, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt500000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt200000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt100000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt50000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt20000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt1000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt2000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt5000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt10000, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTienDauCa, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBang, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(36, 36, 36))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt500, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt500000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt200000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt100000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt50000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt20000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt1000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt2000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt5000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txt10000, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(txtTienDauCa, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                    .addComponent(cboTenCa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel13))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cboTenCa, txt1000, txt10000, txt100000, txt2000, txt20000, txt200000, txt500, txt5000, txt50000, txt500000, txtTienDauCa});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDongHo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txt500, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txt500, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt1000, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,23 +238,35 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtTienDauCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBang))
-                .addGap(41, 41, 41)
-                .addComponent(btnLuu)
-                .addGap(16, 16, 16))
+                    .addComponent(txtTienDauCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(cboTenCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboTenCa, txt1000, txt10000, txt100000, txt2000, txt20000, txt200000, txt500, txt5000, txt50000, txt500000, txtTienDauCa});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         luu();
+        //System.out.println(xDate.timeNow1());
+//        Date now = new Date();
+//		System.out.println(now);
+//		
+//		// chuyển Date sang Timestamp
+//		Timestamp timestamp = new Timestamp(now.getTime());
+//		System.out.println(timestamp);
     }//GEN-LAST:event_btnLuuActionPerformed
 
-    private void btnBangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangActionPerformed
+    private void txtTienDauCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienDauCaActionPerformed
         TienVaoCa();
-    }//GEN-LAST:event_btnBangActionPerformed
+    }//GEN-LAST:event_txtTienDauCaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,12 +311,13 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBang;
     private javax.swing.JButton btnLuu;
+    private javax.swing.JComboBox<String> cboTenCa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -312,7 +341,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtTienDauCa;
     // End of variables declaration//GEN-END:variables
     private void init() {
-        this.setLocationRelativeTo(null); 
+        this.setLocationRelativeTo(null);
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -323,8 +352,10 @@ public class VaoCaJDialog extends javax.swing.JDialog {
             }
         }).start();
         lblHoTen.setText(Auth.user.getHoTen());
+        fillComboBoxCa();
     }
-    private void TienVaoCa(){
+
+    private void TienVaoCa() {
         int tien1 = Integer.parseInt(txt500.getText());
         int tien2 = Integer.parseInt(txt1000.getText());
         int tien3 = Integer.parseInt(txt2000.getText());
@@ -338,8 +369,8 @@ public class VaoCaJDialog extends javax.swing.JDialog {
         float tong = tien1 * 500 + tien2 * 1000 + tien3 * 2000 + tien4 * 5000 + tien5 * 10000 + tien6 * 20000 + tien7 * 50000 + tien8 * 100000 + tien9 * 200000 + tien10 * 500000;
         txtTienDauCa.setText(tong + "");
     }
-    
-    private void luu(){
+
+    private void luu() {
         LichSuCaLam model = getModel();
         try {
             daoLSCL.insert(model);
@@ -349,13 +380,22 @@ public class VaoCaJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
-    LichSuCaLam getModel(){
+
+    LichSuCaLam getModel() {
         LichSuCaLam model = new LichSuCaLam();
         model.setMaNV(Auth.user.getMaNV());
+        model.setTenCaLam((String) cboTenCa.getSelectedItem());
         model.setTienVaoDauCa(Double.valueOf(txtTienDauCa.getText()));
-        model.setThoiGianDB(xDate.now());
+        model.setThoiGianDB(xDate.timeNow1());
         return model;
     }
-  
+    private void fillComboBoxCa() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenCa.getModel();
+        List<CaLam> lsCaLam = cldao.selectAll();
+        model.removeAllElements();
+        for (CaLam caLam : lsCaLam) {
+            model.addElement(caLam.getTenCaLam());
+        }
+    }
+
 }

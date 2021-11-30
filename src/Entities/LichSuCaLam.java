@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -12,19 +13,20 @@ import java.util.Date;
  * @author ACER
  */
 public class LichSuCaLam {
+
     int MaLSCL;
     String MaNV;
     String TenCaLam;
     double TienVaoDauCa;
     double TienCuoiCa;
-    Date ThoiGianDB;
-    Date ThoiGianKT;
+    Timestamp ThoiGianDB;
+    Timestamp ThoiGianKT;
     String GhiChu;
 
     public LichSuCaLam() {
     }
 
-    public LichSuCaLam(int MaLSCL, String MaNV, String TenCaLam, double TienVaoDauCa, double TienCuoiCa, Date ThoiGianDB, Date ThoiGianKT, String GhiChu) {
+    public LichSuCaLam(int MaLSCL, String MaNV, String TenCaLam, double TienVaoDauCa, double TienCuoiCa, Timestamp ThoiGianDB, Timestamp ThoiGianKT, String GhiChu) {
         this.MaLSCL = MaLSCL;
         this.MaNV = MaNV;
         this.TenCaLam = TenCaLam;
@@ -75,19 +77,19 @@ public class LichSuCaLam {
         this.TienCuoiCa = TienCuoiCa;
     }
 
-    public Date getThoiGianDB() {
+    public Timestamp getThoiGianDB() {
         return ThoiGianDB;
     }
 
-    public void setThoiGianDB(Date ThoiGianDB) {
+    public void setThoiGianDB(Timestamp ThoiGianDB) {
         this.ThoiGianDB = ThoiGianDB;
     }
 
-    public Date getThoiGianKT() {
+    public Timestamp getThoiGianKT() {
         return ThoiGianKT;
     }
 
-    public void setThoiGianKT(Date ThoiGianKT) {
+    public void setThoiGianKT(Timestamp ThoiGianKT) {
         this.ThoiGianKT = ThoiGianKT;
     }
 
@@ -99,7 +101,4 @@ public class LichSuCaLam {
         this.GhiChu = GhiChu;
     }
 
-    
-    
-    
 }

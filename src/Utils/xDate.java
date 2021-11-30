@@ -5,6 +5,7 @@
  */
 package Utils;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +39,7 @@ public class xDate {
         DateFormat dateFormat = new SimpleDateFormat(parttern);
         return dateFormat.format(date);
     }
+
     public static Date addDays(Date date, long days) {
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         return date;
@@ -65,5 +67,15 @@ public class xDate {
         }
         return true;
     }
-    
+
+    public static Timestamp timeNow1() {
+        Date now = new Date();
+        //System.out.println(now);
+
+        // chuyển Date sang Timestamp
+        Timestamp timestamp = new Timestamp(now.getTime());
+        //System.out.println(timestamp);
+        return timestamp;
+
+    }
 }
