@@ -1007,7 +1007,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         //chuyen trang thai phong ve trang thai dang don dep
         phongDAO.updateMaTT(new Phong(MapRoom.posPhong, MapRoom.posTang, 1, 5, null));
         mgsBox.alert(this, "In Hóa đơn thành công.");
-
+        themTongTien(hd);
         try {
             HoaDonChiTiet hdct = hoaDonChiTietDAO.selectByNewID(hd.getMaHD(), false);
         } catch (Exception e) {
@@ -1019,6 +1019,12 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         frame.dispose();
     }
 
+    public void themTongTien(HoaDon hd){
+        double tongTienDatabase = hd.getThanhTien();
+        double tongTienHT = tongTienDatabase + sumMoneyHavePay; 
+        hoaDonDAO.updateTongTien(tongTienHT, hd.getMaHD());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuyBo;
     private javax.swing.JButton btnInHoaDon;

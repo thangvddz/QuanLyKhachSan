@@ -3,36 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/DatTraPhongPanel.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/KhachHangDAO.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/YeuCauDAO.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/HoaDonChiTietDAO.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Utils/ClickMouse.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/ManHinhChinhGUI.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/HoaDonDAO.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Entities/ChiTietPhongVaDichVu.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Utils/MapRoom.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/LichSuGDDAO.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/TraPhongJpanel.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/DichVuPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/DichVuDAO.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/KhachHangJPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/ManHinhChinhGUI.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/LichSuGDPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/ThongKeDAO.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/NhanVienJPanel.java</file>
-=======
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Utils/ClickMouse.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/PhongDAO.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Models/JdbcHelper.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Utils/MapRoom.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/ThemPhongJframe.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/DatTraPhongPanel.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/ThongTinPhongJFrame.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Utils/XJdbc.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/DuAn1_QuanLyKhachSan_369/src/Forms/QuanLyPhongPanel.java</file>
->>>>>>> 45ab158ed47c52b092865ed223a48e4b6a32ea70
->>>>>>> 317b3e4e1a2c4d817de6ce77ab4fe329953f1180
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Entities/YeuCau.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Entities/DichVu.java</file>
         </group>
     </open-files>
 </project-private>

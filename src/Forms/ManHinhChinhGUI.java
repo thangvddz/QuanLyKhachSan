@@ -686,7 +686,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     }
 
     public void fillNhanVien() {
-        System.out.println(Auth.user);
         txtThongTinNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
     }
 

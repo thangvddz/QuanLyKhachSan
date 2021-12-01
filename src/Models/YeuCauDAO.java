@@ -23,6 +23,7 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
     private static final String SQL_UPDATE = "UPDATE YEUCAU SET MaDV=?, ThoiGianBD=?, TrangThai=? WHERE MaHDCT=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM YEUCAU";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM YEUCAU WHERE MaDV=?, MaHDCT=?";
+    private static final String SQL_SELECT_MAHDCT = "SELECT * FROM YEUCAU WHERE MaHDCT=?";
     private static final String SQL_DELETE = "DELETE FROM YEUCAU WHERE MaDV=?, MaHDCT=?";
 
     JdbcHelper jdbc;
@@ -56,6 +57,10 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
         return selectBySql(SQL_SELECT_ALL);
     }
 
+    public YeuCau selectAllMAHDCT(int maHDCT) {
+        return selectBySql(SQL_SELECT_MAHDCT, maHDCT).get(0);
+    }
+
     @Override
     protected List<YeuCau> selectBySql(String sql, Object... args) {
         List<YeuCau> ls = new ArrayList<>();
@@ -77,9 +82,9 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
         }
         return ls;
     }
-    
+
     private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
-        
+
         List<Object[]> ls = new ArrayList<>();
         try {
             ResultSet rs = jdbc.query(sql, args);
@@ -95,19 +100,19 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
         }
         return ls;
     }
-    
+
     public List<Object[]> getDichVuDaDung(int soTang, String maPhong) {
         String sql = "{CALL DichVuDaDung(?,?)}";
         String[] cols = {"TenDV", "TongPhiDV"};
         return this.getListOfArray(sql, cols, soTang, maPhong);
     }
-    
+
     public List<Object[]> getTienNhanPSom(Timestamp cusCheckIn, Timestamp HolCheckIn, double giaPhong) {
         String sql = "{CALL TienNhanPhongSom(?,?,?)}";
         String[] cols = {"TienPhongSom"};
         return this.getListOfArray(sql, cols, cusCheckIn, HolCheckIn, giaPhong);
     }
-    
+
     public List<Object[]> getTienTraPTre(Timestamp cusCheckOut, Timestamp HolCheckOut, double giaPhong) {
         String sql = "{CALL TienTraPhongTre(?,?,?)}";
         String[] cols = {"TienPhongTre"};

@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -17,21 +18,19 @@ public class ChiTietPhongVaDichVu {
     int SoTang;
     String TenDV;
     double PhiDV;
-    Date ThoiGianBD;
-    Date ThoiDiemDatPhong;
-    Date ThoiDiemTraPhong;
+    Timestamp ThoiGianBD;
+    int maDV;
 
     public ChiTietPhongVaDichVu() {
     }
 
-    public ChiTietPhongVaDichVu(String MaPhong, int SoTang, String TenDV, double PhiDV, Date ThoiGianBD, Date ThoiDiemDatPhong, Date ThoiDiemTraPhong) {
+    public ChiTietPhongVaDichVu(String MaPhong, int SoTang, String TenDV, double PhiDV, Timestamp ThoiGianBD, int maDV) {
         this.MaPhong = MaPhong;
         this.SoTang = SoTang;
         this.TenDV = TenDV;
         this.PhiDV = PhiDV;
         this.ThoiGianBD = ThoiGianBD;
-        this.ThoiDiemDatPhong = ThoiDiemDatPhong;
-        this.ThoiDiemTraPhong = ThoiDiemTraPhong;
+        this.maDV = maDV;
     }
 
     public String getMaPhong() {
@@ -66,28 +65,20 @@ public class ChiTietPhongVaDichVu {
         this.PhiDV = PhiDV;
     }
 
-    public Date getThoiGianBD() {
+    public Timestamp getThoiGianBD() {
         return ThoiGianBD;
     }
 
-    public void setThoiGianBD(Date ThoiGianBD) {
+    public void setThoiGianBD(Timestamp ThoiGianBD) {
         this.ThoiGianBD = ThoiGianBD;
     }
 
-    public Date getThoiDiemDatPhong() {
-        return ThoiDiemDatPhong;
+    public int getMaDV() {
+        return maDV;
     }
 
-    public void setThoiDiemDatPhong(Date ThoiDiemDatPhong) {
-        this.ThoiDiemDatPhong = ThoiDiemDatPhong;
-    }
-
-    public Date getThoiDiemTraPhong() {
-        return ThoiDiemTraPhong;
-    }
-
-    public void setThoiDiemTraPhong(Date ThoiDiemTraPhong) {
-        this.ThoiDiemTraPhong = ThoiDiemTraPhong;
+    public void setMaDV(int maDV) {
+        this.maDV = maDV;
     }
 
 }

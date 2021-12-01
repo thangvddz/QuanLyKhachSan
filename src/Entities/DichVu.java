@@ -58,4 +58,9 @@ public class DichVu {
         this.TrangThai = TrangThai;
     }
 
+    @Override
+    public String toString() {
+        return TenDV + " , PhiDV=" + PhiDV;
+    }
+
 }
