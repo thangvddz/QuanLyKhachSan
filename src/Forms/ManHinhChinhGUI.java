@@ -492,8 +492,8 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMousePressed
         // TODO add your handling code here:
-        JPanel lichSuGD = new LichSuGDPanel();
-        SwitchPanel(lichSuGD);
+        JPanel lichsuGD = new LichSuGDPanel();
+        SwitchPanel(lichsuGD);
     }//GEN-LAST:event_btnThongKeMousePressed
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
