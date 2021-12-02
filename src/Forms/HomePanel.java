@@ -238,6 +238,6 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel pnlGhiChu;
-    private javax.swing.JPanel pnlScreen;
+    public static javax.swing.JPanel pnlScreen;
     // End of variables declaration//GEN-END:variables
 }

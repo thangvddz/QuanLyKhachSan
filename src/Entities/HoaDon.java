@@ -132,4 +132,9 @@ public class HoaDon {
         this.TrangThai = TrangThai;
     }
 
+    @Override
+    public String toString() {
+        return "HoaDon{" + "MaHD=" + MaHD + ", MaNV=" + MaNV + ", MaKH=" + MaKH + ", ThoiDiemDatPhong=" + ThoiDiemDatPhong + ", ThoiDiemTraPhong=" + ThoiDiemTraPhong + ", TienTraTruoc=" + TienTraTruoc + ", GiamGia=" + GiamGia + ", PhuThu=" + PhuThu + ", ThanhTien=" + ThanhTien + ", GhiChu=" + GhiChu + ", TrangThai=" + TrangThai + '}';
+    }
+
 }

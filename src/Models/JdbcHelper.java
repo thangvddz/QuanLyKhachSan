@@ -19,7 +19,11 @@ public class JdbcHelper {
 
     static String url = "jdbc:sqlserver://localhost:1433;databasename=DA1_N8_V23";
     static String userName = "sa";
+<<<<<<< HEAD
     static String password = "123";
+=======
+    static String password = "a";
+>>>>>>> f1225f544e5de8400a9e69b3146728161b4f5edf
 
     static {
         try {
