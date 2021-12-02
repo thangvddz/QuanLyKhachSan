@@ -595,13 +595,15 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblKhuyenMai" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="lblTongPhiPhuThu1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="txtTraTruoc" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cboKhuyenMai" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtGiamGia" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblKhuyenMai" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="lblTongPhiPhuThu1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="txtTraTruoc" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="txtGiamGia" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel5" min="-2" pref="24" max="-2" attributes="0"/>

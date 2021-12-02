@@ -385,7 +385,7 @@ IF OBJECT_ID('DichVuDaDung') IS NOT NULL
 GO
 create proc DichVuDaDung @SoTang int, @MaPhong varchar(5)
 as
-	select TenDV,SUM(PhiDV) as TongPhiDV
+	select TenDV,ThoiGianBD,SUM(PhiDV) as TongPhiDV
 	from HOADONCHITIET join YEUCAU on HOADONCHITIET.MaHDCT=YEUCAU.MaHDCT
 	join DICHVU on YEUCAU.MaDV = DICHVU.MaDV 
 	where MaPhong=@MaPhong and SoTang=@SoTang and HOADONCHITIET.TrangThai=0

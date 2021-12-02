@@ -63,6 +63,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     public static String CMT;
     public static KhachHang khachMucTieu;
     List<ChiTietPhongVaDichVu> lsCTPVDV;
+    public static int index_tbl_dvdsd;
 
     public DatTraPhongPanel() {
         initComponents();
@@ -512,15 +513,27 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         ));
         tblChiTietPhongVaDV.setGridColor(new java.awt.Color(255, 255, 255));
-        tblChiTietPhongVaDV.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        tblChiTietPhongVaDV.setRowSelectionAllowed(true);
+        tblChiTietPhongVaDV.setSelectionBackground(new java.awt.Color(0, 102, 204));
+        tblChiTietPhongVaDV.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tblChiTietPhongVaDV.setShowHorizontalLines(false);
         tblChiTietPhongVaDV.setShowVerticalLines(false);
+        tblChiTietPhongVaDV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiTietPhongVaDVMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblChiTietPhongVaDV);
 
         btnXoaCTP.setBackground(new java.awt.Color(102, 102, 255));
         btnXoaCTP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoaCTP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_delete_25px.png"))); // NOI18N
         btnXoaCTP.setText("Xóa dịch vụ");
+        btnXoaCTP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaCTPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -563,11 +576,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         btnThemDV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThemDV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_add_25px.png"))); // NOI18N
         btnThemDV.setText("Thêm dịch vụ");
-        btnThemDV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemDVActionPerformed(evt);
-            }
-        });
+        btnThemDV.setEnabled(false);
 
         txtGioDV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtGioDV.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -631,11 +640,6 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         tblPhongDuocChon.setGridColor(new java.awt.Color(255, 255, 255));
         tblPhongDuocChon.setShowHorizontalLines(false);
         tblPhongDuocChon.setShowVerticalLines(false);
-        tblPhongDuocChon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPhongDuocChonMouseClicked(evt);
-            }
-        });
         jScrollPane4.setViewportView(tblPhongDuocChon);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -737,17 +741,6 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDatPhongActionPerformed
 
-    private void tblPhongDuocChonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongDuocChonMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_tblPhongDuocChonMouseClicked
-
-    private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
-        // TODO add your handling code here:
-        insertHDCT();
-        fillTableCTPhongDV();
-    }//GEN-LAST:event_btnThemDVActionPerformed
-
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
@@ -796,11 +789,21 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             try {
                 addDV();
                 fillTableCTPhongDV();
-                System.out.println("LsDV: " + lsCTPVDV.size());
+                cboDichVu.setSelectedIndex(0);
             } catch (Exception e) {
             }
         }
     }//GEN-LAST:event_cboDichVuItemStateChanged
+
+    private void tblChiTietPhongVaDVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietPhongVaDVMouseClicked
+        // TODO add your handling code here:
+        index_tbl_dvdsd = tblChiTietPhongVaDV.getSelectedRow();
+    }//GEN-LAST:event_tblChiTietPhongVaDVMouseClicked
+
+    private void btnXoaCTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTPActionPerformed
+        // TODO add your handling code here:
+        deleteDV();
+    }//GEN-LAST:event_btnXoaCTPActionPerformed
 
     public void init() {
         khachHangDAO = new KhachHangDAO();
@@ -813,6 +816,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         khachMucTieu = new KhachHang();
         lsgddao = new LichSuGDDAO();
         numSelected = 0;
+        index_tbl_dvdsd = -1;
         maPhong = MapRoom.posPhong;
         soTang = MapRoom.posTang;
         CMT = "";
@@ -827,6 +831,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         fillComboboxKhachHangCu();
         fillKhachHangField();
         fillTablePhongDaThue();
+        fillLsCTPVDV();
+        fillTableCTPhongDV();
         if (MapRoom.maKH == 0) {
             xTime.setTimeNow(txtGioCheckIn, txtPhutCheckIn);
         }
@@ -925,7 +931,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void updateKhachHang() {
-        khachHangDAO.update(new KhachHang(MapRoom.maKH, CMT, txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
+        khachHangDAO.update(new KhachHang(MapRoom.maKH, txtSoCMT.getText(), txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
     }
 
     public void insertHoaDon() {
@@ -1148,12 +1154,15 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void fillLsCTPVDV() {
-        List<HoaDonChiTiet> lshdct = hoaDonChiTietDAO.selectAllARoom(false, soTang, maPhong);
-        for (HoaDonChiTiet hoaDonChiTiet : lshdct) {
-            YeuCau yc = yeuCauDAO.selectAllMAHDCT(hoaDonChiTiet.getMaCTHD());
-            DichVu dv = dichVuDAO.selectById(yc.getMaDV());
-            ChiTietPhongVaDichVu ct = new ChiTietPhongVaDichVu(maPhong, soTang, dv.getTenDV(), dv.getPhiDV(), yc.getThoiGianBDSD(), yc.getMaDV());
-            lsCTPVDV.add(ct);
+        try {
+            List<YeuCau> lsyc = yeuCauDAO.selectAllMAHDCT(false, maPhong, soTang);
+            for (YeuCau yeuCau : lsyc) {
+                DichVu dv = dichVuDAO.selectById(yeuCau.getMaDV());
+                ChiTietPhongVaDichVu ct = new ChiTietPhongVaDichVu(maPhong, soTang, dv.getTenDV(), dv.getPhiDV(), yeuCau.getThoiGianBDSD(), yeuCau.getMaDV());
+                lsCTPVDV.add(ct);
+            }
+        } catch (Exception e) {
+            System.out.println("Chua yeu cau dich vu");
         }
     }
 
@@ -1168,6 +1177,31 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             hoaDonChiTietDAO.insert(new HoaDonChiTiet(-1, MaHD, maPhong, soTang, xDate.toDate(xDate.timeNow(), "dd-MM-yyyy"), false));
             int maHDCT = hoaDonChiTietDAO.selectByNewID(MaHD, false).getMaCTHD();
             yeuCauDAO.insert(new YeuCau(dv.getMaDV(), maHDCT, xTime.getTimeStamp(jdcThoiGianSDDV, gioDV, phutDV), false));
+            ChiTietPhongVaDichVu ct = new ChiTietPhongVaDichVu(maPhong, soTang, dv.getTenDV(), dv.getPhiDV(), xTime.getTimeStamp(jdcThoiGianSDDV, gioDV, phutDV), dv.getMaDV());
+            lsCTPVDV.add(ct);
+            fillTableCTPhongDV();
+            mgsBox.alert(this, "Thêm dịch vụ thành công nha...");
+        }
+    }
+
+    public void deleteDV() {
+        if (mgsBox.confirm(this, "Bạn có chắc muốn xóa dịch vụ này không ?")) {
+            if (index_tbl_dvdsd != -1) {
+                try {
+                    List<HoaDonChiTiet> lshdct = hoaDonChiTietDAO.selectListDVDSD(false, soTang, maPhong);
+                    int mahdct = lshdct.get(index_tbl_dvdsd).getMaCTHD();
+                    yeuCauDAO.delete(mahdct);
+                    hoaDonChiTietDAO.delete(mahdct);
+                    lsCTPVDV.remove(index_tbl_dvdsd);
+                    fillTableCTPhongDV();
+                    mgsBox.alert(this, "Xóa thành công dịch vụ");
+                    index_tbl_dvdsd = -1;
+                } catch (Exception e) {
+
+                }
+            } else {
+                mgsBox.alert(this, "Vui lòng chọn dịch vụ trên bảng rồi mới nhấn xóa.");
+            }
         }
     }
 
@@ -1185,6 +1219,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
+            System.out.println("thue dau tien");
+            e.printStackTrace();
         }
     }
 

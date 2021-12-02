@@ -6,6 +6,7 @@
 package Utils;
 
 import Entities.HoaDonChiTiet;
+import Entities.LichSuGD;
 import Entities.Phong;
 import Forms.HomePanel;
 import Forms.ManHinhChinhGUI;
@@ -14,6 +15,7 @@ import Forms.QuanLyPhongPanel;
 import Models.HoaDonChiTietDAO;
 import Models.HoaDonDAO;
 import Models.KhachHangDAO;
+import Models.LichSuGDDAO;
 import Models.PhongDAO;
 import Models.TangDAO;
 import Models.TrangThaiDAO;
@@ -28,6 +30,8 @@ import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -49,6 +53,7 @@ public class MapRoom {
     public static Border outline = BorderFactory.createLineBorder(Color.BLACK);
     public static PhongDAO dao = new PhongDAO();
     public static HoaDonChiTietDAO daohdct = new HoaDonChiTietDAO();
+    public static LichSuGDDAO lsgddao = new LichSuGDDAO();
     public static KhachHangDAO daokh = new KhachHangDAO();
     public static HoaDonDAO daohd = new HoaDonDAO();
     public static TangDAO tangDAO = new TangDAO();
@@ -89,6 +94,19 @@ public class MapRoom {
                 try {
                     int numStatus = dao.RoomCodePerFloor(floors + 1).get(i).getMaTT();
                     String numRoom = dao.RoomCodePerFloor(floors + 1).get(i).getMaPhong();
+                    String hinhThuc = "";
+                    String strDateCheckIn = "";
+                    String strDateCheckOut = "";
+                    try {
+                        int maHDCT = daohdct.selectByNewIDReserve(false, floors + 1, numRoom).getMaCTHD();
+                        List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
+                        hinhThuc = ls.get(ls.size() - 1).isTrangThai() ? "Thuê Theo giờ" : "Thuê theo ngày";
+                        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                        strDateCheckIn = "NGày check-In: "+dateFormat.format(ls.get(ls.size() - 1).getThoiGianBD());
+                        strDateCheckOut = "NGày check-Out: "+dateFormat.format(ls.get(0).getThoiGianKT());
+                    } catch (Exception e) {
+
+                    }
 
                     String tenKH = "";
                     HoaDonChiTiet mahd = null;
@@ -106,7 +124,13 @@ public class MapRoom {
                         maKH = 0;
                     }
 
-                    String info = "<html><center><h4>" + numRoom + "</h4></center><br>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "<br><br><center><h3>" + tenKH + "</h3></center>" + "</html>";
+                    String info = "<html><center><h4>" + numRoom + "</h4></center><br>"
+                            + "<center>"+ trangThaiDao.selectById(numStatus).getTenTrangThai() + "</center>"
+                            + "<center><h3>" + tenKH + "</h3></center>"
+                            + "<center>" + hinhThuc + "</center>"
+                            + "<center>" + strDateCheckIn + "</center>"
+                            + "<center>" + strDateCheckOut + "</center>"
+                            + "</html>";
                     posStatus = numStatus;
                     tang.add(addRoomToFloor(floors, ac, info, numStatus, numRoom));
                 } catch (Exception e) {

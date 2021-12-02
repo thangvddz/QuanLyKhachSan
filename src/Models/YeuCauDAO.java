@@ -22,9 +22,10 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
     private static final String SQL_INSERT = "INSERT INTO YEUCAU(MaDV, MaHDCT, ThoiGianBD, TrangThai) VALUES (?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE YEUCAU SET MaDV=?, ThoiGianBD=?, TrangThai=? WHERE MaHDCT=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM YEUCAU";
-    private static final String SQL_SELECT_BY_ID = "SELECT * FROM YEUCAU WHERE MaDV=?, MaHDCT=?";
-    private static final String SQL_SELECT_MAHDCT = "SELECT * FROM YEUCAU WHERE MaHDCT=?";
-    private static final String SQL_DELETE = "DELETE FROM YEUCAU WHERE MaDV=?, MaHDCT=?";
+    private static final String SQL_SELECT_YC_BY_HDCT = "select YEUCAU.* from HOADONCHITIET left outer join YEUCAU on HOADONCHITIET.MaHDCT = YEUCAU.MaHDCT \n"
+            + "where HOADONCHITIET.TrangThai=? and MaPhong=? and SoTang=? and YEUCAU.MaDV is not null";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM YEUCAU WHERE MaDV=? and MaHDCT=?";
+    private static final String SQL_DELETE = "DELETE FROM YEUCAU WHERE MaHDCT=?";
 
     JdbcHelper jdbc;
 
@@ -57,8 +58,8 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
         return selectBySql(SQL_SELECT_ALL);
     }
 
-    public YeuCau selectAllMAHDCT(int maHDCT) {
-        return selectBySql(SQL_SELECT_MAHDCT, maHDCT).get(0);
+    public List<YeuCau> selectAllMAHDCT(boolean trangThai, String MaPhong, int soTang) {
+        return selectBySql(SQL_SELECT_YC_BY_HDCT, trangThai, MaPhong, soTang);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class YeuCauDAO extends DAO<YeuCau, Object> {
 
     public List<Object[]> getDichVuDaDung(int soTang, String maPhong) {
         String sql = "{CALL DichVuDaDung(?,?)}";
-        String[] cols = {"TenDV", "TongPhiDV"};
+        String[] cols = {"TenDV", "ThoiGianBD", "TongPhiDV"};
         return this.getListOfArray(sql, cols, soTang, maPhong);
     }
 

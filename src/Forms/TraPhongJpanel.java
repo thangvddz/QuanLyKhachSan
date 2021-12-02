@@ -551,13 +551,14 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                         .addGap(5, 5, 5)
                         .addComponent(cboPhiDVNgayLe)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTongPhiPhuThu1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTraTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboKhuyenMai)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTongPhiPhuThu1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTraTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -989,7 +990,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         List<Object[]> ls = yeuCauDAO.getDichVuDaDung(MapRoom.posTang, MapRoom.posPhong);
         for (int i = 0; i < ls.size(); i++) {
             Object[] dv = ls.get(i);
-            sumMoneyService += Double.parseDouble(dv[1].toString());
+            sumMoneyService += Double.parseDouble(dv[2].toString());
         }
         txtTongTienDichVu.setText(String.valueOf(sumMoneyService));
     }
@@ -1011,6 +1012,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         try {
             HoaDonChiTiet hdct = hoaDonChiTietDAO.selectByNewID(hd.getMaHD(), false);
         } catch (Exception e) {
+            System.out.println("Hóa đơn cuối rồi");
             e.printStackTrace();
             hoaDonDAO.updateTT(true, hd.getMaHD());
         }
