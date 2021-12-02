@@ -23,9 +23,12 @@ import Models.LichSuGDDAO;
 import Models.LoaiPhongDAO;
 import Models.PhongDAO;
 import Models.YeuCauDAO;
+import Utils.Auth;
 import Utils.MapRoom;
+import Utils.checkText;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xMoney;
 import Utils.xTime;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -180,6 +183,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtGioCheckIn.setToolTipText("");
         txtGioCheckIn.setPreferredSize(new java.awt.Dimension(68, 27));
 
+        txtGioCheckOut.setEditable(false);
         txtGioCheckOut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtGioCheckOut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtGioCheckOut.setPreferredSize(new java.awt.Dimension(68, 27));
@@ -239,6 +243,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText(":");
 
+        txtPhutCheckOut.setEditable(false);
         txtPhutCheckOut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtPhutCheckOut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -513,7 +518,6 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         ));
         tblChiTietPhongVaDV.setGridColor(new java.awt.Color(255, 255, 255));
-        tblChiTietPhongVaDV.setRowSelectionAllowed(true);
         tblChiTietPhongVaDV.setSelectionBackground(new java.awt.Color(0, 102, 204));
         tblChiTietPhongVaDV.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tblChiTietPhongVaDV.setShowHorizontalLines(false);
@@ -843,14 +847,15 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         //phong khong co nguoi thue makh = 0
         if (MapRoom.maKH == 0) {
             if (checkHinhThuc()) {
-
-                insertKhachHang();
-                insertHoaDon();
-                insertHDCT();
-                insertLSGD();
-                mgsBox.alert(this, "Đặt phòng thành công !!!");
-                DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
-                frame.dispose();
+                if (checkThongTinKhachNhapVao()) {
+                    insertKhachHang();
+                    insertHoaDon();
+                    insertHDCT();
+                    insertLSGD();
+                    mgsBox.alert(this, "Đặt phòng thành công !!!");
+                    DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+                    frame.dispose();
+                }
             } else {
                 mgsBox.alert(this, "Vui lòng chọn hình thức thuê");
             }
@@ -903,6 +908,39 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     }
 
+    public boolean checkThongTinKhachNhapVao() {
+        if (checkText.issEmpty(txtTenKhachHang.getText())) {
+            mgsBox.alert(this, "Tên khách hàng không được để trống");
+        } else {
+            if (checkText.CheckNumChar(txtSoCMT.getText(), 15)) {
+                if (checkText.isPhoneNumber(txtSoDT.getText().trim())) {
+                    if (checkText.isValidEmailAddress(txtEmail.getText().trim()) || txtEmail.getText().trim().equals("")) {
+                        if (checkText.issNum(txtPhiPhuThu.getText())) {
+                            if (checkText.issNum(txtGiamGia.getText())) {
+                                if (checkText.issNum(txtTraTruoc.getText())) {
+                                    return true;
+                                } else {
+                                    mgsBox.alert(this, "Phí Trả trước phải nhập số");
+                                }
+                            } else {
+                                mgsBox.alert(this, "Phí giảm giá phải nhập số");
+                            }
+                        } else {
+                            mgsBox.alert(this, "Phí phụ thu phải nhập số");
+                        }
+                    } else {
+                        mgsBox.alert(this, "Địa chỉ Email không đúng định dạng");
+                    }
+                } else {
+                    mgsBox.alert(this, "Số điện thoại không đúng định dạng");
+                }
+            } else {
+                mgsBox.alert(this, "Số chứng minh thư không quá 15 ký tự");
+            }
+        }
+        return false;
+    }
+
     public void TraPhong() {
 
         if (MapRoom.maKH != 0) {
@@ -940,12 +978,40 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         int hoursChkOut = Integer.parseInt(txtGioCheckOut.getText());
         int minutesChkOut = Integer.parseInt(txtPhutCheckOut.getText());
         try {
-            hoaDonDAO.insert(new HoaDon(-1, "NV01", MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
-                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), Double.parseDouble(txtTraTruoc.getText()),
-                    Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
+            if (jdcCheckOut.getDate() != null) {
+                hoaDonDAO.insert(new HoaDon(-1, Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
+                        xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), Double.parseDouble(txtTraTruoc.getText()),
+                        Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
+            } else {
+                hoaDonDAO.insert(new HoaDon(-1, Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
+                        null, Double.parseDouble(txtTraTruoc.getText()),
+                        Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateHoaDon() {
+        int hoursChkIn = Integer.parseInt(txtGioCheckIn.getText());
+        int minutesChkIn = Integer.parseInt(txtPhutCheckIn.getText());
+        int hoursChkOut = Integer.parseInt(txtGioCheckOut.getText());
+        int minutesChkOut = Integer.parseInt(txtPhutCheckOut.getText());
+        HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
+        if (jdcCheckOut.getDate() != null) {
+            hoaDonDAO.update(new HoaDon(hd.getMaHD(), Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
+                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), 
+                    xMoney.VNDongToDouble(txtTraTruoc.getText()),
+                    xMoney.VNDongToDouble(txtGiamGia.getText()), 
+                    xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
+        } else {
+            hoaDonDAO.update(new HoaDon(hd.getMaHD(), Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
+                    null, 
+                    xMoney.VNDongToDouble(txtTraTruoc.getText()),
+                    xMoney.VNDongToDouble(txtGiamGia.getText()), 
+                    xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
+        }
+
     }
 
     public void insertHDCT() {
@@ -963,9 +1029,17 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         try {
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             // trang thai true thue theo ngay false thue theo gio
-            lsgddao.insert(new LichSuGD(-1, maHDCT,
-                    xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
-                    xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? false : true));
+            if (jdcCheckOut.getDate() != null) {
+                lsgddao.insert(new LichSuGD(-1, maHDCT,
+                        xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
+                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? false : true));
+            } else {
+                lsgddao.insert(new LichSuGD(-1, maHDCT,
+                        xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
+                        null,
+                        chkThueTheoNgay.isSelected() ? false : true));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -973,6 +1047,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     public void updateLSGD() {
         updateKhachHang();
+        updateHoaDon();
         Timestamp localDate = new Timestamp(System.currentTimeMillis());
         jdcCheckOut.setDate(localDate);
         xTime.getTimeFromDatabase(localDate, txtGioCheckOut, txtPhutCheckOut);
@@ -1053,9 +1128,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
             jdcCheckIn.setDate(ls.get(ls.size() - 1).getThoiGianBD());
             xTime.getTimeFromDatabase(ls.get(ls.size() - 1).getThoiGianBD(), txtGioCheckIn, txtPhutCheckIn);
-            jdcCheckOut.setDate(ls.get(0).getThoiGianKT());
-            xTime.getTimeFromDatabase(ls.get(0).getThoiGianKT(), txtGioCheckOut, txtPhutCheckOut);
-            txtTraTruoc.setText(String.valueOf(hd.getTienTraTruoc()));
+            if (ls.get(0).getThoiGianKT() != null) {
+                jdcCheckOut.setDate(ls.get(0).getThoiGianKT());
+                xTime.getTimeFromDatabase(ls.get(0).getThoiGianKT(), txtGioCheckOut, txtPhutCheckOut);
+            }
+
             try {
 
                 if (ls.get(0).isTrangThai()) {
@@ -1067,8 +1144,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 e.printStackTrace();
                 chkThueTheoNgay.setSelected(true);
             }
-            txtPhiPhuThu.setText(String.valueOf(hd.getPhuThu()));
-            txtGiamGia.setText(String.valueOf(hd.getGiamGia()));
+            txtTraTruoc.setText(xMoney.doubleToVNDong(hd.getTienTraTruoc()));
+            txtPhiPhuThu.setText(xMoney.doubleToVNDong(hd.getPhuThu()));
+            txtGiamGia.setText(xMoney.doubleToVNDong(hd.getGiamGia()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1092,7 +1170,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         if (lsPhong != null) {
             model.addRow(new Object[]{
-                lsPhong.getSoTang(), lsPhong.getMaPhong(), lp.getTenLP(), lp.getSoGiuong(), lp.getGiaNgay(), lp.getGiaGio()
+                lsPhong.getSoTang(), lsPhong.getMaPhong(), lp.getTenLP(), lp.getSoGiuong(), xMoney.doubleToVNDong(lp.getGiaNgay()), xMoney.doubleToVNDong(lp.getGiaGio())
             });
         }
     }
@@ -1144,7 +1222,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     chiTietPhongVaDichVu.getMaPhong(),
                     chiTietPhongVaDichVu.getSoTang(),
                     chiTietPhongVaDichVu.getTenDV(),
-                    chiTietPhongVaDichVu.getPhiDV(),
+                    xMoney.doubleToVNDong(chiTietPhongVaDichVu.getPhiDV()),
                     chiTietPhongVaDichVu.getThoiGianBD()
                 });
             }

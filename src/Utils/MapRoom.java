@@ -102,8 +102,13 @@ public class MapRoom {
                         List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
                         hinhThuc = ls.get(ls.size() - 1).isTrangThai() ? "Thuê Theo giờ" : "Thuê theo ngày";
                         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-                        strDateCheckIn = "NGày check-In: "+dateFormat.format(ls.get(ls.size() - 1).getThoiGianBD());
-                        strDateCheckOut = "NGày check-Out: "+dateFormat.format(ls.get(0).getThoiGianKT());
+                        strDateCheckIn = "NGày check-In: " + dateFormat.format(ls.get(ls.size() - 1).getThoiGianBD());
+                        if (ls.get(0).getThoiGianKT() != null) {
+                            strDateCheckOut = "NGày check-Out: " + dateFormat.format(ls.get(0).getThoiGianKT());
+                        }else{
+                            strDateCheckOut = "NGày check-Out: Chưa biết ngày nào ra";
+                        }
+
                     } catch (Exception e) {
 
                     }
@@ -125,7 +130,7 @@ public class MapRoom {
                     }
 
                     String info = "<html><center><h4>" + numRoom + "</h4></center><br>"
-                            + "<center>"+ trangThaiDao.selectById(numStatus).getTenTrangThai() + "</center>"
+                            + "<center>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "</center>"
                             + "<center><h3>" + tenKH + "</h3></center>"
                             + "<center>" + hinhThuc + "</center>"
                             + "<center>" + strDateCheckIn + "</center>"

@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/DichVuPanel.java</file>
             <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/DichVuDAO.java</file>
@@ -11,5 +12,8 @@
             <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/ThongKeDAO.java</file>
             <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/NhanVienJPanel.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 7152c71b53c7318c31e2c0b5b66baff42bc01542
     </open-files>
 </project-private>
