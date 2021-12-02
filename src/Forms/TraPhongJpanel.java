@@ -842,8 +842,14 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
         jdcCheckIn.setDate(hd.getThoiDiemDatPhong());
         xTime.getTimeFromDatabase(hd.getThoiDiemDatPhong(), txtGioCheckIn, txtPhutCheckIn);
-        jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
-        xTime.getTimeFromDatabase(hd.getThoiDiemTraPhong(), txtGioCheckOut, txtPhutCheckOut);
+        if (hd.getThoiDiemTraPhong() != null) {
+            jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
+            xTime.getTimeFromDatabase(hd.getThoiDiemTraPhong(), txtGioCheckOut, txtPhutCheckOut);
+        } else {
+            Timestamp localDate = new Timestamp(System.currentTimeMillis());
+            jdcCheckOut.setDate(localDate);
+            xTime.getTimeFromDatabase(localDate, txtGioCheckOut, txtPhutCheckOut);
+        }
         txtTraTruoc.setText(String.valueOf(hd.getTienTraTruoc()));
         try {
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
@@ -968,7 +974,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             }
             if (sumMinute > 30) {
                 sumHour++;
-            } else if (sumMinute > 15) {
+            } else if (sumMinute > 5) {
                 sumHour += 0.5;
             }
 
@@ -1021,12 +1027,12 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         frame.dispose();
     }
 
-    public void themTongTien(HoaDon hd){
+    public void themTongTien(HoaDon hd) {
         double tongTienDatabase = hd.getThanhTien();
-        double tongTienHT = tongTienDatabase + sumMoneyHavePay; 
+        double tongTienHT = tongTienDatabase + sumMoneyHavePay;
         hoaDonDAO.updateTongTien(tongTienHT, hd.getMaHD());
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuyBo;
     private javax.swing.JButton btnInHoaDon;
