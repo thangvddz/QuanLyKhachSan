@@ -112,6 +112,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtPhutCheckIn = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtPhutCheckOut = new javax.swing.JTextField();
+        lblEmail1 = new javax.swing.JLabel();
+        cboKhachHangCu = new javax.swing.JComboBox<>();
         jPanel9 = new javax.swing.JPanel();
         lblSoPhongDaThue = new javax.swing.JLabel();
         txtSoPhongDaThue = new javax.swing.JTextField();
@@ -207,7 +209,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         lblEmail.setText("Email");
 
         lblQuocTich.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblQuocTich.setText("Quốc tịch");
+        lblQuocTich.setText("Khách hàng:");
 
         lblGioiTinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblGioiTinh.setText("Giới tính");
@@ -242,6 +244,15 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtPhutCheckOut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtPhutCheckOut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        lblEmail1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblEmail1.setText("Quốc tịch");
+
+        cboKhachHangCu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboKhachHangCuItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -249,6 +260,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtQuocTich))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -316,7 +331,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lblQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cboKhachHangCu, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(65, 65, 65))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -339,12 +354,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(txtPhutCheckOut))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboKhachHangCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSoCMT, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,7 +390,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(62, 62, 62))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -385,7 +403,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         lblSoPhongDaThue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSoPhongDaThue.setText("Số phòng đã thuê");
 
-        txtSoPhongDaThue.setText("2");
+        txtSoPhongDaThue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSoPhongDaThue.setText("0");
 
         txtTraTruoc.setText("0");
 
@@ -437,7 +456,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(chkThueTheoGio))
                             .addComponent(txtTraTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSoPhongDaThue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSoPhongDaThue, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 43, Short.MAX_VALUE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -711,7 +730,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed
         // TODO add your handling code here:
-        DatPhong();
+        if (mgsBox.confirm(this, "Bạn có chắc muốn lưu phòng")) {
+            DatPhong();
+        }
     }//GEN-LAST:event_btnDatPhongActionPerformed
 
     private void tblPhongDuocChonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhongDuocChonMouseClicked
@@ -751,8 +772,21 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     private void btnTraPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraPhongActionPerformed
         // TODO add your handling code here:
-        TraPhong();
+        if (mgsBox.confirm(this, "Bạn có chắc muốn trả phòng?")) {
+            TraPhong();
+        }
     }//GEN-LAST:event_btnTraPhongActionPerformed
+
+    private void cboKhachHangCuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboKhachHangCuItemStateChanged
+        // TODO add your handling code here:
+        try {
+            KhachHang kh = (KhachHang) cboKhachHangCu.getSelectedItem();
+            clearForm();
+            fillForm(kh);
+        } catch (Exception e) {
+            clearForm();
+        }
+    }//GEN-LAST:event_cboKhachHangCuItemStateChanged
 
     public void init() {
         khachHangDAO = new KhachHangDAO();
@@ -775,7 +809,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         fillTableChonPhong();
         fillGioiTinh();
         fillComboboxDichVu();
-
+        fillComboboxKhachHangCu();
         fillKhachHangField();
         fillTablePhongDaThue();
         fillTableCTPhongDV();
@@ -821,8 +855,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         mgsBox.alert(this, "Chuyển đổi ngày sang giờ thất bại vì quá thời gian cho phép đổi.");
                     }
                 }
-            }
-            else if (ls.get(0).isTrangThai() == true) {
+            } else if (ls.get(0).isTrangThai() == true) {
                 if (chkThueTheoGio.isSelected()) {
                     // khong oo su thay doi
                     updateLSGD();
@@ -851,10 +884,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void TraPhong() {
-        TraPhongJframe traPhongJframe = new TraPhongJframe(MapRoom.maKH);
-        traPhongJframe.setVisible(true);
-        DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
-        frame.dispose();
+
+        if (MapRoom.maKH != 0) {
+            updateLSGD();
+            TraPhongJframe traPhongJframe = new TraPhongJframe(MapRoom.maKH);
+            traPhongJframe.setVisible(true);
+            DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            mgsBox.alert(this, "Phòng này đã có ai thuê đâu mà trả phòng. nhấn ok đi");
+        }
     }
 
     public void insertKhachHang() {
@@ -863,11 +902,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             try {
                 khachMucTieu = khachHangDAO.selectMaKHNew(CMT);
                 MapRoom.maKH = khachMucTieu.getMaKH();
+                khachHangDAO.update(new KhachHang(MapRoom.maKH, CMT, txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
             } catch (Exception e) {
                 khachHangDAO.insert(new KhachHang(-1, CMT, txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
                 MapRoom.maKH = khachHangDAO.selectMaKHNew(txtSoCMT.getText()).getMaKH();
             }
         }
+    }
+
+    public void updateKhachHang() {
+        khachHangDAO.update(new KhachHang(MapRoom.maKH, CMT, txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
     }
 
     public void insertHoaDon() {
@@ -876,8 +920,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         int hoursChkOut = Integer.parseInt(txtGioCheckOut.getText());
         int minutesChkOut = Integer.parseInt(txtPhutCheckOut.getText());
         try {
-            hoaDonDAO.insert(new HoaDon(-1, "NV01", MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn), 
-                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), Double.parseDouble(txtTraTruoc.getText()), 
+            hoaDonDAO.insert(new HoaDon(-1, "NV01", MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
+                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), Double.parseDouble(txtTraTruoc.getText()),
                     Double.parseDouble(txtGiamGia.getText()), Double.parseDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         } catch (Exception e) {
             e.printStackTrace();
@@ -913,6 +957,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void updateLSGD() {
+        updateKhachHang();
         Timestamp localDate = new Timestamp(System.currentTimeMillis());
         jdcCheckOut.setDate(localDate);
         xTime.getTimeFromDatabase(localDate, txtGioCheckOut, txtPhutCheckOut);
@@ -931,7 +976,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
         Object[] lss = lsgddao.checkOverCheckOut(localDate, hd.getThoiDiemTraPhong(), hd.getMaHD()).get(0);
         jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
@@ -973,6 +1018,23 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
     }
 
+    public void fillComboboxKhachHangCu() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhachHangCu.getModel();
+        model.removeAllElements();
+        model.addElement("none");
+        try {
+            List<HoaDon> lsHD = hoaDonDAO.selectHD_TT_false(false);
+
+            for (HoaDon hoaDon : lsHD) {
+                System.out.println(hoaDon);
+                KhachHang kh = khachHangDAO.selectById(hoaDon.getMaKH());
+                model.addElement(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void fillKhachHangField() {
         int makh = MapRoom.maKH;
         if (makh != 0) {
@@ -983,27 +1045,32 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void fillHoaDonField(int maKH) {
-
-        HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
-        jdcCheckIn.setDate(hd.getThoiDiemDatPhong());
-        xTime.getTimeFromDatabase(hd.getThoiDiemDatPhong(), txtGioCheckIn, txtPhutCheckIn);
-        jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
-        xTime.getTimeFromDatabase(hd.getThoiDiemTraPhong(), txtGioCheckOut, txtPhutCheckOut);
-        txtTraTruoc.setText(String.valueOf(hd.getTienTraTruoc()));
         try {
+
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
-            if (ls.get(0).isTrangThai()) {
-                chkThueTheoGio.setSelected(true);
-            } else {
+            HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
+            jdcCheckIn.setDate(ls.get(ls.size() - 1).getThoiGianBD());
+            xTime.getTimeFromDatabase(ls.get(ls.size() - 1).getThoiGianBD(), txtGioCheckIn, txtPhutCheckIn);
+            jdcCheckOut.setDate(ls.get(0).getThoiGianKT());
+            xTime.getTimeFromDatabase(ls.get(0).getThoiGianKT(), txtGioCheckOut, txtPhutCheckOut);
+            txtTraTruoc.setText(String.valueOf(hd.getTienTraTruoc()));
+            try {
+
+                if (ls.get(0).isTrangThai()) {
+                    chkThueTheoGio.setSelected(true);
+                } else {
+                    chkThueTheoNgay.setSelected(true);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 chkThueTheoNgay.setSelected(true);
             }
+            txtPhiPhuThu.setText(String.valueOf(hd.getPhuThu()));
+            txtGiamGia.setText(String.valueOf(hd.getGiamGia()));
         } catch (Exception e) {
             e.printStackTrace();
-            chkThueTheoNgay.setSelected(true);
         }
-        txtPhiPhuThu.setText(String.valueOf(hd.getPhuThu()));
-        txtGiamGia.setText(String.valueOf(hd.getGiamGia()));
     }
 
     public void clearForm() {
@@ -1034,8 +1101,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         List<DichVu> lsDichVu = dichVuDAO.selectAll();
         model.removeAllElements();
         model.addElement("none");
-        for (DichVu dichVu : lsDichVu) {
-            model.addElement(dichVu.getTenDV() + ", Phi: " + dichVu.getPhiDV());
+        try {
+            for (DichVu dichVu : lsDichVu) {
+                model.addElement(dichVu.getTenDV() + ", Phi: " + dichVu.getPhiDV());
+            }
+        } catch (Exception e) {
         }
         xTime.setTimeNow(txtGioDV, txtPhutDV);
         Date localDate = new Date(System.currentTimeMillis());
@@ -1100,6 +1170,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnXoaCTP;
     private javax.swing.JComboBox<String> cboDichVu;
     private javax.swing.JComboBox<String> cboGioiTinh;
+    private javax.swing.JComboBox<String> cboKhachHangCu;
     private javax.swing.JCheckBox chkThueTheoGio;
     private javax.swing.JCheckBox chkThueTheoNgay;
     private javax.swing.ButtonGroup gbtHinhThucThue;
@@ -1125,6 +1196,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jdcThoiGianSDDV;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmail1;
     private javax.swing.JLabel lblGiamGia;
     private javax.swing.JLabel lblGioiTinh;
     private javax.swing.JLabel lblHinhThucThue;

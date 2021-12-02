@@ -10,7 +10,6 @@ import Entities.Phong;
 import Entities.Tang;
 import Entities.TrangThai;
 import static Forms.QuanLyPhongPanel.gbc;
-import static Forms.QuanLyPhongPanel.pnlMainScreen;
 import Models.LoaiPhongDAO;
 import Models.PhongDAO;
 import Models.TangDAO;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import static Forms.QuanLyPhongPanel.pnlQuanLyPhong;
 
 /**
  *
@@ -80,7 +80,8 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTang.setText("Tầng");
@@ -139,7 +140,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0};
         jPanel2Layout.rowHeights = new int[] {0};
@@ -182,7 +183,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel2.add(btnZenRoom, gridBagConstraints);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWidths = new int[] {0, 10, 0};
         jPanel3Layout.rowHeights = new int[] {0};
@@ -350,6 +351,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         } else {
             if (mgsBox.confirm(this, "Bạn có chắc muốn xóa phòng đang chọn?")) {
                 delete();
+
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -361,6 +363,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         } else {
             if (mgsBox.confirm(this, "Bạn có chắc muốn Sửa phòng đang chọn?")) {
                 update();
+
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -404,14 +407,23 @@ public class ThemPhongJframe extends javax.swing.JFrame {
     }
 
     public void insert() {
-        int maLp = cboLoaiPhong.getSelectedIndex() + 1;
+        LoaiPhong Lp = (LoaiPhong) cboLoaiPhong.getSelectedItem();
+        System.out.println("jjjj" + Lp);
+        int maLp = Lp.getMaLP();
         int soTang = Integer.parseInt(txtTang.getText());
-        int soTangData = tdao.selectAll().size();
+
+        try {
+            int soTangData = tdao.selectAll().size();
+            if (soTang > soTangData) {
+                tdao.insert(new Tang(soTang, "Tàng này được", true));
+            }
+        } catch (Exception e) {
+            tdao.insert(new Tang(soTang, "Tàng này được", true));
+            e.printStackTrace();
+        }
         int maTT = cboTrangThaiPhong.getSelectedIndex() + 1;
         System.out.println("MaLP:" + maLp + ", so tang:" + soTang + ", matt:" + maTT);
-        if (soTang > soTangData) {
-            tdao.insert(new Tang(soTang, "Tàng này được", true));
-        }
+
         for (int i = 0; i < lsRoom.size(); i++) {
             try {
                 pdao.insert(new Phong(lsRoom.get(i), soTang, maLp, maTT, "welcome to my heart"));
@@ -419,7 +431,7 @@ public class ThemPhongJframe extends javax.swing.JFrame {
                 System.out.println("hhh");
             }
         }
-        MapRoom.updateStatusScreen(pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
+        MapRoom.updateStatusScreen(QuanLyPhongPanel.pnlMainScreen, gbc, new ClickMouse.MouseClikQuanLyPhong());
         this.setVisible(false);
     }
 
@@ -477,13 +489,12 @@ public class ThemPhongJframe extends javax.swing.JFrame {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiPhong.getModel();
         model.removeAllElements();
         List<LoaiPhong> ls = lpdao.selectAll();
-        for (LoaiPhong l : ls) {
-            model.addElement(l);
+        for (int i = 0; i < ls.size(); i++) {
+            model.addElement(ls.get(i));
         }
     }
 
     public void setSoGiuong() {
-
         try {
             LoaiPhong maLP = (LoaiPhong) cboLoaiPhong.getSelectedItem();
             System.out.println("malp:" + maLP.getSoGiuong());

@@ -5,7 +5,9 @@
  */
 package Entities;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -19,21 +21,25 @@ public class LichSuCaLam {
     String TenCaLam;
     double TienVaoDauCa;
     double TienCuoiCa;
-    Timestamp ThoiGianDB;
-    Timestamp ThoiGianKT;
+    Date NgayLam;
+    Time ThoiGianDB;
+    Time ThoiGianKT;
+    double TienMatLucVaoCa;
     String GhiChu;
 
     public LichSuCaLam() {
     }
 
-    public LichSuCaLam(int MaLSCL, String MaNV, String TenCaLam, double TienVaoDauCa, double TienCuoiCa, Timestamp ThoiGianDB, Timestamp ThoiGianKT, String GhiChu) {
+    public LichSuCaLam(int MaLSCL, String MaNV, String TenCaLam, double TienVaoDauCa, double TienCuoiCa, Date NgayLam, Time ThoiGianDB, Time ThoiGianKT, double TienMatLucVaoCa, String GhiChu) {
         this.MaLSCL = MaLSCL;
         this.MaNV = MaNV;
         this.TenCaLam = TenCaLam;
         this.TienVaoDauCa = TienVaoDauCa;
         this.TienCuoiCa = TienCuoiCa;
+        this.NgayLam = NgayLam;
         this.ThoiGianDB = ThoiGianDB;
         this.ThoiGianKT = ThoiGianKT;
+        this.TienMatLucVaoCa = TienMatLucVaoCa;
         this.GhiChu = GhiChu;
     }
 
@@ -77,20 +83,36 @@ public class LichSuCaLam {
         this.TienCuoiCa = TienCuoiCa;
     }
 
-    public Timestamp getThoiGianDB() {
+    public Date getNgayLam() {
+        return NgayLam;
+    }
+
+    public void setNgayLam(Date NgayLam) {
+        this.NgayLam = NgayLam;
+    }
+
+    public Time getThoiGianDB() {
         return ThoiGianDB;
     }
 
-    public void setThoiGianDB(Timestamp ThoiGianDB) {
+    public void setThoiGianDB(Time ThoiGianDB) {
         this.ThoiGianDB = ThoiGianDB;
     }
 
-    public Timestamp getThoiGianKT() {
+    public Time getThoiGianKT() {
         return ThoiGianKT;
     }
 
-    public void setThoiGianKT(Timestamp ThoiGianKT) {
+    public void setThoiGianKT(Time ThoiGianKT) {
         this.ThoiGianKT = ThoiGianKT;
+    }
+
+    public double getTienMatLucVaoCa() {
+        return TienMatLucVaoCa;
+    }
+
+    public void setTienMatLucVaoCa(double TienMatLucVaoCa) {
+        this.TienMatLucVaoCa = TienMatLucVaoCa;
     }
 
     public String getGhiChu() {
@@ -100,5 +122,15 @@ public class LichSuCaLam {
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
     }
+
+    
+
+    
+
+    
+
+    
+
+    
 
 }

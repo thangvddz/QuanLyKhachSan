@@ -5,10 +5,12 @@
  */
 package Utils;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -68,14 +70,27 @@ public class xDate {
         return true;
     }
 
-    public static Timestamp timeNow1() {
+    public static Time timeNow1() {
         Date now = new Date();
-        //System.out.println(now);
+        System.out.println(now);
 
         // chuyển Date sang Timestamp
-        Timestamp timestamp = new Timestamp(now.getTime());
-        //System.out.println(timestamp);
-        return timestamp;
+        Time time = new Time(now.getTime());
+        //System.out.println(time);
+        return time;
 
     }
+    static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
+
+//     lấy thời gian hiện tại
+    public static Date now() {
+        return new Date();
+    }
+    
+    public static String timeNow2() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
 }
