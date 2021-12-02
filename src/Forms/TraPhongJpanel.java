@@ -20,7 +20,10 @@ import Models.PhongDAO;
 import Models.YeuCauDAO;
 import Utils.MapRoom;
 import Utils.mgsBox;
+import Utils.xMoney;
 import Utils.xTime;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -56,9 +59,10 @@ public class TraPhongJpanel extends javax.swing.JPanel {
     public static double tienVaoSom;
     public static double tienPhuThu;
     public static double tienTraTruoc;
+    public static double tienGiamGia;
     public static double tienKhuyenMai;
     public static double tienPhucVuNGayLe;
-
+    
     public TraPhongJpanel(int maKH) {
         initComponents();
         this.maKH = maKH;
@@ -781,7 +785,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_cboKhuyenMaiItemStateChanged
-
+    
     public void init() {
         lichSuGDDAO = new LichSuGDDAO();
         khachHangDAO = new KhachHangDAO();
@@ -801,6 +805,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         tienTraTruoc = 0;
         tienKhuyenMai = 0;
         tienPhucVuNGayLe = 0;
+        tienGiamGia = 0;
         tienPhuThu = 0;
         sumMoneyHavePay = 0;
         KhachHang kh = khachHangDAO.selectById(maKH);
@@ -816,7 +821,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         tinhTienDichVu();
         KhachPhaiTra();
     }
-
+    
     public void fillForm(KhachHang kh) {
         txtSoCMT.setText(kh.getSoCMT());
         txtTenKhachHang.setText(kh.getHoTen());
@@ -831,14 +836,14 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             cboGioiTinh.setSelectedIndex(1);
         }
     }
-
+    
     public void fillTangAndPhong() {
         txtSoTang.setText(String.valueOf(MapRoom.posTang));
         txtSoPhong.setText(String.valueOf(MapRoom.posPhong));
     }
-
+    
     public void fillHoaDonField(int maKH) {
-
+        
         HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
         jdcCheckIn.setDate(hd.getThoiDiemDatPhong());
         xTime.getTimeFromDatabase(hd.getThoiDiemDatPhong(), txtGioCheckIn, txtPhutCheckIn);
@@ -850,7 +855,6 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             jdcCheckOut.setDate(localDate);
             xTime.getTimeFromDatabase(localDate, txtGioCheckOut, txtPhutCheckOut);
         }
-        txtTraTruoc.setText(String.valueOf(hd.getTienTraTruoc()));
         try {
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
@@ -864,18 +868,19 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         }
         tienPhuThu = hd.getPhuThu();
         tienTraTruoc = hd.getTienTraTruoc();
-        txtTraTruoc.setText(String.valueOf(tienTraTruoc));
-        txtPhiPhuThu.setText(String.valueOf(tienPhuThu));
-        txtGiamGia.setText(String.valueOf(hd.getGiamGia()));
+        tienGiamGia = hd.getGiamGia();
+        txtTraTruoc.setText(xMoney.doubleToVNDong(tienTraTruoc));
+        txtPhiPhuThu.setText(xMoney.doubleToVNDong(tienPhuThu));
+        txtGiamGia.setText(xMoney.doubleToVNDong(tienGiamGia));
     }
-
+    
     public void fillGioiTinh() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboGioiTinh.getModel();
         model.removeAllElements();
         model.addElement("Nam");
         model.addElement("Nữ");
     }
-
+    
     public void fillPhiDVNgayLe() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhiDVNgayLe.getModel();
         model.removeAllElements();
@@ -885,7 +890,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         model.addElement("30%");
         model.addElement("50%");
     }
-
+    
     public void fillPhiKhuyenMai() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhuyenMai.getModel();
         model.removeAllElements();
@@ -895,7 +900,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         model.addElement("30%");
         model.addElement("50%");
     }
-
+    
     public void fillTableThongTinPhong() {
         DefaultTableModel model = (DefaultTableModel) tblThongTinPhong.getModel();
         model.setRowCount(0);
@@ -924,29 +929,33 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                 l.getThoiGianBD(),
                 l.getThoiGianKT(),
                 l.isTrangThai() ? "Giờ" : "Ngày",
-                l.isTrangThai() ? giaGio : giaNgay,
+                l.isTrangThai() ? xMoney.doubleToVNDong(giaGio) : xMoney.doubleToVNDong(giaNgay),
                 donVi,
                 TenLoaiPhong
             });
         }
     }
-
+    
     public void fillTableThongTinDV() {
         DefaultTableModel model = (DefaultTableModel) tblTongTienDichVu.getModel();
         model.setRowCount(0);
         List<Object[]> ls = yeuCauDAO.getDichVuDaDung(MapRoom.posTang, MapRoom.posPhong);
         for (Object[] l : ls) {
-            model.addRow(l);
+            BigDecimal bd = (BigDecimal) l[2]; // the value you get
+            double d = bd.doubleValue();
+            model.addRow(new Object[]{
+                l[0], l[1], xMoney.doubleToVNDong(d)
+            });
         }
     }
-
+    
     public void TinhTienPhong() {
         try {
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             int maLoaiPhong = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong).getMaLoaiPhong();
             double giaGio = loaiPhongDAO.selectById(maLoaiPhong).getGiaGio();
             double giaNgay = loaiPhongDAO.selectById(maLoaiPhong).getGiaNgay();
-
+            
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
             Timestamp ngayCheckInHol = xTime.getTimeHol(ls.get(ls.size() - 1).getThoiGianBD(), 14, 0);
             Timestamp ngayCheckOutHol = xTime.getTimeHol(ls.get(0).getThoiGianKT(), 12, 0);
@@ -977,36 +986,36 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             } else if (sumMinute > 5) {
                 sumHour += 0.5;
             }
-
+            
             sumMoneyRoom = giaNgay * sumDay + giaGio * sumHour;
-
+            
             txtSoGio.setText(String.valueOf(sumHour));
             txtSoNgay.setText(String.valueOf(sumDay));
-            txtTienTheoGio.setText(String.valueOf(giaGio));
-            txtTienTheoNgay.setText(String.valueOf(giaNgay));
-            txtTongTienPhong.setText(String.valueOf(sumMoneyRoom));
-            txtPhiNhanPSom.setText(String.valueOf(tienVaoSom));
-            txtPhiTraPMuon.setText(String.valueOf(tienTraCham));
+            txtTienTheoGio.setText(xMoney.doubleToVNDong(giaGio));
+            txtTienTheoNgay.setText(xMoney.doubleToVNDong(giaNgay));
+            txtTongTienPhong.setText(xMoney.doubleToVNDong(sumMoneyRoom));
+            txtPhiNhanPSom.setText(xMoney.doubleToVNDong(tienVaoSom));
+            txtPhiTraPMuon.setText(xMoney.doubleToVNDong(tienTraCham));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public void tinhTienDichVu() {
         List<Object[]> ls = yeuCauDAO.getDichVuDaDung(MapRoom.posTang, MapRoom.posPhong);
         for (int i = 0; i < ls.size(); i++) {
             Object[] dv = ls.get(i);
             sumMoneyService += Double.parseDouble(dv[2].toString());
         }
-        txtTongTienDichVu.setText(String.valueOf(sumMoneyService));
+        txtTongTienDichVu.setText(xMoney.doubleToVNDong(sumMoneyService));
     }
-
+    
     public void KhachPhaiTra() {
-        sumMoneyHavePay = sumMoneyRoom + sumMoneyService + tienTraCham + tienVaoSom + tienPhuThu - tienTraTruoc;
+        sumMoneyHavePay = sumMoneyRoom + sumMoneyService + tienTraCham + tienVaoSom + tienPhuThu - tienTraTruoc - tienGiamGia;
         sumMoneyHavePay = sumMoneyHavePay + sumMoneyHavePay * (tienPhucVuNGayLe / 100) - sumMoneyHavePay * (tienKhuyenMai / 100);
-        txtTongThanhToan.setText(String.valueOf(sumMoneyHavePay));
+        txtTongThanhToan.setText(xMoney.doubleToVNDong(sumMoneyHavePay));
     }
-
+    
     public void inHoaDon() {
         HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
         // chuyen hoa don chi tiet ve trang thai dathanhtoan
@@ -1026,7 +1035,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         TraPhongJframe frame = (TraPhongJframe) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
     }
-
+    
     public void themTongTien(HoaDon hd) {
         double tongTienDatabase = hd.getThanhTien();
         double tongTienHT = tongTienDatabase + sumMoneyHavePay;

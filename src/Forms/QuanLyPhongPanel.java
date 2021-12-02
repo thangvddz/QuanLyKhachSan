@@ -64,10 +64,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
         pnlQuanLyPhong = new javax.swing.JPanel();
         pnlMainScreen = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnLamMoi = new javax.swing.JButton();
-        btnRemoveAll = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
-        jLabel1 = new javax.swing.JLabel();
         pnlLoaiPhong = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -102,7 +98,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         btnThemTT = new javax.swing.JButton();
         btnSuaTT = new javax.swing.JButton();
-        btnXoaTT = new javax.swing.JButton();
         btnLamMoiTT = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -266,16 +261,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        btnLamMoi.setText("Làm mới");
-        jPanel1.add(btnLamMoi);
-
-        btnRemoveAll.setText("Remove All");
-        jPanel1.add(btnRemoveAll);
-        jPanel1.add(jSlider1);
-
-        jLabel1.setText("30%");
-        jPanel1.add(jLabel1);
 
         javax.swing.GroupLayout pnlQuanLyPhongLayout = new javax.swing.GroupLayout(pnlQuanLyPhong);
         pnlQuanLyPhong.setLayout(pnlQuanLyPhongLayout);
@@ -530,6 +515,8 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
                 "Mã Trạng thái", "Trạng thái"
             }
         ));
+        tblTrangThaiPhong.setShowHorizontalLines(false);
+        tblTrangThaiPhong.setShowVerticalLines(false);
         tblTrangThaiPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTrangThaiPhongMouseClicked(evt);
@@ -566,16 +553,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
             }
         });
         jPanel8.add(btnSuaTT);
-
-        btnXoaTT.setBackground(new java.awt.Color(255, 255, 255));
-        btnXoaTT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_delete_25px.png"))); // NOI18N
-        btnXoaTT.setText("Xóa");
-        btnXoaTT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaTTActionPerformed(evt);
-            }
-        });
-        jPanel8.add(btnXoaTT);
 
         btnLamMoiTT.setBackground(new java.awt.Color(255, 255, 255));
         btnLamMoiTT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_refresh_25px.png"))); // NOI18N
@@ -718,13 +695,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
         clearFormTrangThai();
     }//GEN-LAST:event_btnSuaTTActionPerformed
 
-    private void btnXoaTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTTActionPerformed
-        // TODO add your handling code here:
-        deleteTrangThaiPhong();
-        fillTableTrangThai();
-        clearFormTrangThai();
-    }//GEN-LAST:event_btnXoaTTActionPerformed
-
     private void btnLamMoiTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiTTActionPerformed
         // TODO add your handling code here:
         clearFormTrangThai();
@@ -856,14 +826,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
         }
     }
 
-    public void deleteTrangThaiPhong() {
-        if (mgsBox.confirm(this, "Có chắc muốn xóa?")) {
-            int maTT = Integer.parseInt(tblTrangThaiPhong.getValueAt(indexMaTT, 0).toString());
-            ttdao.delete(maTT);
-            mgsBox.alert(this, "delete thanh cong");
-        }
-    }
-
     public void fillFormLoaiPhong() {
         int malp = Integer.parseInt(tblLoaiPhong.getValueAt(indexLoaiP, 0).toString());
         LoaiPhong loaiPhong = lpdao.selectById(malp);
@@ -896,17 +858,13 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnLamMoiTT;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton btnRemoveAll;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSuaTT;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThemTT;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btnXoaTT;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -925,7 +883,6 @@ public class QuanLyPhongPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JPanel pnlDangDonDep;
     private javax.swing.JPanel pnlDangSua;
     private javax.swing.JPanel pnlDangXuLy;
