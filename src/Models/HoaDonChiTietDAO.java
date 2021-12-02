@@ -25,15 +25,14 @@ public class HoaDonChiTietDAO extends DAO<HoaDonChiTiet, Object> {
     private static final String SQL_UPDATE = "UPDATE HOADONCHITIET SET MaHD=?, MaPhong=?, SoTang=?, NgayDK=?, TrangThai=? WHERE MaHDCT=?";
     private static final String SQL_UPDATE_V1 = "UPDATE HOADONCHITIET SET TrangThai=? WHERE MaPhong=? and SoTang=? and TrangThai=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM HOADONCHITIET";
-    private static final String SQL_SELECT_CTHD = "select MaPhong, SoTang, TenDV, PhiDV, ThoiGianBD, ThoiDiemDatPhong, ThoiDiemTraPhong from HOADON \n"
-            + "join HOADONCHITIET on HOADON.MaHD = HOADONCHITIET.MaHD\n"
-            + "join YEUCAU on HOADONCHITIET.MaHDCT = YEUCAU.MaHDCT\n"
-            + "join DICHVU on YEUCAU.MaDV = DICHVU.MaDV where HOADON.MaHD=? and HOADON.TrangThai=?";
     private static final String SQL_SELECT_PHONG_DATHUE = "select MaPhong, SoTang, count(*) as soyeucau from HOADONCHITIET where MaHD=? and TrangThai=? group by MaPhong, SoTang";
     private static final String SQL_SELECT_MAHD = "select top 1 * from HOADONCHITIET where MaPhong=? and SoTang=? and TrangThai=?";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM HOADONCHITIET WHERE MaHDCT=?";
+    private static final String SQL_SELECT_LIST_DVDSD = "select HOADONCHITIET.* from HOADONCHITIET left outer join YEUCAU on HOADONCHITIET.MaHDCT = YEUCAU.MaHDCT \n"
+            + "where HOADONCHITIET.TrangThai=? and MaPhong=? and SoTang=? and YEUCAU.MaDV is not null";
     private static final String SQL_SELECT_NEW_ID = "SELECT TOP 1 * FROM HOADONCHITIET where MaHD=? and TrangThai=? order by MaHDCT desc";
     private static final String SQL_SELECT_NEW_ID_RESERVE = "select top 1 * from HOADONCHITIET where TrangThai=? and SoTang=? and MaPhong=?";
+    private static final String SQL_SELECT_HDCT_A_ROOM = "select * from HOADONCHITIET where TrangThai=? and SoTang=? and MaPhong=?";
     private static final String SQL_DELETE = "DELETE FROM HOADONCHITIET WHERE MaHDCT=?";
 
     JdbcHelper jdbc;
@@ -78,6 +77,14 @@ public class HoaDonChiTietDAO extends DAO<HoaDonChiTiet, Object> {
     public List<HoaDonChiTiet> selectAll() {
         return selectBySql(SQL_SELECT_ALL);
     }
+    
+    public List<HoaDonChiTiet> selectAllARoom(boolean TrangThai, int SoTang, String maPhong) {
+        return selectBySql(SQL_SELECT_HDCT_A_ROOM, TrangThai, SoTang, maPhong);
+    }
+    
+    public List<HoaDonChiTiet> selectListDVDSD(boolean TrangThai, int SoTang, String maPhong) {
+        return selectBySql(SQL_SELECT_LIST_DVDSD, TrangThai, maPhong, SoTang);
+    }
 
     public List<ThongTinPhongDaThue> selectAllPhongDaThue(int maHD, boolean trangThai) {
         List<ThongTinPhongDaThue> ls = new ArrayList<>();
@@ -88,29 +95,6 @@ public class HoaDonChiTietDAO extends DAO<HoaDonChiTiet, Object> {
                 int soTang = rs.getInt(2);
                 int soLanYC = rs.getInt(3);
                 ls.add(new ThongTinPhongDaThue(maPhong, soTang, soLanYC));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (ls.isEmpty()) {
-            return null;
-        }
-        return ls;
-    }
-
-    public List<ChiTietPhongVaDichVu> selectAllChiTietPhongVaDichVu(int maHD, boolean trangThai) {
-        List<ChiTietPhongVaDichVu> ls = new ArrayList<>();
-        try {
-            ResultSet rs = jdbc.query(SQL_SELECT_CTHD, maHD, trangThai);
-            while (rs.next()) {
-                String MaPhong = rs.getString(1);
-                int SoTang = rs.getInt(2);
-                String TenDV = rs.getString(3);
-                double PhiDV = rs.getDouble(4);
-                Date ThoiGianBD = rs.getDate(5);
-                Date ThoiDiemDatPhong = rs.getDate(6);
-                Date ThoiDiemTraPhong = rs.getDate(7);
-                ls.add(new ChiTietPhongVaDichVu(MaPhong, SoTang, TenDV, PhiDV, ThoiGianBD, ThoiDiemDatPhong, ThoiDiemTraPhong));
             }
         } catch (Exception e) {
             e.printStackTrace();
