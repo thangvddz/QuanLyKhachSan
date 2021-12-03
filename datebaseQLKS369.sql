@@ -374,9 +374,21 @@ IF OBJECT_ID('LichSuThoiGianThue') IS NOT NULL
 GO
 create proc LichSuThoiGianThue @DateBD datetime, @DateKT datetime 
 as
-	select datediff(DAY, @DateBD, @DateKT) as soNgay,
-	(datediff(HOUR, @DateBD, @DateKT)) as soGio, 
-	(datediff(MINUTE, @DateBD, @DateKT)%60) as soPhut
+	declare @SoNgay int = datediff(DAY, @DateBD, @DateKT)
+	declare @Sogio int = datediff(HOUR, @DateBD, @DateKT)
+	declare @SoPhut int = datediff(MINUTE, @DateBD, @DateKT)
+	if @SoPhut <= 59
+	BEGIN
+		select datediff(DAY, @DateBD, @DateKT) as soNgay,
+		0 as soGio, 
+		(datediff(MINUTE, @DateBD, @DateKT)) as soPhut
+	END
+	else
+	BEGIN
+		select datediff(DAY, @DateBD, @DateKT) as soNgay,
+		datediff(MINUTE, @DateBD, @DateKT)/60 as soGio, 
+		(datediff(MINUTE, @DateBD, @DateKT)%60) as soPhut
+	END
 go
 --exec LichSuThoiGianThue '2021-11-25 20:31:00.000', '2021-11-26 14:20:00.000'
 
