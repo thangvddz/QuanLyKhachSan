@@ -81,7 +81,6 @@ public class KetCaJDialog extends javax.swing.JDialog {
             }
         });
 
-        txtTongSoHoaDon.setEditable(false);
         txtTongSoHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTongSoHoaDonActionPerformed(evt);
@@ -90,19 +89,11 @@ public class KetCaJDialog extends javax.swing.JDialog {
 
         jLabel3.setText("Tổng số hóa đơn:");
 
-        txtTienHang.setEditable(false);
-
         jLabel4.setText("Tiền hàng:");
-
-        txtTienMat.setEditable(false);
 
         jLabel6.setText("Tiền mặt:");
 
-        txtTienTheNganHang.setEditable(false);
-
         jLabel7.setText("Tiền thẻ:");
-
-        txtDoanhThuCa.setEditable(false);
 
         jLabel8.setText("Doanh thu ca:");
 
@@ -265,7 +256,7 @@ public class KetCaJDialog extends javax.swing.JDialog {
     private void btnThongKeCaLamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeCaLamActionPerformed
         ThongKeCaLamJframe caLam = new ThongKeCaLamJframe();
         caLam.setVisible(true);
-        //dispose();
+        dispose();
     }//GEN-LAST:event_btnThongKeCaLamActionPerformed
 
     private void txtTongSoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongSoHoaDonActionPerformed
