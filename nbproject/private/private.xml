@@ -3,24 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/DatTraPhongPanel.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Utils/xDate.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/CaiDatJpanel.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/ManHinhChinhGUI.java</file>
+            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/JdbcHelper.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/TraPhongJpanel.java</file>
-            <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Utils/xMoney.java</file>
-=======
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/DichVuPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/DichVuDAO.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/KhachHangJPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/ManHinhChinhGUI.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/LichSuGDPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/ThongKeDAO.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/HoaDonDAO.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Forms/NhanVienJPanel.java</file>
-            <file>file:/D:/DuAn1/Final/QuanLyKhachSan/src/Models/JdbcHelper.java</file>
->>>>>>> 16734af1b30250723908529a9959fa5561d21e84
         </group>
     </open-files>
 </project-private>

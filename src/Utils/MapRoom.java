@@ -213,7 +213,7 @@ public class MapRoom {
                 break;
             case 4:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
-                box.setBackground(new Color(59, 11, 2));
+                box.setBackground(new Color(59,11,2));
                 break;
             default:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));

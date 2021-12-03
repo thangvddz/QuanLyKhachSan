@@ -385,7 +385,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Check-In", "Check-Out", "Hình thức thuê", "Giá", "Đơn vị (ngày/giờ)", "Loại phòng"
+                "Check-In", "Check-Out", "Hình thức thuê", "Giá", "Thời gian ở tại", "Loại phòng"
             }
         ));
         tblThongTinPhong.setShowHorizontalLines(false);
@@ -418,7 +418,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Dịch vụ", "Thời gian gọi", "phí dịch vụ/ gọi"
+                "Dịch vụ", "Thời gian gọi", "Tổng phí dịch vụ"
             }
         ));
         tblTongTienDichVu.setShowHorizontalLines(false);
@@ -948,36 +948,41 @@ public class TraPhongJpanel extends javax.swing.JPanel {
     public void fillTableThongTinPhong() {
         DefaultTableModel model = (DefaultTableModel) tblThongTinPhong.getModel();
         model.setRowCount(0);
-        int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
-        int maLoaiPhong = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong).getMaLoaiPhong();
-        String TenLoaiPhong = loaiPhongDAO.selectById(maLoaiPhong).getTenLP();
-        double giaGio = loaiPhongDAO.selectById(maLoaiPhong).getGiaGio();
-        double giaNgay = loaiPhongDAO.selectById(maLoaiPhong).getGiaNgay();
-        List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
-        for (LichSuGD l : ls) {
-            Object[] lsGio = lsgddao.getTimesRented(l.getThoiGianBD(), l.getThoiGianKT()).get(0);
-            int soNgay = Integer.parseInt(lsGio[0].toString());
-            int soGio = Integer.parseInt(lsGio[1].toString());
-            int soPhut = Integer.parseInt(lsGio[2].toString());
-            String donVi = "";
-            if (l.isTrangThai()) {
-                donVi = Math.abs(soGio) + "giờ " + Math.abs(soPhut) + " phút";
-            } else {
-                if (soNgay == 0) {
-                    donVi = "1";
+        try {
+            int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
+            int maLoaiPhong = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong).getMaLoaiPhong();
+            String TenLoaiPhong = loaiPhongDAO.selectById(maLoaiPhong).getTenLP();
+            double giaGio = loaiPhongDAO.selectById(maLoaiPhong).getGiaGio();
+            double giaNgay = loaiPhongDAO.selectById(maLoaiPhong).getGiaNgay();
+            List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
+            for (LichSuGD l : ls) {
+                Object[] lsGio = lsgddao.getTimesRented(l.getThoiGianBD(), l.getThoiGianKT()).get(0);
+                int soNgay = Integer.parseInt(lsGio[0].toString());
+                int soGio = Integer.parseInt(lsGio[1].toString());
+                int soPhut = Integer.parseInt(lsGio[2].toString());
+                String donVi = "";
+                if (l.isTrangThai()) {
+                    donVi = Math.abs(soGio) + "giờ " + Math.abs(soPhut) + " phút";
                 } else {
-                    donVi = "" + soNgay;
+                    if (soNgay == 0) {
+                        donVi = "1 " +"Ngày";
+                    } else {
+                        donVi = "" + soNgay + " Ngày";
+                    }
                 }
+                model.addRow(new Object[]{
+                    l.getThoiGianBD(),
+                    l.getThoiGianKT(),
+                    l.isTrangThai() ? "Giờ" : "Ngày",
+                    l.isTrangThai() ? xMoney.doubleToVNDong(giaGio) : xMoney.doubleToVNDong(giaNgay),
+                    donVi,
+                    TenLoaiPhong
+                });
             }
-            model.addRow(new Object[]{
-                l.getThoiGianBD(),
-                l.getThoiGianKT(),
-                l.isTrangThai() ? "Giờ" : "Ngày",
-                l.isTrangThai() ? xMoney.doubleToVNDong(giaGio) : xMoney.doubleToVNDong(giaNgay),
-                donVi,
-                TenLoaiPhong
-            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     public void fillTableThongTinDV() {
@@ -1006,7 +1011,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             if (ls.get(0).isTrangThai() == false) {
                 Object[] tienVoSom = yeuCauDAO.getTienNhanPSom(ls.get(ls.size() - 1).getThoiGianBD(), ngayCheckInHol, giaNgay).get(0);
                 tienVaoSom = Double.parseDouble(tienVoSom[0].toString());
-                Object[] tienTre = yeuCauDAO.getTienNhanPSom(ls.get(0).getThoiGianKT(), ngayCheckOutHol, giaNgay).get(0);
+                Object[] tienTre = yeuCauDAO.getTienTraPTre(ls.get(0).getThoiGianKT(), ngayCheckOutHol, giaNgay).get(0);
                 tienTraCham = Double.parseDouble(tienTre[0].toString());
             }
             for (LichSuGD l : ls) {
