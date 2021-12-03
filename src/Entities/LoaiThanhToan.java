@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Entities;
 
-/**
- *
- * @author you have to better
- */
+
 public class LoaiThanhToan {
 
     int loaiThanhToan;
@@ -46,6 +39,11 @@ public class LoaiThanhToan {
 
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
+    }
+
+    @Override
+    public String toString() {
+        return TenLoaiThanhToan;
     }
 
 }
