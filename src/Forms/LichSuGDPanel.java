@@ -22,15 +22,16 @@ import javax.swing.table.DefaultTableModel;
  * @author hungp
  */
 public class LichSuGDPanel extends javax.swing.JPanel {
-    
+
     ThongKeDAO dao = new ThongKeDAO();
-    
+
     public LichSuGDPanel() {
         initComponents();
         fillTableLSGD();
+        doanhThu();
     }
-    
-    void fillTableLSGD(){
+
+    void fillTableLSGD() {
         DefaultTableModel model = (DefaultTableModel) tblBang.getModel();
         model.setRowCount(0);
         List<Object[]> list = dao.getLichSuGD();
@@ -38,6 +39,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+
     public void guiMail() {
         try {
             Calendar c1 = Calendar.getInstance();
@@ -110,6 +112,12 @@ public class LichSuGDPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Tổng hóa đơn:");
 
+        txtDoanhThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDoanhThuActionPerformed(evt);
+            }
+        });
+
         btnGuiEmail.setText("Gửi mail");
         btnGuiEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +186,11 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         guiMail();
     }//GEN-LAST:event_btnGuiEmailActionPerformed
 
+    private void txtDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoanhThuActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtDoanhThuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuiEmail;
@@ -189,4 +202,15 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtDoanhThu;
     private javax.swing.JTextField txtTongHD;
     // End of variables declaration//GEN-END:variables
+
+    private void doanhThu() {
+        try {
+            List<Integer> list = dao.selectDoanhThu();
+            for (Integer doanhThu : list) {
+                txtDoanhThu.setText(doanhThu.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

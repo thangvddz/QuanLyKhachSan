@@ -21,6 +21,7 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
 
     private static final String SQL_INSERT = "insert into LSCaLam(MaNV,TenCaLam,TienVaoDauCa,NgayLam,ThoiGianBD,TienMatLucVaoCa,GhiChu) values (?,?,?,?,?,?,?)";
     private static final String SQL_SELECT_BYTime = "select * from LSCaLam where MaNV = ? AND NgayLam = ?";
+    private static final String SQL_SELECT_ALL = "select * from LSCaLam";
     
     public LichSuCaLam selectByTime(String MaNV, String NgayLam) {
         return selectBySql(SQL_SELECT_BYTime, MaNV, NgayLam).get(0);
@@ -48,7 +49,7 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
 
     @Override
     public List<LichSuCaLam> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return selectBySql(SQL_SELECT_ALL);
     }
 
     @Override

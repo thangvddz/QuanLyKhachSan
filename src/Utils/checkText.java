@@ -5,6 +5,9 @@
  */
 package Utils;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 /**
  *
  * @author you have to better
@@ -13,6 +16,16 @@ public class checkText {
 
     public static boolean issEmpty(String str) {
         if (str.trim().equals("")) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean CheckNumChar(String str, int limit) {
+        if (!str.trim().equals("")) {
+            if (str.length() > limit) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -62,5 +75,25 @@ public class checkText {
             }
         }
         return false;
+    }
+
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+
+    public static boolean isPhoneNumber(String phone) {
+        String regexStr = "^[0-9]{10,15}$";
+        if (phone.matches(regexStr)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

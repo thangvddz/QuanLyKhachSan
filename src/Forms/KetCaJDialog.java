@@ -35,6 +35,7 @@ public class KetCaJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         init();
+        
     }
 
     /**
@@ -65,6 +66,7 @@ public class KetCaJDialog extends javax.swing.JDialog {
         btnKetCa = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         lblMaNV = new javax.swing.JLabel();
+        btnThongKeCaLam = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BAO CAO KET CA");
@@ -80,6 +82,11 @@ public class KetCaJDialog extends javax.swing.JDialog {
         });
 
         txtTongSoHoaDon.setEditable(false);
+        txtTongSoHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongSoHoaDonActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Tổng số hóa đơn:");
 
@@ -125,6 +132,14 @@ public class KetCaJDialog extends javax.swing.JDialog {
         lblMaNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblMaNV.setText("jLabel1");
 
+        btnThongKeCaLam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_25px.png"))); // NOI18N
+        btnThongKeCaLam.setText("THỐNG KÊ CA LÀM");
+        btnThongKeCaLam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeCaLamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,12 +184,15 @@ public class KetCaJDialog extends javax.swing.JDialog {
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(txtDoanhThuCa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(txtTienCuoiCa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                                .addGap(0, 61, Short.MAX_VALUE))))
+                                .addGap(0, 98, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(btnKetCa)
                         .addGap(64, 64, 64)
-                        .addComponent(btnThoat)))
+                        .addComponent(btnThoat)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnThongKeCaLam)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -197,10 +215,10 @@ public class KetCaJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(txtTongSoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTienHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtTienMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -216,14 +234,17 @@ public class KetCaJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtTienCuoiCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThoat)
-                    .addComponent(btnKetCa))
+                    .addComponent(btnKetCa)
+                    .addComponent(btnThongKeCaLam))
                 .addGap(66, 66, 66))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel6, jLabel7, jLabel8, jLabel9, lblMaNV, lblTenNhanVien, txtDoanhThuCa, txtTienCuoiCa, txtTienDauCa, txtTienHang, txtTienMat, txtTienTheNganHang, txtTongSoHoaDon});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnThoat, btnThongKeCaLam});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -240,6 +261,16 @@ public class KetCaJDialog extends javax.swing.JDialog {
     private void txtTienDauCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienDauCaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTienDauCaActionPerformed
+
+    private void btnThongKeCaLamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeCaLamActionPerformed
+        ThongKeCaLamJframe caLam = new ThongKeCaLamJframe();
+        caLam.setVisible(true);
+        //dispose();
+    }//GEN-LAST:event_btnThongKeCaLamActionPerformed
+
+    private void txtTongSoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongSoHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongSoHoaDonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +317,7 @@ public class KetCaJDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKetCa;
     private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btnThongKeCaLam;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -326,7 +358,7 @@ public class KetCaJDialog extends javax.swing.JDialog {
             //String now = xDate.timeNow();
             try {
             LichSuCaLam model = lscldao.selectByTime(manv, xDate.timeNow2());
-            System.out.println(model);
+            //System.out.println(model);
             txtTienDauCa.setText(String.valueOf(model.getTienVaoDauCa()));
         } catch (Exception e) {
             e.printStackTrace();

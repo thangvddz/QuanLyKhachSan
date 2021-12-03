@@ -1,7 +1,7 @@
-﻿create database DA1_N8_V28	
+﻿create database DA1_N8_V29	
 go
 
-use DA1_N8_V28
+use DA1_N8_V29
 go
 
 create table KHACHHANG(
@@ -51,7 +51,7 @@ create table HOADON(
 	TienTraTruoc money null,
 	GiamGia money null,
 	PhuThu money null,
-	ThanhTien money null,
+	ThanhTien money default 0,
 	GhiChu nvarchar(200) null,
 	TrangThai bit default 0,
 )
@@ -374,34 +374,37 @@ IF OBJECT_ID('LichSuThoiGianThue') IS NOT NULL
 GO
 create proc LichSuThoiGianThue @DateBD datetime, @DateKT datetime 
 as
-	declare @SoNgay int = datediff(DAY, @DateBD, @DateKT)
-	declare @Sogio int = datediff(HOUR, @DateBD, @DateKT)
-	declare @SoPhut int = datediff(MINUTE, @DateBD, @DateKT)
-	if @SoPhut <= 59
-	BEGIN
-		select datediff(DAY, @DateBD, @DateKT) as soNgay,
-		0 as soGio, 
-		(datediff(MINUTE, @DateBD, @DateKT)) as soPhut
-	END
-	else
-	BEGIN
-		select datediff(DAY, @DateBD, @DateKT) as soNgay,
-		datediff(MINUTE, @DateBD, @DateKT)/60 as soGio, 
-		(datediff(MINUTE, @DateBD, @DateKT)%60) as soPhut
-	END
+	select datediff(DAY, @DateBD, @DateKT) as soNgay,
+	(datediff(HOUR, @DateBD, @DateKT)) as soGio, 
+	(datediff(MINUTE, @DateBD, @DateKT)%60) as soPhut
 go
-exec LichSuThoiGianThue '2021-11-25 20:31:00.000', '2021-11-25 22:35:00.000'
+--exec LichSuThoiGianThue '2021-11-25 20:31:00.000', '2021-11-26 14:20:00.000'
 
 IF OBJECT_ID('DichVuDaDung') IS NOT NULL
 	DROP PROC DichVuDaDung
 GO
 create proc DichVuDaDung @SoTang int, @MaPhong varchar(5)
 as
-	select TenDV,SUM(PhiDV) as TongPhiDV
+	select TenDV,ThoiGianBD,SUM(PhiDV) as TongPhiDV
 	from HOADONCHITIET join YEUCAU on HOADONCHITIET.MaHDCT=YEUCAU.MaHDCT
 	join DICHVU on YEUCAU.MaDV = DICHVU.MaDV 
 	where MaPhong=@MaPhong and SoTang=@SoTang and HOADONCHITIET.TrangThai=0
 	group by TenDV, ThoiGianBD
 go
 
-
+IF OBJECT_ID('sp_LichSu') IS NOT NULL
+	DROP PROC sp_LichSu
+GO
+Create proc sp_LichSu
+as begin
+	select
+		ThoiDiemTraPhong NgayGD,
+		HoaDon.MaHD MaHD,
+		KhachHang.HoTen TenKH,
+		HOADONCHITIET.MaPhong MaPhong,
+		HoaDon.ThanhTien TongTien,
+		NhanVien.HoTen HoTenNV
+	from HoaDon join NhanVien on NhanVien.MaNV = HoaDon.MaNV 
+				join KhachHang on HoaDon.MaKH = KhachHang.MaKH 
+				join HOADONCHITIET on HoaDon.MaHD = HOADONCHITIET.MaHD
+end
