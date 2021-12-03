@@ -47,5 +47,23 @@ public class ThongKeDAO {
         String[] cols = {"NgayGD", "MaHD", "TenKH", "MaPhong", "TongTien", "HoTenNV"};
         return getListOfArray(sql, cols);
     }
+    
+    public List<Object[]> getLichSuGD1Ngay() {
+        String sql = "{CALL sp_LichSuToday}";
+        String[] cols = {"NgayGD", "MaHD", "TenKH", "MaPhong", "TongTien", "HoTenNV"};
+        return getListOfArray(sql, cols);
+    }
+    
+    public List<Object[]> getLichSuGD30Ngay() {
+        String sql = "{CALL sp_LichSu30day}";
+        String[] cols = {"NgayGD", "MaHD", "TenKH", "MaPhong", "TongTien", "HoTenNV"};
+        return getListOfArray(sql, cols);
+    }
+    
+    public List<Object[]> getDoanhThu(Integer nam){
+        String sql = "{CALL sp_ThongKeNam(?)}";
+        String[] cols = {"DoanhThu", "TongHoaDon", "TongSoKhach", "HoaDonThapNhat", "HoaDonCaoNhat", "HoaDonTrungBinh"};
+        return getListOfArray(sql, cols, nam);
+    }
 
 }

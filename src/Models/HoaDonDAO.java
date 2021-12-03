@@ -50,7 +50,7 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
     public void updateTT(boolean TrangThai, int maHD) {
         jdbc.update(SQL_UPDATE_TRANGTHAI, TrangThai, maHD);
     }
-    
+
     public void updateTongTien(double tongTien, int maHD) {
         jdbc.update(SQL_UPDATE_TONGTIEN, tongTien, maHD);
     }
@@ -81,7 +81,7 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
     public List<HoaDon> selectAll() {
         return selectBySql(SQL_SELECT_ALL);
     }
-    
+
     public List<HoaDon> selectHD_TT_false(boolean tt) {
         return selectBySql(SQL_SELECT_ID_HOADON_TT_FALSE, tt);
     }
@@ -115,4 +115,20 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
         return ls;
     }
 
+    
+    public List<Integer> selectYears(){
+        String sql = "Select DISTINCT year(ThoiDiemTraPhong) Year from HOADON ORDER By Year DESC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {                
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

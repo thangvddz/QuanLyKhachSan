@@ -19,7 +19,7 @@ public class LoaiThanhToanDAO extends DAO<LoaiThanhToan, Integer> {
 
     private static final String SQL_INSERT = "INSERT INTO LOAITHANHTOAN(TenLoaiThanhToan, TrangThai) VALUES (?,?)";
     private static final String SQL_UPDATE = "UPDATE LOAITHANHTOAN SET TenLoaiThanhToan=?, TrangThai=? WHERE MaLoaiTT=?";
-    private static final String SQL_SELECT_ALL = "SELECT * FROM LOAITHANHTOAN";
+    private static final String SQL_SELECT_ALL = "select * from LOAITHANHTOAN";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM LOAITHANHTOAN WHERE MaLoaiTT=?";
     private static final String SQL_DELETE = "DELETE FROM LOAITHANHTOAN WHERE MaLoaiTT=?";
 

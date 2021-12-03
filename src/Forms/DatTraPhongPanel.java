@@ -1170,7 +1170,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         if (lsPhong != null) {
             model.addRow(new Object[]{
-                lsPhong.getSoTang(), lsPhong.getMaPhong(), lp.getTenLP(), lp.getSoGiuong(), lp.getGiaNgay(), lp.getGiaGio()
+                lsPhong.getSoTang(), lsPhong.getMaPhong(), lp.getTenLP(), lp.getSoGiuong(), xMoney.doubleToVNDong(lp.getGiaNgay()), xMoney.doubleToVNDong(lp.getGiaGio())
             });
         }
     }
@@ -1222,7 +1222,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     chiTietPhongVaDichVu.getMaPhong(),
                     chiTietPhongVaDichVu.getSoTang(),
                     chiTietPhongVaDichVu.getTenDV(),
-                    chiTietPhongVaDichVu.getPhiDV(),
+                    xMoney.doubleToVNDong(chiTietPhongVaDichVu.getPhiDV()),
                     chiTietPhongVaDichVu.getThoiGianBD()
                 });
             }
