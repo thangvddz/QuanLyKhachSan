@@ -13,6 +13,7 @@ import Models.LichSuCaLamDAO;
 import Models.NhanVienDAO;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xMoney;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -36,6 +37,7 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadTableLSCaLam();
         fillComBoBoxNhanVien();
+        LoadTableCaLam();
     }
 
     /**
@@ -51,7 +53,7 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
         tblLSCaLam = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblCaLam = new javax.swing.JTable();
         cboTenNV = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -77,7 +79,7 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ca Làm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 153, 0))); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblCaLam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,7 +90,7 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
                 "Ca làm", "Thời gian bắt đầu làm trong HD", "Thời gian kết thúc làm trong HD", "Ghi chú"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblCaLam);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,7 +105,12 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
 
-        cboTenNV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cboTenNV.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cboTenNV.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboTenNVItemStateChanged(evt);
+            }
+        });
         cboTenNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTenNVActionPerformed(evt);
@@ -116,7 +123,7 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Ngày:");
 
-        jdcNgay.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jdcNgay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(0, 153, 0));
         jButton1.setText("XUẤT BÁO CÁO");
@@ -173,8 +180,12 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenNVActionPerformed
-        // TODO add your handling code here:
+        //loadTableLSCaLam();
     }//GEN-LAST:event_cboTenNVActionPerformed
+
+    private void cboTenNVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTenNVItemStateChanged
+        loadTableLSCaLam();
+    }//GEN-LAST:event_cboTenNVItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -220,45 +231,54 @@ public class ThongKeCaLamJframe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private com.toedter.calendar.JDateChooser jdcNgay;
+    private javax.swing.JTable tblCaLam;
     private javax.swing.JTable tblLSCaLam;
     // End of variables declaration//GEN-END:variables
    private void loadTableLSCaLam() {
         DefaultTableModel model = (DefaultTableModel) tblLSCaLam.getModel();
         model.setRowCount(0);
-        NhanVien nhanVien = (NhanVien) cboTenNV.getSelectedItem();
-        Date ngay = jdcNgay.getDate();
-        if (nhanVien == null && ngay == null) {
-           try {
+        try {
             List<LichSuCaLam> list = daoLSCL.selectAll();
             for (int i = 0; i < list.size(); i++) {
                 LichSuCaLam nv = list.get(i);
                 String hoten = nvdao.selectById(nv.getMaNV()).getHoTen();
-                model.addRow(new Object[]{ hoten,nv.getTenCaLam(),nv.getTienVaoDauCa(),nv.getTienCuoiCa(),nv.getNgayLam(),nv.getThoiGianDB(),nv.getThoiGianKT(),
-                nv.getTienMatLucVaoCa(),nv.getGhiChu()});
+                model.addRow(new Object[]{hoten, nv.getTenCaLam(), xMoney.doubleToVNDong(nv.getTienVaoDauCa()), xMoney.doubleToVNDong(nv.getTienCuoiCa()), nv.getNgayLam(), nv.getThoiGianDB(), nv.getThoiGianKT(),
+                    xMoney.doubleToVNDong(nv.getTienMatLucVaoCa()), nv.getGhiChu()});
             }
         } catch (Exception e) {
             e.printStackTrace();
-            mgsBox.alert(this, "Lỗi truy vấn dữ liệu!");
+            mgsBox.alert(this, "Lỗi truy vấn dữ liệu loadTableCaLam");
         }
-       } else if (nhanVien != null && ngay == null) {
-            try {
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-                mgsBox.alert(this, "Lỗi truy vấn dữ liệu 2!");
-            }
-       }
-{
-       }
     }
-   private void fillComBoBoxNhanVien(){
+
+    private void fillComBoBoxNhanVien() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenNV.getModel();
-        List<NhanVien> lsViens = nvdao.selectAll();
         model.removeAllElements();
-        for (NhanVien nhanVien : lsViens) {
-            model.addElement(nhanVien.getHoTen());
+        try {
+            List<NhanVien> list = nvdao.selectAll();
+            for (NhanVien nhanVien : list) {
+                model.addElement(nhanVien.getHoTen());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            mgsBox.alert(this, "Lỗi truy vấn comboboxNhanVien");
         }
-   }
+    }
+
+    
+    private void LoadTableCaLam(){
+        DefaultTableModel model = (DefaultTableModel) tblCaLam.getModel();
+        model.setRowCount(0);
+        try {
+            List<CaLam> list = cldao.selectAll();
+            for (int i = 0; i < list.size(); i++) {
+                CaLam cl = list.get(i);
+                model.addRow(new Object[]{cl.getTenCaLam(),cl.getThoiGianDBHD(),cl.getThoiGianKTHD(),cl.getGhiChu()});
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            mgsBox.alert(this, "Lỗi truy vấn bảng CaLam ");
+        }
+    }
 }
