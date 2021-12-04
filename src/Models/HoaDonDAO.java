@@ -115,6 +115,39 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
         return ls;
     }
 
+    public List<Integer> selectHoaDonTheoNgay() {
+        String sql = "select COUNT(MaHD) TongHoaDon from HOADON\n"
+                + "where (DATEDIFF(DAY, ThoiDiemTraPhong,GETDATE()) <= 0)";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Integer> selectHoaDonTheoThang() {
+        String sql = "select COUNT(MaHD) TongHoaDon from HOADON\n"
+                + "where (DATEDIFF(DAY, ThoiDiemTraPhong,GETDATE()) <= 30)";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
     
     public List<Integer> selectYears(){
         String sql = "Select DISTINCT year(ThoiDiemTraPhong) Year from HOADON ORDER By Year DESC";

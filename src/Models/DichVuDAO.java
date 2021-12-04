@@ -80,4 +80,50 @@ public class DichVuDAO extends DAO<DichVu, Integer> {
         String sql = "select * from DICHVU where TenDV like ?";
         return this.selectBySql(sql, "%" + key + "%");
     }
+    
+    public List<Object[]> selectDichVuTheoNgay() {
+        String sql = "select top 1 TenDV, count(YEUCAU.MaDV) as soLanGoiDV\n"
+                + "from YEUCAU join DICHVU on YEUCAU.MaDV = DICHVU.MaDV\n"
+                                + "where (DATEDIFF(DAY, ThoiGianBD,GETDATE()) <= 0)\n"
+                + "group by TenDV\n"
+                + "order by soLanGoiDV desc";
+        List<Object[]> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {
+                Object[] dichvu = new Object[2];
+                dichvu[0] = rs.getString(1);
+                dichvu[1] = rs.getString(2);
+                list.add(dichvu);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Object[]> selectDichVuTheoThang() {
+        String sql = "select top 1 TenDV, count(YEUCAU.MaDV) as soLanGoiDV\n"
+                + "from YEUCAU join DICHVU on YEUCAU.MaDV = DICHVU.MaDV\n"
+                + "where (DATEDIFF(DAY, ThoiGianBD,GETDATE()) <= 30)\n"
+                + "group by TenDV\n"
+                + "order by soLanGoiDV desc";
+        List<Object[]> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {
+                Object[] dichvu = new Object[2];
+                dichvu[0] = rs.getString(1);
+                dichvu[1] = rs.getString(2);
+                list.add(dichvu);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

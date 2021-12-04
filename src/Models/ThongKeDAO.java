@@ -25,9 +25,24 @@ public class ThongKeDAO {
         }
     }
 
-    public List<Integer> selectDoanhThu() {
-        String sql = "select SUM(ThanhTien) DoanhThu\n"
-                + "from HOADON";
+    public List<Integer> selectDoanhThuTheoNgay() {
+        String sql = "select SUM(ThanhTien) DoanhThu from HOADON where (DATEDIFF(DAY, ThoiDiemTraPhong,GETDATE()) <= 0)";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Integer> selectDoanhThuTheoThang() {
+        String sql = "select SUM(ThanhTien) DoanhThu from HOADON where (DATEDIFF(DAY, ThoiDiemTraPhong,GETDATE()) <= 30)";
         List<Integer> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.query(sql);
