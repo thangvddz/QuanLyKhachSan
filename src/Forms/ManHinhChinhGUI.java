@@ -587,11 +587,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMousePressed
         // TODO add your handling code here:
-        if (mgsBox.confirm(this, "Bạn có chắc muốn đăng xuất ?")) {
-//            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//            this.setVisible(false);
-//            new DangNhapJDialog(this, true).setVisible(true);
-        }
+        KetCaJFrame ketCaJFrame = new KetCaJFrame();
+        ketCaJFrame.setVisible(true);
+
     }//GEN-LAST:event_btnDangXuatMousePressed
 
     private void btnThanhToanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMouseEntered
@@ -670,7 +668,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     }
 
     public void fillNhanVien() {
-//        txtThongTinNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
+        txtThongTinNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
     }
 
     /**

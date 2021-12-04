@@ -12,9 +12,12 @@ import Models.LichSuCaLamDAO;
 import Utils.Auth;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xTime;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -31,6 +34,8 @@ public class VaoCaJFrame extends javax.swing.JFrame {
      */
     LichSuCaLamDAO daoLSCL = new LichSuCaLamDAO();
     CaLamDAO cldao = new CaLamDAO();
+    public static List<Object[]> ls;
+    Timer timer;
 
     public VaoCaJFrame() {
         initComponents();
@@ -53,7 +58,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cboTenCa = new javax.swing.JComboBox<>();
-        txtTienNhanVaoCa = new javax.swing.JTextField();
+        txtTienThucNhan = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtGhiChu = new javax.swing.JTextField();
@@ -69,6 +74,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         lblDongHo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDongHo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txtTienDauCa.setEditable(false);
         txtTienDauCa.setText("0");
         txtTienDauCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +86,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
 
         jLabel13.setText("Ca Làm: ");
 
-        jLabel2.setText("Tiền mặt nhận lúc vào ca:");
+        jLabel2.setText("Tiền thực nhận");
 
         jLabel3.setText("Ghi chú:");
 
@@ -98,33 +104,30 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(lblDongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13))
-                                .addGap(95, 95, 95)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboTenCa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtTienDauCa)))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(lblDongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTienDauCa)
+                            .addComponent(cboTenCa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGhiChu)
-                            .addComponent(txtTienNhanVaoCa))))
+                            .addComponent(txtTienThucNhan))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
@@ -151,7 +154,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTienNhanVaoCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTienThucNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -161,7 +164,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboTenCa, txtGhiChu, txtTienDauCa, txtTienNhanVaoCa});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboTenCa, txtGhiChu, txtTienDauCa, txtTienThucNhan});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,49 +175,8 @@ public class VaoCaJFrame extends javax.swing.JFrame {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         luu();
-        //System.out.println(xDate.timeNow1());
-        //        Date now = new Date();
-        //		System.out.println(now);
-        //
-        //		// chuyển Date sang Timestamp
-        //		Timestamp timestamp = new Timestamp(now.getTime());
-        //		System.out.println(timestamp);
     }//GEN-LAST:event_btnLuuActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VaoCaJFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
@@ -228,11 +190,14 @@ public class VaoCaJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblHoTen;
     private javax.swing.JTextField txtGhiChu;
     private javax.swing.JTextField txtTienDauCa;
-    private javax.swing.JTextField txtTienNhanVaoCa;
+    private javax.swing.JTextField txtTienThucNhan;
     // End of variables declaration//GEN-END:variables
+
     private void init() {
         this.setLocationRelativeTo(null);
-        new Timer(1000, new ActionListener() {
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        configCa();
+        timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 Date now = new Date();
@@ -240,16 +205,21 @@ public class VaoCaJFrame extends javax.swing.JFrame {
                 String text = formater.format(now);
                 lblDongHo.setText(text);
             }
-        }).start();
+        });
+        timer.start();
         lblHoTen.setText(Auth.user.getHoTen());
+        updateCa();
         fillComboBoxCa();
     }
 
     private void luu() {
-        LichSuCaLam model = getModel();
         try {
-            daoLSCL.insert(model);
+            daoLSCL.insert(getModel());
             mgsBox.alert(this, "Lưu thành công");
+            timer.stop();
+            ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
+            manHinhChinhGUI.setVisible(true);
+            this.setVisible(false);
         } catch (Exception e) {
             mgsBox.alert(this, "Lưu thất bại");
             e.printStackTrace();
@@ -257,23 +227,91 @@ public class VaoCaJFrame extends javax.swing.JFrame {
     }
 
     LichSuCaLam getModel() {
-        LichSuCaLam model = new LichSuCaLam();
-        model.setMaNV(Auth.user.getMaNV());
-        model.setTenCaLam((String) cboTenCa.getSelectedItem());
-        model.setTienVaoDauCa(Double.valueOf(txtTienDauCa.getText()));
-        model.setNgayLam(xDate.now());
-        model.setThoiGianDB(xDate.timeNow1());
-        model.setTienMatLucVaoCa(Double.valueOf(txtTienNhanVaoCa.getText()));
-        model.setGhiChu(txtGhiChu.getText());
-        return model;
+        LichSuCaLam lscl = null;
+        try {
+            int MaLSCL = -1;
+            String MaNV = Auth.user.getMaNV();
+            CaLam cl = (CaLam) cboTenCa.getSelectedItem();
+            int MaCaLam = cl.getMaCaLam();
+            double TienVaoDauCa = Double.parseDouble(txtTienDauCa.getText());
+            double TienCuoiCa = 0;
+            Timestamp ThoiGianBD = new Timestamp(System.currentTimeMillis());
+//        Timestamp ThoiGianKT = null;
+            double TienThucNhan = Double.parseDouble(txtTienThucNhan.getText());
+            double TienThucThu = 0;
+            String GhiChuNhan = txtGhiChu.getText();
+            String GhiChuThu = null;
+            boolean TrangThai = true;
+            lscl = new LichSuCaLam(MaLSCL, MaNV, MaCaLam, TienVaoDauCa, TienCuoiCa, ThoiGianBD, null, TienThucNhan, TienThucThu, GhiChuNhan, GhiChuThu, TrangThai);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lscl;
     }
 
     private void fillComboBoxCa() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenCa.getModel();
-        List<CaLam> lsCaLam = cldao.selectAll();
         model.removeAllElements();
-        for (CaLam caLam : lsCaLam) {
-            model.addElement(caLam.getTenCaLam());
+        try {
+            List<CaLam> lsCaLam = cldao.selectAll();
+            for (CaLam caLam : lsCaLam) {
+                model.addElement(caLam);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    private void updateCa() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenCa.getModel();
+        model.removeAllElements();
+        try {
+            List<CaLam> lsCaLam = cldao.selectAll();
+            for (int i = 0; i < lsCaLam.size(); i++) {
+                Object[] ob = ls.get(i);
+                int hour_begin = (int) ob[0];
+                int minute_begin = (int) ob[1];
+                int hour_end = (int) ob[2];
+                int minute_end = (int) ob[3];
+                if (i == 2) {
+                    Timestamp localDate = new Timestamp(System.currentTimeMillis() + (24 * 3600 * 1000));
+                    Timestamp t_begin = xTime.getTimeHol(localDate, hour_begin, minute_begin);
+                    Timestamp t_end = xTime.getTimeHol(localDate, hour_end, minute_end);
+                    cldao.update(new CaLam(lsCaLam.get(i).getMaCaLam(), lsCaLam.get(i).getTenCaLam(), t_begin, t_end, "hihi"));
+                } else {
+                    Timestamp localDate = new Timestamp(System.currentTimeMillis());
+                    Timestamp t_begin = xTime.getTimeHol(localDate, hour_begin, minute_begin);
+                    Timestamp t_end = xTime.getTimeHol(localDate, hour_end, minute_end);
+                    cldao.update(new CaLam(lsCaLam.get(i).getMaCaLam(), lsCaLam.get(i).getTenCaLam(), t_begin, t_end, "hihi"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void configCa() {
+        ls = new ArrayList<>();
+        //ca sang
+        Object[] obj1 = new Object[4];
+        obj1[0] = 6;
+        obj1[1] = 00;
+        obj1[2] = 14;
+        obj1[3] = 00;
+        ls.add(obj1);
+        //ca chieu
+        Object[] obj2 = new Object[4];
+        obj1[0] = 14;
+        obj1[1] = 00;
+        obj1[2] = 22;
+        obj1[3] = 00;
+        ls.add(obj2);
+        // ca toi
+        Object[] obj3 = new Object[4];
+        obj1[0] = 22;
+        obj1[1] = 00;
+        obj1[2] = 6;
+        obj1[3] = 00;
+        ls.add(obj3);
     }
 }

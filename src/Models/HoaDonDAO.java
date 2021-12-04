@@ -148,13 +148,13 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
             throw new RuntimeException(e);
         }
     }
-    
-    public List<Integer> selectYears(){
+
+    public List<Integer> selectYears() {
         String sql = "Select DISTINCT year(ThoiDiemTraPhong) Year from HOADON ORDER By Year DESC";
         List<Integer> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.query(sql);
-            while (rs.next()) {                
+            while (rs.next()) {
                 list.add(rs.getInt(1));
             }
             rs.getStatement().getConnection().close();
@@ -163,5 +163,29 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+
+        List<Object[]> ls = new ArrayList<>();
+        try {
+            ResultSet rs = jdbc.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                ls.add(vals);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ls;
+    }
+
+    public List<Object[]> getHoaDonTheoCa(Timestamp thoiGianBDCa, Timestamp thoiGianKTCa, String maNV) {
+        String sql = "{CALL HoaDonThuDuocTrongCa(?,?,?)}";
+        String[] cols = {"MaHD", "MaNV", "MaKH", "ThoiDiemDatPhong", "ThoiDiemTraPhong", "TienTraTruoc", "GiamGia", "PhuThu", "ThanhTien", "GhiChu", "TrangThai"};
+        return this.getListOfArray(sql, cols, thoiGianBDCa, thoiGianKTCa, maNV);
     }
 }

@@ -9,6 +9,7 @@ import Entities.LichSuCaLam;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,62 +19,64 @@ import java.util.List;
  * @author ACER
  */
 public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
-
-    private static final String SQL_INSERT = "insert into LSCaLam(MaNV,TenCaLam,TienVaoDauCa,NgayLam,ThoiGianBD,TienMatLucVaoCa,GhiChu) values (?,?,?,?,?,?,?)";
-    private static final String SQL_SELECT_BYTime = "select * from LSCaLam where MaNV = ? AND NgayLam = ?";
-    private static final String SQL_SELECT_ALL = "select * from LSCaLam";
-    private static final String SQL_SELECT_BYMaNV = "select * from LSCaLam where MaNV = ?";
     
-    public LichSuCaLam selectByTime(String MaNV, String NgayLam) {
-        return selectBySql(SQL_SELECT_BYTime, MaNV, NgayLam).get(0);
-    }
-    public LichSuCaLam selectByMaNV(String MaNV){
-        return selectBySql(SQL_SELECT_BYMaNV,MaNV).get(0);
-    }
-
+    private static final String SQL_INSERT = "insert into LSCaLam(MaNV, MaCaLam, TienVaoDauCa, TienCuoiCa, ThoiGianBD, ThoiGianKT, TienThucNhan, TienThucThu, GhiChuNhan, GhiChuThu, TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE LSCaLam SET MaNV=?, MaCaLam=?, TienVaoDauCa=?, TienCuoiCa=?, ThoiGianBD=?, ThoiGianKT=?, TienThucNhan=?, TienThucThu=?, GhiChuNhan=?, GhiChuThu=?, TrangThai=? WHERE MaLSCL=?";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM LSCaLam";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM LSCaLam WHERE MaLSCL=?";
+    private static final String SQL_DELETE = "DELETE FROM LSCaLam WHERE MaLSCL=?";
+    
     @Override
     public void insert(LichSuCaLam entity) {
-        JdbcHelper.update(SQL_INSERT,entity.getMaNV(),entity.getTenCaLam(),entity.getTienVaoDauCa(),entity.getNgayLam(),entity.getThoiGianDB(),entity.getTienMatLucVaoCa(),entity.getGhiChu());
+        JdbcHelper.update(SQL_INSERT, entity.getMaNV(), entity.getMaCaLam(),
+                entity.getTienVaoDauCa(), entity.getTienCuoiCa(), entity.getThoiGianBD(), entity.getThoiGianKT(), entity.getTienThucNhan(), entity.getTienThucThu(),
+                entity.getGhiChuNhan(),
+                entity.getGhiChuThu(), entity.isTrangThai());
     }
-
+    
     @Override
     public void update(LichSuCaLam entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JdbcHelper.update(SQL_UPDATE, entity.getMaNV(), entity.getMaCaLam(),
+                entity.getTienVaoDauCa(), entity.getTienCuoiCa(), entity.getThoiGianBD(), entity.getThoiGianKT(), entity.getTienThucNhan(), entity.getTienThucThu(),
+                entity.getGhiChuNhan(),
+                entity.getGhiChuThu(), entity.isTrangThai());
     }
-
+    
     @Override
     public void delete(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JdbcHelper.update(SQL_DELETE, id);
     }
-
+    
     @Override
     public LichSuCaLam selectById(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
-
+    
     @Override
     public List<LichSuCaLam> selectAll() {
         return selectBySql(SQL_SELECT_ALL);
     }
-
+    
     @Override
     protected List<LichSuCaLam> selectBySql(String sql, Object... args) {
         List<LichSuCaLam> ls = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.query(sql, args);
-
+            
             while (rs.next()) {
                 int MaLSCL = rs.getInt(1);
                 String MaNV = rs.getString(2);
-                String TenCaLam = rs.getString(3);
+                int MaCaLam = rs.getInt(3);
                 double TienVaoDauCa = rs.getDouble(4);
                 double TienCuoiCa = rs.getDouble(5);
-                Date NgayLam = rs.getDate(6);
-                Time ThoiGianBD = rs.getTime(7);
-                Time ThoiGianKT = rs.getTime(8);
-                double TienMatLucVaoCa = rs.getDouble(9);
-                String GhiChu = rs.getString(10);
-                ls.add(new LichSuCaLam(MaLSCL, MaNV, TenCaLam, TienVaoDauCa, TienCuoiCa, NgayLam, ThoiGianBD,ThoiGianKT,TienMatLucVaoCa,GhiChu));
+                Timestamp ThoiGianBD = rs.getTimestamp(6);
+                Timestamp ThoiGianKT = rs.getTimestamp(7);
+                double TienThucNhan = rs.getDouble(8);
+                double TienThucThu = rs.getDouble(9);
+                String GhiChuNhan = rs.getString(10);
+                String GhiChuThu = rs.getString(11);
+                boolean TrangThai = rs.getBoolean(12);
+                ls.add(new LichSuCaLam(MaLSCL, MaNV, MaCaLam, TienVaoDauCa, TienCuoiCa, ThoiGianBD, ThoiGianKT, TienThucNhan, TienThucThu, GhiChuNhan, GhiChuThu, TrangThai));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -83,5 +86,5 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
         }
         return ls;
     }
-
+    
 }

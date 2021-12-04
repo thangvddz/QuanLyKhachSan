@@ -50,6 +50,10 @@ public class ThanhToanDAO extends DAO<ThanhToan, Integer> {
         return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
     
+    public ThanhToan selectByIdD(Integer id, int maloaiTT) {
+        return selectBySql(SQL_SELECT_BY_ID, id, maloaiTT).get(0);
+    }
+    
     @Override
     public List<ThanhToan> selectAll() {
         return selectBySql(SQL_SELECT_ALL);
@@ -76,6 +80,10 @@ public class ThanhToanDAO extends DAO<ThanhToan, Integer> {
             return null;
         }
         return ls;
+    }
+
+    public ThanhToan selectById(int mahd, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

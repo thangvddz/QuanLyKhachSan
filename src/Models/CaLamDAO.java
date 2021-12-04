@@ -9,6 +9,7 @@ import Entities.CaLam;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +17,17 @@ import java.util.List;
  *
  * @author ACER
  */
-public class CaLamDAO extends DAO<CaLam, String> {
+public class CaLamDAO extends DAO<CaLam, Integer> {
 
-    final String insert = "insert into CaLam(TenCaLam,ThoiGianBDHD,ThoiGianKTHD,GhiChu) values (?,?,?,?)";
-    final String update = "update CaLam set ThoiGianBDHD = ?,ThoiGianKTHD = ?,GhiChu = ? where TenCaLam = ?";
-    final String delete = "delete from CaLam where TenCaLam=? ";
-    final String SELECT_ALL = "select * from CaLam";
-    final String SELECT_BY_MCL = "SELECT * FROM CaLam where TenCaLam = ?";
+    private static final String SQL_INSERT = "insert into CaLam(TenCaLam,ThoiGianBDHD,ThoiGianKTHD,GhiChu) values (?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE CaLam SET TenCaLam=?,ThoiGianBDHD=?,ThoiGianKTHD=?,GhiChu=? WHERE MaCaLam=?";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM CaLam";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM CaLam WHERE MaCaLam=?";
+    private static final String SQL_DELETE = "DELETE FROM CaLam WHERE MaCaLam=?";
 
     @Override
     public void insert(CaLam entity) {
-        JdbcHelper.update(insert,
+        JdbcHelper.update(SQL_INSERT,
                 entity.getTenCaLam(),
                 entity.getThoiGianDBHD(),
                 entity.getThoiGianKTHD(),
@@ -35,28 +36,27 @@ public class CaLamDAO extends DAO<CaLam, String> {
 
     @Override
     public void update(CaLam entity) {
-        JdbcHelper.update(insert,
+        JdbcHelper.update(SQL_UPDATE,
                 entity.getTenCaLam(),
                 entity.getThoiGianDBHD(),
                 entity.getThoiGianKTHD(),
-                entity.getGhiChu());
+                entity.getGhiChu(),
+                entity.getMaCaLam());
     }
 
     @Override
-    public void delete(String id) {
-        String sql = "delete from CaLam where TenCaLam = ? ";
-        JdbcHelper.update(sql, id);
-        JdbcHelper.update(delete, id);
+    public void delete(Integer id) {
+        JdbcHelper.update(SQL_DELETE, id);
     }
 
     @Override
-    public CaLam selectById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CaLam selectById(Integer id) {
+        return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
 
     @Override
     public List<CaLam> selectAll() {
-        return selectBySql(SELECT_ALL);
+        return selectBySql(SQL_SELECT_ALL);
     }
 
     @Override
@@ -66,11 +66,12 @@ public class CaLamDAO extends DAO<CaLam, String> {
             ResultSet rs = JdbcHelper.query(sql, args);
 
             while (rs.next()) {
-                String TenCaLAM = rs.getString(1);
-                Time ThoiGianBDHD = rs.getTime(2);
-                Time ThoiGianKTHD = rs.getTime(3);
-                String GhiChu = rs.getString(4);
-                ls.add(new CaLam(TenCaLAM, ThoiGianBDHD, ThoiGianKTHD, GhiChu));
+                int maCaLam = rs.getInt(1);
+                String TenCaLAM = rs.getString(2);
+                Timestamp ThoiGianBDHD = rs.getTimestamp(3);
+                Timestamp ThoiGianKTHD = rs.getTimestamp(4);
+                String GhiChu = rs.getString(5);
+                ls.add(new CaLam(maCaLam, TenCaLAM, ThoiGianBDHD, ThoiGianKTHD, GhiChu));
             }
         } catch (SQLException ex) {
             System.out.println("Error selectbySQL in CaLamDao");
@@ -81,4 +82,5 @@ public class CaLamDAO extends DAO<CaLam, String> {
         }
         return ls;
     }
+
 }

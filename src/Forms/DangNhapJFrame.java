@@ -21,7 +21,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
      * Creates new form DangNhapJFrame
      */
     NhanVienDAO dao = new NhanVienDAO();
-
+    
     public DangNhapJFrame() {
         initComponents();
         init();
@@ -182,10 +182,12 @@ public class DangNhapJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JPasswordField txtMatKhau;
     // End of variables declaration//GEN-END:variables
-private void init() {
+
+    private void init() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
-
+    
     private void login() {
         String user = txtMaNV.getText();
         String matKhau = new String(txtMatKhau.getPassword());
@@ -196,7 +198,9 @@ private void init() {
                 if (matKhau.equals(matKhau2)) {
                     Auth.user = nhanVien;
                     mgsBox.alert(this, "Đăng nhập thành công!");
-                    this.dispose();
+                    VaoCaJFrame vaoCaJFrame = new VaoCaJFrame();
+                    vaoCaJFrame.setVisible(true);
+                    this.setVisible(false);
                 } else {
                     mgsBox.alert(this, "Sai mật khẩu!");
                 }
@@ -208,7 +212,7 @@ private void init() {
             mgsBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-
+    
     private void exit() {
         int hoi = JOptionPane.showConfirmDialog(this, "Bạn muốn thoát thật không?");
         if (hoi != JOptionPane.YES_OPTION) {

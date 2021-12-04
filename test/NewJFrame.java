@@ -32,6 +32,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable, ThreadFac
      */
     public NewJFrame() {
         initComponents();
+        Timestamp localDate = new Timestamp(System.currentTimeMillis() +(24*3600*1000));
+        System.out.println("local time: " + localDate);
     }
 
     /**

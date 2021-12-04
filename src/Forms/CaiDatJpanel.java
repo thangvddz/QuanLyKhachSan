@@ -5,10 +5,15 @@
  */
 package Forms;
 
+import Entities.CaLam;
 import Entities.Config;
+import Models.CaLamDAO;
 import Utils.checkText;
 import Utils.mgsBox;
 import Utils.xFile;
+import java.awt.event.ItemEvent;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -19,6 +24,7 @@ public class CaiDatJpanel extends javax.swing.JPanel {
     /**
      * Creates new form CaiDatJpanel
      */
+
     public CaiDatJpanel() {
         initComponents();
         fillObjectConfig();
@@ -143,7 +149,7 @@ public class CaiDatJpanel extends javax.swing.JPanel {
                 .addComponent(txtPhutChkOut, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +201,9 @@ public class CaiDatJpanel extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
                 .addContainerGap())
         );
@@ -208,7 +214,7 @@ public class CaiDatJpanel extends javax.swing.JPanel {
         save();
         fillObjectConfig();
     }//GEN-LAST:event_btnSaveActionPerformed
-    
+
     public void save() {
         if (mgsBox.confirm(this, "Bạn có chắc lưu thay đổi.?")) {
             if (checkText.isHour(txtGioChkIn.getText())) {
@@ -225,6 +231,7 @@ public class CaiDatJpanel extends javax.swing.JPanel {
                     } else {
                         mgsBox.alert(this, "Phút check-in không đúng định dạng");
                     }
+
                 } else {
                     mgsBox.alert(this, "Giờ check-out không đúng định dạng");
                 }
@@ -233,7 +240,7 @@ public class CaiDatJpanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public void fillObjectConfig() {
         Config c = (Config) xFile.readFile();
         if (c == null) {
@@ -242,19 +249,20 @@ public class CaiDatJpanel extends javax.swing.JPanel {
             fillForm(c);
         }
     }
-    
+
     public void clearForm() {
         txtGioChkIn.setText("");
         txtPhutChkIn.setText("");
         txtGioChkOut.setText("");
         txtPhutChkOut.setText("");
     }
-    
+
     public void fillForm(Config config) {
         txtGioChkIn.setText(String.valueOf(config.getGioChkIn()));
         txtPhutChkIn.setText(String.valueOf(config.getPhutChkIn()));
         txtGioChkOut.setText(String.valueOf(config.getGioChkOut()));
         txtPhutChkOut.setText(String.valueOf(config.getPhutChkOut()));
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
