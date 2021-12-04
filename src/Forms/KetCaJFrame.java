@@ -5,6 +5,21 @@
  */
 package Forms;
 
+import Entities.LichSuCaLam;
+import Utils.Auth;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import Models.LichSuCaLamDAO;
+import Utils.mgsBox;
+import Utils.xDate;
+import java.text.DateFormat;
+import java.util.ArrayList;
+
 /**
  *
  * @author ACER
@@ -14,8 +29,11 @@ public class KetCaJFrame extends javax.swing.JFrame {
     /**
      * Creates new form KetCaJFrame
      */
+    LichSuCaLamDAO lscldao = new LichSuCaLamDAO();
+
     public KetCaJFrame() {
         initComponents();
+        init();
     }
 
     /**
@@ -27,22 +45,225 @@ public class KetCaJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTenNhanVien = new javax.swing.JLabel();
+        lblMaNV = new javax.swing.JLabel();
+        lblDongHoKetCa = new javax.swing.JLabel();
+        txtTienDauCa = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtTongSoHoaDon = new javax.swing.JTextField();
+        txtTienHang = new javax.swing.JTextField();
+        btnThongKeCaLam = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
+        btnKetCa = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtTienCuoiCa = new javax.swing.JTextField();
+        txtDoanhThuCa = new javax.swing.JTextField();
+        txtTienTheNganHang = new javax.swing.JTextField();
+        txtTienMat = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BAO CAO KET CA");
+
+        lblTenNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTenNhanVien.setText("jLabel11");
+
+        lblMaNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblMaNV.setText("jLabel1");
+
+        lblDongHoKetCa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblDongHoKetCa.setForeground(new java.awt.Color(204, 0, 0));
+        lblDongHoKetCa.setText("jLabel12");
+
+        txtTienDauCa.setEditable(false);
+        txtTienDauCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienDauCaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel2.setText("Tiền đầu ca:");
+
+        jLabel3.setText("Tổng số hóa đơn:");
+
+        txtTongSoHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongSoHoaDonActionPerformed(evt);
+            }
+        });
+
+        btnThongKeCaLam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_25px.png"))); // NOI18N
+        btnThongKeCaLam.setText("THỐNG KÊ CA LÀM");
+        btnThongKeCaLam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeCaLamActionPerformed(evt);
+            }
+        });
+
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_cancel_25px.png"))); // NOI18N
+        btnThoat.setText("THOÁT");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
+        btnKetCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Accept.png"))); // NOI18N
+        btnKetCa.setText("KẾT CA");
+        btnKetCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetCaActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel9.setText("Tiền cuối ca:");
+
+        jLabel8.setText("Doanh thu ca:");
+
+        txtTienCuoiCa.setEditable(false);
+
+        jLabel6.setText("Tiền mặt:");
+
+        jLabel7.setText("Tiền thẻ:");
+
+        jLabel4.setText("Tiền hàng:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDongHoKetCa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTongSoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTienHang, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTienDauCa, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtTienTheNganHang, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(53, 53, 53)
+                                            .addComponent(txtTienMat, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtDoanhThuCa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtTienCuoiCa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(0, 116, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(btnKetCa)
+                .addGap(64, 64, 64)
+                .addComponent(btnThoat)
+                .addGap(48, 48, 48)
+                .addComponent(btnThongKeCaLam)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDoanhThuCa, txtTienCuoiCa, txtTienDauCa, txtTienHang, txtTienMat, txtTienTheNganHang, txtTongSoHoaDon});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 615, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDongHoKetCa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTenNhanVien)
+                    .addComponent(lblMaNV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtTienDauCa, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTongSoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTienHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtTienMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtTienTheNganHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtDoanhThuCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtTienCuoiCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThoat)
+                    .addComponent(btnKetCa)
+                    .addComponent(btnThongKeCaLam))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtDoanhThuCa, txtTienCuoiCa, txtTienDauCa, txtTienHang, txtTienMat, txtTienTheNganHang, txtTongSoHoaDon});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtTienDauCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienDauCaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienDauCaActionPerformed
+
+    private void txtTongSoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongSoHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongSoHoaDonActionPerformed
+
+    private void btnThongKeCaLamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeCaLamActionPerformed
+        ThongKeCaLamJframe caLam = new ThongKeCaLamJframe();
+        caLam.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnThongKeCaLamActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        int hoi = JOptionPane.showConfirmDialog(this, "Bạn muốn thoát thật không?");
+        if (hoi != JOptionPane.YES_OPTION) {
+            return;
+        }
+        System.exit(0);
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
+
+    }//GEN-LAST:event_btnKetCaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +301,52 @@ public class KetCaJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKetCa;
+    private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btnThongKeCaLam;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblDongHoKetCa;
+    private javax.swing.JLabel lblMaNV;
+    private javax.swing.JLabel lblTenNhanVien;
+    private javax.swing.JTextField txtDoanhThuCa;
+    private javax.swing.JTextField txtTienCuoiCa;
+    private javax.swing.JTextField txtTienDauCa;
+    private javax.swing.JTextField txtTienHang;
+    private javax.swing.JTextField txtTienMat;
+    private javax.swing.JTextField txtTienTheNganHang;
+    private javax.swing.JTextField txtTongSoHoaDon;
     // End of variables declaration//GEN-END:variables
+    private void init() {
+        this.setLocationRelativeTo(null);
+        new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                Date now = new Date();
+                SimpleDateFormat formater = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String text = formater.format(now);
+                lblDongHoKetCa.setText("Giờ hiện tại: " + text);
+            }
+        }).start();
+        lblTenNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
+        lblMaNV.setText(Auth.user.getMaNV());
+        edit();
+
+    }
+
+    private void edit() {
+        String manv = lblMaNV.getText();
+        try {
+            LichSuCaLam model = lscldao.selectByTime(manv, xDate.timeNow2());
+            //System.out.println(model);
+            txtTienDauCa.setText(String.valueOf(model.getTienVaoDauCa()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
