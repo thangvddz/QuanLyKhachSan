@@ -35,7 +35,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     public static boolean switchSize;
     public static GridBagConstraints gbc;
     PhongDAO phongDAO;
-    
+
     public ManHinhChinhGUI() {
         initComponents();
         setTitle("Quản lý khách sạn");
@@ -43,7 +43,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         init();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -353,6 +353,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnDangXuatMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDangXuatMousePressed(evt);
+            }
         });
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -628,7 +631,16 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
         new KetCaJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_btnKetCaActionPerformed
-    
+
+    private void btnDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMousePressed
+        // TODO add your handling code here:
+        if (mgsBox.confirm(this, "Bạn có chắc muốn đăng xuất ?")) {
+//            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//            this.setVisible(false);
+//            new DangNhapJDialog(this, true).setVisible(true);
+        }
+    }//GEN-LAST:event_btnDangXuatMousePressed
+
     public void init() {
         phongDAO = new PhongDAO();
         gbc = new GridBagConstraints();
@@ -639,25 +651,25 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         fillToHome();
         fillCheckInCheckOut();
         new DangNhapJDialog(this, true).setVisible(true);
-        new VaoCaJDialog(this, true).setVisible(true);
+//        new VaoCaJDialog(this, true).setVisible(true);
         fillNhanVien();
     }
-    
+
     public void fillToHome() {
         resetStatus();
         JPanel home = new HomePanel();
         SwitchPanel(home);
     }
-    
+
     public void resetStatus() {
         phongDAO.updateMaTT3();
     }
 
     // thay đổi giao diện hiển thị trong panel pnlScreen
     public static void SwitchPanel(JPanel panel) {
-        
+
         pnlScreen.removeAll();
-        
+
         panel.setVisible(true);
 //        MapRoom.setGridBagLayout(gbc, pnlScreen);
         pnlScreen.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -666,15 +678,15 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         pnlScreen.revalidate();
         pnlScreen.repaint();
     }
-    
+
     public void changeColor(JPanel panel) {
         panel.setBackground(new Color(224, 70, 84));
     }
-    
+
     public void resetColor(JPanel panel) {
         panel.setBackground(new Color(247, 22, 52));
     }
-    
+
     public static void fillCheckInCheckOut() {
         Config c = (Config) xFile.readFile();
         if (c == null) {
@@ -695,7 +707,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void fillNhanVien() {
         txtThongTinNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
     }
