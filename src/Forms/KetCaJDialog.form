@@ -243,6 +243,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="K&#x1ebe;T CA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetCaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnThoat">
       <Properties>

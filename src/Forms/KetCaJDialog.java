@@ -35,7 +35,7 @@ public class KetCaJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         init();
-        
+        //tiencuoica();
     }
 
     /**
@@ -111,6 +111,11 @@ public class KetCaJDialog extends javax.swing.JDialog {
 
         btnKetCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Accept.png"))); // NOI18N
         btnKetCa.setText("KẾT CA");
+        btnKetCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetCaActionPerformed(evt);
+            }
+        });
 
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_cancel_25px.png"))); // NOI18N
         btnThoat.setText("THOÁT");
@@ -263,6 +268,10 @@ public class KetCaJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTongSoHoaDonActionPerformed
 
+    private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
+        ketca();
+    }//GEN-LAST:event_btnKetCaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -345,15 +354,26 @@ public class KetCaJDialog extends javax.swing.JDialog {
     }
 
     private void edit() {
-            String manv = lblMaNV.getText();
-            //String now = xDate.timeNow();
-            try {
+        String manv = lblMaNV.getText();
+        try {
             LichSuCaLam model = lscldao.selectByTime(manv, xDate.timeNow2());
             //System.out.println(model);
             txtTienDauCa.setText(String.valueOf(model.getTienVaoDauCa()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-            
     }
+
+    private void tiencuoica() {
+        int tiendauca = Integer.parseInt(txtTienDauCa.getText());
+        int doanhthuca = Integer.parseInt(txtDoanhThuCa.getText());
+        float tb = tiendauca + doanhthuca;
+        txtTienCuoiCa.setText(tb + "");
+    }
+
+    private void ketca() {
+
+    }
+
+    
 }
