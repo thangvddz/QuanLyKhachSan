@@ -24,16 +24,15 @@ import javax.swing.Timer;
  *
  * @author ACER
  */
-public class VaoCaJDialog extends javax.swing.JDialog {
+public class VaoCaJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form VaoCaJDialog
+     * Creates new form VaoCaJFrame
      */
     LichSuCaLamDAO daoLSCL = new LichSuCaLamDAO();
     CaLamDAO cldao = new CaLamDAO();
 
-    public VaoCaJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public VaoCaJFrame() {
         initComponents();
         init();
     }
@@ -48,22 +47,42 @@ public class VaoCaJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnLuu = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        txtTienDauCa = new javax.swing.JTextField();
-        lblDongHo = new javax.swing.JLabel();
         lblHoTen = new javax.swing.JLabel();
+        lblDongHo = new javax.swing.JLabel();
+        txtTienDauCa = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cboTenCa = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         txtTienNhanVaoCa = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtGhiChu = new javax.swing.JTextField();
+        btnLuu = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("KHAI BAO TIEN DAU CA");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Nhân Viên:");
+
+        lblHoTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblHoTen.setText("a");
+
+        lblDongHo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDongHo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        txtTienDauCa.setText("0");
+        txtTienDauCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienDauCaActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Tiền đầu ca:");
+
+        jLabel13.setText("Ca Làm: ");
+
+        jLabel2.setText("Tiền mặt nhận lúc vào ca:");
+
+        jLabel3.setText("Ghi chú:");
 
         btnLuu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Accept.png"))); // NOI18N
@@ -73,27 +92,6 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                 btnLuuActionPerformed(evt);
             }
         });
-
-        jLabel12.setText("Tiền đầu ca:");
-
-        txtTienDauCa.setText("0");
-        txtTienDauCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTienDauCaActionPerformed(evt);
-            }
-        });
-
-        lblDongHo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblDongHo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        lblHoTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblHoTen.setText("a");
-
-        jLabel13.setText("Ca Làm: ");
-
-        jLabel2.setText("Tiền mặt nhận lúc vào ca:");
-
-        jLabel3.setText("Ghi chú:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,7 +106,7 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                                 .addComponent(lblDongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,10 +117,6 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                                     .addComponent(cboTenCa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtTienDauCa)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(btnLuu)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -132,6 +126,10 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                             .addComponent(txtGhiChu)
                             .addComponent(txtTienNhanVaoCa))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(btnLuu)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,30 +156,30 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(30, 30, 30))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboTenCa, jLabel12, jLabel13, jLabel2, jLabel3, txtGhiChu, txtTienDauCa, txtTienNhanVaoCa});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cboTenCa, txtGhiChu, txtTienDauCa, txtTienNhanVaoCa});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        luu();
-        //System.out.println(xDate.timeNow1());
-//        Date now = new Date();
-//		System.out.println(now);
-//		
-//		// chuyển Date sang Timestamp
-//		Timestamp timestamp = new Timestamp(now.getTime());
-//		System.out.println(timestamp);
-    }//GEN-LAST:event_btnLuuActionPerformed
-
     private void txtTienDauCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienDauCaActionPerformed
 
     }//GEN-LAST:event_txtTienDauCaActionPerformed
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        luu();
+        //System.out.println(xDate.timeNow1());
+        //        Date now = new Date();
+        //		System.out.println(now);
+        //
+        //		// chuyển Date sang Timestamp
+        //		Timestamp timestamp = new Timestamp(now.getTime());
+        //		System.out.println(timestamp);
+    }//GEN-LAST:event_btnLuuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,27 +198,20 @@ public class VaoCaJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VaoCaJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VaoCaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VaoCaJDialog dialog = new VaoCaJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new VaoCaJFrame().setVisible(true);
             }
         });
     }
@@ -285,5 +276,4 @@ public class VaoCaJDialog extends javax.swing.JDialog {
             model.addElement(caLam.getTenCaLam());
         }
     }
-
 }

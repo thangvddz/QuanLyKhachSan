@@ -894,7 +894,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         mgsBox.alert(this, "Cập nhật hình thức giờ sang ngày thành công");
                     } else {
                         if (mgsBox.confirm(this, "Đã quá thời gian được phép cập hình thức thuê(" + LIMIT_CHANGE * 2 + " h), Nếu đồng ý bạn sẽ phải chịu thêm cả phí ngày lẫn phí giờ trong cùng một ngày.")) {
-                            updateLSGD();
+//                            updateLSGD();
+                            xTime.setTimeNow(txtGioDV, txtPhutDV);
+                            Date localDate = new Date(System.currentTimeMillis());
+                            jdcCheckOut.setDate(localDate);
                             insertLSGD();
                             mgsBox.alert(this, "Chuyển đổi giờ sang ngày thành công");
                             DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
@@ -1000,15 +1003,15 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
         if (jdcCheckOut.getDate() != null) {
             hoaDonDAO.update(new HoaDon(hd.getMaHD(), Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
-                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut), 
+                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut),
                     xMoney.VNDongToDouble(txtTraTruoc.getText()),
-                    xMoney.VNDongToDouble(txtGiamGia.getText()), 
+                    xMoney.VNDongToDouble(txtGiamGia.getText()),
                     xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         } else {
             hoaDonDAO.update(new HoaDon(hd.getMaHD(), Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
-                    null, 
+                    null,
                     xMoney.VNDongToDouble(txtTraTruoc.getText()),
-                    xMoney.VNDongToDouble(txtGiamGia.getText()), 
+                    xMoney.VNDongToDouble(txtGiamGia.getText()),
                     xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         }
 

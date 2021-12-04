@@ -22,9 +22,13 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
     private static final String SQL_INSERT = "insert into LSCaLam(MaNV,TenCaLam,TienVaoDauCa,NgayLam,ThoiGianBD,TienMatLucVaoCa,GhiChu) values (?,?,?,?,?,?,?)";
     private static final String SQL_SELECT_BYTime = "select * from LSCaLam where MaNV = ? AND NgayLam = ?";
     private static final String SQL_SELECT_ALL = "select * from LSCaLam";
+    private static final String SQL_SELECT_BYMaNV = "select * from LSCaLam where MaNV = ?";
     
     public LichSuCaLam selectByTime(String MaNV, String NgayLam) {
         return selectBySql(SQL_SELECT_BYTime, MaNV, NgayLam).get(0);
+    }
+    public LichSuCaLam selectByMaNV(String MaNV){
+        return selectBySql(SQL_SELECT_BYMaNV,MaNV).get(0);
     }
 
     @Override
