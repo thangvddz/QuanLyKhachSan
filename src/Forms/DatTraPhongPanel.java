@@ -14,6 +14,7 @@ import Entities.LichSuGD;
 import Entities.LoaiPhong;
 import Entities.LoaiThanhToan;
 import Entities.Phong;
+import Entities.ThanhToan;
 import Entities.ThongTinPhongDaThue;
 import Entities.YeuCau;
 import Models.DichVuDAO;
@@ -1014,6 +1015,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        insertThanhToan();
     }
 
     public void updateHoaDon() {
@@ -1035,7 +1037,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     xMoney.VNDongToDouble(txtGiamGia.getText()),
                     xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         }
-
+        updateThanhToan();
     }
 
     public void insertHDCT() {
@@ -1130,9 +1132,27 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
+
+    public void insertThanhToan() {
+        try {
+            HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
+            LoaiThanhToan tt =  (LoaiThanhToan) cboThanhToan.getSelectedItem();
+            Timestamp ThoiGianThanhToan = new Timestamp(System.currentTimeMillis());
+            thanhToanDAO.insert(new ThanhToan(hd.getMaHD(), tt.getLoaiThanhToan(), ThoiGianThanhToan, "Thanh toan tra truoc"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }   
     
-    public void insertThanhToan(){
-        
+    public void updateThanhToan() {
+        try {
+            HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
+            LoaiThanhToan tt =  (LoaiThanhToan) cboThanhToan.getSelectedItem();
+            Timestamp ThoiGianThanhToan = new Timestamp(System.currentTimeMillis());
+            thanhToanDAO.update(new ThanhToan(hd.getMaHD(), tt.getLoaiThanhToan(), ThoiGianThanhToan, "Thanh toan tra truoc"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void fillComboboxKhachHangCu() {

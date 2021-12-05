@@ -24,6 +24,8 @@ import Models.LoaiThanhToanDAO;
 import Models.ThanhToanDAO;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xMoney;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -173,6 +175,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
         jLabel1.setText("Tiền thực thu :");
         jPanel6.add(jLabel1);
 
+        txtTienThucThu.setText("0");
         txtTienThucThu.setPreferredSize(new java.awt.Dimension(180, 30));
         jPanel6.add(txtTienThucThu);
 
@@ -236,7 +239,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
         if (hoi != JOptionPane.YES_OPTION) {
             this.setVisible(false);
         }
-        System.exit(0);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
@@ -319,58 +321,63 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
     private void fillForm() {
         try {
+            Timestamp localDate = new Timestamp(System.currentTimeMillis());
             List<LichSuCaLam> lslscl = lscldao.selectAll();
             lichSuCuoi = lslscl.get(lslscl.size() - 1);
             CaLam cl = caLamDAO.selectById(lichSuCuoi.getMaCaLam());
-            List<Object[]> lsHD = hddao.getHoaDonTheoCa(cl.getThoiGianDBHD(), cl.getThoiGianKTHD(), Auth.user.getMaNV());
+            List<Object[]> lsHD = hddao.getHoaDonTheoCa(lichSuCuoi.getThoiGianBD(), localDate, Auth.user.getMaNV());
             for (Object[] objects : lsHD) {
                 int mahd = (int) objects[0];
-                double tienTraTruoc = (double) objects[5];
-                double tienGiamGia = (double) objects[6];
-                double tienPhuThu = (double) objects[7];
-                double tienTongTien = (double) objects[8];
-                try {
-                    ThanhToan tt = thanhToanDAO.selectById(mahd, 1);
+                BigDecimal bd1 = (BigDecimal) objects[5];
+                double tienTraTruoc = bd1.doubleValue();
+                BigDecimal bd2 = (BigDecimal) objects[8];
+                double tienTongTien = bd2.doubleValue();
+                ThanhToan tt = thanhToanDAO.selectById(mahd);
+                if (tt.getMaLoaiTT() == 1) {
                     if (tienTongTien == 0) {
                         tienMat += tienTraTruoc;
                     } else {
                         tienMat += tienTongTien;
                     }
-                } catch (Exception e) {
-                }
-
-                try {
-                    ThanhToan tt = thanhToanDAO.selectById(mahd, 2);
+                } else if (tt.getMaLoaiTT() == 2) {
                     if (tienTongTien == 0) {
                         tienThe += tienTraTruoc;
                     } else {
                         tienThe += tienTongTien;
                     }
-                } catch (Exception e) {
+                } else {
+                    if (tienTongTien == 0) {
+                        tienMat += tienTraTruoc;
+                    } else {
+                        tienMat += tienTongTien;
+                    }
                 }
-
             }
 
-            txtTienDauCa.setText(String.valueOf(lichSuCuoi.getTienThucNhan()));
-            txtTienMat.setText(String.valueOf(tienMat));
-            txtTienTheNganHang.setText(String.valueOf(tienThe));
-            double tongTienn = tienMat + tienThe;
-            txtTienCuoiCa.setText(String.valueOf(tongTienn));
-
-            lichSuCuoi.setTienCuoiCa(tienCuoiCa);
-            lichSuCuoi.setTienThucThu(Double.parseDouble(txtTienThucThu.getText()));
-            lichSuCuoi.setGhiChuThu(txtGhiChu.getText());
-            lichSuCuoi.setTrangThai(false);
-
+            txtTienDauCa.setText(xMoney.doubleToVNDong(lichSuCuoi.getTienThucNhan()));
+            txtTienMat.setText(xMoney.doubleToVNDong(tienMat));
+            txtTienTheNganHang.setText(xMoney.doubleToVNDong(tienThe));
+            tienCuoiCa = tienMat + tienThe;
+            txtTienCuoiCa.setText(xMoney.doubleToVNDong(tienCuoiCa));
+            
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String stringTGBD = dateFormat.format(lichSuCuoi.getThoiGianBD());
             lblThoiGianBD.setText(stringTGBD);
-            Timestamp localDate = new Timestamp(System.currentTimeMillis());
-            lichSuCuoi.setThoiGianKT(localDate);
+
             String stringTGKT = dateFormat.format(localDate);
-            lblThoiGianBD.setText(stringTGKT);
+            lblThoiGianKT.setText(stringTGKT);
         } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public void setLsCuoi() {
+        Timestamp localDate = new Timestamp(System.currentTimeMillis());
+        lichSuCuoi.setTienCuoiCa(tienCuoiCa);
+        lichSuCuoi.setTienThucThu(Double.parseDouble(txtTienThucThu.getText()));
+        lichSuCuoi.setGhiChuThu(txtGhiChu.getText());
+        lichSuCuoi.setTrangThai(false);
+        lichSuCuoi.setThoiGianKT(localDate);
     }
 
 }

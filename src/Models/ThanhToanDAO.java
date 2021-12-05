@@ -19,9 +19,9 @@ import java.util.List;
 public class ThanhToanDAO extends DAO<ThanhToan, Integer> {
     
     private static final String SQL_INSERT = "INSERT INTO THANHTOAN(MaHD, MaLoaiTT, ThoiGianThanhToan, GhiChu) VALUES (?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE THANHTOAN SET MaHD=?, MaLoaiTT=?, ThoiGianThanhToan=?, GhiChu=? WHERE MaHD=? and MaLoaiTT=?";
+    private static final String SQL_UPDATE = "UPDATE THANHTOAN SET MaLoaiTT=?, ThoiGianThanhToan=?, GhiChu=? WHERE MaHD=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM THANHTOAN";
-    private static final String SQL_SELECT_BY_ID = "SELECT * FROM THANHTOAN WHERE MaHD=? and MaLoaiTT=?";
+    private static final String SQL_SELECT_BY_ID = "SELECT top 1 * FROM THANHTOAN WHERE MaHD=? order by ThoiGianThanhToan desc";
     private static final String SQL_DELETE = "DELETE FROM THANHTOAN WHERE MaHD=? and MaLoaiTT=?";
     
     JdbcHelper jdbc;
@@ -37,7 +37,7 @@ public class ThanhToanDAO extends DAO<ThanhToan, Integer> {
     
     @Override
     public void update(ThanhToan entity) {
-        jdbc.update(SQL_UPDATE, entity.getMaHD(), entity.getMaLoaiTT(), entity.getThoiGianThanhToan(), entity.getGhiChu(), entity.getMaHD(), entity.getMaLoaiTT());
+        jdbc.update(SQL_UPDATE, entity.getMaLoaiTT(), entity.getThoiGianThanhToan(), entity.getGhiChu(), entity.getMaHD());
     }
     
     @Override
@@ -48,10 +48,6 @@ public class ThanhToanDAO extends DAO<ThanhToan, Integer> {
     @Override
     public ThanhToan selectById(Integer id) {
         return selectBySql(SQL_SELECT_BY_ID, id).get(0);
-    }
-    
-    public ThanhToan selectByIdD(Integer id, int maloaiTT) {
-        return selectBySql(SQL_SELECT_BY_ID, id, maloaiTT).get(0);
     }
     
     @Override
@@ -81,9 +77,4 @@ public class ThanhToanDAO extends DAO<ThanhToan, Integer> {
         }
         return ls;
     }
-
-    public ThanhToan selectById(int mahd, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

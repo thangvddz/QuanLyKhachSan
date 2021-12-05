@@ -12,11 +12,13 @@ import Models.LichSuCaLamDAO;
 import Utils.Auth;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xMoney;
 import Utils.xTime;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +87,8 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         jLabel12.setText("Tiền đầu ca:");
 
         jLabel13.setText("Ca Làm: ");
+
+        txtTienThucNhan.setText("0");
 
         jLabel2.setText("Tiền thực nhận");
 
@@ -196,6 +200,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
     private void init() {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        fillTienDauCa();
         configCa();
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -210,6 +215,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         lblHoTen.setText(Auth.user.getHoTen());
         updateCa();
         fillComboBoxCa();
+        setCA();
     }
 
     private void luu() {
@@ -222,6 +228,16 @@ public class VaoCaJFrame extends javax.swing.JFrame {
             this.setVisible(false);
         } catch (Exception e) {
             mgsBox.alert(this, "Lưu thất bại");
+            e.printStackTrace();
+        }
+    }
+
+    public void fillTienDauCa() {
+        try {
+            List<LichSuCaLam> lscl = daoLSCL.selectAll();
+            LichSuCaLam lscll = lscl.get(lscl.size() - 1);
+            txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienThucThu()));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -269,6 +285,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
             List<CaLam> lsCaLam = cldao.selectAll();
             for (int i = 0; i < lsCaLam.size(); i++) {
                 Object[] ob = ls.get(i);
+
                 int hour_begin = (int) ob[0];
                 int minute_begin = (int) ob[1];
                 int hour_end = (int) ob[2];
@@ -286,7 +303,6 @@ public class VaoCaJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -301,17 +317,29 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         ls.add(obj1);
         //ca chieu
         Object[] obj2 = new Object[4];
-        obj1[0] = 14;
-        obj1[1] = 00;
-        obj1[2] = 22;
-        obj1[3] = 00;
+        obj2[0] = 14;
+        obj2[1] = 00;
+        obj2[2] = 22;
+        obj2[3] = 00;
         ls.add(obj2);
         // ca toi
         Object[] obj3 = new Object[4];
-        obj1[0] = 22;
-        obj1[1] = 00;
-        obj1[2] = 6;
-        obj1[3] = 00;
+        obj3[0] = 22;
+        obj3[1] = 00;
+        obj3[2] = 6;
+        obj3[3] = 00;
         ls.add(obj3);
+    }
+
+    public void setCA() {
+        LocalDateTime now = LocalDateTime.now();
+        int hour = now.getHour();
+        if (hour >= 22 || (hour >= 0 && hour < 6)) {
+            cboTenCa.setSelectedIndex(2);
+        } else if (hour >= 14) {
+            cboTenCa.setSelectedIndex(1);
+        } else {
+            cboTenCa.setSelectedIndex(0);
+        }
     }
 }

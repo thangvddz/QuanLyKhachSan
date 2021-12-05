@@ -5,10 +5,12 @@
  */
 package Forms;
 
+import Entities.Config;
 import Models.NhanVienDAO;
 import Entities.NhanVien;
 import Utils.Auth;
 import Utils.mgsBox;
+import Utils.xFile;
 import javax.swing.JOptionPane;
 
 /**
@@ -198,6 +200,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
                 if (matKhau.equals(matKhau2)) {
                     Auth.user = nhanVien;
                     mgsBox.alert(this, "Đăng nhập thành công!");
+                    writeFileConfig();
                     VaoCaJFrame vaoCaJFrame = new VaoCaJFrame();
                     vaoCaJFrame.setVisible(true);
                     this.setVisible(false);
@@ -211,6 +214,11 @@ public class DangNhapJFrame extends javax.swing.JFrame {
             e.printStackTrace();
             mgsBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
+    }
+    
+    public void writeFileConfig(){
+        Config con = new Config(14, 0, 12, 0);
+        xFile.writeFile(con);
     }
     
     private void exit() {

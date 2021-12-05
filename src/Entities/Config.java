@@ -60,5 +60,4 @@ public class Config implements Serializable{
         this.phutChkOut = phutChkOut;
     }
     
-    
 }
