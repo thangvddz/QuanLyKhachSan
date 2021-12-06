@@ -59,10 +59,5 @@ public class Config implements Serializable{
     public void setPhutChkOut(int phutChkOut) {
         this.phutChkOut = phutChkOut;
     }
-
-    @Override
-    public String toString() {
-        return "Config{" + "gioChkIn=" + gioChkIn + ", phutChkIn=" + phutChkIn + ", gioChkOut=" + gioChkOut + ", phutChkOut=" + phutChkOut + '}';
-    }
-
+    
 }

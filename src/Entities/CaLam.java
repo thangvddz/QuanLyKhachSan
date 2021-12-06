@@ -5,26 +5,37 @@
  */
 package Entities;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  *
  * @author ACER
  */
 public class CaLam {
+
+    int maCaLam;
     String TenCaLam;
-    Time ThoiGianDBHD;
-    Time ThoiGianKTHD;
+    Timestamp ThoiGianDBHD;
+    Timestamp ThoiGianKTHD;
     String GhiChu;
 
     public CaLam() {
     }
 
-    public CaLam(String TenCaLam, Time ThoiGianDBHD, Time ThoiGianKTHD, String GhiChu) {
+    public CaLam(int maCaLam, String TenCaLam, Timestamp ThoiGianDBHD, Timestamp ThoiGianKTHD, String GhiChu) {
+        this.maCaLam = maCaLam;
         this.TenCaLam = TenCaLam;
         this.ThoiGianDBHD = ThoiGianDBHD;
         this.ThoiGianKTHD = ThoiGianKTHD;
         this.GhiChu = GhiChu;
+    }
+
+    public int getMaCaLam() {
+        return maCaLam;
+    }
+
+    public void setMaCaLam(int maCaLam) {
+        this.maCaLam = maCaLam;
     }
 
     public String getTenCaLam() {
@@ -35,19 +46,19 @@ public class CaLam {
         this.TenCaLam = TenCaLam;
     }
 
-    public Time getThoiGianDBHD() {
+    public Timestamp getThoiGianDBHD() {
         return ThoiGianDBHD;
     }
 
-    public void setThoiGianDBHD(Time ThoiGianDBHD) {
+    public void setThoiGianDBHD(Timestamp ThoiGianDBHD) {
         this.ThoiGianDBHD = ThoiGianDBHD;
     }
 
-    public Time getThoiGianKTHD() {
+    public Timestamp getThoiGianKTHD() {
         return ThoiGianKTHD;
     }
 
-    public void setThoiGianKTHD(Time ThoiGianKTHD) {
+    public void setThoiGianKTHD(Timestamp ThoiGianKTHD) {
         this.ThoiGianKTHD = ThoiGianKTHD;
     }
 
@@ -59,6 +70,9 @@ public class CaLam {
         this.GhiChu = GhiChu;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return  TenCaLam;
+    }
+
 }

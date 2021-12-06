@@ -18,29 +18,37 @@ public class LichSuCaLam {
 
     int MaLSCL;
     String MaNV;
-    String TenCaLam;
+    int MaCaLam;
     double TienVaoDauCa;
     double TienCuoiCa;
-    Date NgayLam;
-    Time ThoiGianDB;
-    Time ThoiGianKT;
-    double TienMatLucVaoCa;
-    String GhiChu;
+    Timestamp ThoiGianBD;
+    Timestamp ThoiGianKT;
+    double TienThucNhan;
+    double TienThucThu;
+    String GhiChuNhan;
+    String GhiChuThu;
+    boolean TrangThai;
 
     public LichSuCaLam() {
     }
 
-    public LichSuCaLam(int MaLSCL, String MaNV, String TenCaLam, double TienVaoDauCa, double TienCuoiCa, Date NgayLam, Time ThoiGianDB, Time ThoiGianKT, double TienMatLucVaoCa, String GhiChu) {
+    public LichSuCaLam(int MaLSCL, String MaNV, int MaCaLam, double TienVaoDauCa, double TienCuoiCa, Timestamp ThoiGianBD, Timestamp ThoiGianKT, double TienThucNhan, double TienThucThu, String GhiChuNhan, String GhiChuThu, boolean TrangThai) {
         this.MaLSCL = MaLSCL;
         this.MaNV = MaNV;
-        this.TenCaLam = TenCaLam;
+        this.MaCaLam = MaCaLam;
         this.TienVaoDauCa = TienVaoDauCa;
         this.TienCuoiCa = TienCuoiCa;
-        this.NgayLam = NgayLam;
-        this.ThoiGianDB = ThoiGianDB;
+        this.ThoiGianBD = ThoiGianBD;
         this.ThoiGianKT = ThoiGianKT;
-        this.TienMatLucVaoCa = TienMatLucVaoCa;
-        this.GhiChu = GhiChu;
+        this.TienThucNhan = TienThucNhan;
+        this.TienThucThu = TienThucThu;
+        this.GhiChuNhan = GhiChuNhan;
+        this.GhiChuThu = GhiChuThu;
+        this.TrangThai = TrangThai;
+    }
+
+    public LichSuCaLam(LichSuCaLam lichSuCuoi) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getMaLSCL() {
@@ -59,12 +67,12 @@ public class LichSuCaLam {
         this.MaNV = MaNV;
     }
 
-    public String getTenCaLam() {
-        return TenCaLam;
+    public int getMaCaLam() {
+        return MaCaLam;
     }
 
-    public void setTenCaLam(String TenCaLam) {
-        this.TenCaLam = TenCaLam;
+    public void setMaCaLam(int MaCaLam) {
+        this.MaCaLam = MaCaLam;
     }
 
     public double getTienVaoDauCa() {
@@ -83,54 +91,60 @@ public class LichSuCaLam {
         this.TienCuoiCa = TienCuoiCa;
     }
 
-    public Date getNgayLam() {
-        return NgayLam;
+    public Timestamp getThoiGianBD() {
+        return ThoiGianBD;
     }
 
-    public void setNgayLam(Date NgayLam) {
-        this.NgayLam = NgayLam;
+    public void setThoiGianBD(Timestamp ThoiGianBD) {
+        this.ThoiGianBD = ThoiGianBD;
     }
 
-    public Time getThoiGianDB() {
-        return ThoiGianDB;
-    }
-
-    public void setThoiGianDB(Time ThoiGianDB) {
-        this.ThoiGianDB = ThoiGianDB;
-    }
-
-    public Time getThoiGianKT() {
+    public Timestamp getThoiGianKT() {
         return ThoiGianKT;
     }
 
-    public void setThoiGianKT(Time ThoiGianKT) {
+    public void setThoiGianKT(Timestamp ThoiGianKT) {
         this.ThoiGianKT = ThoiGianKT;
     }
 
-    public double getTienMatLucVaoCa() {
-        return TienMatLucVaoCa;
+    public double getTienThucNhan() {
+        return TienThucNhan;
     }
 
-    public void setTienMatLucVaoCa(double TienMatLucVaoCa) {
-        this.TienMatLucVaoCa = TienMatLucVaoCa;
+    public void setTienThucNhan(double TienThucNhan) {
+        this.TienThucNhan = TienThucNhan;
     }
 
-    public String getGhiChu() {
-        return GhiChu;
+    public double getTienThucThu() {
+        return TienThucThu;
     }
 
-    public void setGhiChu(String GhiChu) {
-        this.GhiChu = GhiChu;
+    public void setTienThucThu(double TienThucThu) {
+        this.TienThucThu = TienThucThu;
     }
 
-    
+    public String getGhiChuNhan() {
+        return GhiChuNhan;
+    }
 
-    
+    public void setGhiChuNhan(String GhiChuNhan) {
+        this.GhiChuNhan = GhiChuNhan;
+    }
 
-    
+    public String getGhiChuThu() {
+        return GhiChuThu;
+    }
 
-    
+    public void setGhiChuThu(String GhiChuThu) {
+        this.GhiChuThu = GhiChuThu;
+    }
 
-    
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
 
 }
