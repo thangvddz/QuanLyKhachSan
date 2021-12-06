@@ -439,6 +439,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnThanhToanMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnThanhToanMousePressed(evt);
+            }
         });
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -680,6 +683,11 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetColor(btnThanhToan);
     }//GEN-LAST:event_btnThanhToanMouseExited
+
+    private void btnThanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMousePressed
+        JPanel loaithanhtoan = new LoaiThanhToanJPanel();
+        SwitchPanel(loaithanhtoan);
+    }//GEN-LAST:event_btnThanhToanMousePressed
 
     public void init() {
         phongDAO = new PhongDAO();
