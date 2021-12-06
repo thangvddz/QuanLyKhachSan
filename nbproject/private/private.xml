@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/ACER/Desktop/duan1/QuanLyKhachSan/src/Forms/DichVuPanel.java</file>
+            <file>file:/C:/Users/ACER/Desktop/duan1/QuanLyKhachSan/src/Forms/LoaiThanhToanJPanel.java</file>
+            <file>file:/C:/Users/ACER/Desktop/duan1/QuanLyKhachSan/src/Models/LoaiThanhToanDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/duan1/QuanLyKhachSan/src/Models/DichVuDAO.java</file>
+=======
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/DatTraPhongPanel.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/KetCaJFrame.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/ManHinhChinhGUI.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Forms/VaoCaJFrame.java</file>
             <file>file:/C:/Users/you%20have%20to%20better/Documents/NetBeansProjects/2811/DuAn1_QuanLyKhachSan_369/src/Models/ThanhToanDAO.java</file>
+>>>>>>> 2253063dd47284be6b7e5b3e524de0c9ebb1911b
         </group>
     </open-files>
 </project-private>
