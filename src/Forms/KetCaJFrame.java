@@ -103,12 +103,12 @@ public class KetCaJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTenNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTenNhanVien.setText("jLabel11");
+        lblTenNhanVien.setText("Vu Van A");
         getContentPane().add(lblTenNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -3, 210, 40));
 
         lblDongHoKetCa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblDongHoKetCa.setForeground(new java.awt.Color(204, 0, 0));
-        lblDongHoKetCa.setText("jLabel12");
+        lblDongHoKetCa.setText("12:00:00");
         getContentPane().add(lblDongHoKetCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 250, 30));
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 11, 5));
