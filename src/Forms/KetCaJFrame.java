@@ -67,7 +67,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         lblTenNhanVien = new javax.swing.JLabel();
-        lblMaNV = new javax.swing.JLabel();
         lblDongHoKetCa = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -98,21 +97,19 @@ public class KetCaJFrame extends javax.swing.JFrame {
         txtGhiChu = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("BAO CAO KET CA");
+        setTitle("BÁO CÁO KẾT CA");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTenNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTenNhanVien.setText("jLabel11");
         getContentPane().add(lblTenNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -3, 210, 40));
 
-        lblMaNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblMaNV.setText("jLabel1");
-        getContentPane().add(lblMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, -3, 80, 40));
-
         lblDongHoKetCa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblDongHoKetCa.setForeground(new java.awt.Color(204, 0, 0));
         lblDongHoKetCa.setText("jLabel12");
-        getContentPane().add(lblDongHoKetCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 160, 30));
+        getContentPane().add(lblDongHoKetCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 250, 30));
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 11, 5));
 
@@ -159,6 +156,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 470, 40));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
@@ -181,6 +179,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 470, 40));
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         java.awt.GridBagLayout jPanel7Layout = new java.awt.GridBagLayout();
         jPanel7Layout.columnWidths = new int[] {0, 10, 0, 10, 0};
         jPanel7Layout.rowHeights = new int[] {0};
@@ -212,6 +211,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 470, 50));
 
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         jLabel3.setText("Thời gian kêt thúc :");
@@ -235,10 +235,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        int hoi = JOptionPane.showConfirmDialog(this, "Bạn muốn thoát thật không?");
-        if (hoi != JOptionPane.YES_OPTION) {
-            this.setVisible(false);
-        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
@@ -278,7 +275,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDongHoKetCa;
-    private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblTenNhanVien;
     private javax.swing.JLabel lblThoiGianBD;
     private javax.swing.JLabel lblThoiGianKT;
@@ -315,7 +311,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
         timer.start();
 
         lblTenNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
-        lblMaNV.setText(Auth.user.getMaNV());
         fillForm();
     }
 
@@ -332,6 +327,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 double tienTraTruoc = bd1.doubleValue();
                 BigDecimal bd2 = (BigDecimal) objects[8];
                 double tienTongTien = bd2.doubleValue();
+                System.out.println("maHoaDon: "+ mahd);
                 ThanhToan tt = thanhToanDAO.selectById(mahd);
                 if (tt.getMaLoaiTT() == 1) {
                     if (tienTongTien == 0) {

@@ -533,6 +533,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnQuanLyPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyPhongMousePressed
         // TODO add your handling code here:
+        
         JPanel quanLyPhong = new QuanLyPhongPanel();
         SwitchPanel(quanLyPhong);
     }//GEN-LAST:event_btnQuanLyPhongMousePressed
