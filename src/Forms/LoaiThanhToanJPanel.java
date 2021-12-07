@@ -314,16 +314,18 @@ public class LoaiThanhToanJPanel extends javax.swing.JPanel {
             txtTen.requestFocus();
             return;
         }
-        LoaiThanhToan model = getForm();
-        try {
-            lttdao.insert(model);
-            System.out.println("model");
-            this.fillTable();
-            this.clear();
-            mgsBox.alert(this, "Thêm mới thành công");
-        } catch (Exception e) {
-            e.printStackTrace();
-            mgsBox.alert(this, "Thêm mới thất bại");
+        if (mgsBox.confirm(this, "Bạn có muốn thêm loại thanh toán mới này?")) {
+            LoaiThanhToan model = getForm();
+            try {
+                lttdao.insert(model);
+                System.out.println("model");
+                this.fillTable();
+                this.clear();
+                mgsBox.alert(this, "Thêm mới thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                mgsBox.alert(this, "Thêm mới thất bại");
+            }
         }
     }
 
@@ -348,18 +350,20 @@ public class LoaiThanhToanJPanel extends javax.swing.JPanel {
             txtTen.requestFocus();
             return;
         }
-        LoaiThanhToan model = getForm();
-        if (txtMa.getText() == null) {
-            mgsBox.alert(this, "Vui lòng điền mã loại thanh toán cần sửa");
-        } else {
-            try {
-                lttdao.update(model);
-                System.out.println(model);
-                fillTable();
-                mgsBox.alert(this, "Cập nhật thành công!");
-            } catch (Exception e) {
-                e.printStackTrace();
-                mgsBox.alert(this, "Cập nhật thất bại!");
+        if (mgsBox.confirm(this, "Bạn có muốn sửa loại thanh toán này?")) {
+            LoaiThanhToan model = getForm();
+            if (txtMa.getText() == null) {
+                mgsBox.alert(this, "Vui lòng điền mã loại thanh toán cần sửa");
+            } else {
+                try {
+                    lttdao.update(model);
+                    System.out.println(model);
+                    fillTable();
+                    mgsBox.alert(this, "Cập nhật thành công!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mgsBox.alert(this, "Cập nhật thất bại!");
+                }
             }
         }
     }
