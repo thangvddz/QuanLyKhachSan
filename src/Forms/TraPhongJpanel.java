@@ -392,6 +392,8 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         tblThongTinPhong.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tblThongTinPhong);
         if (tblThongTinPhong.getColumnModel().getColumnCount() > 0) {
+            tblThongTinPhong.getColumnModel().getColumn(0).setMinWidth(200);
+            tblThongTinPhong.getColumnModel().getColumn(1).setMinWidth(200);
             tblThongTinPhong.getColumnModel().getColumn(3).setResizable(false);
             tblThongTinPhong.getColumnModel().getColumn(4).setResizable(false);
         }

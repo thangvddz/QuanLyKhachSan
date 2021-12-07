@@ -12,7 +12,9 @@ import Entities.HoaDonChiTiet;
 import Entities.KhachHang;
 import Entities.LichSuGD;
 import Entities.LoaiPhong;
+import Entities.LoaiThanhToan;
 import Entities.Phong;
+import Entities.ThanhToan;
 import Entities.ThongTinPhongDaThue;
 import Entities.YeuCau;
 import Models.DichVuDAO;
@@ -21,7 +23,9 @@ import Models.HoaDonDAO;
 import Models.KhachHangDAO;
 import Models.LichSuGDDAO;
 import Models.LoaiPhongDAO;
+import Models.LoaiThanhToanDAO;
 import Models.PhongDAO;
+import Models.ThanhToanDAO;
 import Models.YeuCauDAO;
 import Utils.Auth;
 import Utils.MapRoom;
@@ -55,7 +59,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     LoaiPhongDAO loaiPhongDAO;
     DichVuDAO dichVuDAO;
     PhongDAO phongDAO;
+    LoaiThanhToanDAO loaiThanhToanDAO;
     LichSuGDDAO lsgddao;
+    ThanhToanDAO thanhToanDAO;
     YeuCauDAO yeuCauDAO;
     public static int CHECK_IN = 14;
     public static int CHECK_OUT = 12;
@@ -67,6 +73,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     public static KhachHang khachMucTieu;
     List<ChiTietPhongVaDichVu> lsCTPVDV;
     public static int index_tbl_dvdsd;
+    int makh_dathue;
 
     public DatTraPhongPanel() {
         initComponents();
@@ -113,6 +120,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtPhutCheckOut = new javax.swing.JTextField();
         lblEmail1 = new javax.swing.JLabel();
         cboKhachHangCu = new javax.swing.JComboBox<>();
+        lblThanhToan = new javax.swing.JLabel();
+        cboThanhToan = new javax.swing.JComboBox<>();
         jPanel9 = new javax.swing.JPanel();
         lblSoPhongDaThue = new javax.swing.JLabel();
         txtSoPhongDaThue = new javax.swing.JTextField();
@@ -256,6 +265,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         });
 
+        lblThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblThanhToan.setText("Thanh toán");
+
+        cboThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -300,21 +314,6 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jdcNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblPhiPhuThu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPhiPhuThu))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtGiamGia)))
-                        .addGap(57, 57, 57))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
@@ -335,7 +334,26 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                                 .addComponent(lblQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cboKhachHangCu, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(65, 65, 65))))
+                        .addGap(65, 65, 65))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jdcNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblPhiPhuThu, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPhiPhuThu))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtGiamGia))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cboThanhToan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,7 +414,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuocTich, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
 
@@ -781,7 +801,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         try {
             KhachHang kh = (KhachHang) cboKhachHangCu.getSelectedItem();
             clearForm();
+            makh_dathue = kh.getMaKH();
             fillForm(kh);
+            
         } catch (Exception e) {
             clearForm();
         }
@@ -819,7 +841,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         yeuCauDAO = new YeuCauDAO();
         khachMucTieu = new KhachHang();
         lsgddao = new LichSuGDDAO();
+        loaiThanhToanDAO = new LoaiThanhToanDAO();
+        thanhToanDAO = new ThanhToanDAO();
         numSelected = 0;
+        makh_dathue = 0;
         index_tbl_dvdsd = -1;
         maPhong = MapRoom.posPhong;
         soTang = MapRoom.posTang;
@@ -832,6 +857,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         fillTableChonPhong();
         fillGioiTinh();
         fillComboboxDichVu();
+        fillComboboxThanhToan();
         fillComboboxKhachHangCu();
         fillKhachHangField();
         fillTablePhongDaThue();
@@ -848,13 +874,23 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         if (MapRoom.maKH == 0) {
             if (checkHinhThuc()) {
                 if (checkThongTinKhachNhapVao()) {
-                    insertKhachHang();
-                    insertHoaDon();
-                    insertHDCT();
-                    insertLSGD();
-                    mgsBox.alert(this, "Đặt phòng thành công !!!");
-                    DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
-                    frame.dispose();
+                    try {
+                        HoaDon hd = hoaDonDAO.selectHoaDonByKH(makh_dathue, false);
+                        MapRoom.maKH = makh_dathue;
+                        insertHDCT();
+                        insertLSGD();
+                        mgsBox.alert(this, "Đặt phòng thành công !!!");
+                        DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+                        frame.dispose();
+                    } catch (Exception e) {
+                        insertKhachHang();
+                        insertHoaDon();
+                        insertHDCT();
+                        insertLSGD();
+                        mgsBox.alert(this, "Đặt phòng thành công !!!");
+                        DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+                        frame.dispose();
+                    }
                 }
             } else {
                 mgsBox.alert(this, "Vui lòng chọn hình thức thuê");
@@ -993,6 +1029,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        insertThanhToan();
     }
 
     public void updateHoaDon() {
@@ -1014,7 +1051,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     xMoney.VNDongToDouble(txtGiamGia.getText()),
                     xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         }
-
+        updateThanhToan();
     }
 
     public void insertHDCT() {
@@ -1095,6 +1132,40 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             cboGioiTinh.setSelectedIndex(0);
         } else {
             cboGioiTinh.setSelectedIndex(1);
+        }
+    }
+
+    public void fillComboboxThanhToan() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboThanhToan.getModel();
+        model.removeAllElements();
+        try {
+            List<LoaiThanhToan> ls = loaiThanhToanDAO.selectAll();
+            for (LoaiThanhToan l : ls) {
+                model.addElement(l);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void insertThanhToan() {
+        try {
+            HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
+            LoaiThanhToan tt = (LoaiThanhToan) cboThanhToan.getSelectedItem();
+            Timestamp ThoiGianThanhToan = new Timestamp(System.currentTimeMillis());
+            thanhToanDAO.insert(new ThanhToan(hd.getMaHD(), tt.getLoaiThanhToan(), ThoiGianThanhToan, "Thanh toan tra truoc"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateThanhToan() {
+        try {
+            HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
+            LoaiThanhToan tt = (LoaiThanhToan) cboThanhToan.getSelectedItem();
+            Timestamp ThoiGianThanhToan = new Timestamp(System.currentTimeMillis());
+            thanhToanDAO.update(new ThanhToan(hd.getMaHD(), tt.getLoaiThanhToan(), ThoiGianThanhToan, "Thanh toan tra truoc"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -1269,16 +1340,24 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         if (mgsBox.confirm(this, "Bạn có chắc muốn xóa dịch vụ này không ?")) {
             if (index_tbl_dvdsd != -1) {
                 try {
-                    List<HoaDonChiTiet> lshdct = hoaDonChiTietDAO.selectListDVDSD(false, soTang, maPhong);
-                    int mahdct = lshdct.get(index_tbl_dvdsd).getMaCTHD();
-                    yeuCauDAO.delete(mahdct);
-                    hoaDonChiTietDAO.delete(mahdct);
-                    lsCTPVDV.remove(index_tbl_dvdsd);
-                    fillTableCTPhongDV();
-                    mgsBox.alert(this, "Xóa thành công dịch vụ");
-                    index_tbl_dvdsd = -1;
-                } catch (Exception e) {
+                    if (MapRoom.maKH == 0) {
+                        lsCTPVDV.remove(index_tbl_dvdsd);
+                        fillTableCTPhongDV();
+                        mgsBox.alert(this, "Xóa thành công dịch vụ");
+                        index_tbl_dvdsd = -1;
+                    } else {
+                        List<HoaDonChiTiet> lshdct = hoaDonChiTietDAO.selectListDVDSD(false, soTang, maPhong);
+                        int mahdct = lshdct.get(index_tbl_dvdsd).getMaCTHD();
+                        yeuCauDAO.delete(mahdct);
+                        hoaDonChiTietDAO.delete(mahdct);
+                        lsCTPVDV.remove(index_tbl_dvdsd);
+                        fillTableCTPhongDV();
+                        mgsBox.alert(this, "Xóa thành công dịch vụ");
+                        index_tbl_dvdsd = -1;
+                    }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             } else {
                 mgsBox.alert(this, "Vui lòng chọn dịch vụ trên bảng rồi mới nhấn xóa.");
@@ -1322,6 +1401,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboDichVu;
     private javax.swing.JComboBox<String> cboGioiTinh;
     private javax.swing.JComboBox<String> cboKhachHangCu;
+    private javax.swing.JComboBox<String> cboThanhToan;
     private javax.swing.JCheckBox chkThueTheoGio;
     private javax.swing.JCheckBox chkThueTheoNgay;
     private javax.swing.ButtonGroup gbtHinhThucThue;
@@ -1359,6 +1439,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblSoDT;
     private javax.swing.JLabel lblSoPhongDaThue;
     private javax.swing.JLabel lblTenKH;
+    private javax.swing.JLabel lblThanhToan;
     private javax.swing.JLabel lblTraTruoc;
     private javax.swing.JTable tblChiTietPhongVaDV;
     private javax.swing.JTable tblPhongDuocChon;

@@ -5,10 +5,14 @@
  */
 package Forms;
 
+import Entities.LichSuCaLam;
 import Entities.NhanVien;
+import Models.CaLamDAO;
+import Models.LichSuCaLamDAO;
 import Models.NhanVienDAO;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xMoney;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,12 +26,15 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     /**
      * Creates new form NhanVienJPanel
      */
+    CaLamDAO cldao = new CaLamDAO();
+    LichSuCaLamDAO daoLSCL = new LichSuCaLamDAO();
     NhanVienDAO dao = new NhanVienDAO();
     int row=-1;
     public NhanVienJPanel() {
         initComponents();
         fillToTable();
         updateStatus();
+        loadTableLSCaLam();
     }
 
     /**
@@ -77,6 +84,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLSCaLam = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -368,6 +379,53 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         tab.addTab("DANH SÁCH", jPanel2);
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lịch sử ca làm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+
+        tblLSCaLam.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Tên NV", "Ca làm", "Tiền vào đầu ca", "Tiền cuối ca", "Thời gian bắt đầu làm", "Thời gian kết thúc", "Tiền thực nhận", "Tiền thực thu", "Ghi chú nhận", "Ghi chú thu", "Trạng thái"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblLSCaLam);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        tab.addTab("Thống kê ca làm", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -448,15 +506,19 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNhanVien;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JRadioButton rdoTruongPhong;
     private javax.swing.JTabbedPane tab;
     private javax.swing.JTable tblDanhSach;
+    private javax.swing.JTable tblLSCaLam;
     private javax.swing.JTextField txtCMT;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
@@ -606,5 +668,23 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         nv.setGioiTinh(rdoNam.isSelected());
         nv.setVaiTro(rdoTruongPhong.isSelected());
         return nv;
+    }
+    
+    private void loadTableLSCaLam() {
+        DefaultTableModel model = (DefaultTableModel) tblLSCaLam.getModel();
+        model.setRowCount(0);
+        try {
+            List<LichSuCaLam> list = daoLSCL.selectAll();
+            for (int i = 0; i < list.size(); i++) {
+                LichSuCaLam nv = list.get(i);
+                String hoten = dao.selectById(nv.getMaNV()).getHoTen();
+                String calam = cldao.selectById(nv.getMaCaLam()).getTenCaLam();
+                model.addRow(new Object[]{hoten, calam, xMoney.doubleToVNDong(nv.getTienVaoDauCa()), xMoney.doubleToVNDong(nv.getTienCuoiCa()), nv.getThoiGianBD(), nv.getThoiGianKT(),
+                    xMoney.doubleToVNDong(nv.getTienThucNhan()), xMoney.doubleToVNDong(nv.getTienThucThu()), nv.getGhiChuNhan(), nv.getGhiChuThu(), nv.isTrangThai() ? "Đã được kiểm toán" : "Chưa được kiểm toán"});
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            mgsBox.alert(this, "Lỗi truy vấn dữ liệu loadTableCaLam");
+        }
     }
 }

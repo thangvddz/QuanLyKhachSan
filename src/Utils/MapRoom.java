@@ -100,7 +100,7 @@ public class MapRoom {
                     try {
                         int maHDCT = daohdct.selectByNewIDReserve(false, floors + 1, numRoom).getMaCTHD();
                         List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
-                        hinhThuc = ls.get(ls.size() - 1).isTrangThai() ? "Thuê Theo giờ" : "Thuê theo ngày";
+                        hinhThuc = ls.get(0).isTrangThai() ? "Thuê Theo giờ" : "Thuê theo ngày";
                         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                         strDateCheckIn = "NGày check-In: " + dateFormat.format(ls.get(ls.size() - 1).getThoiGianBD());
                         if (ls.get(0).getThoiGianKT() != null) {
