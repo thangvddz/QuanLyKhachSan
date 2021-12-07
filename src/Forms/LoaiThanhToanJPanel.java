@@ -95,6 +95,7 @@ public class LoaiThanhToanJPanel extends javax.swing.JPanel {
 
         btnXoa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnXoa.setText("Xóa");
+        btnXoa.setEnabled(false);
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaActionPerformed(evt);
@@ -327,7 +328,7 @@ public class LoaiThanhToanJPanel extends javax.swing.JPanel {
     }
 
     private void delete() {
-        if (mgsBox.confirm(this, "Bạn có muốn xóa dịch vụ này?")) {
+        if (mgsBox.confirm(this, "Bạn có muốn xóa loại thanh toán này?")) {
             int maLTT = Integer.valueOf(txtMa.getText());
             try {
                 lttdao.delete(maLTT);
@@ -349,7 +350,7 @@ public class LoaiThanhToanJPanel extends javax.swing.JPanel {
         }
         LoaiThanhToan model = getForm();
         if (txtMa.getText() == null) {
-            mgsBox.alert(this, "Vui lòng điền mã dịch vụ cần sửa");
+            mgsBox.alert(this, "Vui lòng điền mã loại thanh toán cần sửa");
         } else {
             try {
                 lttdao.update(model);
