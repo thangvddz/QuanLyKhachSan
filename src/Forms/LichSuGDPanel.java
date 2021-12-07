@@ -8,6 +8,7 @@ package Forms;
 import Models.DichVuDAO;
 import Models.HoaDonDAO;
 import Models.ThongKeDAO;
+import Utils.xMoney;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
@@ -231,7 +232,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -251,6 +252,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Email quản lý:");
 
+        btnGuiEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Mail.png"))); // NOI18N
         btnGuiEmail.setText("Gửi mail");
         btnGuiEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +260,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             }
         });
 
+        btnGhiMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh.png"))); // NOI18N
         btnGhiMoi.setText("Ghi mới");
         btnGhiMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,18 +274,16 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGuiEmail)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnGhiMoi)
-                        .addGap(51, 51, 51))))
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtEmail)
+                .addContainerGap())
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btnGuiEmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btnGhiMoi)
+                .addGap(33, 33, 33))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +301,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
 
         jPanel15.setBackground(new java.awt.Color(255, 51, 51));
 
-        lblDoanhThuPhong.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblDoanhThuPhong.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblDoanhThuPhong.setForeground(new java.awt.Color(255, 255, 255));
         lblDoanhThuPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -315,25 +316,23 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                    .addComponent(lblDoanhThuPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblDoanhThuPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblDoanhThuPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 51, 51));
 
-        lblHoaDon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblHoaDon.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblHoaDon.setForeground(new java.awt.Color(255, 255, 255));
         lblHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -347,19 +346,17 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(lblHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(lblHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -371,11 +368,11 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("DỊCH VỤ DÙNG NHIỀU NHẤT");
 
-        lblDichVu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblDichVu.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblDichVu.setForeground(new java.awt.Color(255, 255, 255));
         lblDichVu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblSoLan.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblSoLan.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         lblSoLan.setForeground(new java.awt.Color(255, 255, 255));
         lblSoLan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -425,7 +422,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(39, 611, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,7 +481,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -496,7 +493,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -507,11 +504,11 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("DỊCH VỤ DÙNG NHIỀU NHẤT");
 
-        tbldichVu1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        tbldichVu1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         tbldichVu1.setForeground(new java.awt.Color(255, 255, 255));
         tbldichVu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        tblSoLan1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        tblSoLan1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         tblSoLan1.setForeground(new java.awt.Color(255, 255, 255));
         tblSoLan1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -551,7 +548,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
 
         jPanel12.setBackground(new java.awt.Color(255, 51, 51));
 
-        tblHoaDon1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        tblHoaDon1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         tblHoaDon1.setForeground(new java.awt.Color(255, 255, 255));
         tblHoaDon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -565,13 +562,13 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(tblHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(tblHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,7 +581,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
 
         jPanel13.setBackground(new java.awt.Color(255, 51, 51));
 
-        tblDoanhThuPhong3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        tblDoanhThuPhong3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         tblDoanhThuPhong3.setForeground(new java.awt.Color(255, 255, 255));
         tblDoanhThuPhong3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -599,12 +596,10 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tblDoanhThuPhong3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(tblDoanhThuPhong3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -730,7 +725,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -779,6 +774,17 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiEmailActionPerformed
+        if (txtEmail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được để trống email");
+            txtEmail.requestFocus();
+            return;
+        }
+        String email = "\\w+@\\w+(\\.\\w+){1,2}";
+        if (!txtEmail.getText().matches(email)) {
+            JOptionPane.showMessageDialog(this, "Không đúng định dạng mail");
+            txtEmail.requestFocus();
+            return;
+        }
         guiMail();
     }//GEN-LAST:event_btnGuiEmailActionPerformed
 
@@ -802,7 +808,6 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -816,7 +821,6 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -839,7 +843,6 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblBang30Ngay;
     private javax.swing.JLabel tblDoanhThuPhong3;
     private javax.swing.JLabel tblHoaDon1;
-    private javax.swing.JLabel tblHoaDon2;
     private javax.swing.JLabel tblSoLan1;
     private javax.swing.JTable tblThongKe;
     private javax.swing.JLabel tbldichVu1;
@@ -850,7 +853,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         try {
             List<Integer> list = dao.selectDoanhThuTheoNgay();
             for (Integer doanhThu : list) {
-                lblDoanhThuPhong.setText(doanhThu.toString());
+                lblDoanhThuPhong.setText(doanhThu.toString() + "đ");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -872,7 +875,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         try {
             List<Integer> list = dao.selectDoanhThuTheoThang();
             for (Integer doanhThu : list) {
-                tblDoanhThuPhong3.setText(doanhThu.toString());
+                tblDoanhThuPhong3.setText(doanhThu.toString() + "đ");
             }
         } catch (Exception e) {
             e.printStackTrace();
