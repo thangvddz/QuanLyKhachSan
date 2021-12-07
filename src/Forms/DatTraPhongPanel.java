@@ -73,6 +73,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     public static KhachHang khachMucTieu;
     List<ChiTietPhongVaDichVu> lsCTPVDV;
     public static int index_tbl_dvdsd;
+    int makh_dathue;
 
     public DatTraPhongPanel() {
         initComponents();
@@ -800,7 +801,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         try {
             KhachHang kh = (KhachHang) cboKhachHangCu.getSelectedItem();
             clearForm();
+            makh_dathue = kh.getMaKH();
             fillForm(kh);
+            
         } catch (Exception e) {
             clearForm();
         }
@@ -841,6 +844,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         loaiThanhToanDAO = new LoaiThanhToanDAO();
         thanhToanDAO = new ThanhToanDAO();
         numSelected = 0;
+        makh_dathue = 0;
         index_tbl_dvdsd = -1;
         maPhong = MapRoom.posPhong;
         soTang = MapRoom.posTang;
@@ -870,13 +874,23 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         if (MapRoom.maKH == 0) {
             if (checkHinhThuc()) {
                 if (checkThongTinKhachNhapVao()) {
-                    insertKhachHang();
-                    insertHoaDon();
-                    insertHDCT();
-                    insertLSGD();
-                    mgsBox.alert(this, "Đặt phòng thành công !!!");
-                    DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
-                    frame.dispose();
+                    try {
+                        HoaDon hd = hoaDonDAO.selectHoaDonByKH(makh_dathue, false);
+                        MapRoom.maKH = makh_dathue;
+                        insertHDCT();
+                        insertLSGD();
+                        mgsBox.alert(this, "Đặt phòng thành công !!!");
+                        DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+                        frame.dispose();
+                    } catch (Exception e) {
+                        insertKhachHang();
+                        insertHoaDon();
+                        insertHDCT();
+                        insertLSGD();
+                        mgsBox.alert(this, "Đặt phòng thành công !!!");
+                        DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+                        frame.dispose();
+                    }
                 }
             } else {
                 mgsBox.alert(this, "Vui lòng chọn hình thức thuê");
@@ -1136,18 +1150,18 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     public void insertThanhToan() {
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
-            LoaiThanhToan tt =  (LoaiThanhToan) cboThanhToan.getSelectedItem();
+            LoaiThanhToan tt = (LoaiThanhToan) cboThanhToan.getSelectedItem();
             Timestamp ThoiGianThanhToan = new Timestamp(System.currentTimeMillis());
             thanhToanDAO.insert(new ThanhToan(hd.getMaHD(), tt.getLoaiThanhToan(), ThoiGianThanhToan, "Thanh toan tra truoc"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }   
-    
+    }
+
     public void updateThanhToan() {
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
-            LoaiThanhToan tt =  (LoaiThanhToan) cboThanhToan.getSelectedItem();
+            LoaiThanhToan tt = (LoaiThanhToan) cboThanhToan.getSelectedItem();
             Timestamp ThoiGianThanhToan = new Timestamp(System.currentTimeMillis());
             thanhToanDAO.update(new ThanhToan(hd.getMaHD(), tt.getLoaiThanhToan(), ThoiGianThanhToan, "Thanh toan tra truoc"));
         } catch (Exception e) {
@@ -1326,16 +1340,24 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         if (mgsBox.confirm(this, "Bạn có chắc muốn xóa dịch vụ này không ?")) {
             if (index_tbl_dvdsd != -1) {
                 try {
-                    List<HoaDonChiTiet> lshdct = hoaDonChiTietDAO.selectListDVDSD(false, soTang, maPhong);
-                    int mahdct = lshdct.get(index_tbl_dvdsd).getMaCTHD();
-                    yeuCauDAO.delete(mahdct);
-                    hoaDonChiTietDAO.delete(mahdct);
-                    lsCTPVDV.remove(index_tbl_dvdsd);
-                    fillTableCTPhongDV();
-                    mgsBox.alert(this, "Xóa thành công dịch vụ");
-                    index_tbl_dvdsd = -1;
-                } catch (Exception e) {
+                    if (MapRoom.maKH == 0) {
+                        lsCTPVDV.remove(index_tbl_dvdsd);
+                        fillTableCTPhongDV();
+                        mgsBox.alert(this, "Xóa thành công dịch vụ");
+                        index_tbl_dvdsd = -1;
+                    } else {
+                        List<HoaDonChiTiet> lshdct = hoaDonChiTietDAO.selectListDVDSD(false, soTang, maPhong);
+                        int mahdct = lshdct.get(index_tbl_dvdsd).getMaCTHD();
+                        yeuCauDAO.delete(mahdct);
+                        hoaDonChiTietDAO.delete(mahdct);
+                        lsCTPVDV.remove(index_tbl_dvdsd);
+                        fillTableCTPhongDV();
+                        mgsBox.alert(this, "Xóa thành công dịch vụ");
+                        index_tbl_dvdsd = -1;
+                    }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             } else {
                 mgsBox.alert(this, "Vui lòng chọn dịch vụ trên bảng rồi mới nhấn xóa.");

@@ -103,12 +103,12 @@ public class KetCaJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTenNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTenNhanVien.setText("jLabel11");
+        lblTenNhanVien.setText("Vu Van A");
         getContentPane().add(lblTenNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -3, 210, 40));
 
         lblDongHoKetCa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblDongHoKetCa.setForeground(new java.awt.Color(204, 0, 0));
-        lblDongHoKetCa.setText("jLabel12");
+        lblDongHoKetCa.setText("12:00:00");
         getContentPane().add(lblDongHoKetCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 250, 30));
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 11, 5));
@@ -170,7 +170,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel1.setText("Tiền thực thu :");
+        jLabel1.setText("Tiền Phát sinh:");
         jPanel6.add(jLabel1);
 
         txtTienThucThu.setText("0");
@@ -214,6 +214,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        jLabel3.setForeground(new java.awt.Color(51, 51, 255));
         jLabel3.setText("Thời gian kêt thúc :");
         jPanel8.add(jLabel3);
 
@@ -239,16 +240,18 @@ public class KetCaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
-        if (mgsBox.confirm(this, "Bạn có muốn kết ca ? hệ thống sẽ đăng xuất")) {
-
-            lscldao.update(new LichSuCaLam(lichSuCuoi));
+        if (mgsBox.confirm(this, "Bạn có muốn kết ca, hệ thống sẽ đăng xuất")) {
+            setLsCuoi();
+            lscldao.update(lichSuCuoi);
             mgsBox.alert(this, "Kết ca thành công");
             timer.stop();
-            this.setVisible(false);
+            
             ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
             manHinhChinhGUI.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             manHinhChinhGUI.setVisible(false);
-
+            manHinhChinhGUI.dispose();
+            this.setVisible(false);
+            
             DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
             dangNhapJFrame.setVisible(true);
         }
@@ -327,7 +330,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 double tienTraTruoc = bd1.doubleValue();
                 BigDecimal bd2 = (BigDecimal) objects[8];
                 double tienTongTien = bd2.doubleValue();
-                System.out.println("maHoaDon: "+ mahd);
+                System.out.println("maHoaDon: "+ mahd + ", tong tien: "+ tienTongTien);
                 ThanhToan tt = thanhToanDAO.selectById(mahd);
                 if (tt.getMaLoaiTT() == 1) {
                     if (tienTongTien == 0) {
