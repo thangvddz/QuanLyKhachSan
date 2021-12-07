@@ -32,6 +32,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     /**
      * Creates new form ManHinhChinhGUI
      */
+    public static double tienDichVu;
     public static boolean switchSize;
     public static GridBagConstraints gbc;
     PhongDAO phongDAO;
@@ -135,7 +136,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnHome.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_home_50px.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_home_50px_1.png"))); // NOI18N
         btnHome.add(jLabel1);
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -162,7 +163,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnQuanLyPhong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_room_50px.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_room_50px_1_1.png"))); // NOI18N
         btnQuanLyPhong.add(jLabel5);
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -189,7 +190,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnNhanVien.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_people_50px.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_staff_50px_1.png"))); // NOI18N
         btnNhanVien.add(jLabel7);
 
         jLabel8.setBackground(new java.awt.Color(204, 204, 204));
@@ -216,7 +217,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnDichVu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_service_bell_50px.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_bell_service_50px.png"))); // NOI18N
         btnDichVu.add(jLabel9);
 
         jLabel10.setBackground(new java.awt.Color(204, 204, 204));
@@ -243,7 +244,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         btnThongKe.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_activity_history_50px.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_file_50px.png"))); // NOI18N
         btnThongKe.add(jLabel11);
 
         jLabel12.setBackground(new java.awt.Color(204, 204, 204));
@@ -267,12 +268,12 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 btnKhachHangMousePressed(evt);
             }
         });
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 32, 5);
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5);
         flowLayout1.setAlignOnBaseline(true);
         btnKhachHang.setLayout(flowLayout1);
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_customer_35px.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_customer_50px.png"))); // NOI18N
         btnKhachHang.add(jLabel15);
 
         jLabel16.setBackground(new java.awt.Color(204, 204, 204));
@@ -296,10 +297,10 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 btnCaiDatMousePressed(evt);
             }
         });
-        btnCaiDat.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 30, 5));
+        btnCaiDat.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_settings_35px.png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_settings_50px_1.png"))); // NOI18N
         btnCaiDat.add(jLabel17);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -322,10 +323,10 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 btnDangXuatMousePressed(evt);
             }
         });
-        btnDangXuat.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 30, 5));
+        btnDangXuat.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_logout_rounded_left_35px.png"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_Logout_50px.png"))); // NOI18N
         btnDangXuat.add(jLabel19);
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -384,10 +385,10 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
                 btnThanhToanMousePressed(evt);
             }
         });
-        btnThanhToan.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 23, 5));
+        btnThanhToan.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 24, 5));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_payment_history_50px_1.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_payment_history_50px_2.png"))); // NOI18N
         btnThanhToan.add(jLabel13);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -536,9 +537,13 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnQuanLyPhongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyPhongMousePressed
         // TODO add your handling code here:
-        
-        JPanel quanLyPhong = new QuanLyPhongPanel();
-        SwitchPanel(quanLyPhong);
+        if (Auth.isLogin() && Auth.isManager()) {
+            JPanel quanLyPhong = new QuanLyPhongPanel();
+            SwitchPanel(quanLyPhong);
+        }
+        else{
+            mgsBox.alert(this, "Bạn không có quyền quản lý phòng");
+        }
     }//GEN-LAST:event_btnQuanLyPhongMousePressed
 
     private void btnNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMousePressed
@@ -612,6 +617,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThanhToanMousePressed
 
     public void init() {
+        tienDichVu = 0;
         phongDAO = new PhongDAO();
         gbc = new GridBagConstraints();
         switchSize = true;
@@ -662,7 +668,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             txtGioCheckOutKS.setText("Chưa cài đặt");
         } else {
             if (c.getPhutChkIn() >= 0 && c.getPhutChkIn() < 10) {
-                txtGioCheckInKS.setText(c.getGioChkIn() + " : 0" + c.getPhutChkIn());
+                txtGioCheckInKS.setText(c.getGioChkIn() + " : 00" + c.getPhutChkIn());
                 txtGioCheckOutKS.setText(c.getGioChkOut() + " : " + c.getPhutChkOut());
             }
             if (c.getPhutChkOut() >= 0 && c.getPhutChkOut() < 10) {

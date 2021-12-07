@@ -48,7 +48,6 @@ public class LichSuCaLam {
     }
 
     public LichSuCaLam(LichSuCaLam lichSuCuoi) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getMaLSCL() {

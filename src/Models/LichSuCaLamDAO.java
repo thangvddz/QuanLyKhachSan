@@ -25,6 +25,11 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
     private static final String SQL_SELECT_ALL = "SELECT * FROM LSCaLam";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM LSCaLam WHERE MaLSCL=?";
     private static final String SQL_DELETE = "DELETE FROM LSCaLam WHERE MaLSCL=?";
+    JdbcHelper jdbc;
+    
+    public LichSuCaLamDAO() {
+        jdbc = new JdbcHelper();
+    }
     
     @Override
     public void insert(LichSuCaLam entity) {
@@ -36,10 +41,10 @@ public class LichSuCaLamDAO extends DAO<LichSuCaLam, Object> {
     
     @Override
     public void update(LichSuCaLam entity) {
-        JdbcHelper.update(SQL_UPDATE, entity.getMaNV(), entity.getMaCaLam(),
+        jdbc.update(SQL_UPDATE, entity.getMaNV(), entity.getMaCaLam(),
                 entity.getTienVaoDauCa(), entity.getTienCuoiCa(), entity.getThoiGianBD(), entity.getThoiGianKT(), entity.getTienThucNhan(), entity.getTienThucThu(),
                 entity.getGhiChuNhan(),
-                entity.getGhiChuThu(), entity.isTrangThai());
+                entity.getGhiChuThu(), entity.isTrangThai(),entity.getMaLSCL());
     }
     
     @Override

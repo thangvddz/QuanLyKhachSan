@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Forms;
 
 import Entities.CaLam;
@@ -215,9 +210,11 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         if(status == false){
             luu();
         }else{
+            fillTienDauCa();
             timer.stop();
             ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
             manHinhChinhGUI.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -288,7 +285,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         try {
             List<LichSuCaLam> lscl = daoLSCL.selectAll();
             LichSuCaLam lscll = lscl.get(lscl.size() - 1);
-            txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienThucThu()));
+            txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienCuoiCa()));
             status = lscll.isTrangThai();
             lblTrangThai.setText(status ? "Chưa kết ca" : "Đã kết ca");
         } catch (Exception e) {

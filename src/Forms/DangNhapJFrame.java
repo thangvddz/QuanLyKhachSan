@@ -58,8 +58,12 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         lblMaNV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMaNV.setText("Tên đăng nhập :");
 
+        txtMaNV.setText("vuducthang");
+
         lblMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMatKhau.setText("Mật khẩu :");
+
+        txtMatKhau.setText("123");
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 45, 5));
 
