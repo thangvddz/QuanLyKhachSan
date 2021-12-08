@@ -25,12 +25,12 @@ public class DichVuPanel extends javax.swing.JPanel {
      * Creates new form DichVuPanel
      */
     GridBagConstraints gbc;
-    
+
     public DichVuPanel() {
         initComponents();
         fillTable();
     }
-    
+
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblBang.getModel();
         model.setRowCount(0);
@@ -50,7 +50,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Lỗi đổ dữ liệu vào bảng");
         }
     }
-    
+
     void fillTableTim() {
         DefaultTableModel model = (DefaultTableModel) tblBang.getModel();
         model.setRowCount(0);
@@ -71,7 +71,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Không có dịch vụ này!");
         }
     }
-    
+
     private void insert() {
         if (txtTenDV.getText().isEmpty()) {
             mgsBox.alert(this, "Tên dịch vụ không được để trống");
@@ -98,18 +98,21 @@ public class DichVuPanel extends javax.swing.JPanel {
             return;
         }
         DichVu model = getform();
-        try {
-            dvDAO.insert(model);
-            System.out.println("model");
-            this.fillTable();
-            this.clearForm();
-            mgsBox.alert(this, "Thêm mới thành công");
-        } catch (Exception e) {
-            e.printStackTrace();
-            mgsBox.alert(this, "Thêm mới thất bại");
+        if (mgsBox.confirm(this, "Bạn có muốn thêm dịch vụ này?")) {
+            try {
+                dvDAO.insert(model);
+                System.out.println("model");
+                this.fillTable();
+                this.clearForm();
+                mgsBox.alert(this, "Thêm mới thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                mgsBox.alert(this, "Thêm mới thất bại");
+            }
         }
+
     }
-    
+
     DichVu getform() {
         DichVu model = new DichVu();
         //model.setMaDV(Integer.valueOf(txtMaDV.getText()));
@@ -118,14 +121,14 @@ public class DichVuPanel extends javax.swing.JPanel {
         model.setTrangThai(rdoHoTro.isSelected());
         return model;
     }
-    
+
     void clearForm() {
         txtMaDV.setText("");
         txtPhiDV.setText("");
         txtTenDV.setText("");
         txtTimKiem.setText("");
     }
-    
+
     void setForm(DichVu model) {
         txtMaDV.setText(String.valueOf(model.getMaDV()));
         txtTenDV.setText(model.getTenDV());
@@ -136,7 +139,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             rdoTamNgung.setSelected(true);
         }
     }
-    
+
     void delete() {
         if (mgsBox.confirm(this, "Bạn có muốn xóa dịch vụ này?")) {
             int maDV = Integer.valueOf(txtMaDV.getText());
@@ -151,7 +154,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     void edit() {
         try {
             int maDV = (int) tblBang.getValueAt(this.row, 0);
@@ -164,7 +167,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-    
+
     DichVu getform1() {
         DichVu model = new DichVu();
         model.setMaDV(Integer.valueOf(txtMaDV.getText()));
@@ -173,7 +176,7 @@ public class DichVuPanel extends javax.swing.JPanel {
         model.setTrangThai(rdoHoTro.isSelected());
         return model;
     }
-    
+
     void update() {
         if (txtTenDV.getText().isEmpty()) {
             mgsBox.alert(this, "Tên dịch vụ không được để trống");
@@ -202,7 +205,7 @@ public class DichVuPanel extends javax.swing.JPanel {
         DichVu model = getform1();
         if (txtMaDV.getText() == null) {
             mgsBox.alert(this, "Vui lòng điền mã dịch vụ cần sửa");
-        } else {
+        } else if (mgsBox.confirm(this, "Bạn có muốn sửa dịch vụ này không?")) {
             try {
                 dvDAO.update(model);
                 System.out.println(model);
@@ -214,6 +217,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,10 +257,17 @@ public class DichVuPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Tên dịch vụ:");
 
+        txtTenDV.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel4.setText("Phí dịch vụ:");
 
+        txtPhiDV.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        btnThem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Add.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -265,6 +276,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Edit.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -273,6 +285,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Delete.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -281,6 +294,7 @@ public class DichVuPanel extends javax.swing.JPanel {
             }
         });
 
+        btnMoi.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh.png"))); // NOI18N
         btnMoi.setText("Mới");
         btnMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -289,17 +303,22 @@ public class DichVuPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel2.setText("Mã dịch vụ:");
 
         txtMaDV.setEditable(false);
+        txtMaDV.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel6.setText("Trạng thái:");
 
         buttonGroup1.add(rdoHoTro);
+        rdoHoTro.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         rdoHoTro.setSelected(true);
         rdoHoTro.setText("Hỗ trợ");
 
         buttonGroup1.add(rdoTamNgung);
+        rdoTamNgung.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         rdoTamNgung.setText("Tạm ngưng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -320,10 +339,10 @@ public class DichVuPanel extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(27, 27, 27)
+                                .addGap(25, 25, 25)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSua)))
+                                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnMoi)))
                             .addComponent(jLabel6)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rdoHoTro)
@@ -362,9 +381,10 @@ public class DichVuPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoa)
                     .addComponent(btnMoi))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblBang.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tblBang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -381,6 +401,7 @@ public class DichVuPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblBang.setRowHeight(30);
         tblBang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblBangMousePressed(evt);
@@ -391,9 +412,13 @@ public class DichVuPanel extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel5.setText("Tìm kiếm dịch vụ:");
 
+        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
         btnTim.setBackground(new java.awt.Color(255, 255, 255));
+        btnTim.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Search.png"))); // NOI18N
         btnTim.setText("Tìm kiếm");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
@@ -403,6 +428,7 @@ public class DichVuPanel extends javax.swing.JPanel {
         });
 
         btnHuy.setBackground(new java.awt.Color(255, 255, 255));
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Delete.png"))); // NOI18N
         btnHuy.setText("Hủy");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -438,7 +464,7 @@ public class DichVuPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("QUẢN LÝ DỊCH VỤ");
 
@@ -447,31 +473,29 @@ public class DichVuPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1265, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(221, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 272, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
