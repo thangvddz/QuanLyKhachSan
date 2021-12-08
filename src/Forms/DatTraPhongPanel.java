@@ -800,14 +800,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
     private void cboKhachHangCuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboKhachHangCuItemStateChanged
         // TODO add your handling code here:
-        try {
-            KhachHang kh = (KhachHang) cboKhachHangCu.getSelectedItem();
-            clearForm();
-            makh_dathue = kh.getMaKH();
-            fillForm(kh);
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            try {
+                KhachHang kh = (KhachHang) cboKhachHangCu.getSelectedItem();
+                clearForm();
+                makh_dathue = kh.getMaKH();
+                fillForm(kh);
 
-        } catch (Exception e) {
-            clearForm();
+            } catch (Exception e) {
+                clearForm();
+            }
         }
     }//GEN-LAST:event_cboKhachHangCuItemStateChanged
 
@@ -874,7 +876,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtGioCheckOut.setText(String.valueOf(c.getGioChkOut()));
         if (c.getPhutChkOut() >= 0 && c.getPhutChkOut() < 10) {
             txtPhutCheckOut.setText(String.valueOf(c.getPhutChkOut()) + "0");
-        }else{
+        } else {
             txtPhutCheckOut.setText(String.valueOf(c.getPhutChkOut()));
         }
 
@@ -887,6 +889,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             if (checkHinhThuc()) {
                 if (checkThongTinKhachNhapVao()) {
                     try {
+                        // chon khách cũ
+                        System.out.println("ma kh dat thue: " + makh_dathue);
                         HoaDon hd = hoaDonDAO.selectHoaDonByKH(makh_dathue, false);
                         MapRoom.maKH = makh_dathue;
                         insertHDCT();
@@ -895,6 +899,8 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
                         frame.dispose();
                     } catch (Exception e) {
+                        // khong chon khach cu
+                        e.printStackTrace();
                         insertKhachHang();
                         insertHoaDon();
                         insertHDCT();
@@ -1020,7 +1026,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     }
 
     public void updateKhachHang() {
-        khachHangDAO.update(new KhachHang(MapRoom.maKH, txtSoCMT.getText(), txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
+        try {
+            khachHangDAO.update(new KhachHang(MapRoom.maKH, txtSoCMT.getText(), txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void insertHoaDon() {

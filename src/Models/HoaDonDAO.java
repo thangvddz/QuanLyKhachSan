@@ -25,7 +25,7 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
     private static final String SQL_UPDATE_TRANGTHAI = "UPDATE HOADON SET TrangThai=? WHERE MaHD=?";
     private static final String SQL_UPDATE_TONGTIEN = "UPDATE HOADON SET ThanhTien=? WHERE MaHD=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM HOADON";
-    private static final String SQL_SELECT_ID_HOADON = "select * from HOADON where MaKH=? and TrangThai=?";
+    private static final String SQL_SELECT_ID_HOADON = "select * from HOADON where MaKH=? and TrangThai=? order by MaHD desc";
     private static final String SQL_SELECT_ID_HOADON_TT_FALSE = "select * from HOADON where TrangThai=?";
     private static final String SQL_SELECT_ID_HOADON_MOI = "select TOP 1 * from HOADON where TrangThai=? order by MaHD desc";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM HOADON WHERE MaHD=? and TrangThai=?";
