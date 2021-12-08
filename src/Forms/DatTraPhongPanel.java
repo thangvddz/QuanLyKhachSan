@@ -6,6 +6,7 @@
 package Forms;
 
 import Entities.ChiTietPhongVaDichVu;
+import Entities.Config;
 import Entities.DichVu;
 import Entities.HoaDon;
 import Entities.HoaDonChiTiet;
@@ -32,6 +33,7 @@ import Utils.MapRoom;
 import Utils.checkText;
 import Utils.mgsBox;
 import Utils.xDate;
+import Utils.xFile;
 import Utils.xMoney;
 import Utils.xTime;
 import java.awt.event.ItemEvent;
@@ -803,7 +805,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             clearForm();
             makh_dathue = kh.getMaKH();
             fillForm(kh);
-            
+
         } catch (Exception e) {
             clearForm();
         }
@@ -849,8 +851,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         maPhong = MapRoom.posPhong;
         soTang = MapRoom.posTang;
         CMT = "";
-        txtGioCheckOut.setText("14");
-        txtPhutCheckOut.setText("00");
+        setTimeHoll();
         lsCTPVDV = new ArrayList<>();
         Date localDate = new Date(System.currentTimeMillis());
         jdcCheckIn.setDate(localDate);
@@ -866,6 +867,17 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         if (MapRoom.maKH == 0) {
             xTime.setTimeNow(txtGioCheckIn, txtPhutCheckIn);
         }
+    }
+
+    public void setTimeHoll() {
+        Config c = (Config) xFile.readFile();
+        txtGioCheckOut.setText(String.valueOf(c.getGioChkOut()));
+        if (c.getPhutChkOut() >= 0 && c.getPhutChkOut() < 10) {
+            txtPhutCheckOut.setText(String.valueOf(c.getPhutChkOut()) + "0");
+        }else{
+            txtPhutCheckOut.setText(String.valueOf(c.getPhutChkOut()));
+        }
+
     }
 
     public void DatPhong() {
