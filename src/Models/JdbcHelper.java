@@ -17,15 +17,9 @@ import java.sql.SQLException;
  */
 public class JdbcHelper {
 
-
-<<<<<<< HEAD
-    static String url = "jdbc:sqlserver://localhost:1433;databasename=DA1_N8_V23";
-=======
-
     static String url = "jdbc:sqlserver://localhost:1433;databasename=DA1_N8_V35";
->>>>>>> 6dfe24afe7c3ee7a1078ed10a66bd16627de44d9
     static String userName = "sa";
-    static String password = "123456";
+    static String password = "a";
 
     static {
         try {
