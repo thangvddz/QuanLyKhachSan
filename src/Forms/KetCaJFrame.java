@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -64,7 +65,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         lblTenNhanVien = new javax.swing.JLabel();
         lblDongHoKetCa = new javax.swing.JLabel();
@@ -89,6 +89,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         btnKetCa = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblThoiGianKT = new javax.swing.JLabel();
@@ -102,22 +103,23 @@ public class KetCaJFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTenNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTenNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTenNhanVien.setText("Vu Van A");
         getContentPane().add(lblTenNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -3, 210, 40));
 
-        lblDongHoKetCa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblDongHoKetCa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDongHoKetCa.setForeground(new java.awt.Color(204, 0, 0));
         lblDongHoKetCa.setText("12:00:00");
         getContentPane().add(lblDongHoKetCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 250, 30));
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 11, 5));
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Tiền đầu ca:");
         jPanel1.add(jLabel2);
 
         txtTienDauCa.setEditable(false);
+        txtTienDauCa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTienDauCa.setPreferredSize(new java.awt.Dimension(150, 30));
         jPanel1.add(txtTienDauCa);
 
@@ -125,10 +127,12 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 19, 5));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Tiền mặt:");
         jPanel2.add(jLabel6);
 
         txtTienMat.setEditable(false);
+        txtTienMat.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtTienMat.setPreferredSize(new java.awt.Dimension(150, 30));
         jPanel2.add(txtTienMat);
 
@@ -136,10 +140,12 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 21, 5));
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Tiền thẻ:");
         jPanel3.add(jLabel7);
 
         txtTienTheNganHang.setEditable(false);
+        txtTienTheNganHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTienTheNganHang.setPreferredSize(new java.awt.Dimension(150, 30));
         jPanel3.add(txtTienTheNganHang);
 
@@ -147,10 +153,12 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 5));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Tiền cuối ca :");
         jPanel4.add(jLabel8);
 
         txtTienCuoiCa.setEditable(false);
+        txtTienCuoiCa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTienCuoiCa.setPreferredSize(new java.awt.Dimension(180, 30));
         jPanel4.add(txtTienCuoiCa);
 
@@ -159,20 +167,23 @@ public class KetCaJFrame extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("Thời gian bắt đầu :");
         jPanel5.add(jLabel9);
 
-        lblThoiGianBD.setText("jLabel3");
+        lblThoiGianBD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel5.add(lblThoiGianBD);
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 470, 30));
 
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Tiền Phát sinh:");
         jPanel6.add(jLabel1);
 
+        txtTienThucThu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTienThucThu.setText("0");
         txtTienThucThu.setPreferredSize(new java.awt.Dimension(180, 30));
         jPanel6.add(txtTienThucThu);
@@ -180,11 +191,8 @@ public class KetCaJFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 470, 40));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        java.awt.GridBagLayout jPanel7Layout = new java.awt.GridBagLayout();
-        jPanel7Layout.columnWidths = new int[] {0, 10, 0, 10, 0};
-        jPanel7Layout.rowHeights = new int[] {0};
-        jPanel7.setLayout(jPanel7Layout);
 
+        btnKetCa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnKetCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Accept.png"))); // NOI18N
         btnKetCa.setText("KẾT CA");
         btnKetCa.addActionListener(new java.awt.event.ActionListener() {
@@ -192,41 +200,51 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 btnKetCaActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel7.add(btnKetCa, gridBagConstraints);
+        jPanel7.add(btnKetCa);
 
+        btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_cancel_25px.png"))); // NOI18N
-        btnThoat.setText("THOÁT");
+        btnThoat.setText("TRỞ VỀ");
+        btnThoat.setToolTipText("");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThoatActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        jPanel7.add(btnThoat, gridBagConstraints);
+        jPanel7.add(btnThoat);
+
+        btnReset.setBackground(new java.awt.Color(255, 102, 102));
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_refresh_25px.png"))); // NOI18N
+        btnReset.setText("RESET");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnReset);
 
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 470, 50));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 255));
         jLabel3.setText("Thời gian kêt thúc :");
         jPanel8.add(jLabel3);
 
-        lblThoiGianKT.setText("jLabel4");
+        lblThoiGianKT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel8.add(lblThoiGianKT);
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 470, 30));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ghi chú :");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 80, 30));
 
         txtGhiChu.setColumns(20);
+        txtGhiChu.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         txtGhiChu.setRows(5);
         jScrollPane1.setViewportView(txtGhiChu);
 
@@ -245,20 +263,28 @@ public class KetCaJFrame extends javax.swing.JFrame {
             lscldao.update(lichSuCuoi);
             mgsBox.alert(this, "Kết ca thành công");
             timer.stop();
-            
+
             ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
-            manHinhChinhGUI.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            manHinhChinhGUI.setVisible(false);
+            manHinhChinhGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             manHinhChinhGUI.dispose();
-            this.setVisible(false);
-            
+            Auth.user = null;
+
             DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
             dangNhapJFrame.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnKetCaActionPerformed
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        if (mgsBox.confirm(this, "Bạn có chắc muốn reset lại tổng tiền?")) {
+            reset();
+        }
+    }//GEN-LAST:event_btnResetActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKetCa;
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -313,7 +339,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
         });
         timer.start();
 
-        lblTenNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
+        
         fillForm();
     }
 
@@ -323,14 +349,14 @@ public class KetCaJFrame extends javax.swing.JFrame {
             List<LichSuCaLam> lslscl = lscldao.selectAll();
             lichSuCuoi = lslscl.get(lslscl.size() - 1);
             CaLam cl = caLamDAO.selectById(lichSuCuoi.getMaCaLam());
-            List<Object[]> lsHD = hddao.getHoaDonTheoCa(lichSuCuoi.getThoiGianBD(), localDate, Auth.user.getMaNV());
+            List<Object[]> lsHD = hddao.getHoaDonTheoCa(lichSuCuoi.getThoiGianBD(), localDate, lichSuCuoi.getMaNV());
             for (Object[] objects : lsHD) {
                 int mahd = (int) objects[0];
                 BigDecimal bd1 = (BigDecimal) objects[5];
                 double tienTraTruoc = bd1.doubleValue();
                 BigDecimal bd2 = (BigDecimal) objects[8];
                 double tienTongTien = bd2.doubleValue();
-                System.out.println("maHoaDon: "+ mahd + ", tong tien: "+ tienTongTien);
+                System.out.println("maHoaDon: " + mahd + ", tong tien: " + tienTongTien);
                 ThanhToan tt = thanhToanDAO.selectById(mahd);
                 if (tt.getMaLoaiTT() == 1) {
                     if (tienTongTien == 0) {
@@ -353,12 +379,13 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 }
             }
 
+            lblTenNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
             txtTienDauCa.setText(xMoney.doubleToVNDong(lichSuCuoi.getTienThucNhan()));
             txtTienMat.setText(xMoney.doubleToVNDong(tienMat));
             txtTienTheNganHang.setText(xMoney.doubleToVNDong(tienThe));
             tienCuoiCa = tienMat + tienThe;
             txtTienCuoiCa.setText(xMoney.doubleToVNDong(tienCuoiCa));
-            
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String stringTGBD = dateFormat.format(lichSuCuoi.getThoiGianBD());
             lblThoiGianBD.setText(stringTGBD);
@@ -377,6 +404,16 @@ public class KetCaJFrame extends javax.swing.JFrame {
         lichSuCuoi.setGhiChuThu(txtGhiChu.getText());
         lichSuCuoi.setTrangThai(false);
         lichSuCuoi.setThoiGianKT(localDate);
+    }
+
+    public void reset() {
+        if (txtGhiChu.getText().isEmpty()) {
+            mgsBox.alert(this, "Chưa có ghi chú xác nhận reset của quản lý");
+        }else{
+            lichSuCuoi.setTienCuoiCa(0);
+            lichSuCuoi.setGhiChuThu(txtGhiChu.getText());
+            txtTienCuoiCa.setText("0");
+        }
     }
 
 }

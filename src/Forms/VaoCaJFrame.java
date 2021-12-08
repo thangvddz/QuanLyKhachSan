@@ -5,6 +5,7 @@ import Entities.LichSuCaLam;
 import Models.CaLamDAO;
 import Models.LichSuCaLamDAO;
 import Utils.Auth;
+import Utils.checkText;
 import Utils.mgsBox;
 import Utils.xDate;
 import Utils.xMoney;
@@ -63,7 +64,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         txtGhiChu = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnLuu = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnQuayLai = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lblTrangThai = new javax.swing.JLabel();
 
@@ -105,15 +106,15 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(btnLuu);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_back_to_25px.png"))); // NOI18N
-        jButton1.setText("QUAY LẠI");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnQuayLai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnQuayLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_back_to_25px.png"))); // NOI18N
+        btnQuayLai.setText("QUAY LẠI");
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnQuayLaiActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
+        jPanel1.add(btnQuayLai);
 
         jLabel4.setText("Trạng thái :");
 
@@ -207,29 +208,41 @@ public class VaoCaJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if(status == false){
+        if (status == false) {
             luu();
-        }else{
-            fillTienDauCa();
-            timer.stop();
-            ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
-            manHinhChinhGUI.setVisible(true);
-            this.setVisible(false);
+        } else {
+
+            try {
+                List<LichSuCaLam> lscl = daoLSCL.selectAll();
+                LichSuCaLam lscll = lscl.get(lscl.size() - 1);
+                System.out.println("nvtruoc: " + lscll.getMaNV() + ", nvdangnhap: " + Auth.user.getMaNV());
+                if (lscll.getMaNV().equals(Auth.user.getMaNV())) {
+                    fillTienDauCa();
+                    timer.stop();
+                    ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
+                    manHinhChinhGUI.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    mgsBox.alert(this, "Ca Trước chưa kết thúc, chưa đến lượt bạn.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         DangNhapJFrame dn = new DangNhapJFrame();
         dn.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnQuayLaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnQuayLai;
     private javax.swing.JComboBox<String> cboTenCa;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -285,9 +298,15 @@ public class VaoCaJFrame extends javax.swing.JFrame {
         try {
             List<LichSuCaLam> lscl = daoLSCL.selectAll();
             LichSuCaLam lscll = lscl.get(lscl.size() - 1);
-            txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienCuoiCa()));
+
             status = lscll.isTrangThai();
             lblTrangThai.setText(status ? "Chưa kết ca" : "Đã kết ca");
+            if (status) {
+                txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienVaoDauCa()));
+            } else {
+                txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienCuoiCa()));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -23,7 +23,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
      * Creates new form DangNhapJFrame
      */
     NhanVienDAO dao = new NhanVienDAO();
-    
+
     public DangNhapJFrame() {
         initComponents();
         init();
@@ -191,7 +191,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
-    
+
     private void login() {
         String user = txtMaNV.getText();
         String matKhau = new String(txtMatKhau.getPassword());
@@ -203,9 +203,15 @@ public class DangNhapJFrame extends javax.swing.JFrame {
                     Auth.user = nhanVien;
                     mgsBox.alert(this, "Đăng nhập thành công!");
                     writeFileConfig();
-                    VaoCaJFrame vaoCaJFrame = new VaoCaJFrame();
-                    vaoCaJFrame.setVisible(true);
-                    this.setVisible(false);
+                    if (Auth.isManager()) {
+                        ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
+                        manHinhChinhGUI.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        VaoCaJFrame vaoCaJFrame = new VaoCaJFrame();
+                        vaoCaJFrame.setVisible(true);
+                        this.setVisible(false);
+                    }
                 } else {
                     mgsBox.alert(this, "Sai mật khẩu!");
                 }
@@ -217,12 +223,12 @@ public class DangNhapJFrame extends javax.swing.JFrame {
             mgsBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-    
-    public void writeFileConfig(){
+
+    public void writeFileConfig() {
         Config con = new Config(14, 0, 12, 0);
         xFile.writeFile(con);
     }
-    
+
     private void exit() {
         int hoi = JOptionPane.showConfirmDialog(this, "Bạn muốn thoát thật không?");
         if (hoi != JOptionPane.YES_OPTION) {

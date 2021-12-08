@@ -598,7 +598,6 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         KetCaJFrame ketCaJFrame = new KetCaJFrame();
         ketCaJFrame.setVisible(true);
-
     }//GEN-LAST:event_btnDangXuatMousePressed
 
     private void btnThanhToanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMouseEntered
@@ -668,11 +667,9 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
             txtGioCheckOutKS.setText("Chưa cài đặt");
         } else {
             if (c.getPhutChkIn() >= 0 && c.getPhutChkIn() < 10) {
-                txtGioCheckInKS.setText(c.getGioChkIn() + " : 00" + c.getPhutChkIn());
-                txtGioCheckOutKS.setText(c.getGioChkOut() + " : " + c.getPhutChkOut());
+                txtGioCheckInKS.setText(c.getGioChkIn() + " : 0" + c.getPhutChkIn());
             }
             if (c.getPhutChkOut() >= 0 && c.getPhutChkOut() < 10) {
-                txtGioCheckInKS.setText(c.getGioChkIn() + " : " + c.getPhutChkIn());
                 txtGioCheckOutKS.setText(c.getGioChkOut() + " : 0" + c.getPhutChkOut());
             }
             if (c.getPhutChkIn() >= 10 && c.getPhutChkOut() >= 10) {
