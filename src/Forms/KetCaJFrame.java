@@ -30,6 +30,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -259,19 +260,24 @@ public class KetCaJFrame extends javax.swing.JFrame {
 
     private void btnKetCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetCaActionPerformed
         if (mgsBox.confirm(this, "Bạn có muốn kết ca, hệ thống sẽ đăng xuất")) {
-            setLsCuoi();
-            lscldao.update(lichSuCuoi);
-            mgsBox.alert(this, "Kết ca thành công");
-            timer.stop();
+            try {
+                setLsCuoi();
+                lscldao.update(lichSuCuoi);
+                mgsBox.alert(this, "Kết ca thành công");
+                timer.stop();
 
-            ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
-            manHinhChinhGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            manHinhChinhGUI.dispose();
-            Auth.user = null;
+                ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
+                manHinhChinhGUI.setVisible(false);
+                
+                DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
+                dangNhapJFrame.setVisible(true);
+                
+                this.setVisible(false);
 
-            DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
-            dangNhapJFrame.setVisible(true);
-            this.dispose();
+                Auth.user = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_btnKetCaActionPerformed
 
@@ -339,7 +345,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
         });
         timer.start();
 
-        
         fillForm();
     }
 
@@ -409,7 +414,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
     public void reset() {
         if (txtGhiChu.getText().isEmpty()) {
             mgsBox.alert(this, "Chưa có ghi chú xác nhận reset của quản lý");
-        }else{
+        } else {
             lichSuCuoi.setTienCuoiCa(0);
             lichSuCuoi.setGhiChuThu(txtGhiChu.getText());
             txtTienCuoiCa.setText("0");

@@ -8,6 +8,7 @@ package Forms;
 import Models.DichVuDAO;
 import Models.HoaDonDAO;
 import Models.ThongKeDAO;
+import Utils.Auth;
 import Utils.mgsBox;
 import Utils.xMoney;
 import java.math.BigDecimal;
@@ -45,6 +46,10 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         doanhThuTheoThang();
         dichVuTheoNgay();
         dichVuTheoThang();
+        if (!Auth.isManager()) {
+            tabs.remove(2);
+            tabs.remove(1);
+        }
     }
 
 //    void fillTableLSGD() {
@@ -61,11 +66,13 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         try {
             List<Object[]> list = dao.getLichSuGD();
             for (Object[] row : list) {
+                System.out.println("row4: "+ row[4]);
                 BigDecimal bd1 = (BigDecimal) row[4];
                 double tontien = bd1.doubleValue();
                 model.addRow(new Object[]{(row[0]), row[1], row[2], (row[3]), xMoney.doubleToVNDong(tontien), (row[5])});
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -202,7 +209,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -258,7 +265,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("THỐNG KÊ");
 
-        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tabs.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -307,7 +314,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -517,7 +524,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("1 Ngày", jPanel1);
+        tabs.addTab("1 Ngày", jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -566,7 +573,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -714,7 +721,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("30 Ngày", jPanel2);
+        tabs.addTab("30 Ngày", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -826,7 +833,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Năm", jPanel3);
+        tabs.addTab("Năm", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -835,7 +842,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
+                    .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 1477, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -846,7 +853,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
+                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -916,11 +923,11 @@ public class LichSuGDPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblDichVu;
     private javax.swing.JLabel lblDoanhThuPhong;
     private javax.swing.JLabel lblHoaDon;
     private javax.swing.JLabel lblSoLan;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblBang;
     private javax.swing.JTable tblBang1Ngay;
     private javax.swing.JTable tblBang30Ngay;

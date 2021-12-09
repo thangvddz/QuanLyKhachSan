@@ -394,6 +394,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         tblThongTinPhongDaThue.setShowVerticalLines(false);
         jScrollPane5.setViewportView(tblThongTinPhongDaThue);
 
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lblSoPhongDaThue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -407,6 +408,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtSoPhongDaThue.setPreferredSize(new java.awt.Dimension(33, 33));
         jPanel16.add(txtSoPhongDaThue);
 
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lblHinhThucThue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -424,6 +426,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         chkThueTheoGio.setText("Thuê theo giờ");
         jPanel17.add(chkThueTheoGio);
 
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
         jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lblTraTruoc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
