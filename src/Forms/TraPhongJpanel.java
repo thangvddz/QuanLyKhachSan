@@ -245,6 +245,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         jLabel2.setPreferredSize(new java.awt.Dimension(120, 33));
         jPanel5.add(jLabel2);
 
+        txtTenKhachHang.setEditable(false);
         txtTenKhachHang.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel5.add(txtTenKhachHang);
 
@@ -253,6 +254,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         jLabel9.setPreferredSize(new java.awt.Dimension(90, 33));
         jPanel5.add(jLabel9);
 
+        txtQuocTich.setEditable(false);
         txtQuocTich.setPreferredSize(new java.awt.Dimension(150, 33));
         jPanel5.add(txtQuocTich);
 
@@ -266,6 +268,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         lblCMT.setPreferredSize(new java.awt.Dimension(120, 33));
         jPanel15.add(lblCMT);
 
+        txtSoCMT.setEditable(false);
         txtSoCMT.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel15.add(txtSoCMT);
 
@@ -288,6 +291,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         jLabel5.setPreferredSize(new java.awt.Dimension(120, 33));
         jPanel16.add(jLabel5);
 
+        txtSoDT.setEditable(false);
         txtSoDT.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel16.add(txtSoDT);
 
@@ -309,6 +313,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         jLabel6.setPreferredSize(new java.awt.Dimension(120, 33));
         jPanel17.add(jLabel6);
 
+        txtQueQuan.setEditable(false);
         txtQueQuan.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel17.add(txtQueQuan);
 
@@ -335,6 +340,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         jLabel7.setPreferredSize(new java.awt.Dimension(120, 33));
         jPanel18.add(jLabel7);
 
+        txtEmail.setEditable(false);
         txtEmail.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel18.add(txtEmail);
 
@@ -366,8 +372,8 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         tblThongTinPhong.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tblThongTinPhong);
         if (tblThongTinPhong.getColumnModel().getColumnCount() > 0) {
-            tblThongTinPhong.getColumnModel().getColumn(0).setMinWidth(200);
-            tblThongTinPhong.getColumnModel().getColumn(1).setMinWidth(200);
+            tblThongTinPhong.getColumnModel().getColumn(0).setMinWidth(150);
+            tblThongTinPhong.getColumnModel().getColumn(1).setMinWidth(150);
             tblThongTinPhong.getColumnModel().getColumn(3).setResizable(false);
             tblThongTinPhong.getColumnModel().getColumn(4).setResizable(false);
         }
@@ -429,7 +435,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
 
         txtSoGio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSoGio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txtSoGio.setPreferredSize(new java.awt.Dimension(33, 33));
+        txtSoGio.setPreferredSize(new java.awt.Dimension(99, 33));
         jPanel8.add(txtSoGio);
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -449,7 +455,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
 
         txtSoNgay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSoNgay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txtSoNgay.setPreferredSize(new java.awt.Dimension(33, 33));
+        txtSoNgay.setPreferredSize(new java.awt.Dimension(99, 33));
         jPanel8.add(txtSoNgay);
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -619,20 +625,23 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)
-                                .addComponent(txtSoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSoTang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(7, 7, 7)
+                                        .addComponent(txtSoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(jLabel25)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtSoTang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(12, 12, 12)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -651,8 +660,8 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                                 .addGap(2, 2, 2)
                                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtSoTang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -925,6 +934,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
             for (LichSuGD l : ls) {
                 Object[] lsGio = lsgddao.getTimesRented(l.getThoiGianBD(), l.getThoiGianKT()).get(0);
+                System.out.println("lsgio: "+ lsGio);
                 int soNgay = Integer.parseInt(lsGio[0].toString());
                 int soGio = Integer.parseInt(lsGio[1].toString());
                 int soPhut = Integer.parseInt(lsGio[2].toString());
@@ -948,6 +958,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                 });
             }
         } catch (Exception e) {
+            mgsBox.alert(this, "Có lỗi xảy ra");
             e.printStackTrace();
         }
 
@@ -1006,8 +1017,8 @@ public class TraPhongJpanel extends javax.swing.JPanel {
 
             sumMoneyRoom = giaNgay * sumDay + giaGio * sumHour;
 
-            txtSoGio.setText(String.valueOf(sumHour));
-            txtSoNgay.setText(String.valueOf(sumDay));
+            txtSoGio.setText(String.valueOf(sumHour) + " giờ");
+            txtSoNgay.setText(String.valueOf(sumDay) + " ngày");
             txtTienTheoGio.setText(xMoney.doubleToVNDong(giaGio));
             txtTienTheoNgay.setText(xMoney.doubleToVNDong(giaNgay));
             txtTongTienPhong.setText(xMoney.doubleToVNDong(sumMoneyRoom));

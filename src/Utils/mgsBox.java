@@ -15,15 +15,15 @@ import javax.swing.JOptionPane;
 public class mgsBox {
 
     public static void alert(Component parents, String message) {
-        JOptionPane.showMessageDialog(parents, message, "Hệ thống cầu tiêu thần kỳ", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(parents, message, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static boolean confirm(Component parents, String message) {
-        int choose = JOptionPane.showConfirmDialog(parents, message, "Hệ thống cầu tiêu thần kỳ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int choose = JOptionPane.showConfirmDialog(parents, message, "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return choose == JOptionPane.YES_OPTION;
     }
 
     public static String prompt(Component parent, String message) {
-        return JOptionPane.showInputDialog(parent, message, "Hệ thống cầu tiêu thần kỳ", JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showInputDialog(parent, message, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 }

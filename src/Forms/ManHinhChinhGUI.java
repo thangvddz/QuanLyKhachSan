@@ -540,16 +540,19 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
         if (Auth.isLogin() && Auth.isManager()) {
             JPanel quanLyPhong = new QuanLyPhongPanel();
             SwitchPanel(quanLyPhong);
-        }
-        else{
+        } else {
             mgsBox.alert(this, "Bạn không có quyền quản lý phòng");
         }
     }//GEN-LAST:event_btnQuanLyPhongMousePressed
 
     private void btnNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMousePressed
         // TODO add your handling code here:
-        JPanel nhanvien = new NhanVienJPanel();
-        SwitchPanel(nhanvien);
+        if (Auth.isLogin() && Auth.isManager()) {
+            JPanel nhanvien = new NhanVienJPanel();
+            SwitchPanel(nhanvien);
+        } else {
+            mgsBox.alert(this, "Bạn không có quyền quản lý Nhân viên");
+        }
     }//GEN-LAST:event_btnNhanVienMousePressed
 
     private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered

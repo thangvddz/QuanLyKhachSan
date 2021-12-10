@@ -76,12 +76,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     List<ChiTietPhongVaDichVu> lsCTPVDV;
     public static int index_tbl_dvdsd;
     int makh_dathue;
-
+    
     public DatTraPhongPanel() {
         initComponents();
         init();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -778,7 +778,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 clearForm();
                 makh_dathue = kh.getMaKH();
                 fillForm(kh);
-
+                
             } catch (Exception e) {
                 clearForm();
             }
@@ -806,7 +806,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         deleteDV();
     }//GEN-LAST:event_btnXoaCTPActionPerformed
-
+    
     public void init() {
         khachHangDAO = new KhachHangDAO();
         hoaDonDAO = new HoaDonDAO();
@@ -842,7 +842,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             xTime.setTimeNow(txtGioCheckIn, txtPhutCheckIn);
         }
     }
-
+    
     public void setTimeHoll() {
         Config c = (Config) xFile.readFile();
         txtGioCheckOut.setText(String.valueOf(c.getGioChkOut()));
@@ -851,9 +851,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } else {
             txtPhutCheckOut.setText(String.valueOf(c.getPhutChkOut()));
         }
-
+        
     }
-
+    
     public void DatPhong() {
 
         //phong khong co nguoi thue makh = 0
@@ -920,23 +920,34 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         mgsBox.alert(this, "Cập nhật hình thức giờ sang ngày thành công");
                     } else {
                         if (mgsBox.confirm(this, "Đã quá thời gian được phép cập hình thức thuê(" + LIMIT_CHANGE * 2 + " h), Nếu đồng ý bạn sẽ phải chịu thêm cả phí ngày lẫn phí giờ trong cùng một ngày.")) {
-//                            updateLSGD();
-                            xTime.setTimeNow(txtGioDV, txtPhutDV);
-                            Date localDate = new Date(System.currentTimeMillis());
-                            jdcCheckOut.setDate(localDate);
-                            insertLSGD();
-                            mgsBox.alert(this, "Chuyển đổi giờ sang ngày thành công");
-                            DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
-                            frame.dispose();
+                            try {
+                                int maHDCTT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
+                                List<LichSuGD> lss = lsgddao.selectByMaHDCT(maHDCT);
+                                int siz = lss.size();
+                                lsgddao.update(new LichSuGD(lss.get(siz - 1).getMaLSGD(), maHDCTT,
+                                        xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
+                                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())),
+                                        true));
+                                xTime.setTimeNow(txtGioDV, txtPhutDV);
+                                Date localDate = new Date(System.currentTimeMillis());
+                                jdcCheckIn.setDate(localDate);
+                                insertLSGD();
+                                mgsBox.alert(this, "Chuyển đổi giờ sang ngày thành công");
+                                DatTraPhongJFrame frame = (DatTraPhongJFrame) SwingUtilities.getWindowAncestor(this);
+                                frame.dispose();
+                            } catch (Exception e) {
+                                mgsBox.alert(this, "Có lỗi xảy ra !");
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
             }
-
+            
         }
-
+        
     }
-
+    
     public boolean checkThongTinKhachNhapVao() {
         if (checkText.issEmpty(txtTenKhachHang.getText())) {
             mgsBox.alert(this, "Tên khách hàng không được để trống");
@@ -969,9 +980,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
         return false;
     }
-
+    
     public void TraPhong() {
-
+        
         if (MapRoom.maKH != 0) {
             updateLSGD();
             TraPhongJframe traPhongJframe = new TraPhongJframe(MapRoom.maKH);
@@ -982,7 +993,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Phòng này đã có ai thuê đâu mà trả phòng. nhấn ok đi");
         }
     }
-
+    
     public void insertKhachHang() {
         CMT = txtSoCMT.getText().trim();
         if (!CMT.equals("")) {
@@ -996,16 +1007,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         }
     }
-
+    
     public void updateKhachHang() {
         try {
             khachHangDAO.update(new KhachHang(MapRoom.maKH, txtSoCMT.getText(), txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void insertHoaDon() {
         int hoursChkIn = Integer.parseInt(txtGioCheckIn.getText());
         int minutesChkIn = Integer.parseInt(txtPhutCheckIn.getText());
@@ -1026,7 +1037,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
         insertThanhToan();
     }
-
+    
     public void updateHoaDon() {
         int hoursChkIn = Integer.parseInt(txtGioCheckIn.getText());
         int minutesChkIn = Integer.parseInt(txtPhutCheckIn.getText());
@@ -1048,7 +1059,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
         updateThanhToan();
     }
-
+    
     public void insertHDCT() {
         try {
             addAfterRent();
@@ -1056,7 +1067,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public void insertLSGD() {
         Timestamp localDate = new Timestamp(System.currentTimeMillis());
         jdcCheckIn.setDate(localDate);
@@ -1067,19 +1078,20 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             if (jdcCheckOut.getDate() != null) {
                 lsgddao.insert(new LichSuGD(-1, maHDCT,
                         xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
-                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? false : true));
+                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())),
+                        chkThueTheoNgay.isSelected() ? false : true));
             } else {
                 lsgddao.insert(new LichSuGD(-1, maHDCT,
                         xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
                         null,
                         chkThueTheoNgay.isSelected() ? false : true));
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public void updateLSGD() {
         updateKhachHang();
         updateHoaDon();
@@ -1089,32 +1101,39 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         try {
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
-            if (ls.size() <= 1) {
+            int siz = ls.size();
+            if (siz <= 1) {
                 lsgddao.update(new LichSuGD(ls.get(0).getMaLSGD(), maHDCT,
                         xTime.getTimeStamp(jdcCheckIn, Integer.parseInt(txtGioCheckIn.getText()), Integer.parseInt(txtPhutCheckIn.getText())),
-                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? false : true));
+                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())),
+                        chkThueTheoNgay.isSelected() ? false : true));
             } else {
                 lsgddao.update(new LichSuGD(ls.get(0).getMaLSGD(), maHDCT,
                         ls.get(1).getThoiGianKT(),
-                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())), chkThueTheoNgay.isSelected() ? false : true));
+                        xTime.getTimeStamp(jdcCheckOut, Integer.parseInt(txtGioCheckOut.getText()), Integer.parseInt(txtPhutCheckOut.getText())),
+                        chkThueTheoNgay.isSelected() ? false : true));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
-        Object[] lss = lsgddao.checkOverCheckOut(localDate, hd.getThoiDiemTraPhong(), hd.getMaHD()).get(0);
-        jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
-        xTime.getTimeFromDatabase(hd.getThoiDiemDatPhong(), txtGioCheckOut, txtPhutCheckOut);
+        
+        try {
+            HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
+            jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
+            xTime.getTimeFromDatabase(hd.getThoiDiemDatPhong(), txtGioCheckIn, txtPhutCheckIn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
-
+    
     public void fillGioiTinh() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboGioiTinh.getModel();
         model.removeAllElements();
         model.addElement("Nam");
         model.addElement("Nữ");
     }
-
+    
     public void fillForm(KhachHang kh) {
         txtSoCMT.setText(kh.getSoCMT());
         txtTenKhachHang.setText(kh.getHoTen());
@@ -1129,7 +1148,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             cboGioiTinh.setSelectedIndex(1);
         }
     }
-
+    
     public void fillComboboxThanhToan() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThanhToan.getModel();
         model.removeAllElements();
@@ -1141,7 +1160,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     public void insertThanhToan() {
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
@@ -1152,7 +1171,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public void updateThanhToan() {
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
@@ -1163,14 +1182,14 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public void fillComboboxKhachHangCu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhachHangCu.getModel();
         model.removeAllElements();
         model.addElement("none");
         try {
             List<HoaDon> lsHD = hoaDonDAO.selectHD_TT_false(false);
-
+            
             for (HoaDon hoaDon : lsHD) {
                 KhachHang kh = khachHangDAO.selectById(hoaDon.getMaKH());
                 model.addElement(kh);
@@ -1179,7 +1198,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public void fillKhachHangField() {
         int makh = MapRoom.maKH;
         if (makh != 0) {
@@ -1188,10 +1207,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             fillHoaDonField(makh);
         }
     }
-
+    
     public void fillHoaDonField(int maKH) {
         try {
-
+            
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
@@ -1201,9 +1220,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 jdcCheckOut.setDate(ls.get(0).getThoiGianKT());
                 xTime.getTimeFromDatabase(ls.get(0).getThoiGianKT(), txtGioCheckOut, txtPhutCheckOut);
             }
-
+            
             try {
-
+                
                 if (ls.get(0).isTrangThai()) {
                     chkThueTheoGio.setSelected(true);
                 } else {
@@ -1220,7 +1239,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public void clearForm() {
         txtSoCMT.setText("");
         txtTenKhachHang.setText("");
@@ -1231,7 +1250,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtEmail.setText("");
         cboGioiTinh.setSelectedIndex(0);
     }
-
+    
     public void fillTableChonPhong() {
         Phong lsPhong = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong);
         LoaiPhong lp = loaiPhongDAO.selectById(lsPhong.getMaLoaiPhong());
@@ -1243,7 +1262,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             });
         }
     }
-
+    
     public void fillComboboxDichVu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboDichVu.getModel();
         List<DichVu> lsDichVu = dichVuDAO.selectAll();
@@ -1260,12 +1279,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         Date localDate = new Date(System.currentTimeMillis());
         jdcThoiGianSDDV.setDate(localDate);
     }
-
+    
     public void clearTableChonPhong() {
         DefaultTableModel model = (DefaultTableModel) tblPhongDuocChon.getModel();
         model.setRowCount(0);
     }
-
+    
     public void fillTablePhongDaThue() {
         DefaultTableModel model = (DefaultTableModel) tblThongTinPhongDaThue.getModel();
         model.setRowCount(0);
@@ -1281,7 +1300,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     public void fillTableCTPhongDV() {
         DefaultTableModel model = (DefaultTableModel) tblChiTietPhongVaDV.getModel();
         model.setRowCount(0);
@@ -1299,7 +1318,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public void fillLsCTPVDV() {
         try {
             List<YeuCau> lsyc = yeuCauDAO.selectAllMAHDCT(false, maPhong, soTang);
@@ -1312,7 +1331,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             System.out.println("Chua yeu cau dich vu");
         }
     }
-
+    
     public void addDV() {
         DichVu dv = (DichVu) cboDichVu.getSelectedItem();
         int gioDV = Integer.parseInt(txtGioDV.getText());
@@ -1330,7 +1349,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Thêm dịch vụ thành công nha...");
         }
     }
-
+    
     public void deleteDV() {
         if (mgsBox.confirm(this, "Bạn có chắc muốn xóa dịch vụ này không ?")) {
             if (index_tbl_dvdsd != -1) {
@@ -1350,7 +1369,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         mgsBox.alert(this, "Xóa thành công dịch vụ");
                         index_tbl_dvdsd = -1;
                     }
-
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1359,7 +1378,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         }
     }
-
+    
     public void addAfterRent() {
         int MaHD = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD();
         try {
@@ -1372,13 +1391,13 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     yeuCauDAO.insert(new YeuCau(lsCTPVDV.get(i).getMaDV(), maHDCT, lsCTPVDV.get(i).getThoiGianBD(), false));
                 }
             }
-
+            
         } catch (Exception e) {
             System.out.println("thue dau tien");
             e.printStackTrace();
         }
     }
-
+    
     public boolean checkHinhThuc() {
         if (chkThueTheoGio.isSelected() == false && chkThueTheoNgay.isSelected() == false) {
             return false;
