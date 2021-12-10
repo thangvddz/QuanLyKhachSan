@@ -599,7 +599,7 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMousePressed
         // TODO add your handling code here:
-        KetCaJFrame ketCaJFrame = new KetCaJFrame();
+        KetCaJFrame ketCaJFrame = new KetCaJFrame(this);
         ketCaJFrame.setVisible(true);
 //        this.setVisible(false);
 //        DangNhapJFrame dnjf = new DangNhapJFrame();

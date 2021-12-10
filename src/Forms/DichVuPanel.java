@@ -7,6 +7,7 @@ package Forms;
 
 import Entities.DichVu;
 import Models.DichVuDAO;
+import Utils.Auth;
 import Utils.mgsBox;
 import Utils.xMoney;
 import java.awt.GridBagConstraints;
@@ -513,7 +514,11 @@ public class DichVuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+        if(Auth.isManager()){
+            delete();
+        }else{
+            mgsBox.alert(this, "Nhân viên không có quyền xóa");
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

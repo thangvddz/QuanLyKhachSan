@@ -215,7 +215,6 @@ public class VaoCaJFrame extends javax.swing.JFrame {
             try {
                 List<LichSuCaLam> lscl = daoLSCL.selectAll();
                 LichSuCaLam lscll = lscl.get(lscl.size() - 1);
-                System.out.println("nvtruoc: " + lscll.getMaNV() + ", nvdangnhap: " + Auth.user.getMaNV());
                 if (lscll.getMaNV().equals(Auth.user.getMaNV())) {
                     fillTienDauCa();
                     timer.stop();
@@ -303,6 +302,7 @@ public class VaoCaJFrame extends javax.swing.JFrame {
             lblTrangThai.setText(status ? "Chưa kết ca" : "Đã kết ca");
             if (status) {
                 txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienVaoDauCa()));
+                txtTienThucNhan.setText(xMoney.doubleToVNDong(lscll.getTienThucNhan()));
             } else {
                 txtTienDauCa.setText(xMoney.doubleToVNDong(lscll.getTienCuoiCa()));
             }

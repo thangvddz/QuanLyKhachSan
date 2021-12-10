@@ -7,6 +7,7 @@ package Forms;
 
 import Entities.LoaiThanhToan;
 import Models.LoaiThanhToanDAO;
+import Utils.Auth;
 import Utils.mgsBox;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -256,7 +257,11 @@ public class LoaiThanhToanJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+        if(Auth.isManager()){
+            delete();
+        }else{
+            mgsBox.alert(this, "Bạn không có quyền xóa");
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

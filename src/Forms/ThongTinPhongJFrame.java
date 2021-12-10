@@ -291,7 +291,11 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
     
     public void delete() {
         if (mgsBox.confirm(this, "Bạn có chắc muốn xóa.")) {
-            pdao.deletePhong(Integer.parseInt(txtSoTang.getText()), txtSoPhong.getText());
+            try {
+                pdao.deletePhong(Integer.parseInt(txtSoTang.getText()), txtSoPhong.getText());
+            } catch (Exception e) {
+                mgsBox.alert(this, "xóa không được đâu");
+            }
             mgsBox.alert(this, "Xóa thành công!");
             this.setVisible(false);
             MapRoom.updateStatusScreen(pnlQuanLyPhong, gbc, new ClickMouse.MouseClikQuanLyPhong());

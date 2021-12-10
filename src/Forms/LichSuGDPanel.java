@@ -66,7 +66,6 @@ public class LichSuGDPanel extends javax.swing.JPanel {
         try {
             List<Object[]> list = dao.getLichSuGD();
             for (Object[] row : list) {
-                System.out.println("row4: "+ row[4]);
                 BigDecimal bd1 = (BigDecimal) row[4];
                 double tontien = bd1.doubleValue();
                 model.addRow(new Object[]{(row[0]), row[1], row[2], (row[3]), xMoney.doubleToVNDong(tontien), (row[5])});
@@ -796,7 +795,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -842,7 +841,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 1477, Short.MAX_VALUE)
+                    .addComponent(tabs)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -853,7 +852,7 @@ public class LichSuGDPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

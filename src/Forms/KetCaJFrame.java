@@ -21,10 +21,12 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import Models.LichSuCaLamDAO;
 import Models.LoaiThanhToanDAO;
+import Models.NhanVienDAO;
 import Models.ThanhToanDAO;
 import Utils.mgsBox;
 import Utils.xDate;
 import Utils.xMoney;
+import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -45,6 +47,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
     HoaDonDAO hddao;
     CaLamDAO caLamDAO;
     ThanhToanDAO thanhToanDAO;
+    NhanVienDAO nhanVienDAO;
     LoaiThanhToanDAO loaiThanhToanDAO;
     Timer timer;
     public static double tienCuoiCa;
@@ -52,9 +55,11 @@ public class KetCaJFrame extends javax.swing.JFrame {
     public static double tienThe;
     public static double tienMat;
     public static LichSuCaLam lichSuCuoi;
+    ManHinhChinhGUI manHinhChinhGUI;
 
-    public KetCaJFrame() {
+    public KetCaJFrame(ManHinhChinhGUI manHc) {
         initComponents();
+        this.manHinhChinhGUI = manHc;
         init();
     }
 
@@ -266,13 +271,12 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 mgsBox.alert(this, "Kết ca thành công");
                 timer.stop();
 
-                ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
-                manHinhChinhGUI.setVisible(false);
+                manHinhChinhGUI.dispose();
                 
                 DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
                 dangNhapJFrame.setVisible(true);
                 
-                this.setVisible(false);
+                this.dispose();
 
                 Auth.user = null;
             } catch (Exception e) {
@@ -327,6 +331,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
         lscldao = new LichSuCaLamDAO();
         hddao = new HoaDonDAO();
         thanhToanDAO = new ThanhToanDAO();
+        nhanVienDAO = new NhanVienDAO();
         loaiThanhToanDAO = new LoaiThanhToanDAO();
         caLamDAO = new CaLamDAO();
         tienCuoiCa = 0;
@@ -384,7 +389,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 }
             }
 
-            lblTenNhanVien.setText("Nhân viên: " + Auth.user.getHoTen());
+            lblTenNhanVien.setText("Nhân viên: " + nhanVienDAO.selectById(lichSuCuoi.getMaNV()).getHoTen());
             txtTienDauCa.setText(xMoney.doubleToVNDong(lichSuCuoi.getTienThucNhan()));
             txtTienMat.setText(xMoney.doubleToVNDong(tienMat));
             txtTienTheNganHang.setText(xMoney.doubleToVNDong(tienThe));
