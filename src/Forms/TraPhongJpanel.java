@@ -934,7 +934,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
             for (LichSuGD l : ls) {
                 Object[] lsGio = lsgddao.getTimesRented(l.getThoiGianBD(), l.getThoiGianKT()).get(0);
-                System.out.println("lsgio: "+ lsGio);
+                System.out.println("lsgio: " + lsGio);
                 int soNgay = Integer.parseInt(lsGio[0].toString());
                 int soGio = Integer.parseInt(lsGio[1].toString());
                 int soPhut = Integer.parseInt(lsGio[2].toString());
@@ -943,7 +943,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                     donVi = Math.abs(soGio) + "giờ " + Math.abs(soPhut) + " phút";
                 } else {
                     if (soNgay == 0) {
-                        donVi = "1 " +"Ngày";
+                        donVi = "1 " + "Ngày";
                     } else {
                         donVi = "" + soNgay + " Ngày";
                     }
@@ -1039,9 +1039,13 @@ public class TraPhongJpanel extends javax.swing.JPanel {
     }
 
     public void KhachPhaiTra() {
-        sumMoneyHavePay = sumMoneyRoom + sumMoneyService + tienTraCham + tienVaoSom + tienPhuThu - tienTraTruoc - tienGiamGia;
-        sumMoneyHavePay = sumMoneyHavePay + sumMoneyHavePay * (tienPhucVuNGayLe / 100) - sumMoneyHavePay * (tienKhuyenMai / 100);
-        txtTongThanhToan.setText(xMoney.doubleToVNDong(sumMoneyHavePay));
+        try {
+            sumMoneyHavePay = sumMoneyRoom + sumMoneyService + tienTraCham + tienVaoSom + tienPhuThu - tienTraTruoc - tienGiamGia;
+            sumMoneyHavePay = sumMoneyHavePay + sumMoneyHavePay * (tienPhucVuNGayLe / 100) - sumMoneyHavePay * (tienKhuyenMai / 100);
+            txtTongThanhToan.setText(xMoney.doubleToVNDong(sumMoneyHavePay));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void inHoaDon() {
@@ -1051,15 +1055,18 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         //chuyen trang thai phong ve trang thai dang don dep
         phongDAO.updateMaTT(new Phong(MapRoom.posPhong, MapRoom.posTang, 1, 5, null));
         mgsBox.alert(this, "In Hóa đơn thành công.");
-        themTongTien(hd);
+
         try {
             HoaDonChiTiet hdct = hoaDonChiTietDAO.selectByNewID(hd.getMaHD(), false);
+            hd.setTienTraTruoc(0);
             themThanhToan(hd.getMaHD());
+            themTongTien(hd);
         } catch (Exception e) {
             System.out.println("Hóa đơn cuối rồi");
             e.printStackTrace();
             hoaDonDAO.updateTT(true, hd.getMaHD());
             themThanhToan(hd.getMaHD());
+            themTongTien(hd);
         }
         MapRoom.maKH = 0;
         TraPhongJframe frame = (TraPhongJframe) SwingUtilities.getWindowAncestor(this);
@@ -1067,9 +1074,14 @@ public class TraPhongJpanel extends javax.swing.JPanel {
     }
 
     public void themTongTien(HoaDon hd) {
-        double tongTienDatabase = hd.getThanhTien();
-        double tongTienHT = tongTienDatabase + sumMoneyHavePay;
-        hoaDonDAO.updateTongTien(tongTienHT, hd.getMaHD());
+        try {
+            double tongTienDatabase = hd.getThanhTien();
+            double tongTienHT = tongTienDatabase + sumMoneyHavePay;
+            System.out.println("mahd: " + hd.getMaHD() + " , tongtiendatabase: " + tongTienDatabase + ", tongtien ht: " + tongTienHT);
+            hoaDonDAO.updateTongTien(hd.getTienTraTruoc(), tongTienHT, hd.getMaHD());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void themThanhToan(int mahd) {

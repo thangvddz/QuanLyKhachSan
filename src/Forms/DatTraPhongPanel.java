@@ -76,12 +76,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
     List<ChiTietPhongVaDichVu> lsCTPVDV;
     public static int index_tbl_dvdsd;
     int makh_dathue;
-    
+
     public DatTraPhongPanel() {
         initComponents();
         init();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -201,9 +201,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
         lblNgayChkIn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNgayChkIn.setText("Ngày check-in :");
+        lblNgayChkIn.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel7.add(lblNgayChkIn);
 
-        jdcCheckIn.setPreferredSize(new java.awt.Dimension(130, 30));
+        jdcCheckIn.setPreferredSize(new java.awt.Dimension(130, 33));
         jPanel7.add(jdcCheckIn);
 
         txtGioCheckIn.setEditable(false);
@@ -245,20 +246,22 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtPhutCheckOut.setPreferredSize(new java.awt.Dimension(33, 33));
         jPanel7.add(txtPhutCheckOut);
 
-        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 640, -1));
+        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 710, -1));
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblTenKH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenKH.setText("Tên khách hàng :");
+        lblTenKH.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel10.add(lblTenKH);
 
         txtTenKhachHang.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel10.add(txtTenKhachHang);
 
         lblQuocTich.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblQuocTich.setText(" Khách hàng :");
+        lblQuocTich.setText("Khách hàng :");
+        lblQuocTich.setPreferredSize(new java.awt.Dimension(71, 33));
         jPanel10.add(lblQuocTich);
 
         cboKhachHangCu.setPreferredSize(new java.awt.Dimension(150, 33));
@@ -269,13 +272,14 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         });
         jPanel10.add(cboKhachHangCu);
 
-        jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 680, 40));
+        jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 710, 40));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblSoCMT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSoCMT.setText(" Số cmt/Hộ chiếu :");
+        lblSoCMT.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel11.add(lblSoCMT);
 
         txtSoCMT.setPreferredSize(new java.awt.Dimension(320, 33));
@@ -287,39 +291,43 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         jPanel11.add(txtSoCMT);
 
         lblGioiTinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblGioiTinh.setText("        Giới tính :");
+        lblGioiTinh.setText("Giới tính:");
+        lblGioiTinh.setPreferredSize(new java.awt.Dimension(71, 33));
         jPanel11.add(lblGioiTinh);
 
         cboGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboGioiTinh.setPreferredSize(new java.awt.Dimension(150, 33));
         jPanel11.add(cboGioiTinh);
 
-        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 700, 40));
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 710, 40));
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5));
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblSoDT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSoDT.setText(" Số diện thoại :");
+        lblSoDT.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel12.add(lblSoDT);
 
         txtSoDT.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel12.add(txtSoDT);
 
         lblNgaySinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNgaySinh.setText("   Ngày sinh :");
+        lblNgaySinh.setText("Ngày sinh :");
+        lblNgaySinh.setPreferredSize(new java.awt.Dimension(71, 33));
         jPanel12.add(lblNgaySinh);
 
         jdcNgaySinh.setPreferredSize(new java.awt.Dimension(150, 33));
         jPanel12.add(jdcNgaySinh);
 
-        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 680, 40));
+        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 710, 40));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5));
+        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblDiaChi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblDiaChi.setText(" Quê Quán/ Địa chỉ :");
+        lblDiaChi.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel13.add(lblDiaChi);
 
         txtQueQuan.setPreferredSize(new java.awt.Dimension(320, 33));
@@ -327,53 +335,58 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
 
         lblPhiPhuThu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPhiPhuThu.setText("Phí Phụ Thu :");
+        lblPhiPhuThu.setPreferredSize(new java.awt.Dimension(71, 33));
         jPanel13.add(lblPhiPhuThu);
 
         txtPhiPhuThu.setText("0");
         txtPhiPhuThu.setPreferredSize(new java.awt.Dimension(150, 33));
         jPanel13.add(txtPhiPhuThu);
 
-        jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 180, 730, 40));
+        jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 700, 40));
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5));
+        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblEmail.setText(" Email :");
+        lblEmail.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel14.add(lblEmail);
 
         txtEmail.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel14.add(txtEmail);
 
         lblGiamGia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblGiamGia.setText("      Giảm giá :");
+        lblGiamGia.setText("Giảm giá :");
+        lblGiamGia.setPreferredSize(new java.awt.Dimension(71, 33));
         jPanel14.add(lblGiamGia);
 
         txtGiamGia.setText("0");
         txtGiamGia.setPreferredSize(new java.awt.Dimension(150, 33));
         jPanel14.add(txtGiamGia);
 
-        jPanel3.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 650, -1));
+        jPanel3.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 700, -1));
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 5));
+        jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         lblEmail1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblEmail1.setText("Quốc tịch :");
+        lblEmail1.setPreferredSize(new java.awt.Dimension(110, 33));
         jPanel15.add(lblEmail1);
 
         txtQuocTich.setPreferredSize(new java.awt.Dimension(320, 33));
         jPanel15.add(txtQuocTich);
 
         lblThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblThanhToan.setText("  Thanh toán :");
+        lblThanhToan.setText("Thanh toán :");
+        lblThanhToan.setPreferredSize(new java.awt.Dimension(71, 33));
         jPanel15.add(lblThanhToan);
 
         cboThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboThanhToan.setPreferredSize(new java.awt.Dimension(150, 33));
         jPanel15.add(cboThanhToan);
 
-        jPanel3.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 670, -1));
+        jPanel3.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 700, -1));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết phòng thuê", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
@@ -778,7 +791,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 clearForm();
                 makh_dathue = kh.getMaKH();
                 fillForm(kh);
-                
+
             } catch (Exception e) {
                 clearForm();
             }
@@ -806,7 +819,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         deleteDV();
     }//GEN-LAST:event_btnXoaCTPActionPerformed
-    
+
     public void init() {
         khachHangDAO = new KhachHangDAO();
         hoaDonDAO = new HoaDonDAO();
@@ -842,7 +855,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             xTime.setTimeNow(txtGioCheckIn, txtPhutCheckIn);
         }
     }
-    
+
     public void setTimeHoll() {
         Config c = (Config) xFile.readFile();
         txtGioCheckOut.setText(String.valueOf(c.getGioChkOut()));
@@ -851,9 +864,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } else {
             txtPhutCheckOut.setText(String.valueOf(c.getPhutChkOut()));
         }
-        
+
     }
-    
+
     public void DatPhong() {
 
         //phong khong co nguoi thue makh = 0
@@ -943,11 +956,11 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     }
                 }
             }
-            
+
         }
-        
+
     }
-    
+
     public boolean checkThongTinKhachNhapVao() {
         if (checkText.issEmpty(txtTenKhachHang.getText())) {
             mgsBox.alert(this, "Tên khách hàng không được để trống");
@@ -980,9 +993,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
         return false;
     }
-    
+
     public void TraPhong() {
-        
+
         if (MapRoom.maKH != 0) {
             updateLSGD();
             TraPhongJframe traPhongJframe = new TraPhongJframe(MapRoom.maKH);
@@ -993,7 +1006,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Phòng này đã có ai thuê đâu mà trả phòng. nhấn ok đi");
         }
     }
-    
+
     public void insertKhachHang() {
         CMT = txtSoCMT.getText().trim();
         if (!CMT.equals("")) {
@@ -1007,16 +1020,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public void updateKhachHang() {
         try {
             khachHangDAO.update(new KhachHang(MapRoom.maKH, txtSoCMT.getText(), txtTenKhachHang.getText(), txtSoDT.getText(), jdcNgaySinh.getDate(), txtQueQuan.getText(), txtQuocTich.getText(), txtEmail.getText(), (cboGioiTinh.getSelectedIndex() == 0) ? true : false));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void insertHoaDon() {
         int hoursChkIn = Integer.parseInt(txtGioCheckIn.getText());
         int minutesChkIn = Integer.parseInt(txtPhutCheckIn.getText());
@@ -1037,8 +1050,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         }
         insertThanhToan();
     }
-    
+
     public void updateHoaDon() {
+
         int hoursChkIn = Integer.parseInt(txtGioCheckIn.getText());
         int minutesChkIn = Integer.parseInt(txtPhutCheckIn.getText());
         int hoursChkOut = Integer.parseInt(txtGioCheckOut.getText());
@@ -1051,15 +1065,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     xMoney.VNDongToDouble(txtGiamGia.getText()),
                     xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         } else {
+            
             hoaDonDAO.update(new HoaDon(hd.getMaHD(), Auth.user.getMaNV(), MapRoom.maKH, xTime.getTimeStamp(jdcCheckIn, hoursChkIn, minutesChkIn),
-                    null,
+                    xTime.getTimeStamp(jdcCheckOut, hoursChkOut, minutesChkOut),
                     xMoney.VNDongToDouble(txtTraTruoc.getText()),
                     xMoney.VNDongToDouble(txtGiamGia.getText()),
                     xMoney.VNDongToDouble(txtPhiPhuThu.getText()), 0, "Khách này ngầu lắm", false));
         }
         updateThanhToan();
     }
-    
+
     public void insertHDCT() {
         try {
             addAfterRent();
@@ -1067,7 +1082,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public void insertLSGD() {
         Timestamp localDate = new Timestamp(System.currentTimeMillis());
         jdcCheckIn.setDate(localDate);
@@ -1086,17 +1101,18 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         null,
                         chkThueTheoNgay.isSelected() ? false : true));
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     public void updateLSGD() {
         updateKhachHang();
-        updateHoaDon();
+        
         Timestamp localDate = new Timestamp(System.currentTimeMillis());
         jdcCheckOut.setDate(localDate);
+        updateHoaDon();
         xTime.getTimeFromDatabase(localDate, txtGioCheckOut, txtPhutCheckOut);
         try {
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
@@ -1116,7 +1132,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
             jdcCheckOut.setDate(hd.getThoiDiemTraPhong());
@@ -1124,16 +1140,16 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void fillGioiTinh() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboGioiTinh.getModel();
         model.removeAllElements();
         model.addElement("Nam");
         model.addElement("Nữ");
     }
-    
+
     public void fillForm(KhachHang kh) {
         txtSoCMT.setText(kh.getSoCMT());
         txtTenKhachHang.setText(kh.getHoTen());
@@ -1148,7 +1164,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             cboGioiTinh.setSelectedIndex(1);
         }
     }
-    
+
     public void fillComboboxThanhToan() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThanhToan.getModel();
         model.removeAllElements();
@@ -1160,7 +1176,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
+
     public void insertThanhToan() {
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
@@ -1171,7 +1187,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public void updateThanhToan() {
         try {
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false);
@@ -1182,14 +1198,14 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public void fillComboboxKhachHangCu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhachHangCu.getModel();
         model.removeAllElements();
         model.addElement("none");
         try {
             List<HoaDon> lsHD = hoaDonDAO.selectHD_TT_false(false);
-            
+
             for (HoaDon hoaDon : lsHD) {
                 KhachHang kh = khachHangDAO.selectById(hoaDon.getMaKH());
                 model.addElement(kh);
@@ -1198,7 +1214,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public void fillKhachHangField() {
         int makh = MapRoom.maKH;
         if (makh != 0) {
@@ -1207,10 +1223,10 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             fillHoaDonField(makh);
         }
     }
-    
+
     public void fillHoaDonField(int maKH) {
         try {
-            
+
             int maHDCT = hoaDonChiTietDAO.selectByNewIDReserve(false, MapRoom.posTang, MapRoom.posPhong).getMaCTHD();
             List<LichSuGD> ls = lsgddao.selectByMaHDCT(maHDCT);
             HoaDon hd = hoaDonDAO.selectHoaDonByKH(maKH, false);
@@ -1220,9 +1236,9 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                 jdcCheckOut.setDate(ls.get(0).getThoiGianKT());
                 xTime.getTimeFromDatabase(ls.get(0).getThoiGianKT(), txtGioCheckOut, txtPhutCheckOut);
             }
-            
+
             try {
-                
+
                 if (ls.get(0).isTrangThai()) {
                     chkThueTheoGio.setSelected(true);
                 } else {
@@ -1239,7 +1255,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public void clearForm() {
         txtSoCMT.setText("");
         txtTenKhachHang.setText("");
@@ -1250,7 +1266,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         txtEmail.setText("");
         cboGioiTinh.setSelectedIndex(0);
     }
-    
+
     public void fillTableChonPhong() {
         Phong lsPhong = phongDAO.selectByIdd(MapRoom.posTang, MapRoom.posPhong);
         LoaiPhong lp = loaiPhongDAO.selectById(lsPhong.getMaLoaiPhong());
@@ -1262,7 +1278,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             });
         }
     }
-    
+
     public void fillComboboxDichVu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboDichVu.getModel();
         List<DichVu> lsDichVu = dichVuDAO.selectAll();
@@ -1279,12 +1295,12 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         Date localDate = new Date(System.currentTimeMillis());
         jdcThoiGianSDDV.setDate(localDate);
     }
-    
+
     public void clearTableChonPhong() {
         DefaultTableModel model = (DefaultTableModel) tblPhongDuocChon.getModel();
         model.setRowCount(0);
     }
-    
+
     public void fillTablePhongDaThue() {
         DefaultTableModel model = (DefaultTableModel) tblThongTinPhongDaThue.getModel();
         model.setRowCount(0);
@@ -1300,7 +1316,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
+
     public void fillTableCTPhongDV() {
         DefaultTableModel model = (DefaultTableModel) tblChiTietPhongVaDV.getModel();
         model.setRowCount(0);
@@ -1318,7 +1334,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public void fillLsCTPVDV() {
         try {
             List<YeuCau> lsyc = yeuCauDAO.selectAllMAHDCT(false, maPhong, soTang);
@@ -1331,7 +1347,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             System.out.println("Chua yeu cau dich vu");
         }
     }
-    
+
     public void addDV() {
         DichVu dv = (DichVu) cboDichVu.getSelectedItem();
         int gioDV = Integer.parseInt(txtGioDV.getText());
@@ -1349,7 +1365,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             mgsBox.alert(this, "Thêm dịch vụ thành công nha...");
         }
     }
-    
+
     public void deleteDV() {
         if (mgsBox.confirm(this, "Bạn có chắc muốn xóa dịch vụ này không ?")) {
             if (index_tbl_dvdsd != -1) {
@@ -1369,7 +1385,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                         mgsBox.alert(this, "Xóa thành công dịch vụ");
                         index_tbl_dvdsd = -1;
                     }
-                    
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1378,7 +1394,7 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public void addAfterRent() {
         int MaHD = hoaDonDAO.selectHoaDonByKH(MapRoom.maKH, false).getMaHD();
         try {
@@ -1391,13 +1407,13 @@ public class DatTraPhongPanel extends javax.swing.JPanel {
                     yeuCauDAO.insert(new YeuCau(lsCTPVDV.get(i).getMaDV(), maHDCT, lsCTPVDV.get(i).getThoiGianBD(), false));
                 }
             }
-            
+
         } catch (Exception e) {
             System.out.println("thue dau tien");
             e.printStackTrace();
         }
     }
-    
+
     public boolean checkHinhThuc() {
         if (chkThueTheoGio.isSelected() == false && chkThueTheoNgay.isSelected() == false) {
             return false;

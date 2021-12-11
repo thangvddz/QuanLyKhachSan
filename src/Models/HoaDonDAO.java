@@ -23,7 +23,7 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
     private static final String SQL_INSERT = "INSERT INTO HOADON(MaNV, MaKH, ThoiDiemDatPhong, ThoiDiemTraPhong, TienTraTruoc,GiamGia,PhuThu,ThanhTien, GhiChu, TrangThai) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE HOADON SET MaNV=?, MaKH=?, ThoiDiemDatPhong=?, ThoiDiemTraPhong=?, TienTraTruoc=?,GiamGia=?,PhuThu=?,ThanhTien=?, GhiChu=?, TrangThai=? WHERE MaHD=?";
     private static final String SQL_UPDATE_TRANGTHAI = "UPDATE HOADON SET TrangThai=? WHERE MaHD=?";
-    private static final String SQL_UPDATE_TONGTIEN = "UPDATE HOADON SET ThanhTien=? WHERE MaHD=?";
+    private static final String SQL_UPDATE_TONGTIEN = "UPDATE HOADON SET TienTraTruoc=?, ThanhTien=? WHERE MaHD=?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM HOADON";
     private static final String SQL_SELECT_ID_HOADON = "select * from HOADON where MaKH=? and TrangThai=? order by MaHD desc";
     private static final String SQL_SELECT_ID_HOADON_TT_FALSE = "select * from HOADON where TrangThai=?";
@@ -51,8 +51,8 @@ public class HoaDonDAO extends DAO<HoaDon, Integer> {
         jdbc.update(SQL_UPDATE_TRANGTHAI, TrangThai, maHD);
     }
 
-    public void updateTongTien(double tongTien, int maHD) {
-        jdbc.update(SQL_UPDATE_TONGTIEN, tongTien, maHD);
+    public void updateTongTien(double tienTraTruoc,double tongTien, int maHD) {
+        jdbc.update(SQL_UPDATE_TONGTIEN, tienTraTruoc, tongTien, maHD);
     }
 
     @Override
