@@ -366,7 +366,6 @@ public class KetCaJFrame extends javax.swing.JFrame {
                 double tienTraTruoc = bd1.doubleValue();
                 BigDecimal bd2 = (BigDecimal) objects[8];
                 double tienTongTien = bd2.doubleValue();
-                System.out.println("maHoaDon: " + mahd + ", tong tien: " + tienTongTien);
                 ThanhToan tt = thanhToanDAO.selectById(mahd);
                 if (tt.getMaLoaiTT() == 1) {
                     if (tienTongTien == 0) {
@@ -393,7 +392,7 @@ public class KetCaJFrame extends javax.swing.JFrame {
             txtTienDauCa.setText(xMoney.doubleToVNDong(lichSuCuoi.getTienThucNhan()));
             txtTienMat.setText(xMoney.doubleToVNDong(tienMat));
             txtTienTheNganHang.setText(xMoney.doubleToVNDong(tienThe));
-            tienCuoiCa = tienMat + tienThe;
+            tienCuoiCa = tienMat + tienThe + lichSuCuoi.getTienThucNhan();
             txtTienCuoiCa.setText(xMoney.doubleToVNDong(tienCuoiCa));
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

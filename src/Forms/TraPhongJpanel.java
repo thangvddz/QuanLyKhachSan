@@ -29,6 +29,8 @@ import Utils.xTime;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
@@ -948,9 +950,11 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                         donVi = "" + soNgay + " Ngày";
                     }
                 }
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                
                 model.addRow(new Object[]{
-                    l.getThoiGianBD(),
-                    l.getThoiGianKT(),
+                    dateFormat.format(l.getThoiGianBD()),
+                    dateFormat.format(l.getThoiGianKT()),
                     l.isTrangThai() ? "Giờ" : "Ngày",
                     l.isTrangThai() ? xMoney.doubleToVNDong(giaGio) : xMoney.doubleToVNDong(giaNgay),
                     donVi,

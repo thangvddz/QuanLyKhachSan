@@ -587,14 +587,23 @@ public class ManHinhChinhGUI extends javax.swing.JFrame {
 
     private void btnKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMousePressed
         // TODO add your handling code here:
-        JPanel khachhang = new KhachHangJPanel();
-        SwitchPanel(khachhang);
+        if (Auth.isLogin() && Auth.isManager()) {
+            JPanel khachhang = new KhachHangJPanel();
+            SwitchPanel(khachhang);
+        } else {
+            mgsBox.alert(this, "Bạn không có quyền quản lý Khách hàng");
+        }
     }//GEN-LAST:event_btnKhachHangMousePressed
 
     private void btnCaiDatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCaiDatMousePressed
         // TODO add your handling code here:
-        CaiDatJpanel cd = new CaiDatJpanel();
-        SwitchPanel(cd);
+
+        if (Auth.isLogin() && Auth.isManager()) {
+            CaiDatJpanel cd = new CaiDatJpanel();
+            SwitchPanel(cd);
+        } else {
+            mgsBox.alert(this, "Bạn không có quyền quản lý Nhân viên");
+        }
     }//GEN-LAST:event_btnCaiDatMousePressed
 
     private void btnDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangXuatMousePressed
