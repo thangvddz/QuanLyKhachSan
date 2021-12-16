@@ -31,7 +31,7 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
     PhongDAO pdao;
     LoaiPhongDAO lpdao;
     TrangThaiDAO ttdao;
-    
+
     public ThongTinPhongJFrame() {
         initComponents();
         setTitle("Thông tin phòng");
@@ -229,7 +229,7 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         delete();
     }//GEN-LAST:event_btnXoaActionPerformed
-    
+
     public void init() {
         pdao = new PhongDAO();
         lpdao = new LoaiPhongDAO();
@@ -239,7 +239,7 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
         fillComboboxLoaiPhong();
         fillComboboxTrangThai();
     }
-    
+
     public void fillComboboxTrangThai() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTrangThaiPhong.getModel();
         model.removeAllElements();
@@ -248,7 +248,7 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
             model.addElement(l.getTenTrangThai());
         }
     }
-    
+
     public void fillComboboxLoaiPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiPhong.getModel();
         model.removeAllElements();
@@ -258,37 +258,38 @@ public class ThongTinPhongJFrame extends javax.swing.JFrame {
         }
         updateLoaiP();
     }
-    
+
     public void updateLoaiP() {
         Phong p = pdao.selectThongTinPByID(MapRoom.posTang, MapRoom.posPhong);
         LoaiPhong lp = lpdao.selectById(p.getMaLoaiPhong());
         cboLoaiPhong.setSelectedItem(lp);
     }
-    
+
     public void setSoGiuong() {
         
         try {
             LoaiPhong maLP = (LoaiPhong) cboLoaiPhong.getSelectedItem();
-            System.out.println("malp:" + maLP.getSoGiuong());
             LoaiPhong lp = lpdao.selectById(maLP.getMaLP());
             txtSoGiuong.setText(String.valueOf(lp.getSoGiuong()));
         } catch (NullPointerException e) {
 //            e.printStackTrace();
         }
     }
-    
+
     public void update() {
-        int maLp = cboLoaiPhong.getSelectedIndex() + 1;
+        LoaiPhong lp = (LoaiPhong) cboLoaiPhong.getSelectedItem();
+        int maLp = lp.getMaLP();
         int soTang = Integer.parseInt(txtSoTang.getText());
         int maTT = cboTrangThaiPhong.getSelectedIndex() + 1;
         if (mgsBox.confirm(this, "Bạn có chắc muốn cập nhật.")) {
+            
             pdao.update(new Phong(txtSoPhong.getText(), soTang, maLp, maTT, "Welcome"));
             mgsBox.alert(this, "Cập nhật thành công!");
             this.setVisible(false);
             MapRoom.updateStatusScreen(pnlQuanLyPhong, gbc, new ClickMouse.MouseClikQuanLyPhong());
         }
     }
-    
+
     public void delete() {
         if (mgsBox.confirm(this, "Bạn có chắc muốn xóa.")) {
             try {

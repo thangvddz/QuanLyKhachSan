@@ -7,6 +7,7 @@ package Utils;
 
 import Entities.HoaDonChiTiet;
 import Entities.LichSuGD;
+import Entities.LoaiPhong;
 import Entities.Phong;
 import Forms.HomePanel;
 import Forms.ManHinhChinhGUI;
@@ -16,6 +17,7 @@ import Models.HoaDonChiTietDAO;
 import Models.HoaDonDAO;
 import Models.KhachHangDAO;
 import Models.LichSuGDDAO;
+import Models.LoaiPhongDAO;
 import Models.PhongDAO;
 import Models.TangDAO;
 import Models.TrangThaiDAO;
@@ -52,6 +54,7 @@ public class MapRoom {
 
     public static Border outline = BorderFactory.createLineBorder(Color.BLACK);
     public static PhongDAO dao = new PhongDAO();
+    public static LoaiPhongDAO lpdao = new LoaiPhongDAO();
     public static HoaDonChiTietDAO daohdct = new HoaDonChiTietDAO();
     public static LichSuGDDAO lsgddao = new LichSuGDDAO();
     public static KhachHangDAO daokh = new KhachHangDAO();
@@ -105,7 +108,7 @@ public class MapRoom {
                         strDateCheckIn = "NGày check-In: " + dateFormat.format(ls.get(ls.size() - 1).getThoiGianBD());
                         if (ls.get(0).getThoiGianKT() != null) {
                             strDateCheckOut = "NGày check-Out: " + dateFormat.format(ls.get(0).getThoiGianKT());
-                        }else{
+                        } else {
                             strDateCheckOut = "NGày check-Out: Chưa biết ngày nào ra";
                         }
 
@@ -198,6 +201,18 @@ public class MapRoom {
         room.setBorder(outline);
         room.setFont(new Font("Arial", Font.BOLD, 10));
         room.setForeground(Color.WHITE);
+        if (numStatus != 2) {
+            try {
+                int malpp = dao.selectByIdd(floors + 1, numRoom).getMaLoaiPhong();
+                LoaiPhong lp = lpdao.selectById(malpp);
+                String infooo = "<html><center><h4>" + numRoom + "</h4></center><br>"
+                        + "<center>" + trangThaiDao.selectById(numStatus).getTenTrangThai() + "</center>"
+                        + "<center><h3>" + lp.getTenLP() + "</h3></center>";
+                room.setText(infooo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         switch (numStatus) {
             case 1:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
@@ -210,10 +225,11 @@ public class MapRoom {
             case 3:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
                 box.setBackground(new Color(164, 166, 164));
+
                 break;
             case 4:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));
-                box.setBackground(new Color(59,11,2));
+                box.setBackground(new Color(59, 11, 2));
                 break;
             default:
                 dao.updateMaTT(new Phong(numRoom, floors + 1, -1, numStatus, null));

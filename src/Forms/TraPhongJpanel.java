@@ -951,7 +951,7 @@ public class TraPhongJpanel extends javax.swing.JPanel {
                     }
                 }
                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-                
+
                 model.addRow(new Object[]{
                     dateFormat.format(l.getThoiGianBD()),
                     dateFormat.format(l.getThoiGianKT()),
@@ -975,8 +975,9 @@ public class TraPhongJpanel extends javax.swing.JPanel {
         for (Object[] l : ls) {
             BigDecimal bd = (BigDecimal) l[2]; // the value you get
             double d = bd.doubleValue();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
             model.addRow(new Object[]{
-                l[0], l[1], xMoney.doubleToVNDong(d)
+                l[0], dateFormat.format(l[1]), xMoney.doubleToVNDong(d)
             });
         }
     }

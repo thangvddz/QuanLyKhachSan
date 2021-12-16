@@ -43,6 +43,7 @@ public class PhongDAO extends DAO<Phong, Integer> {
 
     @Override
     public void update(Phong entity) {
+        System.out.println("ma lp :" + entity.getMaLoaiPhong());
         jdbc.update(SQL_UPDATE, entity.getMaLoaiPhong(), entity.getMaTT(), entity.getGhiChu(), entity.getMaPhong(), entity.getSoTang());
     }
 

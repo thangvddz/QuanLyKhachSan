@@ -46,7 +46,7 @@ public class LoaiPhongDAO extends DAO<LoaiPhong, Integer> {
     
     @Override
     public LoaiPhong selectById(Integer id) {
-        return (LoaiPhong) selectBySql(SQL_SELECT_BY_ID, id).get(0);
+        return selectBySql(SQL_SELECT_BY_ID, id).get(0);
     }
     
     @Override
@@ -55,7 +55,7 @@ public class LoaiPhongDAO extends DAO<LoaiPhong, Integer> {
     }
     
     @Override
-    protected List selectBySql(String sql, Object... args) {
+    protected List<LoaiPhong> selectBySql(String sql, Object... args) {
         List<LoaiPhong> ls = new ArrayList<>();
         try {
             ResultSet rs = jdbc.query(sql, args);

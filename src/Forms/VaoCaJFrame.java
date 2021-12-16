@@ -208,24 +208,26 @@ public class VaoCaJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if (status == false) {
-            luu();
-        } else {
+        if (mgsBox.confirm(this, "Bạn có chắc muốn vào ca ?")) {
+            if (status == false) {
+                luu();
+            } else {
 
-            try {
-                List<LichSuCaLam> lscl = daoLSCL.selectAll();
-                LichSuCaLam lscll = lscl.get(lscl.size() - 1);
-                if (lscll.getMaNV().equals(Auth.user.getMaNV())) {
-                    fillTienDauCa();
-                    timer.stop();
-                    ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
-                    manHinhChinhGUI.setVisible(true);
-                    this.setVisible(false);
-                } else {
-                    mgsBox.alert(this, "Ca Trước chưa kết thúc, chưa đến lượt bạn.");
+                try {
+                    List<LichSuCaLam> lscl = daoLSCL.selectAll();
+                    LichSuCaLam lscll = lscl.get(lscl.size() - 1);
+                    if (lscll.getMaNV().equals(Auth.user.getMaNV())) {
+                        fillTienDauCa();
+                        timer.stop();
+                        ManHinhChinhGUI manHinhChinhGUI = new ManHinhChinhGUI();
+                        manHinhChinhGUI.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        mgsBox.alert(this, "Ca Trước chưa kết thúc, chưa đến lượt bạn.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -412,5 +414,5 @@ public class VaoCaJFrame extends javax.swing.JFrame {
             cboTenCa.setSelectedIndex(0);
         }
     }
-    
+
 }
